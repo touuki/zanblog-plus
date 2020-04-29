@@ -1,0 +1,1262 @@
+/**
+ * ZanBlog 2.1.0
+ * zan.less ZanBlog3主题样式文件
+ * Copyright 2012-2014 YEAHZAN.COM
+ * Licensed under MIT
+ *
+ */
+
+@import "variables.less";
+
+/* =========================== 1.通用样式 =========================== */
+
+::selection {
+	background: @zan-primary;
+	color: white;
+}
+
+body {
+	background-color: @zan-bg;
+	background: url("../images/bg.jpg");
+	word-wrap : break-word;
+	&.nav-fixed {
+		position: relative;
+		padding-top: 54px;
+		@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+			padding-top: 94px;
+		}
+	}
+}
+
+a {
+	&:hover {
+		text-decoration: none;
+	}
+}
+
+h1,h2,h3,h4,h5 {
+	font-weight: 100;
+}
+
+ul {
+	list-style-type: none;   
+}
+
+.ad {
+  margin-bottom: 30px;
+  * {
+    max-width: 100%;
+  }
+}
+
+.zan-radius {
+	border-radius: 4px;
+}
+
+.inline-block {
+	display: inline-block;
+  *display: inline;  
+  *zoom:1; 
+}
+
+.zan-opacity-5 {
+ filter:alpha(opacity=50);
+      -khtml-opacity: 0.5;      
+        -moz-opacity: 0.5;   
+             opacity: 0.5;
+}
+
+.white-space {
+	white-space:nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.zan-transition {
+  -webkit-transition: all .3s ease;
+     -moz-transition: all .3s ease;
+       -o-transition: all .3s ease;
+          transition: all .3s ease;
+}
+
+.transform-scale {
+ 	-webkit-transform: scale(1.25);
+  	 -moz-transform: scale(1.25);
+	 	   -o-transform: scale(1.25);
+	 	   		transform: scale(1.25);
+}
+
+.transform-rotate {
+  -webkit-transform: rotate(360deg);
+		 -moz-transform: rotate(360deg);
+	        transform: rotate(360deg);
+}
+
+@keyframes pined {
+	from  {top: -10px;}
+	to {top: -3px;}
+}
+
+@-webkit-keyframes pined {
+	from  {top: -10px;}
+	to {top: -3px;}
+}
+
+/* =========================== 通用样式结束 =========================== */
+
+
+/* =========================== 颜色样式 =========================== */
+
+div[class*="danger"] a {
+	color: @zan-danger;
+}
+
+div[class*="danger"] a:hover {
+	color: @state-danger-text;
+}
+
+div[class*="success"] a {
+	color: @zan-success;
+}
+
+div[class*="success"] a:hover {
+	color: @state-success-text;
+}
+
+div[class*="warning"] a {
+	color: @zan-warning;
+}
+
+div[class*="warning"] a:hover {
+	color: @state-warning-text;
+}
+
+div[class*="info"] a {
+	color: @zan-info;
+}
+
+div[class*="info"] a:hover {
+	color: @state-info-text;
+}
+
+/* 限定badge类颜色 */
+div[class*="danger"] .badge {
+	background-color: @zan-danger;
+}
+
+div[class*="success"] .badge {
+	background-color: @zan-success;
+}
+
+/* =========================== 颜色样式结束 =========================== */
+
+
+/* =========================== 自定义BootStrap样式 =========================== */
+
+.label {
+	margin-right: 5px;
+	font-size: 90%;
+}
+
+.alert {
+	padding: 15px;
+	margin-bottom: 20px;
+	border: 1px solid transparent;
+	.zan-radius;
+	overflow: auto;
+	&.alert-dismissable {
+		padding-right: 35px;
+	}
+} 
+
+.alert-zan {
+  color: @font-color;
+  background-color: @gray-lighter;
+  border: 1px solid @gray-lighter;
+}
+
+.alert-info {
+	color: @state-info-text;
+	background-color: @state-info-bg;
+	border-color: @state-info-border;
+}
+
+.panel-zan {
+	a {
+		color: @font-color;
+		&:hover {
+			color: @state-danger-text;
+		}
+	}
+	> .panel-heading {
+	  color: white;
+	  background-color: @zan-inverse;
+	  border-color: #000;
+	  & + .panel-collapse .panel-body {
+		  border-top-color: #000;
+		}
+	}
+	> .panel-footer + .panel-collapse .panel-body {
+	  border-bottom-color: #000;
+	}
+	.tab-content a:hover,
+	.nav-pills a:hover {
+		color: white;
+	}
+	.badge {
+		background-color: @zan-primary;
+	}
+}
+
+.pagination-zan {
+  margin: 0;
+  .zan-radius;
+  li > a,
+  li > span {
+    color: @zan-primary;
+    border: 2px solid @zan-primary;
+    background-color: transparent;
+    margin-left: 10px;
+    .zan-radius;
+    &:hover {
+      color: white;
+      border: 2px solid @zan-primary;
+      background-color: @zan-primary;
+      .zan-transition;
+    }
+  }
+  .active a,
+  .active span {
+      color: white;
+      border: 2px solid @zan-primary;
+      background-color: @zan-primary;
+      .zan-transition;
+      &:hover {
+        color: white;
+        border: 2px solid @zan-primary;
+        background-color: @zan-primary;
+        .zan-transition;
+        cursor: not-allowed;
+      }
+  }
+}
+
+.btn-zan-solid-pp {
+  color: @zan-primary;
+  background-color: transparent;
+  border: 2px solid @zan-primary;
+  .zan-transition;
+  .badge {
+    color: @zan-primary;
+    background-color: transparent;
+    border: 2px solid @zan-primary;
+    .zan-transition;
+  }
+  &:hover {
+    color: white;
+    background-color: @zan-primary;
+    border: 2px solid @zan-primary;
+    .zan-transition;
+    .badge {
+      color: white;
+      background-color: @zan-primary;
+      border: 2px solid white;
+      .zan-transition;
+    }
+  }
+}
+
+.btn-zan-solid-wp {
+  background-color: white;
+  border-color: @gray-lighter;
+  color: @state-danger-text;
+  font-size: 21px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  padding: 18px 24px;
+  &:hover {
+    background-color: @state-danger-text;
+    border-color: @state-danger-text;
+    color: white;
+  }
+}
+
+.btn-inverse-primary {
+	color: white !important;
+	background-color: @zan-inverse;
+	border-color: @zan-inverse;
+	.zan-transition;
+	&:hover {
+		.zan-transition;
+		color: white !important;
+		background-color: @zan-primary;
+		border-color: @zan-primary;
+	}
+}
+@media (min-width: @screen-sm-min) {
+	.navbar-nav {
+		float: none;
+	}
+}
+
+
+/* =========================== 自定义BootStrap样式结束 =========================== */
+
+
+/* =========================== <IE9 兼容样式 =========================== */
+
+#ie-warning {
+	display: none;
+}
+
+html.ie {
+	#ie-warning {
+		display: block;
+	}
+	.row {
+		margin: 0;
+	}
+	#bdshare a {
+		display: none;
+	}
+	#ds-thread .ds-no-transition#ds-reset .ds-post-button {
+		background: @zan-primary !important;
+	}
+}
+
+.flex-direction-nav a {
+	filter:alpha(opacity=0);
+}
+
+.flex-control-thumbs img {
+	filter:alpha(opacity=70);
+}
+
+.flexslider:hover .flex-next,
+.flexslider:hover .flex-prev {
+	filter:alpha(opacity=80);
+}
+.flexslider:hover .flex-next:hover, 
+.flexslider:hover .flex-prev:hover,
+.flex-control-thumbs img:hover,
+.flex-control-thumbs .flex-active {
+	filter:alpha(opacity=100);
+}
+
+/* =========================== <IE9 兼容样式 =========================== */
+
+
+/* =========================== 响应式 =========================== */
+
+@media (min-width: @screen-lg) {
+	.random .visible-lg,
+	.recent .visible-lg,
+	.hot .visible-lg.visible-sm {
+		display: inline-block !important;
+	}
+}
+
+@media (min-width: @screen-md-min) and (max-width: @screen-md-max) { 
+	.random .visible-md,
+	.recent .visible-md,
+	.hot .visible-xs.visible-md {
+		display: inline-block !important;
+	}
+}
+
+@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+	.hot .visible-lg.visible-sm {
+		display: inline-block !important;
+	}
+	.navbar-brand {
+		margin-right: auto !important;
+		margin-left: auto !important;
+		display: block;
+		float: none !important;
+	}
+	.navbar-nav {
+		width: 100%;
+		text-align: center;
+		> li {
+			float: none !important;
+			display: inline-block !important; 
+			> a {
+				padding: 10px !important;
+			}
+		}
+	}
+	#load-more {
+		margin-bottom: 30px;
+	}
+}
+
+@media (max-width: @screen-xs-max ) {
+	.hot .visible-xs.visible-md {
+		display: inline-block !important;
+	}
+	#zan-bodyer {
+		font-size: 12px !important;
+	}
+	.bs-masthead {
+		margin: 0;
+		padding: 10px;
+		h1 {
+			font-size: 16px;
+		}
+		.btn {
+			font-size: 12px;
+			padding: 6px 12px;
+		}
+		p {
+			font-size: 12px;
+		}
+	}
+	#zan-footer {
+		padding: 20px;
+	}
+	#load-more {
+		margin-bottom: 30px;
+	}
+}
+
+/* =========================== 响应式结束 =========================== */
+
+
+/* =========================== 小工具样式 =========================== */
+
+#sidebar  aside > div {
+ margin-bottom: 30px;
+}
+ /*搜索框*/
+div.search {
+ 	margin-bottom: 20px;
+ 	border: 2px solid white;
+ 	padding: 8px;
+ 	.zan-radius;
+ 	background-color: @zan-inverse;
+ 	input[type="text"] {
+	 	width: 85%;
+	 	float: left;
+	 	margin-right: 10px;
+	 	@media (max-width: @screen-md-max) and (min-width: @screen-md-min) {
+			width: 82%;
+	 	}
+	 	@media (max-width: @screen-sm-max) and (min-width: @screen-sm-min) {
+			width: 93%;
+	 	}
+	 	@media (max-width: @screen-xs-max) {
+			width: 82%;
+	 	}
+ }
+ button {
+		float: left;
+		margin-top: 2px;
+ }
+}
+
+/*幻灯片*/
+.metaslider {
+	.zan-radius;
+	margin-bottom: 40px !important;
+	-webkit-box-shadow: 0 0px 5px @gray-light;
+	   -moz-box-shadow: 0 0px 5px @gray-light;
+	        box-shadow: 0 0px 5px @gray-light;
+  @media (max-width: @screen-xs-max) { 
+		margin-bottom: 20px;
+	}
+  img {
+		.zan-radius;
+	}
+	.flex-direction-nav {
+		a {
+			width: 40px;
+			height: 40px;
+			margin: -20px 0 0;
+			display: block;
+			background: url(../images/arrow.png) no-repeat 0 0;
+			position: absolute;
+			top: 50%;
+			z-index: 10;
+			cursor: pointer;
+			text-indent: -9999px;
+			.zan-transition;
+		  &:hover {
+				background: url(../images/arrow_hover.png) no-repeat 0 0;
+		  }
+		}
+		.flex-next  {
+			background-position: 0 100%;
+		}
+		.flex-next:hover {
+			background-position: 0 100%;
+		}
+	}
+}
+
+.panel-heading {
+	border-bottom: none;
+	font-size: 14px;
+	line-height: 14px;
+	font-weight: normal;
+}
+
+.panel-toggle,
+.panel-remove {
+	float: right;
+	margin: 0px 0px 0px 5px;
+	cursor: pointer;
+}
+
+.panel-toggle:hover,
+.panel-remove:hover {
+	color: @zan-primary;
+	.zan-transition;
+}
+
+.panel.toggled {
+	-webkit-box-shadow: none;
+	   -moz-box-shadow: none;
+	   			box-shadow: none;
+	.zan-transition;
+}
+
+.panel ul.list-group {
+	max-height: 500px;
+	overflow: hidden;
+	width: 100%;
+  .zan-transition;
+}
+
+.panel.toggled ul.list-group{
+	overflow: hidden;
+	max-height: 0px;
+	width: 100%;
+	.zan-transition;
+}
+
+.panel.toggled .panel-heading {
+	border-bottom-right-radius: 3px;
+	border-bottom-left-radius: 3px;
+	.zan-transition;
+}
+
+ul.pills-zan {
+	padding: 10px;
+	li {
+		margin-left: 5px;
+	}
+}
+
+#sidebar-tags a:hover {
+	color: @zan-primary;
+}
+
+.pills-danger li.active > a,
+.pills-danger li.active > a:hover {
+	background-color: @zan-primary !important;
+	border-color: darken(@zan-primary, 5%) !important;
+}
+
+.tab-content {
+	border-top: 1px solid @gray-lighter;
+	padding: 10px;
+}
+
+.tagcloud {
+	padding: 10px 20px 20px 20px;
+	a { 
+		background-color: @zan-info;
+		color: white;
+		.zan-radius;
+		padding: 2px 5px;
+		font-size: 14px  !important;
+		margin-right: 15px;
+		margin-bottom: 10px;
+		.inline-block;
+	}	
+}
+
+.tag-article a,
+.tag-article a:hover {
+	color: white;
+}
+
+.panel.archive {
+	 > a .panel-heading {	
+		background-color: @zan-primary;
+		.zan-radius;
+		color: white;
+		text-align: center;
+		.zan-transition;
+	}
+	> a:hover {
+		text-decoration: none !important;
+		.panel-heading {	
+			background-color: @zan-inverse;
+			.zan-transition;
+		}
+	}
+}
+
+.comment-log {
+	line-height: 20px;
+	background-color: @gray-lighter;
+	border-color: @gray-lighter;
+	.zan-radius;
+	.inline-block;
+	padding: 8px;
+	margin-left: 10px;
+	.white-space;
+  width: 80%;
+}
+
+.author-avatar .avatar {
+	border-radius: 50%;
+	border: 1px solid @gray-lighter;
+	position: relative;
+	z-index: 99;
+	float: left;
+	display: block;
+	.zan-transition;
+	&:hover {
+		.transform-scale;
+	  .zan-transition;
+	}
+}
+
+/*侧边栏-广告*/
+.host img {
+	display: block;
+	width: 100%;
+	height: auto;
+	.zan-transition;
+	&:hover {
+		.zan-opacity-5;
+		.zan-transition;
+	}
+}
+
+/*友情链接*/
+.blogroll li {
+	margin-bottom: 10px;
+}
+
+.panel .post-title {
+	.inline-block; 
+  width: 75%;
+	white-space:nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.login-form {
+  background-color: white;
+  padding: 30px 20px;
+  .input-group-addon {
+    #commentform .input-group .input-group-addon;
+  }
+  .form-control {
+    .inline-block;
+    padding: 10px 5px;
+    border-left: none;
+  }
+  .btn {
+    width: 48%;
+    padding: 10px;
+  }
+  img {
+    border: 3px solid @zan-primary;
+    border-radius: 50%;
+    padding: 3px;
+  }
+}
+
+.login-panel {
+  height: 100px;
+  padding: 20px 0px;
+  @media (min-width: @screen-md-min) and (max-width: @screen-md-max) { 
+    padding: 20px 0;
+  }
+  img {
+    margin-right: 20px;
+    border-radius: 50%;
+    border: 2px solid white;
+    background-color: white;
+    .zan-transition;
+    &:hover {
+    	.zan-transition;
+      .transform-rotate; 
+    }
+  }
+  a {
+    &:hover {
+      color: @zan-primary;
+    }
+  }
+  .user-name {
+    margin-right: 20px;
+  }
+}
+
+/* =========================== 小工具样式结束 =========================== */
+
+
+/* =========================== 页面头部样式 =========================== */
+
+#zan-header.navbar {
+	border-radius: 0;
+	font-size: 14px;
+}
+
+#if-fixed {
+	position: absolute;
+	top: 15px;
+	right: 20px;
+	input {
+		opacity: 0;
+	}
+	i {
+		position: relative;
+		top: -3px;
+		right: 5px;
+		color: white;
+	}
+}
+
+.navbar-fixed-top #if-fixed i {
+	color: @zan-primary;
+ 	.zan-transition;
+	-webkit-animation: pined .5s;
+					animation: pined .5s;
+}
+
+.navbar-brand {
+	background: url(../images/logo.png) no-repeat;
+	width: 200px;
+	height: 50px;
+	display: block;
+}
+
+.nav.navbar-nav > li >.dropdown-menu {
+	> li {
+		position: relative;
+	}
+	.dropdown-menu {
+		left: 100%;
+		top: 0;
+	}
+}
+
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: @zan-primary !important;
+  .zan-transition;
+}
+
+/* =========================== 页面头部样式结束 =========================== */
+
+
+/* =========================== 主体样式 =========================== */
+
+#zan-bodyer {
+	padding: 30px 0;
+}
+
+.zan-breadcrumb {
+	background-color: white;
+	box-shadow: 0 0px 5px @box-shadow-color;
+	margin-bottom: 40px;
+}
+
+#article-list {
+	margin-top: 20px;
+}
+
+.article iframe,
+.article embed {
+  width: 100%;
+  height: 500px;
+  @media (max-width: @screen-md-max) {
+    height: 350px;
+  }
+  @media (max-width: @screen-xs-max) {
+    height: 200px;
+  }
+}
+
+/*文章*/
+.article {
+	position: relative;
+	margin-bottom: 30px;
+	padding-bottom: 20px;
+}
+
+/*文章-置顶*/
+.article-stick {
+	position: absolute;
+	top: -10px;
+	right: 5%;
+	font-size: 40px;
+	color: @zan-primary;
+}
+
+/*文章－日期*/
+.data-article {
+	background-color: @zan-primary;
+	border-color: darken(@zan-primary, 5%);
+  position: absolute;
+  height: 70px;
+  width: 70px;
+  border-radius: 100px;
+  left: -20px;
+  top: -20px;
+  color: white;
+  padding-top: 10px;
+  span.month,
+	span.day {
+		text-align: center;
+		display: block;
+	}
+	span.month {
+		margin: 0;	
+	}
+	span.day {
+		font-size: 30px;	
+		font-weight: bold;
+		margin-top: -5px;
+	}
+}
+
+/*文章－标题*/
+.title-article {
+	padding: 20px 15px 0px 15px;
+	@media (max-width: @screen-xs-max) {
+    padding: 0px;
+  }
+	h1 {
+		font-size: 32px;
+		margin: 0 auto;
+		text-align:center;
+		a {
+			color: @zan-inverse;
+			&:hover {
+				color: @zan-primary;
+				text-decoration: none;
+				.zan-transition;
+			}
+		}
+	}
+}
+
+/*文章－标签*/
+.label-zan:hover {
+	background-color: @zan-primary;
+	.zan-transition;
+}
+
+.tag-article {
+	text-align: center;
+	line-height: 24px;
+	margin: 20px;
+}
+
+/*文章－内容*/
+.centent-article {
+	.thumbnail {
+		margin-bottom: 20px;
+	}
+	img {
+		margin: 10px auto;
+		display: block;
+	}
+}
+
+/*文章－更多*/
+.read-more .badge {
+	background-color: white;
+	color: @zan-primary;
+	padding: 2px 5px;
+	margin-left: 3px;
+}
+
+/* 文章－分页*/
+.zan-page {
+	.pager li > a,
+	.pager li > span {
+		.zan-radius;
+	}
+}
+
+/*相关文章*/
+#post-related {
+	padding:0 19px 19px 19px;
+	.thumbnail {
+		border: 1px solid @gray-lighter;
+	}
+	.post-related-title {
+		.white-space;
+	}
+	.post-related-content {
+		height: 100px;
+	}
+}
+
+/*异步加载*/
+#infscr-loading img {
+	display: none !important;
+}
+
+/* =========================== 主体样式结束 =========================== */
+
+
+/* =========================== 页脚样式 =========================== */
+
+#zan-footer {
+	display: block;
+	text-align: center;
+	color: @gray-lighter;
+	padding: 50px;
+	background-color: @zan-inverse;
+	a {
+		color: @gray-lighter;
+		&:hover {
+			color: @zan-primary;
+		}
+	}
+}
+
+#zan-gotop {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  border: 2px solid white;
+  background-color: @zan-inverse;
+  top: auto;
+  display: block;
+  cursor: pointer;
+  z-index: 999;
+  color: white;
+  i {
+  	font-size: 30px;
+  	line-height: 36px;
+  	text-align: center;
+  	display: block;
+  }
+  &:hover {
+  	border-color: @zan-primary;
+		color: @zan-primary;
+		.zan-transition;
+	}
+}
+
+/* 百度统计 */
+embed[name*="Holmes"] {
+	padding-top: 10px;
+}
+
+/* =========================== 页脚样式结束 =========================== */
+
+
+/* =========================== 评论样式 =========================== */
+
+.comments-header {
+	text-align: center;
+	font-size: 14px;
+}
+
+#loading-comments {
+  font-size: 30px;
+  display: none;
+  color: @zan-primary; 
+  text-align: center; 
+}
+
+.commentlist {
+  padding: 0;
+  #loading,
+  #error {
+    margin-bottom: 10px;
+    color: @zan-primary;
+  }
+  .comment-awaiting-moderation {
+    color: @zan-info;
+  }
+  a {
+  	color: @zan-inverse;
+  	&:hover {
+  		color: @zan-primary;
+  	}
+  }
+  ol {
+    padding-left: 20px;
+    @media (max-width: @screen-xs-max) {
+      padding-left: 5px;
+    }
+  }
+  li {
+    margin: 10px 0px 10px 0px;
+    list-style: none;
+    border: 2px solid  @zan-lightgreen;
+    padding: 2px;
+    background-color: white;
+    .zan-radius;
+  }
+  .comment-body {
+    position: relative;
+    .comment-meta {
+      background: @zan-lightgreen;
+      position: relative;
+      height: auto;
+      min-height: 37px;
+      line-height: 37px;
+      padding-left: 45px;
+      @media (max-width: @screen-xs-max) {
+        padding-left: 30px;
+      }
+      .comment-author {
+        float: left;
+        .says {
+        	margin-left: 10px;
+        }
+      }
+      img {
+        background-color: white;
+        border: 4px solid white;
+        border-radius: 50%;
+        position: absolute;
+        display: block;
+        left: -40px;
+        top: 10px;
+        margin: 0;
+        @media (max-width: @screen-xs-max) {
+          left: -25px;
+          width: 50px;
+          height: 50px;
+        }
+        .zan-transition;
+        &:hover {
+          .zan-transition;
+          .transform-rotate;
+        }
+      }
+    }
+    .comment-metadata {
+      @media (max-width: @screen-xs-max) {
+        display: none;
+      }
+      text-transform: uppercase;
+      float: right;
+      margin-right: 10px;
+      font-size: 12px;
+      text-decoration: none;
+      font-weight: bold;
+      .zan-radius;
+    }
+    .comment-content {
+      padding: 20px 55px 30px 45px;
+      @media (max-width: @screen-xs-max) {
+        padding: 10px 10px 20px 30px;
+      }
+      position: relative;
+    }
+    .comment-reply-link,
+    .comment-reply-login {
+      position: absolute;
+      bottom: 3px;
+      right: 12px;
+      font-size: 12px;
+      text-transform: uppercase;
+      display: block;
+    }
+  }
+}
+
+#comment-nav {
+	margin-top: 20px;
+}
+
+.page-numbers {
+	.zan-radius;
+  .btn-zan-solid-pp;
+  .inline-block;
+  margin: 0 0 10px 10px;
+  padding: 5px 10px;
+  &.current {
+    color: white;
+    background-color: @zan-primary;
+    cursor: not-allowed;
+  }
+  &.dots {
+    border: none;
+    &:hover {
+      color: @zan-primary;
+      background-color: transparent;
+    }
+  }
+}
+
+#reply-title {
+	.alert;
+	.alert-info;
+	margin: 10px auto;
+	text-align: center;
+	font-size: 14px;
+  a:hover {
+    color: white;
+  }
+  #cancel-comment-reply-link {
+    padding: 2px 5px;
+    background-color: @zan-danger;
+    color: white;
+    .zan-radius;
+  }
+}
+
+#smilelink {
+  cursor:pointer;
+  margin-bottom: 10px;
+  img {
+    &:hover {
+    	.zan-opacity-5;
+    }
+  }
+}
+
+#commentform {
+	.input-group label.error {
+		display: block;
+	}
+  label.error {
+    margin-right: 1px;
+    font-size: 12px;
+    color: white;
+    background-color: @zan-danger;
+    padding: 10px;
+    margin-bottom: 0;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+    -webkit-animation: wobble-horizontal 1s ease-in-out;
+            animation: wobble-horizontal 1s ease-in-out;
+    @media (max-width: @screen-md-max) and (min-width: @screen-md-min) {
+       margin-right: 0;
+    }
+    @media (max-width: @screen-sm-max) {
+      margin-right: 2px;
+    }
+    @media (max-width: @screen-xs-max) {
+      margin-right: 0;
+    }
+  }
+	.logged-in-as {
+		display: none;
+	}
+  .form-allowed-tags {
+    margin-top: 10px;
+    @media (max-width: @screen-xs-max) {
+      display: none;
+    }
+  }
+  .input-group {
+    margin-bottom: 20px;
+    .input-group-addon {
+      background-color: @zan-primary;
+      color: white;
+      border: 2px solid @zan-primary;
+      i {
+        width: 15px;
+      }
+    }
+  }
+  input {
+    padding: 10px 25px;
+    @media (max-width: @screen-md-max) and (min-width: @screen-md-min) {
+      padding: 10px 5px;
+    }
+    @media (max-width: @screen-sm-max) {
+      padding: 10px 20px;
+    }
+    @media (max-width: @screen-xs-max) {
+      width: 100%;
+    }
+    background-color: transparent;
+    border: 2px solid @zan-primary;
+  }
+  textarea {
+    margin: 0;
+    margin-bottom: 10px;
+    padding: 10px 15px;
+    width: 100%;
+    .zan-radius;
+    background-color: transparent;
+    border: 2px solid @zan-gray;
+    &:focus {
+      border: 2px solid @zan-primary;
+    }
+  }
+  input:focus, textarea:focus {
+    outline: 0;
+    .zan-transition;
+  }
+  #submit {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    .zan-radius;
+    width: 100%;
+    .btn-zan-solid-pp;
+  }
+}
+
+/* 多说评论框 */
+#ds-thread #ds-reset {
+	.ds-post-button {
+		background: @zan-primary !important;
+		border-color: @zan-primary !important;
+		color: white !important;
+		text-shadow: none !important;
+		&:hover {
+			background: @zan-primary !important;
+			border-color: darken(@zan-primary, 5%) !important;
+		}
+	}
+	.ds-powered-by {
+		display: none;
+	}
+}
+
+/* =========================== 评论样式结束 =========================== */
+
+
+/* =========================== 下载页面样式 =========================== */
+
+.bs-masthead {
+ 	margin-bottom: 20px;
+  position: relative;
+  text-align: center;
+  @media (max-width: @screen-md-max) {
+  	padding: 0;
+  }
+  h1 {
+    font-size: 80px;
+    line-height: 1;
+    @media (max-width: @screen-md-max) {
+	  	font-size: 40px;
+	  }
+	}
+	p {
+    font-size: 20px;
+    margin-left: 15%;
+    margin-right: 15%;
+    @media (max-width: @screen-md-max) {
+    	margin-right: 5%;
+    	margin-left: 5%;
+    }
+	}
+}
+
+/* =========================== 下载页面样式结束 =========================== */
