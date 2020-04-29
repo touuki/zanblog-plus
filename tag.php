@@ -1,1 +1,0 @@
-<?php get_template_part( 'common', get_post_format() ); ?>

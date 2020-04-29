@@ -8,37 +8,31 @@
  *
  */
 
-// 自定义theme路径
-define( 'THEMEPATH', TEMPLATEPATH . '/' );
-
-// 自定义includes路径
-define( 'INCLUDESEPATH', THEMEPATH . 'includes/' );
-
-// 自定义widgets路径
-define( 'WIDGETSPATH', INCLUDESEPATH . 'widgets/' );
-
-// 自定义classes路径
-define( 'CLASSESPATH', INCLUDESEPATH . 'classes/' );
-
-// 自定义admin路径
-define( 'ADMINPATH', INCLUDESEPATH . 'admin/' );
-
 // 加载主题函数文件
-require_once( INCLUDESEPATH . 'theme-functions.php' );
+require get_parent_theme_file_path('/inc/theme-functions.php');
 
 // 加载小工具文件
-require_once( WIDGETSPATH . 'widgets.php' );
+require get_parent_theme_file_path('/widgets.php');
 
 // 加载主题选项文件
-require_once(INCLUDESEPATH . 'theme-options.php');
+require get_parent_theme_file_path('/inc/theme-options.php');
 
 // 加载短代码文件
-require_once(INCLUDESEPATH . 'shortcodes.php');
+require get_parent_theme_file_path('/inc/shortcodes.php');
 
 // 加载自定义登录文件
-require_once(ADMINPATH . 'custom-login.php');
+require get_parent_theme_file_path('/inc/admin/custom-login.php');
 
 // 加载自定义用户资料文件
-require_once(ADMINPATH . 'custom-user.php');
+require get_parent_theme_file_path('/inc/admin/custom-user.php');
 
-?>
+function zan_breadcrumb($is_single = false){
+    if (function_exists('bcn_display')) : ?>
+		<!-- 面包屑 -->
+		<div class="breadcrumb <?php if(!$is_single) echo 'zan-breadcrumb'; ?>">
+			<i class="fa fa-home"></i>
+			<?php bcn_display(); ?>
+		</div>
+		<!-- 面包屑结束 -->
+	<?php endif;
+}

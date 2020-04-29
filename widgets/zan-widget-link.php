@@ -9,12 +9,12 @@
 class Zan_Link extends WP_Widget {
 
   // 设定小工具信息
-  function Zan_Link() {
+  function __construct() {
     $widget_options = array(
           'name'        => '链接组件（ZanBlog）', 
           'description' => 'Zanblog 链接组件' 
     );
-    parent::WP_Widget( false, false, $widget_options );  
+    parent::__construct( false, false, $widget_options );  
   }
 
   // 设定小工具结构
@@ -60,5 +60,4 @@ class Zan_Link extends WP_Widget {
   }
 } 
 
-register_widget( 'Zan_Link' );
 ?>

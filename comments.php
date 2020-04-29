@@ -12,7 +12,7 @@ if ( post_password_required() ) { ?>
 
 <div id="comments-template">
   <div class="comments-wrap">
-    <div id="comments" data-url="<?php echo get_bloginfo("template_url") ?>/includes/comment-ajax.php">
+    <div id="comments" data-url="<?php echo get_bloginfo("template_url") ?>/inc/comment-ajax.php">
       <?php if ( have_comments() ) : ?>
         <h3 id="comments-title" class="comments-header alert alert-info"><i class="fa fa-comments"></i> <?php comments_number( __('暂无评论', 'contempo'), __('1 条评论', 'contempo'), __( '% 条评论', 'contempo') );?></h3>
         <div id="loading-comments"><i class="fa fa-spinner fa-spin"></i></div>

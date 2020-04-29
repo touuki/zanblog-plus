@@ -9,12 +9,12 @@
 class Zan_Login extends WP_Widget {
 
   // 设定小工具信息
-  function Zan_Login() {
+  function __construct() {
     $widget_options = array(
           'name'        => '前台登录组件（ZanBlog）', 
           'description' => 'ZanBlog 前台登录组件' 
     );
-    parent::WP_Widget( false, false, $widget_options );  
+    parent::__construct( false, false, $widget_options );  
   }
 
   // 设定小工具结构
@@ -86,5 +86,4 @@ class Zan_Login extends WP_Widget {
   }
 } 
 
-register_widget( 'Zan_Login' );
 ?>

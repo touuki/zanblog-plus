@@ -9,12 +9,12 @@
 class Zan_Custom extends WP_Widget {
 
   // 设定小工具信息
-  function Zan_Custom() {
+  function __construct() {
     $widget_options = array(
           'name'        => '自定义组件（ZanBlog）', 
           'description' => '自行添加想要的组件，例如公告栏' 
     );
-    parent::WP_Widget( false, false, $widget_options );  
+    parent::__construct( false, false, $widget_options );  
   }
 
   // 设定小工具结构
@@ -56,5 +56,4 @@ class Zan_Custom extends WP_Widget {
   }
 } 
 
-register_widget( 'Zan_Custom' );
 ?>

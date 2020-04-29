@@ -9,12 +9,12 @@
 class Zan_Search extends WP_Widget {
 
   // 设定小工具信息
-  function Zan_Search() {
+  function __construct() {
     $widget_options = array(
           'name'        => '搜索框组件（ZanBlog）', 
           'description' => 'ZanBlog 搜索框组件' 
     );
-    parent::WP_Widget( false, false, $widget_options );  
+    parent::__construct( false, false, $widget_options );  
   }
 
   // 设定小工具结构
@@ -42,5 +42,4 @@ class Zan_Search extends WP_Widget {
   }
 } 
 
-register_widget( 'Zan_Search' );
 ?>

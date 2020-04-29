@@ -59,11 +59,6 @@
         </a>
       </li>
       <li class="">
-        <a href="#tab-1-2" data-toggle="tab">
-          广告
-        </a>
-      </li>
-      <li class="">
         <a href="#tab-1-3" data-toggle="tab">
           SEO
         </a>
@@ -91,26 +86,6 @@
             <dt>页脚版权</dt>
             <dd>
               <textarea  name="zan_footer" id="zan_footer" rows="5" autofocus><?php echo stripslashes(get_option('zan_footer')); ?></textarea>
-            </dd>
-          </dl>
-        </div>
-        <div class="tab-pane fade" id="tab-1-2">
-          <dl class="dl-horizontal">
-            <dt>首页内容区域上部广告<br><span>建议规格：100px高 750px宽</span></dt>
-            <dd>
-              <textarea name="zan_content_top_ad" id="zan_content_top_ad" rows="5" autofocus><?php echo stripslashes( get_option( 'zan_content_top_ad' ) ); ?></textarea>
-            </dd>
-            <dt>首页内容区域下部广告<br><span>建议规格：100px高 750px宽</span></dt>
-            <dd>
-              <textarea name="zan_content_down_ad" id="zan_content_down_ad" rows="5" autofocus><?php echo stripslashes( get_option('zan_content_down_ad' ) ); ?></textarea>
-            </dd>
-            <dt>文章页上部广告<br><span>建议规格：100px高 750px宽</span></dt>
-            <dd>
-              <textarea name="zan_single_top_ad" id="zan_single_top_ad" rows="5" autofocus><?php echo stripslashes( get_option( 'zan_single_top_ad' ) ); ?></textarea>
-            </dd>
-            <dt>文章内页下部广告<br><span>建议规格：100px高 750px宽</span></dt>
-            <dd>
-              <textarea name="zan_single_down_ad" id="zan_single_down_ad" rows="5" autofocus><?php echo stripslashes( get_option( 'zan_single_down_ad' ) ); ?></textarea>
             </dd>
           </dl>
         </div>

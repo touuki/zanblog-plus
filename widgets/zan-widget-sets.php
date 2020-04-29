@@ -9,12 +9,12 @@
 class Zan_Sets extends WP_Widget {
 
   // 设定小工具信息
-  function Zan_Sets() {
+  function __construct() {
     $widget_options = array(
           'name'        => '集合组件（ZanBlog）', 
           'description' => 'ZanBlog 集合组件，包含分类目录、热门标签、友情链接模块' 
     );
-    parent::WP_Widget( false, false, $widget_options );  
+    parent::__construct( false, false, $widget_options );  
   }
 
   // 设定小工具结构
@@ -78,5 +78,4 @@ class Zan_Sets extends WP_Widget {
   }
 } 
 
-register_widget( 'Zan_Sets' );
 ?>

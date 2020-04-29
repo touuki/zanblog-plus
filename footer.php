@@ -1,15 +1,18 @@
+</div>
+</div>
 <footer id="zan-footer">
 	<div class="container">
 
 		<!-- 版权信息 -->
-		<?php echo stripslashes( get_option( 'zan_footer' ) ); ?>	Theme By <a href="http://www.yeahzan.com/"  target="_blank">YeahZan</a>      	
+		<?php echo stripslashes(get_option('zan_footer')); ?> Theme By <a href="http://www.yeahzan.com/" target="_blank">YeahZan</a>
 		<!-- 版权信息结束 -->
 
 		<!--统计代码-->
-    <?php $analytics = get_option('zan_analytics');if ($analytics != "") : ?>
-    	<?php echo stripslashes($analytics); ?>
-    <?php endif ?>
-    <!--统计代码结束-->
+		<?php $analytics = get_option('zan_analytics');
+		if ($analytics != "") : ?>
+			<?php echo stripslashes($analytics); ?>
+		<?php endif; ?>
+		<!--统计代码结束-->
 
 	</div>
 </footer>
