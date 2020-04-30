@@ -24,7 +24,7 @@ class Zan_Custom extends WP_Widget {
     @$content = $instance['content'] ? $instance['content'] : '';
     echo $before_widget;
     ?>
-    <div class="panel panel-zan hidden-xs">
+    <div class="panel panel-zan">
       <div class="panel-heading"><?php echo $title; ?></div>
       <div class="panel-body custom"><?php echo $content; ?></div>
     </div>

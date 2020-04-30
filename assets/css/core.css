@@ -411,82 +411,6 @@ html.ie #ds-thread .ds-no-transition#ds-reset .ds-post-button {
 }
 /* =========================== 响应式结束 =========================== */
 /* =========================== 小工具样式 =========================== */
-#sidebar aside > div {
-  margin-bottom: 30px;
-}
-/*搜索框*/
-div.search {
-  margin-bottom: 20px;
-  border: 2px solid white;
-  padding: 8px;
-  border-radius: 4px;
-  background-color: #3d4450;
-}
-div.search input[type="text"] {
-  width: 85%;
-  float: left;
-  margin-right: 10px;
-}
-@media (max-width: 1199px) and (min-width: 992px) {
-  div.search input[type="text"] {
-    width: 82%;
-  }
-}
-@media (max-width: 991px) and (min-width: 768px) {
-  div.search input[type="text"] {
-    width: 93%;
-  }
-}
-@media (max-width: 767px) {
-  div.search input[type="text"] {
-    width: 82%;
-  }
-}
-div.search button {
-  float: left;
-  margin-top: 2px;
-}
-/*幻灯片*/
-.metaslider {
-  border-radius: 4px;
-  margin-bottom: 40px !important;
-  -webkit-box-shadow: 0 0px 5px #999999;
-  -moz-box-shadow: 0 0px 5px #999999;
-  box-shadow: 0 0px 5px #999999;
-}
-@media (max-width: 767px) {
-  .metaslider {
-    margin-bottom: 20px;
-  }
-}
-.metaslider img {
-  border-radius: 4px;
-}
-.metaslider .flex-direction-nav a {
-  width: 40px;
-  height: 40px;
-  margin: -20px 0 0;
-  display: block;
-  background: url(../images/arrow.png) no-repeat 0 0;
-  position: absolute;
-  top: 50%;
-  z-index: 10;
-  cursor: pointer;
-  text-indent: -9999px;
-  -webkit-transition: all .3s ease;
-  -moz-transition: all .3s ease;
-  -o-transition: all .3s ease;
-  transition: all .3s ease;
-}
-.metaslider .flex-direction-nav a:hover {
-  background: url(../images/arrow_hover.png) no-repeat 0 0;
-}
-.metaslider .flex-direction-nav .flex-next {
-  background-position: 0 100%;
-}
-.metaslider .flex-direction-nav .flex-next:hover {
-  background-position: 0 100%;
-}
 .panel-heading {
   border-bottom: none;
   font-size: 14px;
@@ -1331,20 +1255,6 @@ embed[name*="Holmes"] {
   -moz-transition: all .3s ease;
   -o-transition: all .3s ease;
   transition: all .3s ease;
-}
-/* 多说评论框 */
-#ds-thread #ds-reset .ds-post-button {
-  background: #d9534f !important;
-  border-color: #d9534f !important;
-  color: white !important;
-  text-shadow: none !important;
-}
-#ds-thread #ds-reset .ds-post-button:hover {
-  background: #d9534f !important;
-  border-color: #d43f3a !important;
-}
-#ds-thread #ds-reset .ds-powered-by {
-  display: none;
 }
 /* =========================== 评论样式结束 =========================== */
 /* =========================== 下载页面样式 =========================== */

@@ -28,7 +28,7 @@ class Zan_Hotest_Posts extends WP_Widget
     @$num = $instance['num'] ? $instance['num'] : 8;
     echo $before_widget;
 ?>
-    <div class="panel panel-zan hot hidden-xs">
+    <div class="panel panel-zan hot">
       <div class="panel-heading">
         <i class="fa fa-fire"></i> <?php echo $title; ?>
         <i class="fa fa-times-circle panel-remove"></i>

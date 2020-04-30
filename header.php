@@ -1,79 +1,15 @@
 <!DOCTYPE html>
-<!--[if IE 7]>
-<html class="ie ie7" <?php language_attributes(); ?>>
-<![endif]-->
-<!--[if IE 8]>
-<html class="ie ie8" <?php language_attributes(); ?>>
-<![endif]-->
-<!--[if !(IE 7) | !(IE 8)  ]><!-->
-<html <?php language_attributes(); ?>>
-<!--<![endif]-->
+<html <?php language_attributes(); ?> class="no-js">
 
 <head>
-
-  <!-- 设置标题 -->
-  <title>
-    <?php
-    global $page, $paged;
-    $site_description = get_bloginfo('description', 'display');
-    if ($site_description && (is_home() || is_front_page())) {
-      bloginfo('name');
-      echo " - $site_description";
-    } else {
-      echo trim(wp_title('', 0));
-      if ($paged >= 2 || $page >= 2)
-        echo ' - ' . sprintf(__('第%s页'), max($paged, $page));
-      echo ' | ';
-      bloginfo('name');
-    }
-    ?>
-  </title>
-  <!-- 设置标题结束 -->
-
-  <!-- 设置关键词、描述 -->
-  <?php if (is_home() || is_front_page()) {
-    $description = get_option('zan_description');
-    $keywords = get_option('zan_keywords');
-  } elseif (is_category()) {
-    $description = strip_tags(trim(category_description()));
-    $keywords = single_cat_title('', false);
-  } elseif (is_tag()) {
-    $description = sprintf(__('与标签 %s 相关联的文章列表'), single_tag_title('', false));
-    $keywords = single_tag_title('', false);
-  } elseif (is_single()) {
-    if ($post->post_excerpt) {
-      $description = $post->post_excerpt;
-    } else {
-      $description = mb_strimwidth(strip_tags($post->post_content), 0, 110, "");
-    }
-    $keywords = "";
-    $tags = wp_get_post_tags($post->ID);
-    foreach ($tags as $tag) {
-      $keywords = $keywords . $tag->name . ", ";
-    }
-  } else {
-    $description = get_option('zan_description');
-    $keywords = get_option('zan_keywords');
-  }
-  ?>
-  <!-- 设置关键词、描述结束 -->
-
-  <meta charset="utf-8">
-  <meta content="<?php echo trim($description); ?>" name="description" />
-  <meta content="<?php echo rtrim($keywords, ','); ?>" name="keywords" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="<?php bloginfo('charset'); ?>">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="profile" href="http://gmpg.org/xfn/11">
   <?php wp_head(); ?>
-
-  <!--[if lt IE 9]>
-  <script src="<?php echo get_template_directory_uri(); ?>/ui/js/modernizr.js"></script>
-  <script src="<?php echo get_template_directory_uri(); ?>/ui/js/respond.min.js"></script>
-  <script src="<?php echo get_template_directory_uri(); ?>/ui/js/html5shiv.js"></script>
-<![endif]-->
-
 </head>
 
 <body <?php body_class(); ?>>
+  <?php wp_body_open(); ?>
   <header id="zan-header" class="navbar navbar-inverse">
     <nav class="container">
       <a href="<?php echo site_url(); ?>">

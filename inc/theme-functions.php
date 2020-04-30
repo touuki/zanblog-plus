@@ -9,20 +9,6 @@
  * @author      YEAHZAN
  */
 
-
-// 注册加载JS & CSS文件
-add_action('wp_enqueue_scripts', 'zan_scripts_styles');
-
-// 设定后台特色图像
-add_theme_support('post-thumbnails');
-
-// 隐藏admin bar
-//add_filter('show_admin_bar', '__return_false');
-
-// 开启链接管理（包括友情链接）
-add_filter('pre_option_link_manager_enabled', '__return_true');
-
-
 /**
  * ZanBlog 自定义子菜单类
  *
@@ -39,97 +25,6 @@ class Zan_Nav_Menu extends Walker_Nav_Menu
     $output .= "\n$indent<ul class=\"dropdown-menu\">\n";
 
     return $output;
-  }
-}
-
-
-/**
- * 注册、加载CSS & JS文件
- *
- * @since Zanblog 2.0.0
- *
- * @return void
- */
-function zan_scripts_styles()
-{
-  wp_enqueue_script('bootstrap-script', get_template_directory_uri() . '/ui/js/bootstrap.js', array('jquery'), '3.0.0');
-
-  wp_enqueue_script('icheck-script', get_template_directory_uri() . '/ui/js/jquery.icheck.js', array('jquery'));
-
-  wp_enqueue_script('validate-script', get_template_directory_uri() . '/ui/js/jquery.validate.js', array('jquery'), '1.9.0');
-
-  wp_enqueue_script('lazyload-script', get_template_directory_uri() . '/ui/js/jquery.lazyload.min.js', array('jquery'), '1.9.3');
-
-  wp_enqueue_script('zanblog-script', get_template_directory_uri() . '/ui/js/zanblog.js', array('jquery'), '2.1.0');
-
-  wp_enqueue_script('custom-script', get_template_directory_uri() . '/ui/js/custom.js', array('jquery'), '2.1.0');
-
-  wp_enqueue_style('bootstrap-style', get_template_directory_uri() . '/ui/css/bootstrap.css', array(), '3.0.0');
-
-  wp_enqueue_style('fontawesome-style', get_template_directory_uri() . '/ui/font-awesome/css/font-awesome.min.css', array(), '4.0.1');
-
-  wp_enqueue_style('icheck-style', get_template_directory_uri() . '/ui/css/flat/red.css', array());
-
-  wp_enqueue_style('custom-style', get_template_directory_uri() . '/ui/css/core.css', array(), '2.1.0');
-
-  wp_enqueue_style('zanblog-style', get_stylesheet_uri(), array(), '2.1.0');
-
-  wp_enqueue_style('custom-style', get_template_directory_uri() . '/ui/css/custom.css', array(), '2.1.0');
-}
-
-/**
- * 字符串截取
- *
- * @since 2.1.0
- * @return string
- */
-function zan_cut_string($string, $sublen, $start = 0, $code = 'UTF-8')
-{
-  if ($code == 'UTF-8') {
-    $pa = "/[\x01-\x7f]|[\xc2-\xdf][\x80-\xbf]|\xe0[\xa0-\xbf][\x80-\xbf]|[\xe1-\xef][\x80-\xbf][\x80-\xbf]|\xf0[\x90-\xbf][\x80-\xbf][\x80-\xbf]|[\xf1-\xf7][\x80-\xbf][\x80-\xbf][\x80-\xbf]/";
-    preg_match_all($pa, $string, $t_string);
-    if (count($t_string[0]) - $start > $sublen) return join('', array_slice($t_string[0], $start, $sublen)) . "...";
-    return join('', array_slice($t_string[0], $start, $sublen));
-  } else {
-    $start = $start * 2;
-    $sublen = $sublen * 2;
-    $strlen = strlen($string);
-    $tmpstr = '';
-
-    for ($i = 0; $i < $strlen; $i++) {
-      if ($i >= $start && $i < ($start + $sublen)) {
-        if (ord(substr($string, $i, 1)) > 129) $tmpstr .= substr($string, $i, 2);
-        else $tmpstr .= substr($string, $i, 1);
-      }
-      if (ord(substr($string, $i, 1)) > 129) $i++;
-    }
-    if (strlen($tmpstr) < $strlen) $tmpstr .= "...";
-    return $tmpstr;
-  }
-}
-
-/**
- * 分页功能（异步加载或自然分页）
- *
- * @since Zanblog 2.1.0
- *
- * @return void.
- */
-function zan_page($trigger)
-{
-
-  global  $paged;
-
-  if (empty($paged)) $paged = 1;
-
-  $next = $paged + 1;
-
-  if ($trigger == 'auto') {
-    echo "<a id='load-more' class='btn btn-inverse-primary btn-block' load-data='努力加载中...' href='" . get_pagenum_link($next) . "'><i></i> <attr>加载更多</attr></a>";
-  } elseif ($trigger == "manual") {
-    show_paginate();
-  } else {
-    echo "<div class='alert alert-danger'><i class='icon-warning-sign'></i> 请输入正确的触发值（auto或者manual）</div>";
   }
 }
 

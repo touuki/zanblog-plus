@@ -19,10 +19,7 @@ var zan = {
 		this.dropDown();
 		this.panelToggle();
 		this.panelClose();
-		this.btnLoading();
-		this.setImgHeight();
 		this.archivesNum();
-		// this.lazyload();
 		this.commentValidate();
 		this.ajaxCommentsReply();
 		this.ajaxCommentsPage();
@@ -64,28 +61,25 @@ var zan = {
 
 		  		zanHeader.addClass('navbar-fixed-top');
 		  		body.addClass('nav-fixed');
-		  		ifFixed.iCheck('check');
+		  		ifFixed.prop( "checked", true );
     		} else {
 
     			zanHeader.removeClass('navbar-fixed-top');
 		  		body.removeClass('nav-fixed');
-		  		ifFixed.iCheck('uncheck');
+		  		ifFixed.prop( "checked", false );
     		}
     	}
 
-	    ifFixed.iCheck({
-	    	checkboxClass: 'icheckbox_flat-red'
-	  	});
-
-	  	ifFixed.on('ifChecked', function(event){
-		  	zanHeader.addClass('navbar-fixed-top');
-		  	body.addClass('nav-fixed');
-		  	storage.setItem('ifFixed', 'fixed');
-
-		}).on('ifUnchecked', function(event) {
-			zanHeader.removeClass('navbar-fixed-top');
-		  	body.removeClass('nav-fixed');
-		  	storage.setItem('ifFixed', 'float');
+	  	ifFixed.on('change', function(){
+			if (jQuery(this).is(':checked')) {
+				zanHeader.addClass('navbar-fixed-top');
+				body.addClass('nav-fixed');
+				storage.setItem('ifFixed', 'fixed');
+			} else {
+				zanHeader.removeClass('navbar-fixed-top');
+				body.removeClass('nav-fixed');
+				storage.setItem('ifFixed', 'float');
+			}
 		});
 	},
 	
@@ -140,39 +134,6 @@ var zan = {
 		});
 	},
 
-	btnLoading:	function() {
-
-		var loadBtn = jQuery('#load-more');
-		var loadData = loadBtn.attr('load-data');
-
-		loadBtn.click(function() {
-
-			loadBtn.addClass('disabled');
-			loadBtn.find('i').addClass('fa fa-spinner fa-spin');
-			loadBtn.find('attr').text(loadData);
-		})
-	},
-
-	// 设置图片高度
-	setImgHeight: function() {
-
-		var img = jQuery(".content-article p").find("img");
-
-		img.each(function() {
-
-			var $this = jQuery(this);
-			var attrWidth = $this.attr('width');
-			var attrHeight = $this.attr('height');
-			var width = $this.width();
-
-			var scale = width / attrWidth;
-			var height = scale * attrHeight;
-
-			$this.css('height', height);
-
-		});
-	},
-
 	// 文章存档添加字段
 	archivesNum: function() {
 
@@ -186,16 +147,9 @@ var zan = {
 		});
  	},
 
- 	// 延时加载图片功能
-	lazyload: function() {
-		jQuery("#sidebar img.lazy").lazyload({ threshold : 800});
-		jQuery("#smilelink img.lazy").lazyload({ threshold : 800});
-		jQuery("img.lazy").lazyload({ effect : "fadeIn" ,threshold : 800,skip_invisible : false});
-
-	},
-
 	// 评论验证
 	commentValidate: function() {
+		/*
 	  jQuery( '#commentform' ).validate( {
 	    rules: {
 	      author: {
@@ -226,8 +180,9 @@ var zan = {
 	      comment: {
 	        required: "留言内容不能为空！"
 	      }
-	    }
-	  } );
+		}
+	} );
+	*/
 	},
 
 	// ajax评论回复
@@ -296,8 +251,6 @@ var zan = {
 						
 						$('#respond').before(new_htm);
 						$('#new-comm-' + num).append(data);
-
-						zan.lazyload();
 						
 						$body.animate({
 							scrollTop: $('#new-comm-' + num).offset().top - 65
@@ -337,8 +290,6 @@ var zan = {
 
 				t.respondId = respondId;
 				postId = postId || false;
-
-				zan.lazyload();
 
 				if (!t.I('wp-temp-form-div')) {
 					div = document.createElement('div');

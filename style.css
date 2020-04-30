@@ -16,3 +16,42 @@ Tags: Bootstrap3, 扁平化设计, 精致简约
     width: 1px;
     word-wrap: normal !important;
 }
+
+.admin-bar .navbar-fixed-top {
+    top: 32px; /* if it already has a top value, add 32px to it */
+}
+
+@media screen and (max-width: 782px) {
+    .admin-bar .navbar-fixed-top {
+        top: 46px; /* if it already has a top value, add 46px to it */
+    }
+}
+
+.widget-area > section {
+    margin-bottom: 30px;
+}
+
+.search {
+    padding: 8px;
+    background-color: #3d4450;
+}
+
+.search-form {
+    position: relative;
+}
+
+.search-submit {
+    bottom: 0;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 42px;
+    font-size: 14px;
+}
+
+input[type="search"].search-field {
+    width: -webkit-calc(100% - 50px);
+    width: calc(100% - 50px);
+}

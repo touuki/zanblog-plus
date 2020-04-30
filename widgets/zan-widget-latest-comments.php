@@ -29,7 +29,7 @@ class Zan_Latest_Comments extends WP_Widget
     @$size = $instance['size'] ? $instance['size'] : 40;
     echo $before_widget;
 ?>
-    <div class="panel panel-zan hidden-xs">
+    <div class="panel panel-zan">
       <div class="panel-heading">
         <i class="fa fa-comments"></i> <?php echo $title; ?>
         <i class="fa fa-times-circle panel-remove"></i>

@@ -1,7 +1,7 @@
 <!-- 内容主体 -->
 <article class="article container well">
 	<!-- 面包屑 -->
-	<?php zan_breadcrumb(true); ?>
+	<?php zan_breadcrumb(false); ?>
 	<!-- 面包屑 -->
 
 	<!-- 大型设备文章属性 -->
@@ -13,7 +13,11 @@
 			<span class="label label-zan"><i class="fa fa-tags"></i> <?php the_time('n' . '-' . 'd'); ?></span>
 			<span class="label label-zan"><i class="fa fa-tags"></i> <?php the_category(','); ?></span>
 			<span class="label label-zan"><i class="fa fa-user"></i> <?php the_author_posts_link(); ?></span>
-			<span class="label label-zan"><i class="fa fa-eye"></i> <?php if (function_exists('the_views')) the_views(); ?></span>
+			<?php if (function_exists('the_views')) : ?>
+				<span class="label label-zan">
+					<i class="fa fa-eye"></i><?php the_views(); ?>
+				</span>
+			<?php endif; ?>
 			<?php edit_post_link('<span class="label label-zan"><i class="fa fa-edit"></i> 编辑', ' ', '</span>'); ?>
 		</div>
 	</div>
@@ -26,7 +30,9 @@
 		</div>
 		<p>
 			<i class="fa fa-calendar"></i> <?php the_time('n'); ?>-<?php the_time('d'); ?>
-			<i class="fa fa-eye"></i> <?php if (function_exists('the_views')) the_views(); ?>
+			<?php if (function_exists('the_views')) : ?>
+				<i class="fa fa-eye"></i><?php the_views(); ?>
+			<?php endif; ?>
 		</p>
 	</div>
 	<!-- 小型设备文章属性结束 -->
@@ -75,34 +81,6 @@
 			<p>转载时必须以链接形式注明原始出处及本声明。</p>
 		</div>
 		<!-- 文章版权信息结束 -->
-
-		<!-- 文章分享 -->
-		<div class="clearfix" id="bdshare">
-			<div class="bdsharebuttonbox pull-right">
-				<a href="#" class="bds_more" data-cmd="more"></a>
-				<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
-				<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
-				<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
-			</div>
-		</div>
-		<!-- 文章分享结束 -->
-
-		<script>
-			window._bd_share_config = {
-				"common": {
-					"bdSnsKey": {},
-					"bdText": "",
-					"bdMini": "2",
-					"bdMiniList": false,
-					"bdPic": "",
-					"bdStyle": "1",
-					"bdSize": "24"
-				},
-				"share": {}
-			};
-			with(document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
-		</script>
-		<!-- Baidu Button END -->
 	</div>
 </article>
 <!-- 内容主体结束 -->
