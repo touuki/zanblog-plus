@@ -16,7 +16,6 @@
         <div class="navbar-brand"></div>
       </a>
       <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
         <span class="fa fa-reorder fa-lg"></span>
       </button>
       <div class="navbar-collapse bs-navbar-collapse collapse">

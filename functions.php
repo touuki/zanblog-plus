@@ -244,7 +244,7 @@ add_filter('wp_get_attachment_image_attributes', 'zan_post_thumbnail_sizes_attr'
 function zan_breadcrumb($is_block = true)
 {
 	if (function_exists('bcn_display')) : ?>
-		<div class="breadcrumb <?php if ($is_block) echo 'zan-breadcrumb'; ?>">
+		<div class="breadcrumb <?php if ($is_block) echo 'panel panel-default'; ?>">
 			<i class="fa fa-home"></i>
 			<?php bcn_display(); ?>
 		</div>

@@ -19,7 +19,9 @@
 	</header>
 
 	<div class="centent-article">
-		<figure class="thumbnail hidden-xs"><?php the_post_thumbnail('full'); ?></figure>
+		<?php if (has_post_thumbnail()) : ?>
+			<figure class="thumbnail hidden-xs"><?php the_post_thumbnail('full'); ?></figure>
+		<?php endif; ?>
 		<?php the_content(); ?>
 
 		<!-- 分页 -->
@@ -87,12 +89,10 @@
 					the_post();
 					update_post_caches($posts); ?>
 					<div class="col-md-4">
-						<div class="thumbnail">
-							<div class="caption clearfix">
-								<p class="post-related-title"><a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></p>
-								<p class="post-related-content"><?php echo mb_strimwidth(strip_tags(apply_filters('the_content', $post->post_content)), 0, 150, "..."); ?></p>
-								<p><a class="btn btn-danger pull-right read-more" href="<?php the_permalink() ?>" title="详细阅读 <?php the_title(); ?>">阅读全文</a></p>
-							</div>
+						<div class="well clearfix">
+							<p class="post-related-title"><a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></p>
+							<p class="post-related-content"><?php echo mb_strimwidth(strip_tags(apply_filters('the_content', $post->post_content)), 0, 150, "..."); ?></p>
+							<p><a class="btn btn-danger pull-right read-more" href="<?php the_permalink() ?>" title="详细阅读 <?php the_title(); ?>">阅读全文</a></p>
 						</div>
 					</div>
 		<?php

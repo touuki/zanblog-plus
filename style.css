@@ -8,8 +8,61 @@ Version: 2.1.0
 Tags: Bootstrap3, 扁平化设计, 精致简约
 */
 
-/* =========================== Main Style Start =========================== */
-.says, .screen-reader-text {
+
+/* --------------------------- Base Start ----------------------------------- */
+
+a {
+    color: #d9534f;
+    text-decoration: none;
+}
+
+a:hover,
+a:focus {
+    color: #c9302c;
+    text-decoration: none;
+}
+
+:hover,
+:focus {
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease;
+}
+
+
+/* --------------------------- Base End ----------------------------------- */
+
+
+/* --------------------------- Bootstrap Start --------------------------- */
+
+.thumbnail {
+    padding: 0;
+}
+
+.panel-default {
+    margin-bottom: 30px;
+    padding: 20px;
+}
+
+.thumbnail img {
+    border-radius: 4px;
+    border: 1px solid #e5e5e5;
+}
+
+.thumbnail img:hover {
+    border: 1px solid #d9534f;
+    opacity: 0.8;
+}
+
+
+/* --------------------------- Bootstrap End ------------------------------ */
+
+
+/* --------------------------- Main Style Start --------------------------- */
+
+.says,
+.screen-reader-text {
     clip: rect(1px, 1px, 1px, 1px);
     height: 1px;
     overflow: hidden;
@@ -25,52 +78,64 @@ Tags: Bootstrap3, 扁平化设计, 精致简约
 }
 
 .admin-bar .navbar-fixed-top {
-    top: 32px; /* if it already has a top value, add 32px to it */
+    top: 32px;
+    /* if it already has a top value, add 32px to it */
 }
 
 @media screen and (max-width: 782px) {
     .admin-bar .navbar-fixed-top {
-        top: 46px; /* if it already has a top value, add 46px to it */
+        top: 46px;
+        /* if it already has a top value, add 46px to it */
     }
 }
 
-.widget-area > section {
+.widget-area>section {
     margin-bottom: 30px;
 }
-/* =========================== Main Style End =========================== */
 
- /* =========================== Article Start =========================== */
- .entry-title {
+
+/* --------------------------- Main Style End --------------------------- */
+
+
+/* --------------------------- Article Start --------------------------- */
+
+.article {
+    position: relative;
+}
+
+.entry-title {
     padding: 20px 15px 0px 15px;
     font-size: 32px;
     margin: 0;
     margin-bottom: 20px;
     text-align: center;
 }
- 
+
 .entry-meta {
     text-align: center;
     line-height: 24px;
     margin-bottom: 20px;
 }
 
-.entry-meta a,
-.entry-meta a:hover {
+.label-meta a,
+.label-meta a:hover {
     color: #ffffff;
 }
 
 .label-meta {
     background-color: #3d4450;
 }
-  
+
 .label-meta:hover,
 .label-meta:focus {
     background-color: #d9534f;
-    -webkit-transition: all .3s ease;
-    -moz-transition: all .3s ease;
-    -o-transition: all .3s ease;
-    transition: all .3s ease;
 }
+
+.read-more .badge {
+    padding: 2px 5px;
+    margin-left: 3px;
+}
+
 @media (max-width: 767px) {
     .entry-title {
         padding: 0px;
@@ -84,10 +149,14 @@ Tags: Bootstrap3, 扁平化设计, 精致简约
         width: 100%;
     }
 }
-/* =========================== Article End =========================== */
 
-/* =========================== Search Form Start =========================== */
-.widget_search > div {
+
+/* --------------------------- Article End --------------------------- */
+
+
+/* --------------------------- Search Form Start --------------------------- */
+
+.widget_search>div {
     padding: 8px;
     background-color: #3d4450;
 }
@@ -107,16 +176,19 @@ Tags: Bootstrap3, 扁平化设计, 精致简约
 }
 
 input[type="search"].search-field {
-    width: -webkit-calc(100% - 50px);
-    width: calc(100% - 50px);
+    display: inline-block;
+    width: -webkit-calc(100% - 56px);
+    width: calc(100% - 56px);
 }
-/* =========================== Search Form End =========================== */
+
+
+/* --------------------------- Search Form End --------------------------- */
 
 .comments-title {
     text-align: center;
     font-size: 14px;
 }
 
-.comment-form-comment > label {
+.comment-form-comment>label {
     display: none;
 }

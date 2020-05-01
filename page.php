@@ -23,7 +23,7 @@ get_header(); ?>
 		while (have_posts()) :
 			the_post();
 		?>
-			<article class="article panel panel-default clearfix">
+			<article class="article panel panel-default">
 				<?php the_content(); ?>
 			</article>
 		<?php
