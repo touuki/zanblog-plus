@@ -1,28 +1,20 @@
 <?php
-
 /**
- * Functions 整体函数调用
+ * Twenty Seventeen functions and definitions
  *
- * @package    YEAHZAN
- * @subpackage ZanBlog
- * @since      ZanBlog 2.1.0
+ * @link https://developer.wordpress.org/themes/basics/theme-functions/
  *
+ * @package WordPress
+ * @subpackage ZanBlog_Plus
+ * @since ZanBlog Plus 1.0
  */
+
 
 // 加载主题函数文件
 require get_parent_theme_file_path('/inc/theme-functions.php');
 
 // 加载小工具文件
 require get_parent_theme_file_path('/widgets.php');
-
-// 加载短代码文件
-require get_parent_theme_file_path('/inc/shortcodes.php');
-
-// 加载自定义登录文件
-require get_parent_theme_file_path('/inc/admin/custom-login.php');
-
-// 加载自定义用户资料文件
-require get_parent_theme_file_path('/inc/admin/custom-user.php');
 
 
 /**
@@ -168,7 +160,8 @@ function zan_scripts()
 {
 	//wp_enqueue_style('bootstrap', 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css', array(), null);
 
-	wp_enqueue_style('bootstrap', get_theme_file_uri('/assets/css/bootstrap.css'), array(), null);
+	wp_enqueue_style('bootstrap', 'https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css', array(), null);
+	//wp_enqueue_style('bootstrap', get_theme_file_uri('/assets/css/bootstrap.css'), array(), null);
 
 	wp_enqueue_style('fontawesome', 'http://comet.uki.site/fontawesome/css/all.css', array(), null);
 
@@ -176,13 +169,15 @@ function zan_scripts()
 	wp_enqueue_style('zan-core-style', get_theme_file_uri('/assets/css/core.css'), array(), '20200430');
 	wp_enqueue_style('zan-style', get_stylesheet_uri(), array(), '20200430');
 
-	//wp_enqueue_script('jquery', 'https://code.jquery.com/jquery-3.5.0.min.js', array(), null);
+	wp_deregister_script( 'jquery' );
+	wp_enqueue_script('jquery', 'https://code.jquery.com/jquery-3.5.0.min.js', array(), null);
 
 	//wp_enqueue_script('popper.js', 'https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js', array('jquery'), null);
 
 	//wp_enqueue_script('bootstrap', 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js', array('jquery', 'popper.js'), null);
 
-	wp_enqueue_script('bootstrap', get_theme_file_uri('/assets/js/bootstrap.js'), array('jquery'), null);
+	wp_enqueue_script('bootstrap', 'https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js', array('jquery'), null);
+	//wp_enqueue_script('bootstrap', get_theme_file_uri('/assets/js/bootstrap.js'), array('jquery'), null);
 
 	wp_enqueue_script('zan-script', get_theme_file_uri('/assets/js/zanblog.js'), array('jquery'), '20200430');
 

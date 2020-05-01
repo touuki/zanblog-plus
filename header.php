@@ -30,8 +30,8 @@
         ?>
       </div>
     </nav>
-    <div id="if-fixed" class="pull-right visible-lg visible-md">
-      <i class="fa fa-thumb-tack"></i>
+    <div id="if-fixed" class="pull-right hidden-xs">
+      <i class="fa fa-thumbtack"></i>
       <input type="checkbox">
     </div>
   </header>

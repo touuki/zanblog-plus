@@ -1,41 +1,22 @@
 <!-- 内容主体 -->
-<article class="article container well">
-	<!-- 面包屑 -->
-	<?php zan_breadcrumb(false); ?>
-	<!-- 面包屑 -->
-
-	<!-- 大型设备文章属性 -->
-	<div class="hidden-xs">
-		<div class="title-article">
-			<h1><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></h1>
-		</div>
-		<div class="tag-article container">
-			<span class="label label-zan"><i class="fa fa-tags"></i> <?php the_time('n' . '-' . 'd'); ?></span>
-			<span class="label label-zan"><i class="fa fa-tags"></i> <?php the_category(','); ?></span>
-			<span class="label label-zan"><i class="fa fa-user"></i> <?php the_author_posts_link(); ?></span>
+<article class="article panel panel-default">
+	<header>
+		<!-- 面包屑 -->
+		<?php zan_breadcrumb(false); ?>
+		<!-- 面包屑 -->
+		<?php the_title('<h1 class="entry-title">', '</h1>'); ?>
+		<div class="entry-meta">
+			<span class="label label-meta"><i class="fa fa-calendar-alt"></i> <?php the_time('Y-m-d'); ?></span>
+			<span class="label label-meta"><i class="fa fa-folder"></i> <?php the_category(','); ?></span>
+			<span class="label label-meta"><i class="fa fa-user"></i> <?php the_author_posts_link(); ?></span>
 			<?php if (function_exists('the_views')) : ?>
-				<span class="label label-zan">
-					<i class="fa fa-eye"></i><?php the_views(); ?>
+				<span class="label label-meta">
+					<i class="fa fa-eye"></i> <?php the_views(); ?>
 				</span>
 			<?php endif; ?>
-			<?php edit_post_link('<span class="label label-zan"><i class="fa fa-edit"></i> 编辑', ' ', '</span>'); ?>
+			<?php edit_post_link('<span class="label label-meta"><i class="fa fa-edit"></i> 编辑', ' ', '</span>'); ?>
 		</div>
-	</div>
-	<!-- 大型设备文章属性结束 -->
-
-	<!-- 小型设备文章属性 -->
-	<div class="visible-xs">
-		<div class="title-article">
-			<h4><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></h4>
-		</div>
-		<p>
-			<i class="fa fa-calendar"></i> <?php the_time('n'); ?>-<?php the_time('d'); ?>
-			<?php if (function_exists('the_views')) : ?>
-				<i class="fa fa-eye"></i><?php the_views(); ?>
-			<?php endif; ?>
-		</p>
-	</div>
-	<!-- 小型设备文章属性结束 -->
+	</header>
 
 	<div class="centent-article">
 		<figure class="thumbnail hidden-xs"><?php the_post_thumbnail('full'); ?></figure>
@@ -86,7 +67,7 @@
 <!-- 内容主体结束 -->
 
 <!-- 相关文章 -->
-<div class="bs-example visible-md visible-lg" id="post-related">
+<div class="bs-example visible-md visible-lg panel panel-default" id="post-related">
 	<div class="row">
 		<div class="alert alert-danger related-title text-center"><i class="fa fa-heart"></i> 您可能也喜欢:</div>
 		<?php

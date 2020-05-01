@@ -1,9 +1,7 @@
 </div>
 </div>
 <footer id="zan-footer">
-	<div class="container">
-		Theme By <a href="http://github.com/touuki/zanblog-plus/" target="_blank">ZanBlog Plus</a>
-	</div>
+	Theme By <a href="http://github.com/touuki/zanblog-plus/" target="_blank">ZanBlog Plus</a>
 </footer>
 
 <!-- 回到顶端 -->

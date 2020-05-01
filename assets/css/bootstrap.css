@@ -4889,15 +4889,6 @@ textarea.input-group-sm > .input-group-btn > .btn {
   background-color: #c9302c;
 }
 
-.label-zan {
-  background-color: #3d4450;
-}
-
-.label-zan[href]:hover,
-.label-zan[href]:focus {
-  background-color: #3d4450;
-}
-
 .badge {
   display: inline-block;
   min-width: 10px;

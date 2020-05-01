@@ -63,9 +63,9 @@ class Zan_Rand_Posts extends WP_Widget
                 <?php the_title(); ?>
               </a>
             </span>
-            <?php if (function_exists('the_views')) { ?>
+            <?php if (function_exists('the_views')) : ?>
               <span class="badge"><?php the_views(); ?></span>
-            <?php } ?>
+            <?php endif; ?>
           </li>
         <?php
         endforeach;

@@ -17,7 +17,6 @@
 
 body {
 	background-color: @zan-bg;
-	background: url("../images/bg.jpg");
 	word-wrap : break-word;
 	&.nav-fixed {
 		position: relative;
@@ -206,39 +205,6 @@ div[class*="success"] .badge {
 	.badge {
 		background-color: @zan-primary;
 	}
-}
-
-.pagination-zan {
-  margin: 0;
-  .zan-radius;
-  li > a,
-  li > span {
-    color: @zan-primary;
-    border: 2px solid @zan-primary;
-    background-color: transparent;
-    margin-left: 10px;
-    .zan-radius;
-    &:hover {
-      color: white;
-      border: 2px solid @zan-primary;
-      background-color: @zan-primary;
-      .zan-transition;
-    }
-  }
-  .active a,
-  .active span {
-      color: white;
-      border: 2px solid @zan-primary;
-      background-color: @zan-primary;
-      .zan-transition;
-      &:hover {
-        color: white;
-        border: 2px solid @zan-primary;
-        background-color: @zan-primary;
-        .zan-transition;
-        cursor: not-allowed;
-      }
-  }
 }
 
 .btn-zan-solid-pp {
@@ -506,8 +472,8 @@ ul.pills-zan {
 	}	
 }
 
-.tag-article a,
-.tag-article a:hover {
+.entry-meta a,
+.entry-meta a:hover {
 	color: white;
 }
 
@@ -781,12 +747,12 @@ ul.pills-zan {
 }
 
 /*文章－标签*/
-.label-zan:hover {
+.label-meta:hover {
 	background-color: @zan-primary;
 	.zan-transition;
 }
 
-.tag-article {
+.entry-meta {
 	text-align: center;
 	line-height: 24px;
 	margin: 20px;
@@ -821,9 +787,12 @@ ul.pills-zan {
 
 /*相关文章*/
 #post-related {
-	padding:0 19px 19px 19px;
 	.thumbnail {
 		border: 1px solid @gray-lighter;
+	}
+	.related-title {
+		margin-right: 15px;
+		margin-left: 15px;
 	}
 	.post-related-title {
 		.white-space;
@@ -1047,16 +1016,6 @@ embed[name*="Holmes"] {
   }
 }
 
-#smilelink {
-  cursor:pointer;
-  margin-bottom: 10px;
-  img {
-    &:hover {
-    	.zan-opacity-5;
-    }
-  }
-}
-
 #commentform {
 	.input-group label.error {
 		display: block;
@@ -1103,7 +1062,7 @@ embed[name*="Holmes"] {
       }
     }
   }
-  input {
+  input[type="text"] {
     padding: 10px 25px;
     @media (max-width: @screen-md-max) and (min-width: @screen-md-min) {
       padding: 10px 5px;
@@ -1118,6 +1077,7 @@ embed[name*="Holmes"] {
     border: 2px solid @zan-primary;
   }
   textarea {
+	  resize: none;
     margin: 0;
     margin-bottom: 10px;
     padding: 10px 15px;
@@ -1129,34 +1089,10 @@ embed[name*="Holmes"] {
       border: 2px solid @zan-primary;
     }
   }
-  input:focus, textarea:focus {
+  input[type="text"]:focus, textarea:focus {
     outline: 0;
     .zan-transition;
   }
-  #submit {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    .zan-radius;
-    width: 100%;
-    .btn-zan-solid-pp;
-  }
-}
-
-/* 多说评论框 */
-#ds-thread #ds-reset {
-	.ds-post-button {
-		background: @zan-primary !important;
-		border-color: @zan-primary !important;
-		color: white !important;
-		text-shadow: none !important;
-		&:hover {
-			background: @zan-primary !important;
-			border-color: darken(@zan-primary, 5%) !important;
-		}
-	}
-	.ds-powered-by {
-		display: none;
-	}
 }
 
 /* =========================== 评论样式结束 =========================== */

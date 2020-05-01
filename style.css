@@ -8,6 +8,7 @@ Version: 2.1.0
 Tags: Bootstrap3, 扁平化设计, 精致简约
 */
 
+/* =========================== Main Style Start =========================== */
 .says, .screen-reader-text {
     clip: rect(1px, 1px, 1px, 1px);
     height: 1px;
@@ -15,6 +16,12 @@ Tags: Bootstrap3, 扁平化设计, 精致简约
     position: absolute !important;
     width: 1px;
     word-wrap: normal !important;
+}
+
+.zan-breadcrumb {
+    background-color: #ffffff;
+    box-shadow: 0 0px 5px #c2c2c2;
+    margin-bottom: 40px;
 }
 
 .admin-bar .navbar-fixed-top {
@@ -30,8 +37,57 @@ Tags: Bootstrap3, 扁平化设计, 精致简约
 .widget-area > section {
     margin-bottom: 30px;
 }
+/* =========================== Main Style End =========================== */
 
-.search {
+ /* =========================== Article Start =========================== */
+ .entry-title {
+    padding: 20px 15px 0px 15px;
+    font-size: 32px;
+    margin: 0;
+    margin-bottom: 20px;
+    text-align: center;
+}
+ 
+.entry-meta {
+    text-align: center;
+    line-height: 24px;
+    margin-bottom: 20px;
+}
+
+.entry-meta a,
+.entry-meta a:hover {
+    color: #ffffff;
+}
+
+.label-meta {
+    background-color: #3d4450;
+}
+  
+.label-meta:hover,
+.label-meta:focus {
+    background-color: #d9534f;
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease;
+}
+@media (max-width: 767px) {
+    .entry-title {
+        padding: 0px;
+        margin-bottom: 5px;
+    }
+    .entry-meta {
+        line-height: 24px;
+        margin-bottom: 20px;
+    }
+    .read-more {
+        width: 100%;
+    }
+}
+/* =========================== Article End =========================== */
+
+/* =========================== Search Form Start =========================== */
+.widget_search > div {
     padding: 8px;
     background-color: #3d4450;
 }
@@ -48,10 +104,19 @@ Tags: Bootstrap3, 扁平化设计, 精致简约
     right: 0;
     top: 0;
     width: 42px;
-    font-size: 14px;
 }
 
 input[type="search"].search-field {
     width: -webkit-calc(100% - 50px);
     width: calc(100% - 50px);
+}
+/* =========================== Search Form End =========================== */
+
+.comments-title {
+    text-align: center;
+    font-size: 14px;
+}
+
+.comment-form-comment > label {
+    display: none;
 }

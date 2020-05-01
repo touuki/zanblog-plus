@@ -1,17 +1,25 @@
-<?php get_header(); ?>
+<?php 
+/**
+ * The main template file
+ *
+ * This is the most generic template file in a WordPress theme
+ * and one of the two required files for a theme (the other being style.css).
+ * It is used to display a page when nothing more specific matches a query.
+ * E.g., it puts together the home page when no home.php file exists.
+ *
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
+ *
+ * @package WordPress
+ * @subpackage ZanBlog_Plus
+ * @since ZanBlog Plus 1.0
+ * @version 1.0
+ */
+
+get_header(); ?>
 <div class="row">
-	<main id="mainstay" class="col-md-8" role="main">
+	<main class="col-md-8" role="main">
 
 		<?php if (is_home() && is_front_page()) : ?>
-			<!-- 公告 -->
-			<?php if (get_option('zan_notice')) { ?>
-				<div class="well fade in">
-					<button type="button" class="close" data-dismiss="alert">&times;</button>
-					<?php echo stripslashes(get_option('zan_notice')); ?>
-				</div>
-			<?php } ?>
-			<!-- 公告结束 -->
-
 			<!-- Home Banner Start -->
 			<header id="banner" role="banner" class="widget-area" aria-label="<?php esc_attr_e('Banner', 'default'); ?>">
 				<?php dynamic_sidebar('sidebar-2') ?>
@@ -23,7 +31,6 @@
 			<!-- 面包屑 -->
 		<?php endif; ?>
 
-		<!-- 内容主体 -->
 		<?php
 		if (have_posts()) :
 
@@ -47,12 +54,10 @@
 			));
 		else :
 
-			get_template_part('template-parts/content', 'none');
+			//get_template_part('template-parts/content', 'none');
 
 		endif;
 		?>
-		<!-- 内容主体结束 -->
-
 	</main>
 
 	<?php get_sidebar(); ?>
