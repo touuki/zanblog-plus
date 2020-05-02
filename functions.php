@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Twenty Seventeen functions and definitions
  *
@@ -114,16 +115,20 @@ function zan_widgets_init()
 		'id'            => 'sidebar-1',
 		'name'          => __('Blog Sidebar', 'default'),
 		'description'   => __('Add widgets here to appear in your sidebar on blog posts and archive pages.', 'default'),
-		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</section>'
+		'before_widget' => '<section id="%1$s" class="panel panel-widget widget %2$s">',
+		'after_widget'  => '</section>',
+		'before_title'  => '<div class="panel-heading"><h2 class="widgettitle">',
+		'after_title'   => '</h2><i class="fa fa-times-circle panel-btn-remove"></i><i class="fa fa-chevron-circle-up panel-btn-toggle"></i></div>',
 	));
 
 	register_sidebar(array(
 		'id'            => 'sidebar-2',
 		'name'          => __('Home Banner', 'default'),
 		'description'   => __('Add widgets here to appear in your home banner.', 'default'),
-		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</section>'
+		'before_widget' => '<section id="%1$s" class="panel panel-widget widget %2$s">',
+		'after_widget'  => '</section>',
+		'before_title'  => '<div class="panel-heading"><h2 class="widgettitle">',
+		'after_title'   => '</h2><i class="fa fa-times-circle panel-btn-remove"></i><i class="fa fa-chevron-circle-up panel-btn-toggle"></i></div>',
 	));
 }
 add_action('widgets_init', 'zan_widgets_init');
@@ -169,7 +174,7 @@ function zan_scripts()
 	wp_enqueue_style('zan-core-style', get_theme_file_uri('/assets/css/core.css'), array(), '20200430');
 	wp_enqueue_style('zan-style', get_stylesheet_uri(), array(), '20200430');
 
-	wp_deregister_script( 'jquery' );
+	wp_deregister_script('jquery');
 	wp_enqueue_script('jquery', 'https://code.jquery.com/jquery-3.5.0.min.js', array(), null);
 
 	//wp_enqueue_script('popper.js', 'https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js', array('jquery'), null);
@@ -181,15 +186,11 @@ function zan_scripts()
 
 	wp_enqueue_script('zan-script', get_theme_file_uri('/assets/js/zanblog.js'), array('jquery'), '20200430');
 
-	wp_enqueue_script('modernizr', get_theme_file_uri('/assets/js/modernizr.js'), array(), null);
-	wp_script_add_data('modernizr', 'conditional', 'lt IE 9');
-	wp_enqueue_script('respond', get_theme_file_uri('/assets/js/respond.min.js'), array(), null);
-	wp_script_add_data('respond', 'conditional', 'lt IE 9');
-	// Load the html5 shiv.
-	wp_enqueue_script('html5', get_theme_file_uri('/assets/js/html5shiv.js'), array(), null);
-	wp_script_add_data('html5', 'conditional', 'lt IE 9');
+	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
+		wp_enqueue_script( 'comment-reply' );
+	}
 }
-add_action( 'wp_enqueue_scripts', 'zan_scripts' );
+add_action('wp_enqueue_scripts', 'zan_scripts');
 
 
 /**
@@ -251,6 +252,32 @@ function zan_breadcrumb($is_block = true)
 <?php endif;
 }
 
+function zan_color_cloud($text)
+{
+	$text = preg_replace_callback('|<a (.+?)>|i', 'zan_color_cloud_callback', $text);
+	return $text;
+}
+
+function zan_color_cloud_callback($matches)
+{
+	$text = $matches[1];
+	$h = rand(0, 360);
+	$s = rand(80,100);
+	$l = rand(30,40);
+	$pattern = '/style=(\'|\")(.*)(\'|\")/i';
+	$text = preg_replace($pattern, 'style="color: hsl(' . $h . ',' . $s . '%,' . $l . '%);$2;"', $text);
+
+	return "<a $text>";
+}
+add_filter('wp_tag_cloud', 'zan_color_cloud', 1);
+
+function zan_tag_cloud_args($args)
+{
+	$args['smallest'] = '8';
+	$args['largest'] = '22';
+	return $args;
+}
+add_filter('widget_tag_cloud_args', 'zan_tag_cloud_args');
 
 /**
  * Customizer additions.

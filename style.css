@@ -40,6 +40,10 @@ a:focus {
     padding: 0;
 }
 
+.panel {
+    border: none;
+}
+
 .panel-default {
     margin-bottom: 30px;
     padding: 20px;
@@ -71,12 +75,6 @@ a:focus {
     word-wrap: normal !important;
 }
 
-.zan-breadcrumb {
-    background-color: #ffffff;
-    box-shadow: 0 0px 5px #c2c2c2;
-    margin-bottom: 40px;
-}
-
 .admin-bar .navbar-fixed-top {
     top: 32px;
     /* if it already has a top value, add 32px to it */
@@ -89,10 +87,6 @@ a:focus {
     }
 }
 
-.widget-area>section {
-    margin-bottom: 30px;
-}
-
 
 /* --------------------------- Main Style End --------------------------- */
 
@@ -103,17 +97,22 @@ a:focus {
     position: relative;
 }
 
+.article-stick {
+    position: absolute;
+    top: -10px;
+    right: 5%;
+    font-size: 40px;
+    color: #d9534f;
+}
+
 .entry-title {
-    padding: 20px 15px 0px 15px;
-    font-size: 32px;
-    margin: 0;
-    margin-bottom: 20px;
+    font-size: 2.5em;
+    margin: 20px;
     text-align: center;
 }
 
 .entry-meta {
     text-align: center;
-    line-height: 24px;
     margin-bottom: 20px;
 }
 
@@ -142,8 +141,7 @@ a:focus {
         margin-bottom: 5px;
     }
     .entry-meta {
-        line-height: 24px;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
     }
     .read-more {
         width: 100%;
@@ -154,15 +152,60 @@ a:focus {
 /* --------------------------- Article End --------------------------- */
 
 
-/* --------------------------- Search Form Start --------------------------- */
+/* --------------------------- Widget Start --------------------------- */
 
-.widget_search>div {
-    padding: 8px;
+.panel-btn-toggle,
+.panel-btn-remove {
+    float: right;
+    margin: 0px 0px 0px 5px;
+    cursor: pointer;
+    line-height: inherit;
+}
+
+.panel-btn-toggle:hover,
+.panel-btn-remove:hover {
+    color: #d9534f;
+}
+
+.panel-widget {
+    -webkit-transition: none;
+    -moz-transition: none;
+    -o-transition: none;
+    transition: none;
+}
+
+.panel-widget>.panel-heading {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: #ffffff;
     background-color: #3d4450;
+}
+
+.panel-widget>.panel-heading .badge {
+    color: #3d4450;
+    background-color: #ffffff;
+}
+
+.widget {
+    margin-bottom: 30px;
+}
+
+.widgettitle {
+    display: inline;
+    font-size: 1em;
+}
+
+.tagcloud {
+    margin: 5px;
 }
 
 .search-form {
     position: relative;
+    height: 36px;
+}
+
+.search-form>label {
+    display: none;
 }
 
 .search-submit {
@@ -177,12 +220,43 @@ a:focus {
 
 input[type="search"].search-field {
     display: inline-block;
-    width: -webkit-calc(100% - 56px);
-    width: calc(100% - 56px);
+    width: 100%;
+    height: 100%;
+    padding-right: 54px;
+}
+
+.widget_metaslider_widget {
+    border: none;
+}
+
+.recentcomments {
+    background-color: #eeeeee;
+    border-color: #eeeeee;
+    border-radius: 4px;
+    display: inline-block;
+    padding: 8px;
+    margin-left: 10px;
+    /* white-space: nowrap; */
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: -webkit-calc(100% - 50px);
+    max-width: calc(100% - 50px);
+}
+
+.recentcomments a {
+    color: #666666;
+}
+
+.recentcomments a:hover,
+.recentcomments a:focus {
+    color: #d9534f;
 }
 
 
-/* --------------------------- Search Form End --------------------------- */
+/* --------------------------- Widget End --------------------------- */
+
+
+/* --------------------------- Comment Start --------------------------- */
 
 .comments-title {
     text-align: center;
@@ -191,4 +265,37 @@ input[type="search"].search-field {
 
 .comment-form-comment>label {
     display: none;
+}
+
+#reply-title #cancel-comment-reply-link {
+    font-size: 14px;
+    padding: 2px 5px;
+    background-color: #d9534f;
+    color: #ffffff;
+    border-radius: 4px;
+}
+
+
+/* --------------------------- Comment End --------------------------- */
+
+.site-footer {
+    display: block;
+    text-align: center;
+    color: #ffffff;
+    padding: 50px;
+    background-color: #3d4450;
+}
+
+.site-footer a {
+    color: #ffffff;
+}
+
+.site-footer a:hover {
+    color: #d9534f;
+}
+
+@media (max-width: 767px) {
+    .site-footer {
+        padding: 20px;
+    }
 }

@@ -53,20 +53,19 @@ if (post_password_required()) {
   if (!comments_open() && get_comments_number() && post_type_supports(get_post_type(), 'comments')) :
   ?>
 
-    <p class="no-comments"><?php _e('Comments are closed.', 'twentyseventeen'); ?></p>
+    <p class="no-comments"><?php _e('Comments are closed.', 'default'); ?></p>
   <?php
   endif;
 
   comment_form(
     array(
-      'title_reply'          => '<i class="fa fa-pencil"></i> ' . __('Leave a Reply', 'default'),
+      'title_reply'          => '<i class="fa fa-pen"></i> ' . __('Leave a Reply', 'default'),
       'fields'               => array(
         'author' => '<div class="row"><div class="col-sm-4"><div class="input-group"><span class="input-group-addon"><i class="fa fa-user"></i></span><input type="text" name="author" id="author" placeholder="* 昵称"></div></div>',
         'email'  => '<div class="col-sm-4"><div class="input-group"><span class="input-group-addon"><i class="fa fa-envelope"></i></span><input type="text" name="email" id="email" placeholder="* 邮箱"></div></div>',
         'url'    => '<div class="col-sm-4"><div class="input-group"><span class="input-group-addon"><i class="fa fa-link"></i></span><input type="text" name="url" id="url" placeholder="网站"></div></div></div>'
       ),
-      'class_submit' => 'submit btn btn-danger btn-block'
-
+      'class_submit' => 'submit btn btn-danger btn-block',
     )
   );
   ?>

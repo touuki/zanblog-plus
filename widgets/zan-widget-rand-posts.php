@@ -28,11 +28,10 @@ class Zan_Rand_Posts extends WP_Widget
     @$num = $instance['num'] ? $instance['num'] : 8;
     echo $before_widget;
 ?>
-    <div class="panel panel-zan recent">
       <div class="panel-heading">
-        <i class="fa fa-refresh"></i> <?php echo $title; ?>
-        <i class="fa fa-times-circle panel-remove"></i>
-        <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        <i class="fa fa-sync-alt"></i> <?php echo $title; ?>
+        <i class="fa fa-times-circle panel-btn-remove"></i>
+        <i class="fa fa-chevron-circle-up panel-btn-toggle"></i>
       </div>
       <ul class="list-group list-group-flush">
         <?php
@@ -72,7 +71,6 @@ class Zan_Rand_Posts extends WP_Widget
         wp_reset_postdata();
         ?>
       </ul>
-    </div>
   <?php
     echo $after_widget;
   }

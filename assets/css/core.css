@@ -144,49 +144,6 @@ ul {
 
 /* =========================== 颜色样式 =========================== */
 
-div[class*="danger"] a {
-    color: #d9534f;
-}
-
-div[class*="danger"] a:hover {
-    color: #b94a48;
-}
-
-div[class*="success"] a {
-    color: #5cb85c;
-}
-
-div[class*="success"] a:hover {
-    color: #468847;
-}
-
-div[class*="warning"] a {
-    color: #f0ad4e;
-}
-
-div[class*="warning"] a:hover {
-    color: #c09853;
-}
-
-div[class*="info"] a {
-    color: #5bc0de;
-}
-
-div[class*="info"] a:hover {
-    color: #3a87ad;
-}
-
-
-/* 限定badge类颜色 */
-
-div[class*="danger"] .badge {
-    background-color: #d9534f;
-}
-
-div[class*="success"] .badge {
-    background-color: #5cb85c;
-}
-
 
 /* =========================== 颜色样式结束 =========================== */
 
@@ -224,10 +181,6 @@ div[class*="success"] .badge {
 
 .panel-zan a {
     color: #666666;
-}
-
-.panel-zan a:hover {
-    color: #b94a48;
 }
 
 .panel-zan>.panel-heading {
@@ -464,68 +417,6 @@ html.ie #ds-thread .ds-no-transition#ds-reset .ds-post-button {
 
 /* =========================== 小工具样式 =========================== */
 
-.panel-heading {
-    border-bottom: none;
-    font-size: 14px;
-    line-height: 14px;
-    font-weight: normal;
-}
-
-.panel-toggle,
-.panel-remove {
-    float: right;
-    margin: 0px 0px 0px 5px;
-    cursor: pointer;
-}
-
-.panel-toggle:hover,
-.panel-remove:hover {
-    color: #d9534f;
-    -webkit-transition: all .3s ease;
-    -moz-transition: all .3s ease;
-    -o-transition: all .3s ease;
-    transition: all .3s ease;
-}
-
-.panel.toggled {
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-    -webkit-transition: all .3s ease;
-    -moz-transition: all .3s ease;
-    -o-transition: all .3s ease;
-    transition: all .3s ease;
-}
-
-.panel ul.list-group {
-    max-height: 500px;
-    overflow: hidden;
-    width: 100%;
-    -webkit-transition: all .3s ease;
-    -moz-transition: all .3s ease;
-    -o-transition: all .3s ease;
-    transition: all .3s ease;
-}
-
-.panel.toggled ul.list-group {
-    overflow: hidden;
-    max-height: 0px;
-    width: 100%;
-    -webkit-transition: all .3s ease;
-    -moz-transition: all .3s ease;
-    -o-transition: all .3s ease;
-    transition: all .3s ease;
-}
-
-.panel.toggled .panel-heading {
-    border-bottom-right-radius: 3px;
-    border-bottom-left-radius: 3px;
-    -webkit-transition: all .3s ease;
-    -moz-transition: all .3s ease;
-    -o-transition: all .3s ease;
-    transition: all .3s ease;
-}
-
 ul.pills-zan {
     padding: 10px;
 }
@@ -549,23 +440,6 @@ ul.pills-zan li {
     padding: 10px;
 }
 
-.tagcloud {
-    padding: 10px 20px 20px 20px;
-}
-
-.tagcloud a {
-    background-color: #5bc0de;
-    color: white;
-    border-radius: 4px;
-    padding: 2px 5px;
-    font-size: 14px !important;
-    margin-right: 15px;
-    margin-bottom: 10px;
-    display: inline-block;
-    *display: inline;
-    *zoom: 1;
-}
-
 .panel.archive>a .panel-heading {
     background-color: #d9534f;
     border-radius: 4px;
@@ -587,22 +461,6 @@ ul.pills-zan li {
     -moz-transition: all .3s ease;
     -o-transition: all .3s ease;
     transition: all .3s ease;
-}
-
-.comment-log {
-    line-height: 20px;
-    background-color: #eeeeee;
-    border-color: #eeeeee;
-    border-radius: 4px;
-    display: inline-block;
-    *display: inline;
-    *zoom: 1;
-    padding: 8px;
-    margin-left: 10px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    width: 80%;
 }
 
 .author-avatar .avatar {
@@ -849,14 +707,6 @@ ul.pills-zan li {
 
 /*文章-置顶*/
 
-.article-stick {
-    position: absolute;
-    top: -10px;
-    right: 5%;
-    font-size: 40px;
-    color: #d9534f;
-}
-
 
 /*文章－日期*/
 
@@ -933,6 +783,7 @@ ul.pills-zan li {
 
 #post-related .post-related-content {
     height: 100px;
+    font-size: 0.8em;
 }
 
 
@@ -947,22 +798,6 @@ ul.pills-zan li {
 
 
 /* =========================== 页脚样式 =========================== */
-
-#zan-footer {
-    display: block;
-    text-align: center;
-    color: #eeeeee;
-    padding: 50px;
-    background-color: #3d4450;
-}
-
-#zan-footer a {
-    color: #eeeeee;
-}
-
-#zan-footer a:hover {
-    color: #d9534f;
-}
 
 #zan-gotop {
     position: fixed;
@@ -1237,17 +1072,6 @@ embed[name*="Holmes"] {
     padding-right: 35px;
 }
 
-#reply-title a:hover {
-    color: white;
-}
-
-#reply-title #cancel-comment-reply-link {
-    padding: 2px 5px;
-    background-color: #d9534f;
-    color: white;
-    border-radius: 4px;
-}
-
 #commentform .input-group label.error {
     display: block;
 }
@@ -1321,11 +1145,9 @@ embed[name*="Holmes"] {
 #commentform textarea {
     resize: none;
     margin: 0;
-    margin-bottom: 10px;
     padding: 10px 15px;
     width: 100%;
     border-radius: 4px;
-    background-color: transparent;
     border: 2px solid #c1c1c1;
 }
 

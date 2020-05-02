@@ -10,13 +10,13 @@
 		</div>
 		<div class="entry-meta">
 			<?php if (is_sticky()) : ?>
-				<span class="label label-meta visible-xs-inline"><i class="fa fa-bookmark"></i> 置顶</span>
+				<span class="label label-meta visible-xs-inline"><i class="fa fa-bookmark"></i> 置顶文章</span>
 			<?php endif; ?>
 			<span class="label label-meta visible-xs-inline"><i class="fa fa-calendar-alt"></i> <?php the_time('Y-m-d'); ?></span>
 			<span class="label label-meta"><i class="fa fa-folder"></i> <?php the_category(','); ?></span>
 			<span class="label label-meta"><i class="fa fa-user"></i> <?php the_author_posts_link(); ?></span>
-			<?php if (have_comments()) : ?>
-				<span class="label label-meta"><i class="fa fa-comments"></i> <?php comments_number('0', '1', '%'); ?></span>
+			<?php if (get_comments_number()) : ?>
+				<span class="label label-meta"><i class="fa fa-comments"></i> <a href="<?php echo esc_url(get_permalink()); ?>#comments"><?php echo get_comments_number(); ?></a></span>
 			<?php endif; ?>
 		</div>
 	</header>

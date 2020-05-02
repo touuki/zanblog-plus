@@ -27,27 +27,3 @@ class Zan_Nav_Menu extends Walker_Nav_Menu
     return $output;
   }
 }
-
-/**
- * 彩色云标签
- *
- * @since Zanblog 2.0.0
- *
- * @return tags.
- */
-function zan_color_cloud($text)
-{
-  $text = preg_replace_callback('|<a (.+?)>|i', 'zan_color_cloud_callback', $text);
-  return $text;
-}
-
-function zan_color_cloud_callback($matches)
-{
-  $text = $matches[1];
-  $color = dechex(rand(0, 16777215));
-  $pattern = '/style=(\'|\")(.*)(\'|\")/i';
-  $text = preg_replace($pattern, "style=\"color:#{$color};$2;\"", $text);
-
-  return "<a $text>";
-}
-add_filter('wp_tag_cloud', 'zan_color_cloud', 1);
