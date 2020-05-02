@@ -10,11 +10,9 @@
 			<span class="label label-meta"><i class="fa fa-folder"></i> <?php the_category(','); ?></span>
 			<span class="label label-meta"><i class="fa fa-user"></i> <?php the_author_posts_link(); ?></span>
 			<?php if (function_exists('the_views')) : ?>
-				<span class="label label-meta">
-					<i class="fa fa-eye"></i> <?php the_views(); ?>
-				</span>
+				<span class="label label-meta"><i class="fa fa-eye"></i> <?php the_views(); ?></span>
 			<?php endif; ?>
-			<?php edit_post_link('<span class="label label-meta"><i class="fa fa-edit"></i> 编辑', ' ', '</span>'); ?>
+			<?php edit_post_link(null, '<span class="label label-meta"><i class="fa fa-edit"></i> ', '</span>'); ?>
 		</div>
 	</header>
 

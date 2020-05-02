@@ -208,7 +208,7 @@ function zan_content_image_sizes_attr($sizes, $size)
 {
 	$width = $size[0];
 
-	if ('page' === get_post_type() && is_page_template('page-templates/page-full-width.php')) {
+	if ('page' === get_post_type() && is_page_template('page-templates/full-width.php')) {
 		$sizes = '93vw';
 	} else {
 		$sizes = '(max-width: 768px) 93vw, (max-width: 992px) 682px, (max-width: 1200px) 579px, 712px';
@@ -231,7 +231,7 @@ add_filter('wp_calculate_image_sizes', 'zan_content_image_sizes_attr', 10, 2);
  */
 function zan_post_thumbnail_sizes_attr($attr, $attachment, $size)
 {
-	if ('page' === get_post_type() && is_page_template('page-templates/page-full-width.php')) {
+	if ('page' === get_post_type() && is_page_template('page-templates/full-width.php')) {
 		$attr['sizes'] = '93vw';
 	} else {
 		$attr['sizes'] = '(max-width: 768px) 93vw, (max-width: 992px) 682px, (max-width: 1200px) 579px, 712px';
@@ -278,6 +278,14 @@ function zan_tag_cloud_args($args)
 	return $args;
 }
 add_filter('widget_tag_cloud_args', 'zan_tag_cloud_args');
+
+
+function zan_option_views_options($value){
+	$value['template'] = '%VIEW_COUNT%';
+	$value['most_viewed_template'] = '<li><a href="%POST_URL%" title="%POST_TITLE%">%POST_TITLE%</a><span class="badge"><i class="fa fa-eye"></i> %VIEW_COUNT%</span></li>';
+	return $value;
+}
+add_filter('option_views_options', 'zan_option_views_options');
 
 /**
  * Customizer additions.

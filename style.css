@@ -111,9 +111,18 @@ a:focus {
     text-align: center;
 }
 
+.entry-title a {
+    color: #3d4450;
+}
+
+.entry-title a:hover,
+.entry-title a:focus {
+    color: #d9534f;
+}
+
 .entry-meta {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .label-meta a,
@@ -174,6 +183,36 @@ a:focus {
     transition: none;
 }
 
+.panel-widget a {
+    color: #666666;
+}
+
+.panel-widget a:hover,
+.panel-widget a:focus {
+    color: #d9534f;
+}
+
+.panel-widget .post-date {
+    /* Clone badge */
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    border-radius: 10px;
+}
+
+.panel-widget .badge,
+.panel-widget .post-date {
+    margin-top: 2px;
+    background-color: #d9534f;
+    float: right;
+}
+
 .panel-widget>.panel-heading {
     padding-top: 5px;
     padding-bottom: 5px;
@@ -184,6 +223,38 @@ a:focus {
 .panel-widget>.panel-heading .badge {
     color: #3d4450;
     background-color: #ffffff;
+}
+
+.panel-widget>ul {
+    /* Clone list-group */
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.panel-widget>ul li {
+    /* Clone list-group-item */
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-width: 1px 0;
+    border-radius: 0;
+}
+
+.panel-widget>ul li:first-child {
+    /* Clone list-group-item */
+    border-top: 0;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.panel-widget>ul li:last-child {
+    /* Clone list-group-item */
+    border-bottom: 0;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
 }
 
 .widget {
@@ -225,6 +296,13 @@ input[type="search"].search-field {
     padding-right: 54px;
 }
 
+input[type="search"].search-field:focus {
+    border-color: #d9534f;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(217,83,79,.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(217,83,79,.6);
+}
+
 .widget_metaslider_widget {
     border: none;
 }
@@ -241,15 +319,6 @@ input[type="search"].search-field {
     overflow: hidden;
     max-width: -webkit-calc(100% - 50px);
     max-width: calc(100% - 50px);
-}
-
-.recentcomments a {
-    color: #666666;
-}
-
-.recentcomments a:hover,
-.recentcomments a:focus {
-    color: #d9534f;
 }
 
 

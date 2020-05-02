@@ -150,11 +150,6 @@ ul {
 
 /* =========================== 自定义BootStrap样式 =========================== */
 
-.label {
-    margin-right: 5px;
-    font-size: 90%;
-}
-
 .alert {
     padding: 15px;
     margin-bottom: 20px;
@@ -177,89 +172,6 @@ ul {
     color: #3a87ad;
     background-color: #d9edf7;
     border-color: #bce8f1;
-}
-
-.panel-zan a {
-    color: #666666;
-}
-
-.panel-zan>.panel-heading {
-    color: white;
-    background-color: #3d4450;
-    border-color: #000;
-}
-
-.panel-zan>.panel-heading+.panel-collapse .panel-body {
-    border-top-color: #000;
-}
-
-.panel-zan>.panel-footer+.panel-collapse .panel-body {
-    border-bottom-color: #000;
-}
-
-.panel-zan .tab-content a:hover,
-.panel-zan .nav-pills a:hover {
-    color: white;
-}
-
-.panel-zan .badge {
-    background-color: #d9534f;
-}
-
-.btn-zan-solid-pp {
-    color: #d9534f;
-    background-color: transparent;
-    border: 2px solid #d9534f;
-    -webkit-transition: all .3s ease;
-    -moz-transition: all .3s ease;
-    -o-transition: all .3s ease;
-    transition: all .3s ease;
-}
-
-.btn-zan-solid-pp .badge {
-    color: #d9534f;
-    background-color: transparent;
-    border: 2px solid #d9534f;
-    -webkit-transition: all .3s ease;
-    -moz-transition: all .3s ease;
-    -o-transition: all .3s ease;
-    transition: all .3s ease;
-}
-
-.btn-zan-solid-pp:hover {
-    color: white;
-    background-color: #d9534f;
-    border: 2px solid #d9534f;
-    -webkit-transition: all .3s ease;
-    -moz-transition: all .3s ease;
-    -o-transition: all .3s ease;
-    transition: all .3s ease;
-}
-
-.btn-zan-solid-pp:hover .badge {
-    color: white;
-    background-color: #d9534f;
-    border: 2px solid white;
-    -webkit-transition: all .3s ease;
-    -moz-transition: all .3s ease;
-    -o-transition: all .3s ease;
-    transition: all .3s ease;
-}
-
-.btn-zan-solid-wp {
-    background-color: white;
-    border-color: #eeeeee;
-    color: #b94a48;
-    font-size: 21px;
-    margin-bottom: 5px;
-    margin-top: 5px;
-    padding: 18px 24px;
-}
-
-.btn-zan-solid-wp:hover {
-    background-color: #b94a48;
-    border-color: #b94a48;
-    color: white;
 }
 
 .btn-inverse-primary {
@@ -293,47 +205,6 @@ ul {
 
 
 /* =========================== <IE9 兼容样式 =========================== */
-
-#ie-warning {
-    display: none;
-}
-
-html.ie #ie-warning {
-    display: block;
-}
-
-html.ie .row {
-    margin: 0;
-}
-
-html.ie #bdshare a {
-    display: none;
-}
-
-html.ie #ds-thread .ds-no-transition#ds-reset .ds-post-button {
-    background: #d9534f !important;
-}
-
-.flex-direction-nav a {
-    filter: alpha(opacity=0);
-}
-
-.flex-control-thumbs img {
-    filter: alpha(opacity=70);
-}
-
-.flexslider:hover .flex-next,
-.flexslider:hover .flex-prev {
-    filter: alpha(opacity=80);
-}
-
-.flexslider:hover .flex-next:hover,
-.flexslider:hover .flex-prev:hover,
-.flex-control-thumbs img:hover,
-.flex-control-thumbs .flex-active {
-    filter: alpha(opacity=100);
-}
-
 
 /* =========================== <IE9 兼容样式 =========================== */
 
@@ -388,20 +259,6 @@ html.ie #ds-thread .ds-no-transition#ds-reset .ds-post-button {
     }
     #zan-bodyer {
         font-size: 12px !important;
-    }
-    .bs-masthead {
-        margin: 0;
-        padding: 10px;
-    }
-    .bs-masthead h1 {
-        font-size: 16px;
-    }
-    .bs-masthead .btn {
-        font-size: 12px;
-        padding: 6px 12px;
-    }
-    .bs-masthead p {
-        font-size: 12px;
     }
     #zan-footer {
         padding: 20px;
@@ -831,14 +688,6 @@ ul.pills-zan li {
     transition: all .3s ease;
 }
 
-
-/* 百度统计 */
-
-embed[name*="Holmes"] {
-    padding-top: 10px;
-}
-
-
 /* =========================== 页脚样式结束 =========================== */
 
 
@@ -1169,42 +1018,6 @@ embed[name*="Holmes"] {
 
 
 /* =========================== 下载页面样式 =========================== */
-
-.bs-masthead {
-    margin-bottom: 20px;
-    position: relative;
-    text-align: center;
-}
-
-@media (max-width: 1199px) {
-    .bs-masthead {
-        padding: 0;
-    }
-}
-
-.bs-masthead h1 {
-    font-size: 80px;
-    line-height: 1;
-}
-
-@media (max-width: 1199px) {
-    .bs-masthead h1 {
-        font-size: 40px;
-    }
-}
-
-.bs-masthead p {
-    font-size: 20px;
-    margin-left: 15%;
-    margin-right: 15%;
-}
-
-@media (max-width: 1199px) {
-    .bs-masthead p {
-        margin-right: 5%;
-        margin-left: 5%;
-    }
-}
 
 
 /* =========================== 下载页面样式结束 =========================== */
