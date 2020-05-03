@@ -534,10 +534,6 @@ ul.pills-zan li {
     padding: 30px 0;
 }
 
-#article-list {
-    margin-top: 20px;
-}
-
 .article iframe,
 .article embed {
     width: 100%;
@@ -604,10 +600,6 @@ ul.pills-zan li {
 
 
 /*文章－内容*/
-
-.centent-article .thumbnail {
-    margin-bottom: 20px;
-}
 
 
 /*文章－更多*/

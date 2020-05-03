@@ -10,7 +10,6 @@
  * @package WordPress
  * @subpackage ZanBlog_Plus
  * @since ZanBlog Plus 1.0
- * @version 1.0
  */
 
 /*

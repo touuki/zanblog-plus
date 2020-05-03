@@ -1,29 +1,21 @@
 <!-- 内容主体 -->
-<article class="article panel panel-default">
-	<header>
+<article id="post-<?php the_ID(); ?>" <?php post_class('panel panel-default clearfix'); ?>>
+	<header class="entry-header">
 		<!-- 面包屑 -->
 		<?php zan_breadcrumb(false); ?>
 		<!-- 面包屑 -->
 		<?php the_title('<h1 class="entry-title">', '</h1>'); ?>
 		<div class="entry-meta">
-			<span class="label label-meta"><i class="fa fa-calendar-alt"></i> <?php the_time('Y-m-d'); ?></span>
-			<span class="label label-meta"><i class="fa fa-folder"></i> <?php the_category(','); ?></span>
-			<span class="label label-meta"><i class="fa fa-user"></i> <?php the_author_posts_link(); ?></span>
-			<?php if (function_exists('the_views')) : ?>
-				<span class="label label-meta"><i class="fa fa-eye"></i> <?php the_views(); ?></span>
-			<?php endif; ?>
-			<?php edit_post_link(null, '<span class="label label-meta"><i class="fa fa-edit"></i> ', '</span>'); ?>
+			<?php zan_entry_meta(); ?>
 		</div>
 	</header>
 
-	<div class="centent-article">
-		<?php if (has_post_thumbnail()) : ?>
-			<figure class="thumbnail hidden-xs"><?php the_post_thumbnail('full'); ?></figure>
-		<?php endif; ?>
+	<?php zan_post_thumbnail(); ?>
+	<div class="entry-content">
 		<?php the_content(); ?>
 
 		<!-- 分页 -->
-		<div class="zan-page bs-example">
+		<div class="zan-page">
 			<ul class="pager">
 				<li class="previous"><?php previous_post_link('%link', '上一篇', TRUE); ?></li>
 				<li class="next"><?php next_post_link('%link', '下一篇', TRUE); ?></li>
@@ -67,37 +59,44 @@
 <!-- 内容主体结束 -->
 
 <!-- 相关文章 -->
-<div class="bs-example visible-md visible-lg panel panel-default" id="post-related">
-	<div class="row">
-		<div class="alert alert-danger related-title text-center"><i class="fa fa-heart"></i> 您可能也喜欢:</div>
-		<?php
-		global $post;
-		$cats = wp_get_post_categories($post->ID);
+<?php
+$terms = get_the_category();
+if ($terms) :
+	$term_ids = array();
+	foreach ($terms as $term) {
+		$term_ids[] = $term->term_id;
+	}
 
-		if ($cats) {
-			$args = array(
-				'category__in' => array($cats[0]),
-				'post__not_in' => array($post->ID),
-				'showposts' => 3,
-			);
-			query_posts($args);
+	$related_posts = new WP_Query(
+		array(
+			'category__in' => $term_ids,
+			'post__not_in' => (array) $post->ID,
+			'showposts' => 3,
+		)
+	);
 
-			if (have_posts()) {
-				while (have_posts()) {
-					the_post();
-					update_post_caches($posts); ?>
+	if ($related_posts->have_posts()) :
+?>
+		<div class="visible-md visible-lg panel panel-default" id="post-related">
+			<div class="row">
+				<div class="alert alert-danger related-title text-center"><i class="fa fa-heart"></i> 您可能也喜欢:</div>
+				<?php
+				while ($related_posts->have_posts()) :
+					$related_posts->the_post();
+				?>
 					<div class="col-md-4">
 						<div class="well clearfix">
 							<p class="post-related-title"><a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></p>
-							<p class="post-related-content"><?php echo mb_strimwidth(strip_tags(apply_filters('the_content', $post->post_content)), 0, 150, "..."); ?></p>
-							<p><a class="btn btn-danger pull-right read-more" href="<?php the_permalink() ?>" title="详细阅读 <?php the_title(); ?>">阅读全文</a></p>
+							<div class="post-related-content">
+								<?php the_excerpt(); ?>
+							</div>
+							<a class="btn btn-danger pull-right more-link" href="<?php the_permalink(); ?>" title="详细阅读 <?php the_title_attribute(); ?>">阅读全文</a>
 						</div>
 					</div>
-		<?php
-				}
-			}
-			wp_reset_query();
-		} ?>
-	</div>
-</div>
-<!-- 相关文章结束 -->
+				<?php endwhile; ?>
+			</div>
+		</div>
+<?php
+		wp_reset_postdata();
+	endif;
+endif;
