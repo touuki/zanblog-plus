@@ -213,6 +213,74 @@ function zan_post_thumbnail_sizes_attr($attr, $attachment, $size)
 }
 //add_filter('wp_get_attachment_image_attributes', 'zan_post_thumbnail_sizes_attr', 10, 3);
 
+function zan_comment_form()
+{
+	$req = get_option('require_name_email');
+	$html_req = ($req ? " required='required'" : '');
+	$commenter     = wp_get_current_commenter();
+
+	$fields = array(
+		'author' => sprintf(
+			'<div class="row"><div class="col-sm-4">%s<div class="comment-form-author input-group"><span class="input-group-addon"><i class="fa fa-user"></i></span>%s</div></div>',
+			sprintf(
+				'<label class="screen-reader-text" for="author">%s%s</label>',
+				__('Name'),
+				($req ? ' <span class="required">*</span>' : '')
+			),
+			sprintf(
+				'<input class="form-control" id="author" name="author" type="text" placeholder="%s" value="%s" size="30" maxlength="245"%s />',
+				__('Name') . ($req ? '*' : ''),
+				esc_attr($commenter['comment_author']),
+				$html_req
+			)
+		),
+		'email'  => sprintf(
+			'<div class="col-sm-4">%s<div class="comment-form-email input-group"><span class="input-group-addon"><i class="fa fa-envelope"></i></span>%s</div></div>',
+			sprintf(
+				'<label class="screen-reader-text" for="email">%s%s</label>',
+				__('Email'),
+				($req ? ' <span class="required">*</span>' : '')
+			),
+			sprintf(
+				'<input class="form-control" id="email" name="email" type="email" placeholder="%s" value="%s" size="30" maxlength="100" aria-describedby="email-notes"%s />',
+				__('Email') . ($req ? '*' : ''),
+				esc_attr($commenter['comment_author_email']),
+				$html_req
+			)
+		),
+		'url'    => sprintf(
+			'<div class="col-sm-4">%s<div class="comment-form-url input-group"><span class="input-group-addon"><i class="fa fa-link"></i></span>%s</div></div></div>',
+			sprintf(
+				'<label class="screen-reader-text" for="url">%s</label>',
+				__('Website')
+			),
+			sprintf(
+				'<input class="form-control" id="url" name="url" type="url" placeholder="%s" value="%s" size="30" maxlength="200" />',
+				__('Website'),
+				esc_attr($commenter['comment_author_url'])
+			)
+		),
+	);
+
+	comment_form(
+		array(
+			'title_reply'          => '<i class="fa fa-pen"></i> ' . __('Leave a Reply', 'default'),
+			'fields'               => $fields,
+			'class_submit' => 'submit btn btn-danger btn-block',
+			'comment_field' => sprintf(
+				'<p class="comment-form-comment">%s %s</p>',
+				sprintf(
+					'<label class="screen-reader-text" for="comment">%s</label>',
+					_x('Comment', 'noun')
+				),
+				'<textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea>'
+			),
+			'title_reply_before'   => '<h3 id="reply-title" class="comment-reply-title alert alert-info">',
+			'title_reply_after'    => '</h3>',
+		)
+	);
+}
+
 function zan_excerpt_length($length)
 {
 	if (is_singular()) {

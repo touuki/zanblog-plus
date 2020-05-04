@@ -32,16 +32,6 @@
 
 /* =========================== 1.通用样式 =========================== */
 
-::selection {
-    background: #d9534f;
-    color: white;
-}
-
-body {
-    background-color: #f0f0f0;
-    word-wrap: break-word;
-}
-
 body.nav-fixed {
     position: relative;
     padding-top: 54px;
@@ -51,73 +41,6 @@ body.nav-fixed {
     body.nav-fixed {
         padding-top: 94px;
     }
-}
-
-a:hover {
-    text-decoration: none;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5 {
-    font-weight: 100;
-}
-
-ul {
-    list-style-type: none;
-}
-
-.ad {
-    margin-bottom: 30px;
-}
-
-.ad * {
-    max-width: 100%;
-}
-
-.zan-radius {
-    border-radius: 4px;
-}
-
-.inline-block {
-    display: inline-block;
-    *display: inline;
-    *zoom: 1;
-}
-
-.zan-opacity-5 {
-    filter: alpha(opacity=50);
-    -khtml-opacity: 0.5;
-    -moz-opacity: 0.5;
-    opacity: 0.5;
-}
-
-.white-space {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-}
-
-.zan-transition {
-    -webkit-transition: all .3s ease;
-    -moz-transition: all .3s ease;
-    -o-transition: all .3s ease;
-    transition: all .3s ease;
-}
-
-.transform-scale {
-    -webkit-transform: scale(1.25);
-    -moz-transform: scale(1.25);
-    -o-transform: scale(1.25);
-    transform: scale(1.25);
-}
-
-.transform-rotate {
-    -webkit-transform: rotate(360deg);
-    -moz-transform: rotate(360deg);
-    transform: rotate(360deg);
 }
 
 @keyframes pined {
@@ -150,13 +73,7 @@ ul {
 
 /* =========================== 自定义BootStrap样式 =========================== */
 
-.alert {
-    padding: 15px;
-    margin-bottom: 20px;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    overflow: auto;
-}
+
 
 .alert.alert-dismissable {
     padding-right: 35px;
@@ -211,26 +128,7 @@ ul {
 
 /* =========================== 响应式 =========================== */
 
-@media (min-width: 1200px) {
-    .random .visible-lg,
-    .recent .visible-lg,
-    .hot .visible-lg.visible-sm {
-        display: inline-block !important;
-    }
-}
-
-@media (min-width: 992px) and (max-width: 1199px) {
-    .random .visible-md,
-    .recent .visible-md,
-    .hot .visible-xs.visible-md {
-        display: inline-block !important;
-    }
-}
-
 @media (min-width: 768px) and (max-width: 991px) {
-    .hot .visible-lg.visible-sm {
-        display: inline-block !important;
-    }
     .navbar-brand {
         margin-right: auto !important;
         margin-left: auto !important;
@@ -248,126 +146,12 @@ ul {
     .navbar-nav>li>a {
         padding: 10px !important;
     }
-    #load-more {
-        margin-bottom: 30px;
-    }
 }
-
-@media (max-width: 767px) {
-    .hot .visible-xs.visible-md {
-        display: inline-block !important;
-    }
-    #zan-footer {
-        padding: 20px;
-    }
-    #load-more {
-        margin-bottom: 30px;
-    }
-}
-
 
 /* =========================== 响应式结束 =========================== */
 
 
 /* =========================== 小工具样式 =========================== */
-
-.author-avatar .avatar {
-    border-radius: 50%;
-    border: 1px solid #eeeeee;
-    position: relative;
-    z-index: 99;
-    float: left;
-    display: block;
-    -webkit-transition: all .3s ease;
-    -moz-transition: all .3s ease;
-    -o-transition: all .3s ease;
-    transition: all .3s ease;
-}
-
-.author-avatar .avatar:hover {
-    -webkit-transform: scale(1.25);
-    -moz-transform: scale(1.25);
-    -o-transform: scale(1.25);
-    transform: scale(1.25);
-    -webkit-transition: all .3s ease;
-    -moz-transition: all .3s ease;
-    -o-transition: all .3s ease;
-    transition: all .3s ease;
-}
-
-.login-form {
-    background-color: white;
-    padding: 30px 20px;
-}
-
-.login-form .input-group-addon {
-    background-color: #d9534f;
-    color: white;
-    border: 2px solid #d9534f;
-}
-
-.login-form .input-group-addon i {
-    width: 15px;
-}
-
-.login-form .form-control {
-    display: inline-block;
-    *display: inline;
-    *zoom: 1;
-    padding: 10px 5px;
-    border-left: none;
-}
-
-.login-form .btn {
-    width: 48%;
-    padding: 10px;
-}
-
-.login-form img {
-    border: 3px solid #d9534f;
-    border-radius: 50%;
-    padding: 3px;
-}
-
-.login-panel {
-    height: 100px;
-    padding: 20px 0px;
-}
-
-@media (min-width: 992px) and (max-width: 1199px) {
-    .login-panel {
-        padding: 20px 0;
-    }
-}
-
-.login-panel img {
-    margin-right: 20px;
-    border-radius: 50%;
-    border: 2px solid white;
-    background-color: white;
-    -webkit-transition: all .3s ease;
-    -moz-transition: all .3s ease;
-    -o-transition: all .3s ease;
-    transition: all .3s ease;
-}
-
-.login-panel img:hover {
-    -webkit-transition: all .3s ease;
-    -moz-transition: all .3s ease;
-    -o-transition: all .3s ease;
-    transition: all .3s ease;
-    -webkit-transform: rotate(360deg);
-    -moz-transform: rotate(360deg);
-    transform: rotate(360deg);
-}
-
-.login-panel a:hover {
-    color: #d9534f;
-}
-
-.login-panel .user-name {
-    margin-right: 20px;
-}
 
 
 /* =========================== 小工具样式结束 =========================== */
@@ -525,32 +309,8 @@ ul {
 
 /*相关文章*/
 
-#post-related .thumbnail {
-    border: 1px solid #eeeeee;
-}
-
-#post-related .related-title {
-    margin-right: 15px;
-    margin-left: 15px;
-}
-
-#post-related .post-related-title {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-}
-
-#post-related .post-related-content {
-    height: 100px;
-    font-size: 0.8em;
-}
-
 
 /*异步加载*/
-
-#infscr-loading img {
-    display: none !important;
-}
 
 
 /* =========================== 主体样式结束 =========================== */
@@ -805,64 +565,6 @@ ul {
     background-color: transparent;
 }
 
-#reply-title {
-    padding: 15px;
-    margin-bottom: 20px;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    overflow: auto;
-    color: #3a87ad;
-    background-color: #d9edf7;
-    border-color: #bce8f1;
-    margin: 10px auto;
-    text-align: center;
-    font-size: 14px;
-}
-
-#reply-title.alert-dismissable {
-    padding-right: 35px;
-}
-
-#commentform .input-group label.error {
-    display: block;
-}
-
-#commentform label.error {
-    margin-right: 1px;
-    font-size: 12px;
-    color: white;
-    background-color: #d9534f;
-    padding: 10px;
-    margin-bottom: 0;
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-    -webkit-animation: wobble-horizontal 1s ease-in-out;
-    animation: wobble-horizontal 1s ease-in-out;
-}
-
-@media (max-width: 1199px) and (min-width: 992px) {
-    #commentform label.error {
-        margin-right: 0;
-    }
-}
-
-@media (max-width: 991px) {
-    #commentform label.error {
-        margin-right: 2px;
-    }
-}
-
-@media (max-width: 767px) {
-    #commentform label.error {
-        margin-right: 0;
-    }
-}
-
-#commentform .logged-in-as {
-    display: none;
-}
-
 #commentform .form-allowed-tags {
     margin-top: 10px;
 }
@@ -877,43 +579,7 @@ ul {
     margin-bottom: 10px;
 }
 
-#commentform .input-group .input-group-addon {
-    background-color: #d9534f;
-    color: white;
-    border: 2px solid #d9534f;
-}
 
-#commentform .input-group .input-group-addon i {
-    width: 15px;
-}
-
-#commentform input[type="text"] {
-    width: 100%;
-    padding: 6px 6px;
-    border: 2px solid #d9534f;
-}
-
-#commentform textarea {
-    resize: none;
-    margin: 0;
-    padding: 10px 15px;
-    width: 100%;
-    border-radius: 4px;
-    border: 2px solid #c1c1c1;
-}
-
-#commentform textarea:focus {
-    border: 2px solid #d9534f;
-}
-
-#commentform input[type="text"]:focus,
-#commentform textarea:focus {
-    outline: 0;
-    -webkit-transition: all .3s ease;
-    -moz-transition: all .3s ease;
-    -o-transition: all .3s ease;
-    transition: all .3s ease;
-}
 
 
 /* =========================== 评论样式结束 =========================== */

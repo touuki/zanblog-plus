@@ -80,8 +80,7 @@ class Zan_Widget_Recent_Comments extends WP_Widget_Recent_Comments
             $post_ids = array_unique(wp_list_pluck($comments, 'comment_post_ID'));
             _prime_post_caches($post_ids, strpos(get_option('permalink_structure'), '%category%'), false);
             foreach ($comments as $comment) {
-                $output .= '<li>';
-                $output .= '<span class="author-avatar">' . get_avatar($comment->comment_author_email, 40) . '</span>';
+                $output .= '<li>' . get_avatar($comment->comment_author_email, 40);
                 $output .= '<span class="recentcomments"><a href="' . esc_url(get_comment_link($comment->comment_ID, $args)) . '">';
                 if(post_password_required($comment->comment_post_ID)){
                     $output .= '<i class="fa fa-lock"></i> ' . __('There is no excerpt because this is a protected post.', 'default');
