@@ -97,41 +97,6 @@ function zan_setup()
 }
 add_action('after_setup_theme', 'zan_setup');
 
-
-/**
- * Register widget area and custom recent comments widget.
- *
- * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
- */
-require get_template_directory() . '/widgets/class-zan-widget-recent-comments.php';
-
-function zan_widgets_init()
-{
-	unregister_widget('WP_Widget_Recent_Comments');
-	register_widget('Zan_Widget_Recent_Comments');
-
-	register_sidebar(array(
-		'id'            => 'sidebar-1',
-		'name'          => __('Blog Sidebar', 'default'),
-		'description'   => __('Add widgets here to appear in your sidebar on blog posts and archive pages.', 'default'),
-		'before_widget' => '<section id="%1$s" class="panel panel-widget widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<div class="panel-heading"><h2 class="widgettitle">',
-		'after_title'   => '</h2><i class="fa fa-times-circle panel-btn-remove"></i><i class="fa fa-chevron-circle-up panel-btn-toggle"></i></div>',
-	));
-
-	register_sidebar(array(
-		'id'            => 'sidebar-2',
-		'name'          => __('Home Banner', 'default'),
-		'description'   => __('Add widgets here to appear in your home banner.', 'default'),
-		'before_widget' => '<section id="%1$s" class="panel panel-widget widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<div class="panel-heading"><h2 class="widgettitle">',
-		'after_title'   => '</h2><i class="fa fa-times-circle panel-btn-remove"></i><i class="fa fa-chevron-circle-up panel-btn-toggle"></i></div>',
-	));
-}
-add_action('widgets_init', 'zan_widgets_init');
-
 /**
  * Handles JavaScript detection.
  *
@@ -156,6 +121,14 @@ function zan_pingback_header()
 }
 add_action('wp_head', 'zan_pingback_header');
 
+//密码保护文章禁止搜索引擎收录（加noindex）
+function zan_password_noindex_header()
+{
+	if (post_password_required()) {
+		echo '<meta name="robots" content="noindex">';
+	}
+}
+add_action('wp_head', 'zan_password_noindex_header', 1);
 
 /**
  * Enqueues scripts and styles.
@@ -261,70 +234,18 @@ function zan_breadcrumb($is_block = true)
 	endif;
 }
 
-function zan_color_cloud($text)
-{
-	return preg_replace_callback('/<a (.+?)>/i', 'zan_color_cloud_callback', $text);
-}
-
-function zan_color_cloud_callback($matches)
-{
-	$text = $matches[1];
-	$h = rand(0, 360);
-	$s = rand(80, 100);
-	$l = rand(30, 40);
-	$pattern = '/style=(\'|\")(.*)(\'|\")/i';
-	$text = preg_replace($pattern, 'style="color: hsl(' . $h . ',' . $s . '%,' . $l . '%);$2;"', $text);
-
-	return "<a $text>";
-}
-add_filter('wp_tag_cloud', 'zan_color_cloud', 1);
-
-/**
- * Custom Tag cloud.
- */
-function zan_tag_cloud_args($args)
-{
-	$args['smallest'] = '8';
-	$args['largest'] = '22';
-	return $args;
-}
-add_filter('widget_tag_cloud_args', 'zan_tag_cloud_args');
-
-
-/**
- * Custom WP_PostViews Widget and template.
- */
-function zan_option_views_options($value)
-{
-	$value['template'] = '%VIEW_COUNT%';
-	$value['most_viewed_template'] = '<li><a href="%POST_URL%" title="%POST_TITLE%">%POST_TITLE%</a><span class="badge"><i class="fa fa-eye"></i> %VIEW_COUNT%</span></li>';
-	return $value;
-}
-add_filter('option_views_options', 'zan_option_views_options');
-
 /**
  * Custom password protected post's title prefix.
  */
 function zan_protected_title_format()
 {
-	return '<i class="fa fa-lock"></i> %s';
+	if (post_password_required()) {
+		return '<i class="fa fa-lock"></i> %s';
+	} else {
+		return '<i class="fa fa-unlock"></i> %s';
+	}
 }
 add_filter('protected_title_format', 'zan_protected_title_format');
-
-/**
- * Add Font Awesome support in widget title.
- * A title like 'i$fa fa-sync-alt$ Title' will be replaced with '<i class="fa fa-sync-alt"></i>  Title'
- */
-function zan_widget_title($title)
-{
-	return preg_replace_callback('/i\$(.*?)\$/', 'zan_widget_title_callback', $title);
-}
-
-function zan_widget_title_callback($matches)
-{
-	return '<i class="' . $matches[1] . '"></i>';
-}
-add_filter('widget_title', 'zan_widget_title');
 
 /**
  * Custom private post's title prefix.
@@ -335,25 +256,23 @@ function zan_private_title_format()
 }
 add_filter('private_title_format', 'zan_private_title_format');
 
-if (version_compare($GLOBALS['wp_version'], '4.9.0', '>=')) {
-	/**
-	 * Add a method to use WP_Widget_Recent_Posts to show random posts. 
-	 */
-	function zan_widget_posts_args($args, $instance)
-	{
-		if (strpos($instance['title'], 'i$random-posts$') !== false) {
-			$args['orderby'] = 'rand';
-		}
-		$args['has_password'] = false;
-		return $args;
+function exclude_password_proceted($query)
+{
+	if ($query->is_home() && $query->is_main_query()) {
+		$query->set('has_password', false);
 	}
-	add_filter('widget_posts_args', 'zan_widget_posts_args', 10, 2);
 }
+add_action('pre_get_posts', 'exclude_password_proceted');
 
 /**
  * Custom template tags for this theme.
  */
 require get_template_directory() . '/inc/template-tags.php';
+
+/**
+ * Custom widget functions for this theme.
+ */
+require get_template_directory() . '/inc/widget-functions.php';
 
 /**
  * Customizer additions.

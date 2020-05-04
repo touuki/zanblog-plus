@@ -8,7 +8,7 @@
  */
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class('panel panel-default clearfix'); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class('article panel panel-default clearfix'); ?>>
 	<header class="entry-header">
 		<?php the_title('<h1 class="entry-title">', '</h1>'); ?>
 	</header>

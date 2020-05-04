@@ -1,5 +1,5 @@
 <!-- 内容主体 -->
-<article id="post-<?php the_ID(); ?>" <?php post_class('panel panel-default clearfix'); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class('article panel panel-default clearfix'); ?>>
 	<header class="entry-header">
 		<!-- 面包屑 -->
 		<?php zan_breadcrumb(false); ?>
@@ -13,16 +13,16 @@
 	<?php zan_post_thumbnail(); ?>
 	<div class="entry-content">
 		<?php the_content(); ?>
-
-		<!-- 分页 -->
-		<div class="zan-page">
-			<ul class="pager">
-				<li class="previous"><?php previous_post_link('%link', '上一篇', TRUE); ?></li>
-				<li class="next"><?php next_post_link('%link', '下一篇', TRUE); ?></li>
-			</ul>
-		</div>
-		<!-- 分页 -->
-
+	</div>
+	<!-- 分页 -->
+	<nav class="zan-page">
+		<ul class="pager">
+			<li class="previous"><?php previous_post_link('%link', '上一篇', TRUE); ?></li>
+			<li class="next"><?php next_post_link('%link', '下一篇', TRUE); ?></li>
+		</ul>
+	</nav>
+	<!-- 分页 -->
+	<footer>
 		<!-- 文章版权信息 -->
 		<div class="copyright alert alert-success">
 			<p>
@@ -54,7 +54,8 @@
 			<p>转载时必须以链接形式注明原始出处及本声明。</p>
 		</div>
 		<!-- 文章版权信息结束 -->
-	</div>
+		<?php zan_entry_tag_list(); ?>
+	</footer>
 </article>
 <!-- 内容主体结束 -->
 

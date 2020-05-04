@@ -34,7 +34,7 @@ if (!function_exists('zan_entry_meta')) :
         }
 
         if ('post' === get_post_type()) {
-            zan_entry_taxonomies();
+            zan_entry_category_list();
         }
 
         $comments_number = get_comments_number();
@@ -78,9 +78,9 @@ if (!function_exists('zan_entry_date')) :
         $time_string = sprintf(
             $time_string,
             esc_attr(get_the_date('c')),
-            get_the_date(__('Y/m/d', 'default')),
+            get_the_date(),
             esc_attr(get_the_modified_date('c')),
-            get_the_modified_date(__('Y/m/d', 'default'))
+            get_the_modified_date()
         );
 
         printf(
@@ -91,17 +91,17 @@ if (!function_exists('zan_entry_date')) :
     }
 endif;
 
-if (!function_exists('zan_entry_taxonomies')) :
+if (!function_exists('zan_entry_category_list')) :
     /**
      * Prints HTML with category and tags for current post.
      *
-     * Create your own zan_entry_taxonomies() function to override in a child theme.
+     * Create your own zan_entry_category_list() function to override in a child theme.
      *
      * @since ZanBlog Plus 1.0
      */
-    function zan_entry_taxonomies()
+    function zan_entry_category_list()
     {
-        $categories_list = get_the_category_list('</span><span class="label label-meta"><i class="fa fa-folder"></i> ');
+        $categories_list = get_the_category_list(_x( ', ', 'Used between list items, there is a space after the comma.', 'default' ));
         if ($categories_list) {
             printf(
                 '<span class="cat-links"><span class="screen-reader-text">%1$s </span><span class="label label-meta"><i class="fa fa-folder"></i> %2$s</span></span>',
@@ -109,11 +109,23 @@ if (!function_exists('zan_entry_taxonomies')) :
                 $categories_list
             );
         }
+    }
+endif;
 
-        $tags_list = get_the_tag_list('<span class="label label-meta"><i class="fa fa-tag"></i> #', '</span><span class="label label-meta"><i class="fa fa-tag"></i> #', '</span>');
+if (!function_exists('zan_entry_tag_list')) :
+    /**
+     * Prints HTML with category and tags for current post.
+     *
+     * Create your own zan_entry_tag_list() function to override in a child theme.
+     *
+     * @since ZanBlog Plus 1.0
+     */
+    function zan_entry_tag_list()
+    {
+        $tags_list = get_the_tag_list();
         if ($tags_list && !is_wp_error($tags_list)) {
             printf(
-                '<span class="tags-links"><span class="screen-reader-text">%1$s </span>%2$s</span>',
+                '<span class="tags-links"><span class="screen-reader-text">%1$s </span><i class="fa fa-tags"></i> %2$s</span>',
                 _x('Tags', 'Used before tag names.', 'default'),
                 $tags_list
             );

@@ -257,9 +257,6 @@ ul {
     .hot .visible-xs.visible-md {
         display: inline-block !important;
     }
-    #zan-bodyer {
-        font-size: 12px !important;
-    }
     #zan-footer {
         padding: 20px;
     }
@@ -273,52 +270,6 @@ ul {
 
 
 /* =========================== 小工具样式 =========================== */
-
-ul.pills-zan {
-    padding: 10px;
-}
-
-ul.pills-zan li {
-    margin-left: 5px;
-}
-
-#sidebar-tags a:hover {
-    color: #d9534f;
-}
-
-.pills-danger li.active>a,
-.pills-danger li.active>a:hover {
-    background-color: #d9534f !important;
-    border-color: #d43f3a !important;
-}
-
-.tab-content {
-    border-top: 1px solid #eeeeee;
-    padding: 10px;
-}
-
-.panel.archive>a .panel-heading {
-    background-color: #d9534f;
-    border-radius: 4px;
-    color: white;
-    text-align: center;
-    -webkit-transition: all .3s ease;
-    -moz-transition: all .3s ease;
-    -o-transition: all .3s ease;
-    transition: all .3s ease;
-}
-
-.panel.archive>a:hover {
-    text-decoration: none !important;
-}
-
-.panel.archive>a:hover .panel-heading {
-    background-color: #3d4450;
-    -webkit-transition: all .3s ease;
-    -moz-transition: all .3s ease;
-    -o-transition: all .3s ease;
-    transition: all .3s ease;
-}
 
 .author-avatar .avatar {
     border-radius: 50%;
@@ -342,47 +293,6 @@ ul.pills-zan li {
     -moz-transition: all .3s ease;
     -o-transition: all .3s ease;
     transition: all .3s ease;
-}
-
-
-/*侧边栏-广告*/
-
-.host img {
-    display: block;
-    width: 100%;
-    height: auto;
-    -webkit-transition: all .3s ease;
-    -moz-transition: all .3s ease;
-    -o-transition: all .3s ease;
-    transition: all .3s ease;
-}
-
-.host img:hover {
-    filter: alpha(opacity=50);
-    -khtml-opacity: 0.5;
-    -moz-opacity: 0.5;
-    opacity: 0.5;
-    -webkit-transition: all .3s ease;
-    -moz-transition: all .3s ease;
-    -o-transition: all .3s ease;
-    transition: all .3s ease;
-}
-
-
-/*友情链接*/
-
-.blogroll li {
-    margin-bottom: 10px;
-}
-
-.panel .post-title {
-    display: inline-block;
-    *display: inline;
-    *zoom: 1;
-    width: 75%;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
 }
 
 .login-form {

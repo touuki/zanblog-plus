@@ -1,4 +1,4 @@
-<article id="post-<?php the_ID(); ?>" <?php post_class('panel panel-default clearfix'); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class('article panel panel-default clearfix'); ?>>
 	<header class="entry-header">
 		<?php the_title(sprintf('<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url(get_permalink())), '</a></h2>'); ?>
 		<div class="entry-meta">
@@ -17,7 +17,10 @@
 	<div class="entry-summary well">
 		<?php the_excerpt();?>
 	</div>
-	<a class="btn btn-danger pull-right more-link" href="<?php the_permalink() ?>" title="详细阅读 <?php the_title_attribute(); ?>">阅读全文
-	<?php if (function_exists('the_views')) the_views(true, '<span class="badge">', '</span>'); ?></a>
+	<footer>
+		<?php zan_entry_tag_list(); ?>
+		<a class="btn btn-danger pull-right more-link" href="<?php the_permalink() ?>" title="详细阅读 <?php the_title_attribute(); ?>">阅读全文
+		<?php if (function_exists('the_views')) the_views(true, '<span class="badge">', '</span>'); ?></a>
+	</footer>
 
 </article>
