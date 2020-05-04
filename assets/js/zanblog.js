@@ -15,23 +15,23 @@ var zan = {
   //初始化函数
   init: function () {
     this.topFixed();
-    this.goTop();
+    this.gotoTop();
     this.dropDown();
     this.panelToggle();
     this.panelClose();
   },
 
   // 回到顶端
-  goTop: function () {
+  gotoTop: function () {
     jQuery(window).scroll(function () {
-      jQuery(this).scrollTop() > 200 ? jQuery("#zan-gotop").css({
+      jQuery(this).scrollTop() > 200 ? jQuery(".goto-top-btn").css({
         bottom: "20px"
-      }) : jQuery("#zan-gotop").css({
+      }) : jQuery(".goto-top-btn").css({
         bottom: "-40px"
       });
     });
 
-    jQuery("#zan-gotop").click(function () {
+    jQuery(".goto-top-btn").click(function () {
       return jQuery("body,html").animate({
         scrollTop: 0
       }, 500), !1
@@ -41,7 +41,7 @@ var zan = {
   // 头部固定
   topFixed: function () {
 
-    var zanHeader = jQuery('#zan-header');
+    var zanHeader = jQuery('.site-header');
     var body = jQuery('body');
     var ifFixed = zanHeader.find('input[type="checkbox"]');
     var storage = window.localStorage;

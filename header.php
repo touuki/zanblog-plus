@@ -10,30 +10,37 @@
 
 <body <?php body_class(); ?>>
   <?php wp_body_open(); ?>
-  <header id="zan-header" class="navbar navbar-inverse">
-    <nav class="container">
-      <a href="<?php echo site_url(); ?>">
-        <div class="navbar-brand"></div>
-      </a>
-      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
-        <span class="fa fa-reorder fa-lg"></span>
-      </button>
-      <div class="navbar-collapse bs-navbar-collapse collapse">
+  <a class="skip-link screen-reader-text" href="#content"><?php _e('Skip to content', 'default'); ?></a>
+
+  <div class="site-header navbar navbar-inverse" role="banner">
+    <div class="container-fluid">
+      <header class="site-branding navbar-header">
+        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#top-menu" aria-expanded="false">
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="navbar-brand">
+          <?php zan_the_custom_logo(); ?>
+        </div>
+      </header>
+      <nav id="top-menu" class="collapse navbar-collapse">
         <?php
-        $defaults = array(
-          'container' => '',
-          'menu_class' => 'nav navbar-nav',
-          'walker' => new Zan_Nav_Menu('')
+        wp_nav_menu(
+          array(
+            'theme_location' => 'top',
+            'container' => '',
+            'menu_class' => 'nav navbar-nav',
+            'walker' => new Zan_Nav_Menu,
+            'fallback_cb' => false
+          )
         );
-        wp_nav_menu($defaults);
         ?>
-      </div>
-    </nav>
+      </nav>
+    </div>
     <div id="if-fixed" class="pull-right hidden-xs">
       <i class="fa fa-thumbtack"></i>
       <input type="checkbox">
     </div>
-  </header>
+  </div>
 
-  <div id="zan-bodyer">
-    <div class="container">
+  <div class="site-content-contain">
+    <div id="content" class="container">

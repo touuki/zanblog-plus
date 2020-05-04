@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The template used for displaying page content
  *
@@ -14,6 +15,19 @@
 	</header>
 
 	<div class="entry-content">
-		<?php the_content(); ?>
+		<?php
+		the_content();
+
+		wp_link_pages(
+			array(
+				'before'      => '<div class="page-links"><span class="page-links-title screen-reader-text">' . __('Pages:', 'default') . '</span>',
+				'after'       => '</div>',
+				'link_before' => '<span>',
+				'link_after'  => '</span>',
+				'pagelink'    => '<span class="screen-reader-text">' . __('Page', 'default') . ' </span>%',
+				'separator'   => '<span class="screen-reader-text">, </span>',
+			)
+		);
+		?>
 	</div>
 </article>

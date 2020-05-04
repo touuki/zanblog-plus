@@ -205,6 +205,21 @@ if (!function_exists('zan_edit_link')) :
     }
 endif;
 
+if ( ! function_exists( 'zan_the_custom_logo' ) ) :
+	/**
+	 * Displays the optional custom logo.
+	 *
+	 * Does nothing if the custom logo is not available.
+	 *
+	 * @since ZanBlog Plus 1.0
+	 */
+	function zan_the_custom_logo() {
+		if ( function_exists( 'the_custom_logo' ) ) {
+			the_custom_logo();
+		}
+	}
+endif;
+
 if (!function_exists('wp_body_open')) :
     /**
      * Fire the wp_body_open action.

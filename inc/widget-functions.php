@@ -76,7 +76,7 @@ if (version_compare($GLOBALS['wp_version'], '4.9.0', '>=')) {
 function zan_option_views_options($value)
 {
 	$value['template'] = '%VIEW_COUNT%';
-	$value['most_viewed_template'] = '<li><a href="%POST_URL%" title="%POST_TITLE%">%POST_TITLE%</a><span class="badge"><i class="fa fa-eye"></i> %VIEW_COUNT%</span></li>';
+	$value['most_viewed_template'] = '<li><a href="%POST_URL%">%POST_TITLE%</a><span class="badge"><i class="fa fa-eye"></i> %VIEW_COUNT%</span></li>';
 	return $value;
 }
 add_filter('option_views_options', 'zan_option_views_options');

@@ -6,7 +6,7 @@
 				<i class="fa fa-bookmark article-stick hidden-xs"></i>
 				<span class="label label-meta visible-xs-inline"><i class="fa fa-bookmark"></i> 置顶文章</span>
 			<?php endif; ?>
-			<div class="data-article hidden-xs">
+			<div class="data-mark hidden-xs">
 				<span class="month"><?php echo __(get_the_date('M'), 'default') ?></span>
 				<span class="day"><?php echo get_the_date('d') ?></span>
 			</div>

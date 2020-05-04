@@ -41,6 +41,14 @@ function zan_setup()
 	 */
 	add_theme_support('post-thumbnails');
 
+	// This theme uses wp_nav_menu() in two locations.
+	register_nav_menus(
+		array(
+			'top'    => __( 'Top Menu', 'default' ),
+			'social' => __( 'Social Links Menu', 'default' ),
+		)
+	);
+
 	/*
 	 * Switch default core markup for search form, comment form, and comments
 	 * to output valid HTML5.
@@ -68,8 +76,8 @@ function zan_setup()
 	add_theme_support(
 		'custom-logo',
 		array(
-			'width'      => 250,
-			'height'     => 250,
+			'width'      => 200,
+			'height'     => 50,
 			'flex-width' => true,
 		)
 	);
@@ -145,8 +153,8 @@ function zan_scripts()
 	wp_enqueue_style('zan-core-style', get_theme_file_uri('/assets/css/core.css'), array(), '20200430');
 	wp_enqueue_style('zan-style', get_stylesheet_uri(), array(), '20200430');
 
-	wp_deregister_script('jquery');
-	wp_enqueue_script('jquery', 'https://code.jquery.com/jquery-3.5.0.min.js', array(), null);
+	//wp_deregister_script('jquery');
+	//wp_enqueue_script('jquery', 'https://code.jquery.com/jquery-3.5.0.min.js', array(), null);
 
 	//wp_enqueue_script('popper.js', 'https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js', array('jquery'), null);
 

@@ -12,16 +12,42 @@
 
 	<?php zan_post_thumbnail(); ?>
 	<div class="entry-content">
-		<?php the_content(); ?>
+		<?php
+		the_content();
+		
+		wp_link_pages(
+			array(
+				'before'      => '<div class="page-links"><span class="page-links-title screen-reader-text">' . __('Pages:', 'default') . '</span>',
+				'after'       => '</div>',
+				'link_before' => '<span>',
+				'link_after'  => '</span>',
+				'pagelink'    => '<span class="screen-reader-text">' . __('Page', 'default') . ' </span>%',
+				'separator'   => '<span class="screen-reader-text">, </span>',
+			)
+		);
+		?>
 	</div>
-	<!-- 分页 -->
-	<nav class="zan-page">
-		<ul class="pager">
-			<li class="previous"><?php previous_post_link('%link', '上一篇', TRUE); ?></li>
-			<li class="next"><?php next_post_link('%link', '下一篇', TRUE); ?></li>
-		</ul>
-	</nav>
-	<!-- 分页 -->
+	<?php
+	if (is_singular('attachment')) {
+		// Parent post navigation.
+		the_post_navigation(
+			array(
+				'prev_text' => '<span class="meta-nav">' . __('Back to Parent Post', 'default') . '</span><span class="screen-reader-text">:%title</span>',
+			)
+		);
+	} elseif (is_singular('post')) {
+		// Previous/next post navigation.
+		the_post_navigation(
+			array(
+				'next_text' => '<span class="meta-nav" aria-hidden="true">' . __('Next', 'default') . '</span> ' .
+					'<span class="screen-reader-text">' . __('Next post:', 'default') . '%title</span> ',
+				'prev_text' => '<span class="meta-nav" aria-hidden="true">' . __('Previous', 'default') . '</span> ' .
+					'<span class="screen-reader-text">' . __('Previous post:', 'default') . '%title</span> ',
+				'in_same_term' => true,
+			)
+		);
+	}
+	?>
 	<footer>
 		<!-- 文章版权信息 -->
 		<div class="copyright alert alert-success">
@@ -58,4 +84,3 @@
 	</footer>
 </article>
 <!-- 内容主体结束 -->
-

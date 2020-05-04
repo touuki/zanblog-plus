@@ -28,7 +28,6 @@ if (post_password_required()) {
     <h2 class="comments-title alert alert-warning">
       <i class="fa fa-comments"></i> <?php comments_number(); ?>
     </h2>
-    <div id="loading-comments"><i class="fa fa-spinner fa-spin"></i></div>
     <ol class="commentlist">
       <?php
       wp_list_comments(

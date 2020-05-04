@@ -10,7 +10,7 @@
 </footer>
 
 <!-- 回到顶端 -->
-<div id="zan-gotop">
+<div class="goto-top-btn">
 	<i class="fa fa-angle-up"></i>
 </div>
 <!-- 回到顶端结束 -->
