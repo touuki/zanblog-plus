@@ -57,6 +57,7 @@ textarea:focus {
 }
 
 a i.fa,
+.navbar-toggle i.fa,
 .comment-metadata time {
     -webkit-transition: none;
     -moz-transition: none;
@@ -103,10 +104,77 @@ a i.fa,
     opacity: 0.8;
 }
 
+.navbar {
+    border-width: 0;
+}
+
+.navbar-inverse {
+    background-color: #3d4450;
+}
+
+.navbar-inverse .navbar-brand,
+.navbar-inverse .navbar-text,
+.navbar-inverse .navbar-toggle,
+.navbar-inverse .navbar-nav>li>a {
+    color: #ffffff;
+}
+
+.navbar-inverse .navbar-nav .open>a,
+.navbar-inverse .navbar-nav .open>a:hover,
+.navbar-inverse .navbar-nav .open>a:focus,
+.navbar-inverse .navbar-nav .open .dropdown-menu>li>a:hover,
+.navbar-inverse .navbar-nav .open .dropdown-menu>li>a:focus {
+    color: #ffffff;
+    background-color: #d9534f;
+}
+
+.navbar-inverse .navbar-toggle {
+    border-color: #ffffff;
+}
+
+.navbar-inverse .navbar-toggle:hover,
+.navbar-inverse .navbar-toggle:focus {
+    background-color: #d9534f;
+    border-color: #d9534f;
+}
+
 .navbar-brand {
     padding: 0;
 }
 
+.navbar-toggle {
+    line-height: 0.9;
+}
+
+.nav.navbar-nav>li>.dropdown-menu>li {
+    position: relative;
+}
+
+.nav.navbar-nav>li .dropdown-menu>li>a {
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.nav.navbar-nav>li>.dropdown-menu .dropdown-menu {
+    left: 100%;
+    top: 0;
+}
+
+.navbar-fixed-top .navbar-collapse {
+    max-height: unset;
+}
+
+@media (max-width: 767px) {
+    .navbar-nav>li .dropdown-menu {
+        padding: 0;
+    }
+    .nav.navbar-nav>li .dropdown-menu>li {
+        padding-left: 20px;
+    }
+    .navbar-inverse .navbar-nav .open .dropdown-menu>li>a {
+        color: #ffffff;
+    }
+}
 
 /* --------------------------- Bootstrap End ------------------------------ */
 
@@ -125,6 +193,10 @@ a i.fa,
     width: 1px;
 }
 
+body.nav-fixed {
+    padding-top: 50px;
+}
+
 .admin-bar .navbar-fixed-top {
     top: 32px;
     /* if it already has a top value, add 32px to it */
@@ -141,13 +213,54 @@ a i.fa,
     padding: 30px 0;
 }
 
+.if-nav-fixed {
+    height: 50px;
+    padding-right: 10px;
+}
+
 
 /* --------------------------- Main Style End --------------------------- */
 
+.title-home-link {
+    display: block;
+    height: 50px;
+    overflow: hidden;
+}
 
-/* --------------------------- Data mark Start --------------------------- */
+.title-home-link:focus,
+.title-home-link:hover {
+    background-color: #d9534f;
+}
 
-.data-mark {
+.site-title {
+    margin: 0;
+    padding: 5px 15px 3px 15px;
+    font-size: 24px;
+    color: #ffffff;
+    line-height: 1;
+}
+
+.site-description {
+    margin: 0;
+    padding: 0 15px 0 15px;
+    font-size: 10px;
+    color: #ffffff;
+    font-style: italic;
+    -webkit-transition: none;
+    -moz-transition: none;
+    -o-transition: none;
+    transition: none;
+}
+
+.site-title:only-child {
+    font-size: 30px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+/* --------------------------- Date mark Start --------------------------- */
+
+.date-mark {
     background-color: #d9534f;
     border-color: #d43f3a;
     position: absolute;
@@ -160,17 +273,17 @@ a i.fa,
     padding-top: 10px;
 }
 
-.data-mark .month,
-.data-mark .day {
+.date-mark .month,
+.date-mark .day {
     text-align: center;
     display: block;
 }
 
-.data-mark .month {
+.date-mark .month {
     margin: 0;
 }
 
-.data-mark .day {
+.date-mark .day {
     font-size: 30px;
     font-weight: bold;
     margin-top: -5px;
@@ -384,10 +497,6 @@ a i.fa,
 .related-posts .col-md-4 {
     width: 33%;
     float: left;
-}
-
-.related-post {
-    padding: 15px;
 }
 
 

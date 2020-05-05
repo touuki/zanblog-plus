@@ -1,7 +1,8 @@
 <?php
 
 require get_template_directory() . '/widgets/class-zan-widget-recent-comments.php';
-function zan_register_widgets(){
+function zan_register_widgets()
+{
 	unregister_widget('WP_Widget_Recent_Comments');
 	register_widget('Zan_Widget_Recent_Comments');
 }
@@ -26,8 +27,8 @@ function zan_widgets_init()
 
 	register_sidebar(array(
 		'id'            => 'sidebar-2',
-		'name'          => __('Home Banner', 'default'),
-		'description'   => __('Add widgets here to appear in your home banner.', 'default'),
+		'name'          => __('Head Banner', 'default'),
+		'description'   => __('Add widgets here to appear in your head banner.', 'default'),
 		'before_widget' => '<section id="%1$s" class="panel panel-widget widget %2$s">',
 		'after_widget'  => '</section>',
 		'before_title'  => '<div class="panel-heading"><h2 class="widgettitle">',
@@ -56,7 +57,7 @@ add_filter('widget_title', 'zan_widget_title');
 if (version_compare($GLOBALS['wp_version'], '4.9.0', '>=')) {
 	/**
 	 * Add a method to use WP_Widget_Recent_Posts to show random posts.
-     * Just add 'i$random-posts$' in the widget title and it will not display on the front.
+	 * Just add 'i$random-posts$' in the widget title and it will not display on the front.
 	 */
 	function zan_widget_posts_args($args, $instance)
 	{
@@ -69,6 +70,53 @@ if (version_compare($GLOBALS['wp_version'], '4.9.0', '>=')) {
 	add_filter('widget_posts_args', 'zan_widget_posts_args', 10, 2);
 }
 
+function zan_widget_display_callback($instance, $widget, $args)
+{
+	if (is_home()) {
+		return isset($instance['hide_on_home']) && $instance['hide_on_home'] ? false : $instance;
+	}
+	if (is_single()) {
+		return isset($instance['hide_on_post']) && $instance['hide_on_post'] ? false : $instance;
+	}
+	if (is_page()) {
+		return isset($instance['hide_on_page']) && $instance['hide_on_page'] ? false : $instance;
+	}
+	return isset($instance['hide_on_other']) && $instance['hide_on_other'] ? false : $instance;
+}
+add_filter('widget_display_callback', 'zan_widget_display_callback', 10, 3);
+
+function zan_widget_update_callback($instance, $new_instance, $old_instance, $widget)
+{
+	$instance['hide_on_home'] = isset($new_instance['hide_on_home']) ? (bool) $new_instance['hide_on_home'] : false;
+	$instance['hide_on_post'] = isset($new_instance['hide_on_post']) ? (bool) $new_instance['hide_on_post'] : false;
+	$instance['hide_on_page'] = isset($new_instance['hide_on_page']) ? (bool) $new_instance['hide_on_page'] : false;
+	$instance['hide_on_other'] = isset($new_instance['hide_on_other']) ? (bool) $new_instance['hide_on_other'] : false;
+	return $instance;
+}
+add_filter('widget_update_callback', 'zan_widget_update_callback', 10, 4);
+
+function zan_widget_form_callback($instance, $widget)
+{
+	$hide_on_home = isset($instance['hide_on_home']) ? (bool) $instance['hide_on_home'] : false;
+	$hide_on_post = isset($instance['hide_on_post']) ? (bool) $instance['hide_on_post'] : false;
+	$hide_on_page = isset($instance['hide_on_page']) ? (bool) $instance['hide_on_page'] : false;
+	$hide_on_other = isset($instance['hide_on_other']) ? (bool) $instance['hide_on_other'] : false;
+?>
+	<p>
+		<?php _e('Hide on:', 'default') ?>
+		<label for="<?php echo $widget->get_field_id('hide_on_home'); ?>"><?php _e('Home', 'default'); ?></label>
+		<input class="checkbox" type="checkbox" <?php checked($hide_on_home); ?> id="<?php echo $widget->get_field_id('hide_on_home'); ?>" name="<?php echo $widget->get_field_name('hide_on_home'); ?>" />
+		<label for="<?php echo $widget->get_field_id('hide_on_post'); ?>"><?php _e('post', 'default'); ?></label>
+		<input class="checkbox" type="checkbox" <?php checked($hide_on_post); ?> id="<?php echo $widget->get_field_id('hide_on_post'); ?>" name="<?php echo $widget->get_field_name('hide_on_post'); ?>" />
+		<label for="<?php echo $widget->get_field_id('hide_on_page'); ?>"><?php _e('Page', 'default'); ?></label>
+		<input class="checkbox" type="checkbox" <?php checked($hide_on_page); ?> id="<?php echo $widget->get_field_id('hide_on_page'); ?>" name="<?php echo $widget->get_field_name('hide_on_page'); ?>" />
+		<label for="<?php echo $widget->get_field_id('hide_on_other'); ?>"><?php _e('other', 'default'); ?></label>
+		<input class="checkbox" type="checkbox" <?php checked($hide_on_other); ?> id="<?php echo $widget->get_field_id('hide_on_other'); ?>" name="<?php echo $widget->get_field_name('hide_on_other'); ?>" />
+	</p>
+<?php
+	return $instance;
+}
+add_filter('widget_form_callback', 'zan_widget_form_callback', 10, 2);
 
 /**
  * Custom WP_PostViews Widget and template.
@@ -112,7 +160,8 @@ function zan_tag_cloud_args($args)
 add_filter('widget_tag_cloud_args', 'zan_tag_cloud_args');
 
 
-function zan_get_calendar($calendar_output){
-    return str_replace('class="wp-calendar-table"','class="wp-calendar-table table table-striped table-condensed"',$calendar_output);
+function zan_get_calendar($calendar_output)
+{
+	return str_replace('class="wp-calendar-table"', 'class="wp-calendar-table table table-striped table-condensed"', $calendar_output);
 }
 add_filter('get_calendar', 'zan_get_calendar');

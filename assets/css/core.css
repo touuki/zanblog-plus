@@ -32,16 +32,7 @@
 
 /* =========================== 1.通用样式 =========================== */
 
-body.nav-fixed {
-    position: relative;
-    padding-top: 54px;
-}
 
-@media (min-width: 768px) and (max-width: 991px) {
-    body.nav-fixed {
-        padding-top: 94px;
-    }
-}
 
 @keyframes pined {
     from {
@@ -73,12 +64,6 @@ body.nav-fixed {
 
 /* =========================== 自定义BootStrap样式 =========================== */
 
-@media (min-width: 768px) {
-    .navbar-nav {
-        float: none;
-    }
-}
-
 
 /* =========================== 自定义BootStrap样式结束 =========================== */
 
@@ -89,26 +74,6 @@ body.nav-fixed {
 
 
 /* =========================== 响应式 =========================== */
-
-@media (min-width: 768px) and (max-width: 991px) {
-    .navbar-brand {
-        margin-right: auto !important;
-        margin-left: auto !important;
-        display: block;
-        float: none !important;
-    }
-    .navbar-nav {
-        width: 100%;
-        text-align: center;
-    }
-    .navbar-nav>li {
-        float: none !important;
-        display: inline-block !important;
-    }
-    .navbar-nav>li>a {
-        padding: 10px !important;
-    }
-}
 
 /* =========================== 响应式结束 =========================== */
 
@@ -121,23 +86,6 @@ body.nav-fixed {
 
 /* =========================== 页面头部样式 =========================== */
 
-#if-fixed {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-}
-
-#if-fixed input {
-    opacity: 0;
-}
-
-#if-fixed i {
-    position: relative;
-    top: -3px;
-    right: 5px;
-    color: white;
-}
-
 .navbar-fixed-top #if-fixed i {
     color: #d9534f;
     -webkit-transition: all .3s ease;
@@ -148,25 +96,6 @@ body.nav-fixed {
     animation: pined .5s;
 }
 
-.nav.navbar-nav>li>.dropdown-menu>li {
-    position: relative;
-}
-
-.nav.navbar-nav>li>.dropdown-menu .dropdown-menu {
-    left: 100%;
-    top: 0;
-}
-
-.dropdown-menu>li>a:hover,
-.dropdown-menu>li>a:focus {
-    color: #ffffff;
-    text-decoration: none;
-    background-color: #d9534f !important;
-    -webkit-transition: all .3s ease;
-    -moz-transition: all .3s ease;
-    -o-transition: all .3s ease;
-    transition: all .3s ease;
-}
 
 
 /* =========================== 页面头部样式结束 =========================== */

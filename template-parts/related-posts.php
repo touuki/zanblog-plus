@@ -24,7 +24,7 @@ if ($terms) :
 					$related_posts->the_post();
 				?>
 					<div class="col-md-4">
-						<div class="related-post well clearfix">
+						<div class="related-post well well-sm clearfix">
 							<p class="related-post-title"><a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></p>
 							<div class="related-post-content">
 								<?php the_excerpt(); ?>

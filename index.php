@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 /**
  * The main template file
  *
@@ -12,26 +13,17 @@
  * @package WordPress
  * @subpackage ZanBlog_Plus
  * @since ZanBlog Plus 1.0
- * @version 1.0
  */
 
 get_header(); ?>
 <div class="row">
 	<main class="col-md-8" role="main">
-
-		<?php if (is_home() && is_front_page()) : ?>
-			<!-- Home Banner Start -->
-			<header id="banner" role="banner" class="widget-area" aria-label="<?php esc_attr_e('Banner', 'default'); ?>">
-				<?php dynamic_sidebar('sidebar-2') ?>
-			</header>
-			<!-- Home Banner End-->
-		<?php else : ?>
-			<!-- 面包屑 -->
-			<?php zan_breadcrumb(); ?>
-			<!-- 面包屑 -->
-		<?php endif; ?>
-
 		<?php
+		get_sidebar('head');
+
+		if (!is_home() || !is_front_page())
+			zan_breadcrumb();
+
 		if (have_posts()) :
 
 			// Start the Loop.

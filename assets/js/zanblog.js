@@ -8,6 +8,7 @@
 
 jQuery(function () {
   zan.init();
+
 });
 
 var zan = {
@@ -16,9 +17,19 @@ var zan = {
   init: function () {
     this.topFixed();
     this.gotoTop();
-    this.dropDown();
-    this.panelToggle();
-    this.panelClose();
+    jQuery('.nav.navbar-nav li').mouseover(this.openMenu).mouseout(this.closeMenu);
+    jQuery('.panel-btn-toggle').data('toggle', true).click(this.panelToggle);
+    jQuery('.panel-btn-remove').click(this.panelClose);
+    this.resize();
+    jQuery(window).resize(this.resize);
+  },
+
+  openMenu: function () {
+    jQuery(this).addClass('open');
+  },
+
+  closeMenu: function () {
+    jQuery(this).removeClass('open');
   },
 
   // 回到顶端
@@ -79,47 +90,34 @@ var zan = {
     });
   },
 
-  // 菜单下拉
-  dropDown: function () {
-    var dropDownLi = jQuery('.nav.navbar-nav li');
-
-    dropDownLi.mouseover(function () {
-      jQuery(this).addClass('open');
-    }).mouseout(function () {
-      jQuery(this).removeClass('open');
-    });
-  },
-
   // 小工具显示/隐藏
   panelToggle: function () {
-    jQuery('.panel-btn-toggle')
-      .data('toggle', true)
-      .click(function () {
-        var btn = jQuery(this);
-        if (btn.data('toggle')) {
-          btn
-            .removeClass('fa-chevron-circle-up')
-            .addClass('fa-chevron-circle-down')
-            .data('toggle', false)
-            .parents('.panel-heading').first()
-            .nextAll()
-            .slideToggle(300);
-        } else {
-          btn
-            .removeClass('fa-chevron-circle-down')
-            .addClass('fa-chevron-circle-up')
-            .data('toggle', true)
-            .parents('.panel-heading').first()
-            .nextAll()
-            .slideToggle(300);
-        }
-      });
+    var btn = jQuery(this);
+    if (btn.data('toggle')) {
+      btn
+        .removeClass('fa-chevron-circle-up')
+        .addClass('fa-chevron-circle-down')
+        .data('toggle', false)
+        .parents('.panel-heading').first()
+        .nextAll()
+        .slideToggle(300);
+    } else {
+      btn
+        .removeClass('fa-chevron-circle-down')
+        .addClass('fa-chevron-circle-up')
+        .data('toggle', true)
+        .parents('.panel-heading').first()
+        .nextAll()
+        .slideToggle(300);
+    }
   },
 
   // 小工具删除
   panelClose: function () {
-    jQuery('.panel-btn-remove').click(function () {
-      jQuery(this).parents('.panel').first().toggle(300);
-    });
+    jQuery(this).parents('.panel').first().toggle(300);
+  },
+
+  resize: function () {
+    jQuery("body.nav-fixed").css("padding-top", jQuery('.navbar-fixed-top').height() + 'px');
   },
 }

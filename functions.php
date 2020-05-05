@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Twenty Seventeen functions and definitions
+ * ZanBlog Plus functions and definitions
  *
  * @link https://developer.wordpress.org/themes/basics/theme-functions/
  *
@@ -9,10 +9,6 @@
  * @subpackage ZanBlog_Plus
  * @since ZanBlog Plus 1.0
  */
-
-
-// 加载主题函数文件
-require get_template_directory() . '/inc/theme-functions.php';
 
 /**
  * Sets up theme defaults and registers support for various WordPress features.
@@ -79,6 +75,7 @@ function zan_setup()
 			'width'      => 200,
 			'height'     => 50,
 			'flex-width' => true,
+			'flex-height'=> false,
 		)
 	);
 
@@ -129,14 +126,16 @@ function zan_pingback_header()
 }
 add_action('wp_head', 'zan_pingback_header');
 
-//密码保护文章禁止搜索引擎收录（加noindex）
-function zan_password_noindex_header()
+/**
+ * Prevent search engine web crawlers from indexing a password protected post or a none content page.
+ */
+function zan_noindex()
 {
-	if (post_password_required()) {
-		echo '<meta name="robots" content="noindex">';
+	if ((!have_posts() || post_password_required()) && get_option( 'blog_public' )) {
+		wp_no_robots();
 	}
 }
-add_action('wp_head', 'zan_password_noindex_header', 1);
+add_action('wp_head', 'zan_noindex', 1);
 
 /**
  * Enqueues scripts and styles.
@@ -309,6 +308,14 @@ function zan_breadcrumb($is_block = true)
 <?php
 	endif;
 }
+
+function zan_nav_menu_submenu_css_class( $classes, $args, $depth ){
+	if($args->theme_location == 'top'){
+		$classes[] = 'dropdown-menu';
+	}
+	return $classes;
+}
+add_filter('nav_menu_submenu_css_class', 'zan_nav_menu_submenu_css_class', 10, 3);
 
 /**
  * Custom password protected post's title prefix.

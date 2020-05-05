@@ -12,13 +12,13 @@
  * @package WordPress
  * @subpackage ZanBlog_Plus
  * @since ZanBlog Plus 1.0
- * @version 1.0
  */
 
 get_header(); ?>
 <div class="row">
 	<main class="col-md-8">
 		<?php
+		get_sidebar('head');
 		// Start the Loop.
 		while (have_posts()) :
 			the_post();
