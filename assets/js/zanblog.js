@@ -68,9 +68,9 @@ var zan = {
     }
     var width = jQuery(window).width();
     var height = jQuery('.navbar-fixed-top').height();
-    var addiationHeight = jQuery('#wpadminbar').height() || 0;
-    if (width <= 600 && addiationHeight > 0) {
-      addiationHeight = currentScrollPos < addiationHeight ? addiationHeight - currentScrollPos : 0;
+    var additionalHeight = jQuery('#wpadminbar').height() || 0;
+    if (width <= 600 && additionalHeight > 0) {
+      additionalHeight = currentScrollPos < additionalHeight ? additionalHeight - currentScrollPos : 0;
     }
     if (
       // screen is at the top
@@ -80,9 +80,9 @@ var zan = {
       // fixed navbar
       || width >= 768 && jQuery('.if-navbar-fixed').hasClass('checked')
     ) {
-      jQuery('.navbar-top').css('top', addiationHeight + 'px');
+      jQuery('.navbar-top').css('top', additionalHeight + 'px');
     } else {
-      jQuery('.navbar-top').css('top', (addiationHeight - height) + 'px');
+      jQuery('.navbar-top').css('top', (additionalHeight - height) + 'px');
     }
   },
 

@@ -14,7 +14,7 @@
 	<div class="entry-content">
 		<?php
 		the_content();
-		
+
 		wp_link_pages(
 			array(
 				'before'      => '<div class="page-links"><span class="page-links-title screen-reader-text">' . __('Pages:', 'default') . '</span>',
@@ -49,37 +49,9 @@
 	}
 	?>
 	<footer>
-		<!-- 文章版权信息 -->
-		<div class="copyright alert alert-success">
-			<p>
-				版权属于:
-				<?php
-				if (get_post_meta($post->ID, "版权属于", true)) {
-					echo get_post_meta($post->ID, "版权属于", true);
-				} else {
-					echo '<a href="';
-					bloginfo('url');
-					echo '">';
-					bloginfo('name');
-					echo '</a>';
-				}
-				?>
-			</p>
-			<p>
-				原文地址:
-				<?php
-				if (get_post_meta($post->ID, "原文地址", true)) {
-					echo get_post_meta($post->ID, "原文地址", true);
-				} else {
-					echo '<a href="';
-					echo the_permalink() . '">';
-					echo the_permalink() . '</a>';
-				}
-				?>
-			</p>
-			<p>转载时必须以链接形式注明原始出处及本声明。</p>
-		</div>
-		<!-- 文章版权信息结束 -->
+		<?php if (get_option('copyright_post') || is_customize_preview()) : ?>
+			<div class="copyright-post alert alert-success"><?php zan_copyright_post(); ?></div>
+		<?php endif; ?>
 		<?php zan_entry_tag_list(); ?>
 	</footer>
 </article>

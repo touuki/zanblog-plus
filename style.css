@@ -739,6 +739,10 @@ textarea:focus {
     margin-bottom: 0;
 }
 
+.panel-widget.widget_calendar #today {
+    background-color: #d9534f;
+    color: #ffffff;
+}
 
 /* image */
 
@@ -759,8 +763,8 @@ textarea:focus {
     padding-bottom: 0;
 }
 
-.panel-widget.widget_categories ul>li::before,
-.panel-widget.widget_nav_menu ul>li::before {
+.panel-widget.widget_categories ul>li:before,
+.panel-widget.widget_nav_menu ul>li:before {
     content: '－ ';
 }
 
