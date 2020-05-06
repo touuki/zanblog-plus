@@ -40,8 +40,8 @@ function zan_setup()
 	// This theme uses wp_nav_menu() in two locations.
 	register_nav_menus(
 		array(
-			'top'    => __( 'Top Menu', 'default' ),
-			'social' => __( 'Social Links Menu', 'default' ),
+			'top'    => __('Top Menu', 'default'),
+			'social' => __('Social Links Menu', 'default'),
 		)
 	);
 
@@ -75,7 +75,7 @@ function zan_setup()
 			'width'      => 200,
 			'height'     => 50,
 			'flex-width' => true,
-			'flex-height'=> false,
+			'flex-height' => false,
 		)
 	);
 
@@ -98,9 +98,103 @@ function zan_setup()
 	add_theme_support('responsive-embeds');
 
 	// Add support for custom background.
-	add_theme_support('custom-background');
+	add_theme_support(
+		'custom-background',
+		array(
+			'wp-head-callback' => 'zan_custom_background_cb'
+		)
+	);
 }
 add_action('after_setup_theme', 'zan_setup');
+
+/**
+ * Modified from wp-includes/theme.php/_custom_background_cb(). The default callback function cannot show fixed background on iOS browser.
+ *
+ * @see _custom_background_cb()
+ */
+function zan_custom_background_cb()
+{
+	$attachment = get_theme_mod('background_attachment', get_theme_support('custom-background', 'default-attachment'));
+
+	if ('fixed' !== $attachment) {
+		// if not fixed, back to default callback function
+		return _custom_background_cb();
+	}
+
+	// $background is the saved custom image, or the default image.
+	$background = set_url_scheme(get_background_image());
+
+	// $color is the saved custom color.
+	// A default has to be specified in style.css. It will not be printed here.
+	$color = get_background_color();
+
+	if (get_theme_support('custom-background', 'default-color') === $color) {
+		$color = false;
+	}
+
+	$type_attr = current_theme_supports('html5', 'style') ? '' : ' type="text/css"';
+
+	if (!$background && !$color) {
+		if (is_customize_preview()) {
+			printf('<style%s id="custom-background-css"></style>', $type_attr);
+		}
+		return;
+	}
+
+	$style = $color ? "background-color: #$color;" : '';
+
+	if ($background) {
+		$image = ' background-image: url("' . esc_url_raw($background) . '");';
+
+		// Background Position.
+		$position_x = get_theme_mod('background_position_x', get_theme_support('custom-background', 'default-position-x'));
+		$position_y = get_theme_mod('background_position_y', get_theme_support('custom-background', 'default-position-y'));
+
+		if (!in_array($position_x, array('left', 'center', 'right'), true)) {
+			$position_x = 'left';
+		}
+
+		if (!in_array($position_y, array('top', 'center', 'bottom'), true)) {
+			$position_y = 'top';
+		}
+
+		$position = " background-position: $position_x $position_y;";
+
+		// Background Size.
+		$size = get_theme_mod('background_size', get_theme_support('custom-background', 'default-size'));
+
+		if (!in_array($size, array('auto', 'contain', 'cover'), true)) {
+			$size = 'auto';
+		}
+
+		$size = " background-size: $size;";
+
+		// Background Repeat.
+		$repeat = get_theme_mod('background_repeat', get_theme_support('custom-background', 'default-repeat'));
+
+		if (!in_array($repeat, array('repeat-x', 'repeat-y', 'repeat', 'no-repeat'), true)) {
+			$repeat = 'repeat';
+		}
+
+		$repeat = " background-repeat: $repeat;";
+
+		$style .= $image . $position . $size . $repeat;
+	}
+?>
+	<style <?php echo $type_attr; ?> id="custom-background-css">
+		body.custom-background:before {
+			content: '';
+			position: fixed;
+			z-index: -1;
+			top: 0;
+			right: 0;
+			height: 100vh;
+			left: 0;
+			<?php echo trim($style); ?>
+		}
+	</style>
+	<?php
+}
 
 /**
  * Handles JavaScript detection.
@@ -131,7 +225,7 @@ add_action('wp_head', 'zan_pingback_header');
  */
 function zan_noindex()
 {
-	if ((!have_posts() || post_password_required()) && get_option( 'blog_public' )) {
+	if ((!have_posts() || post_password_required()) && get_option('blog_public')) {
 		wp_no_robots();
 	}
 }
@@ -149,7 +243,6 @@ function zan_scripts()
 	wp_enqueue_style('fontawesome', 'http://comet.uki.site/fontawesome/css/all.css', array(), null);
 
 	// Theme stylesheet.
-	wp_enqueue_style('zan-core-style', get_theme_file_uri('/assets/css/core.css'), array(), '20200430');
 	wp_enqueue_style('zan-style', get_stylesheet_uri(), array(), '20200430');
 
 	//wp_deregister_script('jquery');
@@ -301,7 +394,7 @@ add_filter('excerpt_length', 'zan_excerpt_length');
 function zan_breadcrumb($is_block = true)
 {
 	if (function_exists('bcn_display')) :
-?>
+	?>
 		<div class="breadcrumb<?php if ($is_block) echo ' panel panel-default'; ?>" itemscope itemtype="https://schema.org/BreadcrumbList">
 			<i class="fa fa-home"></i> <?php bcn_display(); ?>
 		</div>
@@ -309,8 +402,9 @@ function zan_breadcrumb($is_block = true)
 	endif;
 }
 
-function zan_nav_menu_submenu_css_class( $classes, $args, $depth ){
-	if($args->theme_location == 'top'){
+function zan_nav_menu_submenu_css_class($classes, $args, $depth)
+{
+	if ($args->theme_location == 'top') {
 		$classes[] = 'dropdown-menu';
 	}
 	return $classes;

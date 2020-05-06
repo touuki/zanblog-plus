@@ -165,3 +165,6 @@ function zan_get_calendar($calendar_output)
 	return str_replace('class="wp-calendar-table"', 'class="wp-calendar-table table table-striped table-condensed"', $calendar_output);
 }
 add_filter('get_calendar', 'zan_get_calendar');
+
+
+add_filter('show_recent_comments_widget_style', '__return_false');

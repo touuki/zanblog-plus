@@ -9,7 +9,7 @@
  */
 
 ?>
-<div class="site-header navbar navbar-inverse" role="banner">
+<div class="navbar-top navbar navbar-inverse navbar-fixed-top" role="banner">
     <div class="container-fluid">
         <header class="site-branding navbar-header">
             <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false" aria-controls="top-menu">
@@ -33,6 +33,9 @@
                 </a>
             </div>
         </header>
+        <div class="if-navbar-fixed navbar-right hidden-xs" data-state="checked">
+            <i class="fa fa-thumbtack"></i>
+        </div>
         <nav id="top-menu" class="collapse navbar-collapse" role="navigation" aria-label="<?php esc_attr_e('Top Menu', 'default'); ?>">
             <?php
             wp_nav_menu(
@@ -44,11 +47,9 @@
                 )
             );
             ?>
-            <div class="if-navbar-fixed navbar-right hidden-xs">
-                <i class="fa fa-thumbtack"></i>
-                <input type="checkbox">
+            <div class="navbar-form navbar-right">
+                <?php get_search_form(); ?>
             </div>
-            <?php echo str_replace('class="search-form"', 'class="search-form navbar-form navbar-right"', get_search_form(array('echo' => false))); ?>
         </nav>
     </div>
 </div>

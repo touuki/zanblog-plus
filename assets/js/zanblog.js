@@ -3,94 +3,115 @@
  *
  * Provides helper functions to enhance the theme experience.
  *
- * Website: www.yeahzan.com
  */
 
 jQuery(function () {
   zan.init();
-
 });
 
 var zan = {
 
-  //初始化函数
   init: function () {
-    this.topFixed();
-    this.gotoTop();
+    // set default value
+    var defaultState = jQuery('.if-navbar-fixed').attr('data-state');
+    if (defaultState) {
+      window.localStorage.setItem('ifNavbarFixed', defaultState);
+    }
+
+    var ifNavbarFixed = window.localStorage.getItem('ifNavbarFixed');
+    if (ifNavbarFixed) {
+      if (ifNavbarFixed === 'checked') {
+        jQuery('.if-navbar-fixed').addClass("checked");
+      } else {
+        jQuery('.if-navbar-fixed').removeClass("checked");
+      }
+    }
+    jQuery('.if-navbar-fixed').click(this.ifNavbarFixedClick);
+
+    jQuery(".goto-top").click(this.gotoTop);
+
     jQuery('.nav.navbar-nav li').mouseover(this.openMenu).mouseout(this.closeMenu);
+
     jQuery('.panel-btn-toggle').data('toggle', true).click(this.panelToggle);
     jQuery('.panel-btn-remove').click(this.panelClose);
-    this.resize();
-    jQuery(window).resize(this.resize);
+
+    this.bodyPaddingTop();
+    this.showNavbarAccordingly(window.pageYOffset, zan.prevScrollpos);
+    this.showGotoTopAccordingly();
+    jQuery(window).resize(function () {
+      zan.showNavbarAccordingly(window.pageYOffset, zan.prevScrollpos);
+      zan.bodyPaddingTop();
+    });
+
+    jQuery(window).scroll(function () {
+      zan.showNavbarAccordingly(window.pageYOffset, zan.prevScrollpos);
+      zan.showGotoTopAccordingly();
+      zan.prevScrollpos = window.pageYOffset;
+    });
   },
 
+  prevScrollpos: window.pageYOffset,
+
   openMenu: function () {
-    jQuery(this).addClass('open');
+    var menu = jQuery(this);
+    menu.addClass('open');
   },
 
   closeMenu: function () {
-    jQuery(this).removeClass('open');
+    var menu = jQuery(this);
+    menu.removeClass('open');
   },
 
-  // 回到顶端
-  gotoTop: function () {
-    jQuery(window).scroll(function () {
-      jQuery(this).scrollTop() > 200 ? jQuery(".goto-top-btn").css({
-        bottom: "20px"
-      }) : jQuery(".goto-top-btn").css({
-        bottom: "-40px"
-      });
-    });
-
-    jQuery(".goto-top-btn").click(function () {
-      return jQuery("body,html").animate({
-        scrollTop: 0
-      }, 500), !1
-    });
-  },
-
-  // 头部固定
-  topFixed: function () {
-
-    var zanHeader = jQuery('.site-header');
-    var body = jQuery('body');
-    var ifFixed = zanHeader.find('input[type="checkbox"]');
-    var storage = window.localStorage;
-
-    storage.setItem('ifFixed', 'fixed');
-    // 将这行代码注释去掉可以实现网站头部默认钉住。
-
-    if (!storage.getItem('ifFixed')) {
-
-      storage.setItem('ifFixed', 'float');
-    } else {
-      if (storage.getItem('ifFixed') == 'fixed') {
-
-        zanHeader.addClass('navbar-fixed-top');
-        body.addClass('nav-fixed');
-        ifFixed.prop("checked", true);
-      } else {
-
-        zanHeader.removeClass('navbar-fixed-top');
-        body.removeClass('nav-fixed');
-        ifFixed.prop("checked", false);
-      }
+  showNavbarAccordingly: function (currentScrollPos, prevScrollpos) {
+    if (jQuery('#top-menu').hasClass('in')) {
+      return;
     }
+    var width = jQuery(window).width();
+    var height = jQuery('.navbar-fixed-top').height();
+    var addiationHeight = jQuery('#wpadminbar').height() || 0;
+    if (width <= 600 && addiationHeight > 0) {
+      addiationHeight = currentScrollPos < addiationHeight ? addiationHeight - currentScrollPos : 0;
+    }
+    if (
+      // screen is at the top
+      currentScrollPos < height
+      // scroll up
+      || prevScrollpos >= currentScrollPos
+      // fixed navbar
+      || width >= 768 && jQuery('.if-navbar-fixed').hasClass('checked')
+    ) {
+      jQuery('.navbar-top').css('top', addiationHeight + 'px');
+    } else {
+      jQuery('.navbar-top').css('top', (addiationHeight - height) + 'px');
+    }
+  },
 
-    ifFixed.on('change', function () {
-      if (jQuery(this).is(':checked')) {
-        zanHeader.addClass('navbar-fixed-top');
-        body.addClass('nav-fixed');
-        storage.setItem('ifFixed', 'fixed');
-      } else {
-        zanHeader.removeClass('navbar-fixed-top');
-        body.removeClass('nav-fixed');
-        storage.setItem('ifFixed', 'float');
-      }
+  showGotoTopAccordingly: function () {
+    jQuery(window).scrollTop() > 200 ? jQuery(".goto-top").css({
+      bottom: "20px"
+    }) : jQuery(".goto-top").css({
+      bottom: "-40px"
     });
   },
 
-  // 小工具显示/隐藏
+  gotoTop: function () {
+    jQuery("body,html").animate({
+      scrollTop: 0
+    }, 500);
+    return false;
+  },
+
+  ifNavbarFixedClick: function () {
+    var btn = jQuery(this);
+    if (btn.hasClass('checked')) {
+      btn.removeClass('checked');
+      window.localStorage.setItem('ifNavbarFixed', 'unchecked');
+    } else {
+      btn.addClass('checked');
+      window.localStorage.setItem('ifNavbarFixed', 'checked');
+    }
+  },
+
   panelToggle: function () {
     var btn = jQuery(this);
     if (btn.data('toggle')) {
@@ -112,12 +133,12 @@ var zan = {
     }
   },
 
-  // 小工具删除
   panelClose: function () {
-    jQuery(this).parents('.panel').first().toggle(300);
+    var btn = jQuery(this);
+    btn.parents('.panel').first().toggle(300);
   },
 
-  resize: function () {
-    jQuery("body.nav-fixed").css("padding-top", jQuery('.navbar-fixed-top').height() + 'px');
+  bodyPaddingTop: function () {
+    jQuery('body').css('padding-top', jQuery('.navbar-fixed-top').height() + 'px');
   },
 }

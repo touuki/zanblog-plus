@@ -1,13 +1,16 @@
 /*
-Theme Name: Zanblog 2.1.0
-Theme URI: http://www.yeahzan.com/zanblog
-Description: 基于Bootstrap3.0的WordPress主题
-Author: 佚站互联
-Author URI: http://www.yeahzan.com/
-Version: 2.1.0
-Tags: Bootstrap3, 扁平化设计, 精致简约
-*/
+Theme Name: Zanblog Plus
+Theme URI: https://github.com/touuki/zanblog-plus
+Author: Touuki
+Author URI: https://github.com/touuki
+Description: Zanblog Plus is a beautiful and powerful WordPress Theme constructed by Bootstrap3. It's a refactoring and improvement of the unmaintained ZanBlog 2.1.0. ZanBlog Plus will make your WordPress look beautiful everywhere.
+Version: 1.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Tags: bootstrap3, one-column, two-columns, right-sidebar, accessibility-ready, custom-background, custom-menu, featured-images, sticky-post, threaded-comments, blog
+Text Domain: zanblog-plus
 
+*/
 
 /* --------------------------- Base Start ----------------------------------- */
 
@@ -29,8 +32,18 @@ a:focus {
     text-decoration: none;
 }
 
-:hover,
-:focus {
+a,
+img,
+input,
+textarea,
+button,
+.panel-btn-toggle,
+.panel-btn-remove,
+.label-meta,
+.goto-top,
+.navbar-top,
+.if-navbar-fixed i
+ {
     -webkit-transition: all .3s ease;
     -moz-transition: all .3s ease;
     -o-transition: all .3s ease;
@@ -55,16 +68,6 @@ textarea:focus {
     -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(217, 83, 79, .6);
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(217, 83, 79, .6);
 }
-
-a i.fa,
-.navbar-toggle i.fa,
-.comment-metadata time {
-    -webkit-transition: none;
-    -moz-transition: none;
-    -o-transition: none;
-    transition: none;
-}
-
 
 /* --------------------------- Base End ----------------------------------- */
 
@@ -104,78 +107,6 @@ a i.fa,
     opacity: 0.8;
 }
 
-.navbar {
-    border-width: 0;
-}
-
-.navbar-inverse {
-    background-color: #3d4450;
-}
-
-.navbar-inverse .navbar-brand,
-.navbar-inverse .navbar-text,
-.navbar-inverse .navbar-toggle,
-.navbar-inverse .navbar-nav>li>a {
-    color: #ffffff;
-}
-
-.navbar-inverse .navbar-nav .open>a,
-.navbar-inverse .navbar-nav .open>a:hover,
-.navbar-inverse .navbar-nav .open>a:focus,
-.navbar-inverse .navbar-nav .open .dropdown-menu>li>a:hover,
-.navbar-inverse .navbar-nav .open .dropdown-menu>li>a:focus {
-    color: #ffffff;
-    background-color: #d9534f;
-}
-
-.navbar-inverse .navbar-toggle {
-    border-color: #ffffff;
-}
-
-.navbar-inverse .navbar-toggle:hover,
-.navbar-inverse .navbar-toggle:focus {
-    background-color: #d9534f;
-    border-color: #d9534f;
-}
-
-.navbar-brand {
-    padding: 0;
-}
-
-.navbar-toggle {
-    line-height: 0.9;
-}
-
-.nav.navbar-nav>li>.dropdown-menu>li {
-    position: relative;
-}
-
-.nav.navbar-nav>li .dropdown-menu>li>a {
-    padding-top: 8px;
-    padding-bottom: 8px;
-}
-
-.nav.navbar-nav>li>.dropdown-menu .dropdown-menu {
-    left: 100%;
-    top: 0;
-}
-
-.navbar-fixed-top .navbar-collapse {
-    max-height: unset;
-}
-
-@media (max-width: 767px) {
-    .navbar-nav>li .dropdown-menu {
-        padding: 0;
-    }
-    .nav.navbar-nav>li .dropdown-menu>li {
-        padding-left: 20px;
-    }
-    .navbar-inverse .navbar-nav .open .dropdown-menu>li>a {
-        color: #ffffff;
-    }
-}
-
 /* --------------------------- Bootstrap End ------------------------------ */
 
 
@@ -193,46 +124,112 @@ a i.fa,
     width: 1px;
 }
 
-body.nav-fixed {
-    padding-top: 50px;
-}
-
-.admin-bar .navbar-fixed-top {
-    top: 32px;
-    /* if it already has a top value, add 32px to it */
-}
-
-@media screen and (max-width: 782px) {
-    .admin-bar .navbar-fixed-top {
-        top: 46px;
-        /* if it already has a top value, add 46px to it */
-    }
-}
-
 .site-content-contain {
-    padding: 30px 0;
+    padding-top: 30px;
 }
 
-.if-nav-fixed {
-    height: 50px;
-    padding-right: 10px;
+.search-form {
+    height: 34px;
 }
-
 
 /* --------------------------- Main Style End --------------------------- */
 
-.title-home-link {
+/* --------------------------- Navbar Top Start --------------------------- */
+
+.navbar-top {
+    margin: 0;
+    border-width: 0;
+    border-radius: 0;
+    background-color: #3d4450;
+}
+
+.navbar-top .navbar-brand,
+.navbar-top .navbar-text,
+.navbar-top .navbar-toggle,
+.navbar-top .navbar-nav>li>a {
+    color: #ffffff;
+}
+
+.navbar-top .navbar-nav .open>a,
+.navbar-top .navbar-nav .open>a:hover,
+.navbar-top .navbar-nav .open>a:focus,
+.navbar-top .navbar-nav .open .dropdown-menu>li>a:hover,
+.navbar-top .navbar-nav .open .dropdown-menu>li>a:focus {
+    color: #ffffff;
+    background-color: #d9534f;
+}
+
+.navbar-top .navbar-toggle {
+    border-color: #ffffff;
+    line-height: 0.9;
+}
+
+.navbar-top .navbar-toggle:hover,
+.navbar-top .navbar-toggle:focus {
+    background-color: #d9534f;
+    border-color: #d9534f;
+}
+
+.navbar-top .navbar-brand {
+    padding: 0;
+}
+
+.navbar-top .nav.navbar-nav>li>.dropdown-menu>li {
+    position: relative;
+}
+
+.navbar-top .nav.navbar-nav>li .dropdown-menu>li>a {
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.navbar-top .nav.navbar-nav>li>.dropdown-menu .dropdown-menu {
+    left: 100%;
+    top: 0;
+}
+
+.navbar-top .navbar-collapse {
+    max-height: unset;
+}
+
+@media (max-width: 767px) {
+    .navbar-top .navbar-nav>li .dropdown-menu {
+        padding: 0;
+    }
+    .navbar-top .nav.navbar-nav>li .dropdown-menu>li {
+        padding-left: 20px;
+    }
+    .navbar-top .navbar-nav .open .dropdown-menu>li>a {
+        color: #ffffff;
+    }
+}
+
+@media (min-width: 768px){
+    .navbar-top>.container .navbar-brand,
+    .navbar-top>.container-fluid .navbar-brand {
+        margin-left: 0;
+    }
+    .navbar-top .navbar-right {
+        margin-right: 0;
+    }
+    .navbar-top .navbar-collapse {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+.navbar-top .title-home-link {
     display: block;
     height: 50px;
     overflow: hidden;
 }
 
-.title-home-link:focus,
-.title-home-link:hover {
+.navbar-top .title-home-link:focus,
+.navbar-top .title-home-link:hover {
     background-color: #d9534f;
 }
 
-.site-title {
+.navbar-top .site-title {
     margin: 0;
     padding: 5px 15px 3px 15px;
     font-size: 24px;
@@ -240,23 +237,38 @@ body.nav-fixed {
     line-height: 1;
 }
 
-.site-description {
+.navbar-top .site-description {
     margin: 0;
     padding: 0 15px 0 15px;
     font-size: 10px;
     color: #ffffff;
     font-style: italic;
-    -webkit-transition: none;
-    -moz-transition: none;
-    -o-transition: none;
-    transition: none;
 }
 
-.site-title:only-child {
+.navbar-top .site-title:only-child {
     font-size: 30px;
     padding-bottom: 10px;
     padding-top: 10px;
 }
+
+.navbar-top .if-navbar-fixed i {
+    line-height: 30px;
+    padding: 10px 10px;
+    cursor: pointer;
+    color: #ffffff;
+}
+
+.navbar-top .if-navbar-fixed.checked i {
+    color: #d9534f;
+}
+
+.navbar-top .if-navbar-fixed i:hover {
+    -webkit-transform: scale(1.25);
+    -moz-transform: scale(1.25);
+    -o-transform: scale(1.25);
+    transform: scale(1.25);
+}
+/* --------------------------- Navbar Top End --------------------------- */
 
 /* --------------------------- Date mark Start --------------------------- */
 
@@ -523,13 +535,6 @@ body.nav-fixed {
 
 .widget {
     margin-bottom: 30px;
-}
-
-.panel-widget {
-    -webkit-transition: none;
-    -moz-transition: none;
-    -o-transition: none;
-    transition: none;
 }
 
 .panel-widget:not(.widget_calendar) a {
@@ -913,10 +918,6 @@ body.nav-fixed {
     left: -40px;
     top: 10px;
     margin: 0;
-    -webkit-transition: all .3s ease;
-    -moz-transition: all .3s ease;
-    -o-transition: all .3s ease;
-    transition: all .3s ease;
 }
 
 @media (max-width: 767px) {
@@ -1052,7 +1053,7 @@ body.nav-fixed {
 
 /* --------------------------- Goto Top Botton Start --------------------------- */
 
-.goto-top-btn {
+.goto-top {
     position: fixed;
     bottom: 20px;
     right: 20px;
@@ -1068,24 +1069,16 @@ body.nav-fixed {
     color: white;
 }
 
-.goto-top-btn i.fa {
+.goto-top i.fa {
     font-size: 30px;
     line-height: 36px;
     text-align: center;
     display: block;
-    -webkit-transition: none;
-    -moz-transition: none;
-    -o-transition: none;
-    transition: none;
 }
 
-.goto-top-btn:hover {
+.goto-top:hover {
     border-color: #d9534f;
     color: #d9534f;
-    -webkit-transition: all .3s ease;
-    -moz-transition: all .3s ease;
-    -o-transition: all .3s ease;
-    transition: all .3s ease;
 }
 
 .site-footer {

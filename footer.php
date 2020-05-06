@@ -8,11 +8,9 @@
 	</div><!-- .site-info -->
 </footer>
 
-<!-- 回到顶端 -->
-<div class="goto-top-btn">
+<div class="goto-top">
 	<i class="fa fa-angle-up"></i>
-</div>
-<!-- 回到顶端结束 -->
+</div><!-- .goto-top -->
 
 <?php wp_footer(); ?>
 
