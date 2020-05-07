@@ -151,7 +151,7 @@ if (!function_exists('zan_post_thumbnail')) :
         }
 
         if (is_singular()) : ?>
-            <figure class="post-thumbnail thumbnail hidden-xs"><?php the_post_thumbnail(); ?></figure>
+            <figure class="post-thumbnail thumbnail"><?php the_post_thumbnail(); ?></figure>
         <?php else : ?>
             <figure class="thumbnail">
                 <a class="post-thumbnail" href="<?php the_permalink() ?>" aria-hidden="true">

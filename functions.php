@@ -103,6 +103,16 @@ function zan_setup()
 			'wp-head-callback' => 'zan_custom_background_cb'
 		)
 	);
+
+	if (get_option('copyright_post') === false) {
+		$default_copyright_post = '<p><strong>Author</strong>: <a href="%AUTHOR_URL%">%POST_AUTHOR%</a></p>
+		<p><strong>Title</strong>: %POST_TITLE%</p>
+		<p><strong>URL</strong>: <a href="%POST_URL%" rel="bookmark">%POST_URL%</a></p>
+		<p>If you find this article helpful, you are welcome to reprint it following the license below, with source credited.</p>
+		<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" /></a>
+		<span>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.</span></p>';
+		add_option('copyright_post', $default_copyright_post);
+	}
 }
 add_action('after_setup_theme', 'zan_setup');
 
@@ -181,6 +191,12 @@ function zan_custom_background_cb()
 	}
 ?>
 	<style <?php echo $type_attr; ?> id="custom-background-css">
+		body.custom-background {
+			/* To be compatible with IE */
+			background-attachment: fixed;
+			<?php echo trim($style); ?>
+		}
+
 		body.custom-background:before {
 			content: '';
 			position: fixed;
@@ -242,7 +258,7 @@ function zan_scripts()
 	wp_enqueue_style('fontawesome', get_template_directory_uri() . '/assets/css/fontawesome.min.css', array(), '5.13.0');
 
 	// Theme stylesheet.
-	wp_enqueue_style('zan-style', get_stylesheet_uri(), array(), '20200430');
+	wp_enqueue_style('zan-style', get_stylesheet_uri(), array(), '1.0');
 
 	//wp_deregister_script('jquery');
 	//wp_enqueue_script('jquery', 'https://code.jquery.com/jquery-3.5.0.min.js', array(), null);
@@ -277,10 +293,26 @@ function zan_content_image_sizes_attr($sizes, $size)
 {
 	$width = $size[0];
 
-	if ('page' === get_post_type() && is_page_template('page-templates/full-width.php')) {
-		$sizes = '93vw';
+	if (is_page_template('page-templates/full-width.php')) {
+		if ($width >= 1100) {
+			$sizes = '(max-width: 768px) 89vw, (max-width: 992px) 680px, (max-width: 1200px) 900px, 1100px';
+		} elseif ($width >= 900) {
+			$sizes = '(max-width: 768px) 89vw, (max-width: 992px) 680px, (max-width: 1200px) 900px, ' . $width . 'px';
+		} elseif ($width >= 680) {
+			$sizes = '(max-width: 768px) 89vw, (max-width: 992px) 680px, ' . $width . 'px';
+		} else {
+			$sizes = '(max-width: ' . ($width / 0.89) . 'px) 89vw, ' . $width . 'px';
+		}
 	} else {
-		$sizes = '(max-width: 768px) 93vw, (max-width: 992px) 682px, (max-width: 1200px) 579px, 712px';
+		if ($width >= 710) {
+			$sizes = '(max-width: 768px) 89vw, (max-width: 992px) 680px, (max-width: 1200px) 576px, 710px';
+		} elseif ($width >= 680) {
+			$sizes = '(max-width: 768px) 89vw, (max-width: 992px) 680px, (max-width: 1200px) 576px, ' . $width . 'px';
+		} elseif ($width >= 576) {
+			$sizes = '(max-width: ' . ($width / 0.89) . 'px) 89vw, (max-width: 992px) ' . $width . 'px, (max-width: 1200px) 576px, ' . $width . 'px';
+		} else {
+			$sizes = '(max-width: ' . ($width / 0.89) . 'px) 89vw, ' . $width . 'px';
+		}
 	}
 
 	return $sizes;
@@ -301,16 +333,16 @@ add_filter('wp_calculate_image_sizes', 'zan_content_image_sizes_attr', 10, 2);
 function zan_post_thumbnail_sizes_attr($attr, $attachment, $size)
 {
 	if ('post-thumbnail' === $size) {
-		if (is_active_sidebar('sidebar-1')) {
-			$attr['sizes'] = '(max-width: 768px) 93vw, (max-width: 992px) 682px, (max-width: 1200px) 579px, 712px';
+		if (is_page_template('page-templates/full-width.php')) {
+			$attr['sizes'] = '(max-width: 768px) 89vw, (max-width: 992px) 680px, (max-width: 1200px) 900px, 1100px';
 		} else {
-			$attr['sizes'] = '93vw';
+			$attr['sizes'] = '(max-width: 768px) 89vw, (max-width: 992px) 680px, (max-width: 1200px) 576px, 710px';
 		}
 	}
 
 	return $attr;
 }
-//add_filter('wp_get_attachment_image_attributes', 'zan_post_thumbnail_sizes_attr', 10, 3);
+add_filter('wp_get_attachment_image_attributes', 'zan_post_thumbnail_sizes_attr', 10, 3);
 
 function zan_comment_form()
 {
@@ -418,7 +450,7 @@ function zan_protected_title_format()
 	if (post_password_required()) {
 		return '<i class="fa fa-lock"></i> %s';
 	} else {
-		return '<i class="fa fa-unlock"></i> %s';
+		return '<i class="fa fa-lock-open"></i> %s';
 	}
 }
 add_filter('protected_title_format', 'zan_protected_title_format');

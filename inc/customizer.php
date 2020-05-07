@@ -23,16 +23,6 @@ function zan_customize_register($wp_customize)
 		'title'			=> __('Copyright', 'default'),
 		'priority'		=> 100,
 	));
-	
-	if (get_option('copyright_post') === false) {
-		$default_copyright_post = '<p><strong>Author</strong>: <a href="%AUTHOR_URL%">%POST_AUTHOR%</a></p>
-		<p><strong>Title</strong>: %POST_TITLE%</p>
-		<p><strong>URL</strong>: <a href="%POST_URL%" rel="bookmark">%POST_URL%</a></p>
-		<p>If you find this article helpful, you are welcome to reprint it following the license below, with source credited.</p>
-		<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
-		<span>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.</span></p>';
-		add_option('copyright_post', $default_copyright_post);
-	}
 
 	$wp_customize->add_setting(
 		'copyright_post',
@@ -120,6 +110,10 @@ function zan_copyright_post()
 }
 
 function add_theme_copyright_page() {
-    add_theme_page( __('Copyright', 'default'), __('Copyright', 'default'), 'edit_theme_options', 'customize.php?return=%2Fwordpress%2Fwp-admin%2Fplugins.php%3Fplugin_status%3Dall%26paged%3D1%26s&autofocus%5Bcontrol%5D=copyright_post' );
+    add_theme_page( __('Copyright', 'default'), __('Copyright', 'default'), 'edit_theme_options', add_query_arg( 
+		array( 
+			'return' => urlencode( remove_query_arg( wp_removable_query_args(), wp_unslash( $_SERVER['REQUEST_URI'] ) ) ), 
+			'autofocus' => array( 'control' => 'copyright_post' ),
+		), 'customize.php' ) );
 }
 add_action( 'admin_menu', 'add_theme_copyright_page' );

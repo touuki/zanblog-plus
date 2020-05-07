@@ -333,6 +333,7 @@ textarea:focus {
 
 .entry-title {
     margin-top: 0;
+    padding: 0 25px;
     font-size: 36px;
     text-align: center;
 }
@@ -368,6 +369,18 @@ textarea:focus {
 .label-meta:hover,
 .label-meta:focus {
     background-color: #d9534f;
+}
+
+.entry-content {
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+@media (max-width: 767px) {
+    .entry-content ul,
+    .entry-content ol {
+        padding-left: 15px;
+    }
 }
 
 .post-navigation {
@@ -503,7 +516,7 @@ textarea:focus {
 
 .related-posts .related-post-content {
     height: 120px;
-    font-size: 11px;
+    font-size: 12px;
 }
 
 .related-posts .col-md-4 {
