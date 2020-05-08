@@ -153,8 +153,16 @@ textarea:focus {
 .navbar-top .navbar-nav .open>a,
 .navbar-top .navbar-nav .open>a:hover,
 .navbar-top .navbar-nav .open>a:focus,
+.navbar-top .title-home-link:focus,
+.navbar-top .title-home-link:hover {
+    color: #ffffff;
+    background-color: #262c35;
+}
+
 .navbar-top .navbar-nav .open .dropdown-menu>li>a:hover,
-.navbar-top .navbar-nav .open .dropdown-menu>li>a:focus {
+.navbar-top .navbar-nav .open .dropdown-menu>li>a:focus,
+.navbar-inverse .navbar-nav > .current-menu-parent > a,
+.navbar-inverse .navbar-nav > .current-menu-item > a {
     color: #ffffff;
     background-color: #d9534f;
 }
@@ -222,11 +230,6 @@ textarea:focus {
     display: block;
     height: 50px;
     overflow: hidden;
-}
-
-.navbar-top .title-home-link:focus,
-.navbar-top .title-home-link:hover {
-    background-color: #d9534f;
 }
 
 .navbar-top .site-title {

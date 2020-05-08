@@ -63,7 +63,7 @@ var zan = {
   },
 
   showNavbarAccordingly: function (currentScrollPos, prevScrollpos) {
-    if (jQuery('#top-menu').hasClass('in')) {
+    if (jQuery('#top-menu').hasClass('in') && width < 768) {
       return;
     }
     var width = jQuery(window).width();
