@@ -163,6 +163,16 @@ if (!function_exists('zan_post_thumbnail')) :
     }
 endif;
 
+function zan_excerpt_length($length)
+{
+	if (is_singular()) {
+		return 80;
+	} else {
+		return 250;
+	}
+}
+add_filter('excerpt_length', 'zan_excerpt_length');
+
 if ( ! function_exists( 'zan_excerpt_more' ) && ! is_admin() ) :
 	/**
 	 * Replaces "[...]" (appended to automatically generated excerpts) with ... and

@@ -117,101 +117,6 @@ function zan_setup()
 add_action('after_setup_theme', 'zan_setup');
 
 /**
- * Modified from wp-includes/theme.php/_custom_background_cb(). The default callback function cannot show fixed background on iOS browser.
- *
- * @see _custom_background_cb()
- */
-function zan_custom_background_cb()
-{
-	$attachment = get_theme_mod('background_attachment', get_theme_support('custom-background', 'default-attachment'));
-
-	if ('fixed' !== $attachment) {
-		// if not fixed, back to default callback function
-		return _custom_background_cb();
-	}
-
-	// $background is the saved custom image, or the default image.
-	$background = set_url_scheme(get_background_image());
-
-	// $color is the saved custom color.
-	// A default has to be specified in style.css. It will not be printed here.
-	$color = get_background_color();
-
-	if (get_theme_support('custom-background', 'default-color') === $color) {
-		$color = false;
-	}
-
-	$type_attr = current_theme_supports('html5', 'style') ? '' : ' type="text/css"';
-
-	if (!$background && !$color) {
-		if (is_customize_preview()) {
-			printf('<style%s id="custom-background-css"></style>', $type_attr);
-		}
-		return;
-	}
-
-	$style = $color ? "background-color: #$color;" : '';
-
-	if ($background) {
-		$image = ' background-image: url("' . esc_url_raw($background) . '");';
-
-		// Background Position.
-		$position_x = get_theme_mod('background_position_x', get_theme_support('custom-background', 'default-position-x'));
-		$position_y = get_theme_mod('background_position_y', get_theme_support('custom-background', 'default-position-y'));
-
-		if (!in_array($position_x, array('left', 'center', 'right'), true)) {
-			$position_x = 'left';
-		}
-
-		if (!in_array($position_y, array('top', 'center', 'bottom'), true)) {
-			$position_y = 'top';
-		}
-
-		$position = " background-position: $position_x $position_y;";
-
-		// Background Size.
-		$size = get_theme_mod('background_size', get_theme_support('custom-background', 'default-size'));
-
-		if (!in_array($size, array('auto', 'contain', 'cover'), true)) {
-			$size = 'auto';
-		}
-
-		$size = " background-size: $size;";
-
-		// Background Repeat.
-		$repeat = get_theme_mod('background_repeat', get_theme_support('custom-background', 'default-repeat'));
-
-		if (!in_array($repeat, array('repeat-x', 'repeat-y', 'repeat', 'no-repeat'), true)) {
-			$repeat = 'repeat';
-		}
-
-		$repeat = " background-repeat: $repeat;";
-
-		$style .= $image . $position . $size . $repeat;
-	}
-?>
-	<style <?php echo $type_attr; ?> id="custom-background-css">
-		body.custom-background {
-			/* To be compatible with IE */
-			background-attachment: fixed;
-			<?php echo trim($style); ?>
-		}
-
-		body.custom-background:before {
-			content: '';
-			position: fixed;
-			z-index: -1;
-			top: 0;
-			right: 0;
-			height: 100vh;
-			left: 0;
-			<?php echo trim($style); ?>
-		}
-	</style>
-	<?php
-}
-
-/**
  * Handles JavaScript detection.
  *
  * Adds a `js` class to the root `<html>` element when JavaScript is detected.
@@ -411,16 +316,6 @@ function zan_comment_form()
 		)
 	);
 }
-
-function zan_excerpt_length($length)
-{
-	if (is_singular()) {
-		return 80;
-	} else {
-		return 250;
-	}
-}
-add_filter('excerpt_length', 'zan_excerpt_length');
 
 function zan_breadcrumb($is_block = true)
 {
