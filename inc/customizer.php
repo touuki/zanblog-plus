@@ -136,6 +136,8 @@ function zan_run_wptexturize($run_texturize) {
 	}
 }
 add_filter('run_wptexturize', 'zan_run_wptexturize');
+//Reset wptexturize in case the wptexturize is first called before the filter is added.
+wptexturize('Any non-empty text', true);
 
 /**
  * Modified from wp-includes/theme.php/_custom_background_cb(). The default callback function cannot show fixed background on iOS browser.
