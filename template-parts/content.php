@@ -3,8 +3,8 @@
 		<?php the_title(sprintf('<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url(get_permalink())), '</a></h2>'); ?>
 		<div class="entry-meta">
 			<?php if (is_sticky()) : ?>
-				<i class="fa fa-bookmark article-stick hidden-xs"></i>
-				<span class="label label-meta visible-xs-inline"><i class="fa fa-bookmark"></i> 置顶文章</span>
+				<i class="fas fa-bookmark article-stick hidden-xs"></i>
+				<span class="label label-meta visible-xs-inline"><i class="fas fa-bookmark"></i> 置顶文章</span>
 			<?php endif; ?>
 			<div class="date-mark hidden-xs">
 				<span class="month"><?php echo __(get_the_date('M'), 'default') ?></span>

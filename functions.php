@@ -257,7 +257,7 @@ function zan_comment_form()
 
 	$fields = array(
 		'author' => sprintf(
-			'<div class="row"><div class="col-sm-4">%s<div class="comment-form-author input-group"><span class="input-group-addon"><i class="fa fa-user"></i></span>%s</div></div>',
+			'<div class="row"><div class="col-sm-4">%s<div class="comment-form-author input-group"><span class="input-group-addon"><i class="fas fa-user"></i></span>%s</div></div>',
 			sprintf(
 				'<label class="screen-reader-text" for="author">%s%s</label>',
 				__('Name'),
@@ -271,7 +271,7 @@ function zan_comment_form()
 			)
 		),
 		'email'  => sprintf(
-			'<div class="col-sm-4">%s<div class="comment-form-email input-group"><span class="input-group-addon"><i class="fa fa-envelope"></i></span>%s</div></div>',
+			'<div class="col-sm-4">%s<div class="comment-form-email input-group"><span class="input-group-addon"><i class="fas fa-envelope"></i></span>%s</div></div>',
 			sprintf(
 				'<label class="screen-reader-text" for="email">%s%s</label>',
 				__('Email'),
@@ -285,7 +285,7 @@ function zan_comment_form()
 			)
 		),
 		'url'    => sprintf(
-			'<div class="col-sm-4">%s<div class="comment-form-url input-group"><span class="input-group-addon"><i class="fa fa-link"></i></span>%s</div></div></div>',
+			'<div class="col-sm-4">%s<div class="comment-form-url input-group"><span class="input-group-addon"><i class="fas fa-link"></i></span>%s</div></div></div>',
 			sprintf(
 				'<label class="screen-reader-text" for="url">%s</label>',
 				__('Website')
@@ -300,7 +300,7 @@ function zan_comment_form()
 
 	comment_form(
 		array(
-			'title_reply'          => '<i class="fa fa-pen"></i> ' . __('Leave a Reply', 'default'),
+			'title_reply'          => '<i class="fas fa-pen"></i> ' . __('Leave a Reply', 'default'),
 			'fields'               => $fields,
 			'class_submit' => 'submit btn btn-danger btn-block',
 			'comment_field' => sprintf(
@@ -322,7 +322,7 @@ function zan_breadcrumb($is_block = true)
 	if (function_exists('bcn_display')) :
 	?>
 		<div class="breadcrumb<?php if ($is_block) echo ' panel panel-default'; ?>" itemscope itemtype="https://schema.org/BreadcrumbList">
-			<i class="fa fa-home"></i> <?php bcn_display(); ?>
+			<i class="fas fa-home"></i> <?php bcn_display(); ?>
 		</div>
 <?php
 	endif;
@@ -343,9 +343,9 @@ add_filter('nav_menu_submenu_css_class', 'zan_nav_menu_submenu_css_class', 10, 3
 function zan_protected_title_format()
 {
 	if (post_password_required()) {
-		return '<i class="fa fa-lock"></i> %s';
+		return '<i class="fas fa-lock"></i> %s';
 	} else {
-		return '<i class="fa fa-lock-open"></i> %s';
+		return '<i class="fas fa-lock-open"></i> %s';
 	}
 }
 add_filter('protected_title_format', 'zan_protected_title_format');
@@ -355,7 +355,7 @@ add_filter('protected_title_format', 'zan_protected_title_format');
  */
 function zan_private_title_format()
 {
-	return '<i class="fa fa-eye-slash"></i> %s';
+	return '<i class="fas fa-eye-slash"></i> %s';
 }
 add_filter('private_title_format', 'zan_private_title_format');
 

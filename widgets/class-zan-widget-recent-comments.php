@@ -83,7 +83,7 @@ class Zan_Widget_Recent_Comments extends WP_Widget_Recent_Comments
                 $output .= '<li>' . get_avatar($comment->comment_author_email, 40);
                 $output .= '<a class="recentcomments" href="' . esc_url(get_comment_link($comment->comment_ID, $args)) . '">';
                 if(post_password_required($comment->comment_post_ID)){
-                    $output .= '<i class="fa fa-lock"></i> ' . __('There is no excerpt because this is a protected post.', 'default');
+                    $output .= '<i class="fas fa-lock"></i> ' . __('There is no excerpt because this is a protected post.', 'default');
                 } else {
                     $output .= mb_strimwidth(strip_tags(apply_filters('comment_text', $comment->comment_content, $comment, array())), 0, 70, '[…]');
                 }

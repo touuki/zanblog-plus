@@ -13,7 +13,7 @@
     <div class="container-fluid">
         <header class="site-branding navbar-header">
             <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false" aria-controls="top-menu">
-                <i class="fa fa-bars"></i>
+                <i class="fas fa-bars"></i>
             </button>
             <div class="navbar-brand">
                 <?php zan_the_custom_logo(); ?>
@@ -34,7 +34,7 @@
             </div>
         </header>
         <div class="if-navbar-fixed navbar-right hidden-xs" data-state="checked">
-            <i class="fa fa-thumbtack"></i>
+            <i class="fas fa-thumbtack"></i>
         </div>
         <nav id="top-menu" class="collapse navbar-collapse" role="navigation" aria-label="<?php esc_attr_e('Top Menu', 'default'); ?>">
             <?php

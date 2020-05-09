@@ -17,7 +17,7 @@ if ($terms) :
 	if ($related_posts->have_posts()) :
 ?>
 		<aside class="related-posts hidden-xs panel panel-default">
-			<div class="alert alert-danger text-center"><i class="fa fa-heart"></i> 您可能也喜欢:</div>
+			<div class="alert alert-danger text-center"><i class="fas fa-heart"></i> 您可能也喜欢:</div>
 			<div class="row">
 				<?php
 				while ($related_posts->have_posts()) :

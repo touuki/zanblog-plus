@@ -9,7 +9,7 @@
 </footer>
 
 <div class="goto-top">
-	<i class="fa fa-angle-up"></i>
+	<i class="fas fa-angle-up"></i>
 </div><!-- .goto-top -->
 
 <?php wp_footer(); ?>

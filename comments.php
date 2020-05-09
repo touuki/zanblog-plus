@@ -26,7 +26,7 @@ if (post_password_required()) {
 <div id="comments" class="comments-area panel panel-default">
   <?php if (have_comments()) : ?>
     <h2 class="comments-title alert alert-warning">
-      <i class="fa fa-comments"></i> <?php comments_number(); ?>
+      <i class="fas fa-comments"></i> <?php comments_number(); ?>
     </h2>
     <ol class="commentlist">
       <?php
@@ -35,7 +35,7 @@ if (post_password_required()) {
           'avatar_size' => 70,
           'style'       => 'ol',
           'short_ping'  => true,
-          'reply_text'  => '<i class="fa fa-reply"></i> ' . __('Reply', 'default'),
+          'reply_text'  => '<i class="fas fa-reply"></i> ' . __('Reply', 'default'),
         )
       );
       ?>

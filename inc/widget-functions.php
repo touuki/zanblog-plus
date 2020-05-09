@@ -22,7 +22,7 @@ function zan_widgets_init()
 		'before_widget' => '<section id="%1$s" class="panel panel-widget widget %2$s">',
 		'after_widget'  => '</section>',
 		'before_title'  => '<div class="panel-heading"><h2 class="widgettitle">',
-		'after_title'   => '</h2><i class="fa fa-times-circle panel-btn-remove"></i><i class="fa fa-chevron-circle-up panel-btn-toggle"></i></div>',
+		'after_title'   => '</h2><i class="fas fa-times-circle panel-btn-remove"></i><i class="fas fa-chevron-circle-up panel-btn-toggle"></i></div>',
 	));
 
 	register_sidebar(array(
@@ -32,7 +32,7 @@ function zan_widgets_init()
 		'before_widget' => '<section id="%1$s" class="panel panel-widget widget %2$s">',
 		'after_widget'  => '</section>',
 		'before_title'  => '<div class="panel-heading"><h2 class="widgettitle">',
-		'after_title'   => '</h2><i class="fa fa-times-circle panel-btn-remove"></i><i class="fa fa-chevron-circle-up panel-btn-toggle"></i></div>',
+		'after_title'   => '</h2><i class="fas fa-times-circle panel-btn-remove"></i><i class="fas fa-chevron-circle-up panel-btn-toggle"></i></div>',
 	));
 }
 add_action('widgets_init', 'zan_widgets_init');
@@ -40,7 +40,7 @@ add_action('widgets_init', 'zan_widgets_init');
 
 /**
  * Add Font Awesome support in widget title.
- * A title like 'i$fa fa-sync-alt$ Title' will be replaced with '<i class="fa fa-sync-alt"></i>  Title'
+ * A title like 'i$fas fa-sync-alt$ Title' will be replaced with '<i class="fas fa-sync-alt"></i>  Title'
  */
 function zan_widget_title($title)
 {
@@ -124,7 +124,7 @@ add_filter('widget_form_callback', 'zan_widget_form_callback', 10, 2);
 function zan_option_views_options($value)
 {
 	$value['template'] = '%VIEW_COUNT%';
-	$value['most_viewed_template'] = '<li><a href="%POST_URL%">%POST_TITLE%</a><span class="badge"><i class="fa fa-eye"></i> %VIEW_COUNT%</span></li>';
+	$value['most_viewed_template'] = '<li><a href="%POST_URL%">%POST_TITLE%</a><span class="badge"><i class="fas fa-eye"></i> %VIEW_COUNT%</span></li>';
 	return $value;
 }
 add_filter('option_views_options', 'zan_option_views_options');
