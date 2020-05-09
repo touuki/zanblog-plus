@@ -4,11 +4,11 @@
  * Template Post Type: page
  *
  * @package WordPress
- * @subpackage ZanBlog_plug
- * @since ZanBlog-Plug 1.0
+ * @subpackage ZanBlog_plus
+ * @since ZanBlog-Plus 1.0
  */
 get_header(); ?>
-<main>
+<main id="main" class="site-main" role="main">
 	<?php
 	// Start the Loop.
 	while (have_posts()) :

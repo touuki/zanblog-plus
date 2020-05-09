@@ -24,7 +24,7 @@ if (!function_exists('zan_entry_meta')) :
             printf(
                 '<span class="byline"><a href="%1$s" class="author label label-meta"><i class="fas fa-user"></i> <span class="screen-reader-text">%2$s</span>%3$s</a></span>',
                 esc_url(get_author_posts_url(get_the_author_meta('ID'))),
-                _x('Author', 'Used before post author name.', 'default'),
+                _x('Author', 'Used before post author name.', 'zanblog-plus'),
                 get_the_author()
             );
         }
@@ -40,11 +40,14 @@ if (!function_exists('zan_entry_meta')) :
         $comments_number = get_comments_number();
         if (!is_singular() && !post_password_required() && (comments_open() || $comments_number)) {
             echo '<span class="comments-link">';
-            $title  = get_the_title();
             comments_popup_link(
-                '<i class="fas fa-comments"></i> ' . sprintf(__('0<span class="screen-reader-text"> Leave a comment on %s</span>', 'default'), $title),
-                '<i class="fas fa-comments"></i> ' . sprintf(__('1<span class="screen-reader-text"> Comment on %s</span>', 'default'), $title),
-                '<i class="fas fa-comments"></i> ' . sprintf(__('%1$s<span class="screen-reader-text"> Comments on %2$s</span>', 'default'), $comments_number, $title),
+                '<i class="fas fa-comments"></i> ' . __('Leave a comment', 'zanblog-plus'),
+                '<i class="fas fa-comments"></i> ' . __('1<span class="screen-reader-text"> Comment</span>', 'zanblog-plus'),
+                '<i class="fas fa-comments"></i> ' . sprintf(
+                    /* translators: %s: Comments number. */
+                    __('%s<span class="screen-reader-text"> Comments</span>', 'zanblog-plus'), 
+                    $comments_number
+                ),
                 'label label-meta'
             );
             echo '</span>';
@@ -85,7 +88,7 @@ if (!function_exists('zan_entry_date')) :
 
         printf(
             '<span class="posted-on"><span class="screen-reader-text">%1$s </span>%2$s</span>',
-            _x('Posted on', 'Used before publish date.', 'default'),
+            _x('Posted on', 'Used before publish date.', 'zanblog-plus'),
             $time_string
         );
     }
@@ -101,11 +104,11 @@ if (!function_exists('zan_entry_category_list')) :
      */
     function zan_entry_category_list()
     {
-        $categories_list = get_the_category_list(_x( ', ', 'Used between list items, there is a space after the comma.', 'default' ));
+        $categories_list = get_the_category_list(', ');
         if ($categories_list) {
             printf(
                 '<span class="cat-links"><span class="screen-reader-text">%1$s </span><span class="label label-meta"><i class="fas fa-folder"></i> %2$s</span></span>',
-                _x('Categories', 'Used before category names.', 'default'),
+                __('Categories'),
                 $categories_list
             );
         }
@@ -125,8 +128,8 @@ if (!function_exists('zan_entry_tag_list')) :
         $tags_list = get_the_tag_list();
         if ($tags_list && !is_wp_error($tags_list)) {
             printf(
-                '<span class="tags-links"><span class="screen-reader-text">%1$s </span><i class="fas fa-tags"></i> %2$s</span>',
-                _x('Tags', 'Used before tag names.', 'default'),
+                '<span class="tags-links"><span class="screen-reader-text">%1$s</span><i class="fas fa-tags"></i> %2$s</span>',
+                __('Tags: '),
                 $tags_list
             );
         }
@@ -204,7 +207,7 @@ if (!function_exists('zan_edit_link')) :
         edit_post_link(
             '<i class="fas fa-edit"></i> ' . sprintf(
                 /* translators: %s: Post title. */
-                __('Edit<span class="screen-reader-text"> "%s"</span>', 'default'),
+                __('Edit') . '<span class="screen-reader-text"> "%s"</span>',
                 get_the_title()
             ),
             '<span class="edit-link">',

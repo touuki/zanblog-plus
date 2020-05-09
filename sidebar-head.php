@@ -14,6 +14,6 @@ if (!is_active_sidebar('sidebar-2')) {
   return;
 }
 ?>
-<header id="banner" class="widget-area" role="banner" aria-label="<?php esc_attr_e('Banner', 'default'); ?>">
+<aside class="widget-area" aria-label="<?php esc_attr_e('Head Banner', 'zanblog-plus'); ?>">
   <?php dynamic_sidebar('sidebar-2') ?>
-</header>
+</aside>

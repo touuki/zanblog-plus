@@ -1,17 +1,16 @@
 <?php
-
 /**
- * Displays top navigation
+ * The template part for displaying top navigation
  *
  * @package WordPress
  * @subpackage ZanBlog_Plus
  * @since ZanBlog Plus 1.0
  */
-
 ?>
-<div class="navbar-top navbar navbar-inverse navbar-fixed-top" role="banner">
+
+<header class="navbar-top navbar navbar-inverse navbar-fixed-top" role="banner">
     <div class="container-fluid">
-        <header class="site-branding navbar-header">
+        <div class="site-branding navbar-header">
             <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false" aria-controls="top-menu">
                 <i class="fas fa-bars"></i>
             </button>
@@ -32,11 +31,11 @@
                     <?php endif; ?>
                 </a>
             </div>
-        </header>
+        </div>
         <div class="if-navbar-fixed navbar-right hidden-xs" data-state="checked">
             <i class="fas fa-thumbtack"></i>
         </div>
-        <nav id="top-menu" class="collapse navbar-collapse" role="navigation" aria-label="<?php esc_attr_e('Top Menu', 'default'); ?>">
+        <nav id="top-menu" class="collapse navbar-collapse" role="navigation" aria-label="<?php esc_attr_e('Top Menu', 'zanblog-plus'); ?>">
             <?php
             wp_nav_menu(
                 array(
@@ -52,4 +51,4 @@
             </div>
         </nav>
     </div>
-</div>
+</header>

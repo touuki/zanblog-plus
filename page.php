@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The template for displaying all pages
  *
@@ -15,24 +16,27 @@
  */
 
 get_header(); ?>
-<div class="row">
-	<main class="col-md-8">
-		<?php
-		get_sidebar('head');
-		// Start the Loop.
-		while (have_posts()) :
-			the_post();
-		
-			get_template_part('template-parts/content', 'page');
+<div id="primary" class="content-area row">
+	<div class="col-md-8">
+		<?php get_sidebar('head'); ?>
 
-			// If comments are open or we have at least one comment, load up the comment template.
-			if (comments_open() || get_comments_number()) :
-				comments_template();
-			endif;
+		<main id="main" class="site-main" role="main">
+			<?php
+			// Start the Loop.
+			while (have_posts()) :
+				the_post();
 
-		endwhile; // End the loop.
-		?>
-	</main>
+				get_template_part('template-parts/content', 'page');
+
+				// If comments are open or we have at least one comment, load up the comment template.
+				if (comments_open() || get_comments_number()) :
+					comments_template();
+				endif;
+
+			endwhile; // End the loop.
+			?>
+		</main>
+	</div>
 	<?php get_sidebar(); ?>
 </div>
 <?php get_footer();

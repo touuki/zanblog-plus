@@ -20,11 +20,11 @@
 
 		wp_link_pages(
 			array(
-				'before'      => '<div class="page-links"><span class="page-links-title screen-reader-text">' . __('Pages:', 'default') . '</span>',
+				'before'      => '<div class="page-links"><span class="page-links-title screen-reader-text">' . _x('Pages:', 'link_pages', 'zanblog-plus') . '</span>',
 				'after'       => '</div>',
 				'link_before' => '<span>',
 				'link_after'  => '</span>',
-				'pagelink'    => '<span class="screen-reader-text">' . __('Page', 'default') . ' </span>%',
+				'pagelink'    => _x('<span class="screen-reader-text">Page </span>%', 'link_pages', 'zanblog-plus'),
 				'separator'   => '<span class="screen-reader-text">, </span>',
 			)
 		);

@@ -1,9 +1,18 @@
-<!-- 内容主体 -->
+<?php
+/**
+ * The template part for displaying single posts
+ *
+ * @package WordPress
+ * @subpackage ZanBlog_Plus
+ * @since ZanBlog Plus 1.0
+ */
+?>
+
 <article id="post-<?php the_ID(); ?>" <?php post_class('article panel panel-default clearfix'); ?>>
 	<header class="entry-header">
-		<!-- 面包屑 -->
+
 		<?php zan_breadcrumb(false); ?>
-		<!-- 面包屑 -->
+
 		<?php the_title('<h1 class="entry-title">', '</h1>'); ?>
 		<div class="entry-meta">
 			<?php zan_entry_meta(); ?>
@@ -17,11 +26,11 @@
 
 		wp_link_pages(
 			array(
-				'before'      => '<div class="page-links"><span class="page-links-title screen-reader-text">' . __('Pages:', 'default') . '</span>',
+				'before'      => '<div class="page-links"><span class="page-links-title screen-reader-text">' . _x('Pages:', 'link_pages', 'zanblog-plus') . '</span>',
 				'after'       => '</div>',
 				'link_before' => '<span>',
 				'link_after'  => '</span>',
-				'pagelink'    => '<span class="screen-reader-text">' . __('Page', 'default') . ' </span>%',
+				'pagelink'    => _x('<span class="screen-reader-text">Page </span>%', 'link_pages', 'zanblog-plus'),
 				'separator'   => '<span class="screen-reader-text">, </span>',
 			)
 		);
@@ -32,17 +41,17 @@
 		// Parent post navigation.
 		the_post_navigation(
 			array(
-				'prev_text' => '<span class="meta-nav">' . __('Back to Parent Post', 'default') . '</span><span class="screen-reader-text">:%title</span>',
+				'prev_text' => '<span class="meta-nav">' . __('Back to Parent Post', 'zanblog-plus') . '</span><span class="screen-reader-text">:%title</span>',
 			)
 		);
 	} elseif (is_singular('post')) {
 		// Previous/next post navigation.
 		the_post_navigation(
 			array(
-				'next_text' => '<span class="meta-nav" aria-hidden="true">' . __('Next', 'default') . '</span> ' .
-					'<span class="screen-reader-text">' . __('Next post:', 'default') . '%title</span> ',
-				'prev_text' => '<span class="meta-nav" aria-hidden="true">' . __('Previous', 'default') . '</span> ' .
-					'<span class="screen-reader-text">' . __('Previous post:', 'default') . '%title</span> ',
+				'next_text' => '<span class="meta-nav">' . __('Next post', 'zanblog-plus') . '</span>' .
+					'<span class="screen-reader-text">' . ': %title</span> ',
+				'prev_text' => '<span class="meta-nav">' . __('Previous post', 'zanblog-plus') . '</span>' .
+					'<span class="screen-reader-text">' . ': %title</span> ',
 				'in_same_term' => true,
 			)
 		);
@@ -55,4 +64,3 @@
 		<?php zan_entry_tag_list(); ?>
 	</footer>
 </article>
-<!-- 内容主体结束 -->

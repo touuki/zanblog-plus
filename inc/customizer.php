@@ -20,7 +20,7 @@ function zan_customize_register($wp_customize)
 	$wp_customize->get_setting('blogdescription')->transport  = 'postMessage';
 
 	$wp_customize->add_section('content', array(
-		'title'			=> __('Content', 'default'),
+		'title'			=> __('Content setting', 'zanblog-plus'),
 		'priority'		=> 100,
 	));
 
@@ -33,7 +33,8 @@ function zan_customize_register($wp_customize)
 	);
 
 	$wp_customize->add_control('copyright_post', array(
-		'label'			=> __('Post copyright (HTML code).', 'default'),
+		'label'			=> __('Post copyright', 'zanblog-plus'),
+		'description'   => __('Accept any HTML content.', 'zanblog-plus'),
 		'section'		=> 'content',
 		'priority'		=> 10,
 		'type'          => 'textarea',
@@ -42,8 +43,8 @@ function zan_customize_register($wp_customize)
 	$wp_customize->add_setting('disable_wptexturize');
 
 	$wp_customize->add_control('disable_wptexturize', array(
-		'label'      => __('Disable texturize', 'default'),
-		'description'=> _x('If true, it will short-circuit wptexturize() and display the original text. See <a href="https://developer.wordpress.org/reference/functions/wptexturize/" target="_blank" rel="noreferrer noopener">wptexturize()</a>', 'disable_wptexturize', 'default'),
+		'label'      => __('Disable texturize', 'zanblog-plus'),
+		'description'=> _x('If true, it will short-circuit wptexturize() and display the original text. See <a href="https://developer.wordpress.org/reference/functions/wptexturize/" target="_blank" rel="noreferrer noopener">wptexturize()</a>', 'disable_wptexturize', 'zanblog-plus'),
 		'priority'   => 10,
 		'type'       => 'checkbox',
 		'section'    => 'content'
@@ -120,7 +121,7 @@ function zan_copyright_post()
 }
 
 function add_theme_copyright_page() {
-    add_theme_page( __('Copyright', 'default'), __('Copyright', 'default'), 'edit_theme_options', add_query_arg( 
+    add_theme_page( __('Copyright', 'zanblog-plus'), __('Copyright', 'zanblog-plus'), 'edit_theme_options', add_query_arg( 
 		array( 
 			'return' => urlencode( remove_query_arg( wp_removable_query_args(), wp_unslash( $_SERVER['REQUEST_URI'] ) ) ), 
 			'autofocus' => array( 'control' => 'copyright_post' ),
@@ -128,8 +129,13 @@ function add_theme_copyright_page() {
 }
 add_action( 'admin_menu', 'add_theme_copyright_page' );
 
+function zan_document_title_separator($sep) {
+	return '–';
+}
+
 function zan_run_wptexturize($run_texturize) {
 	if(get_theme_mod('disable_wptexturize')){
+		add_filter( 'document_title_separator', 'zan_document_title_separator' );
 		return false;
 	} else {
 		return $run_texturize;

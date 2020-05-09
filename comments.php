@@ -35,7 +35,7 @@ if (post_password_required()) {
           'avatar_size' => 70,
           'style'       => 'ol',
           'short_ping'  => true,
-          'reply_text'  => '<i class="fas fa-reply"></i> ' . __('Reply', 'default'),
+          'reply_text'  => '<i class="fas fa-reply"></i> ' . __('Reply'),
         )
       );
       ?>
@@ -50,7 +50,7 @@ if (post_password_required()) {
   endif;
 
   if (!comments_open() && get_comments_number() && post_type_supports(get_post_type(), 'comments')) : ?>
-    <p class="no-comments"><?php _e('Comments are closed.', 'default'); ?></p>
+    <p class="no-comments"><?php _e('Comments are closed.'); ?></p>
   <?php endif;
   zan_comment_form();
   ?>

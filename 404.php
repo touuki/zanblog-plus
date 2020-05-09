@@ -1,9 +1,25 @@
-<?php get_header(); ?>
-<div class="alert alert-danger text-center">
-	<h1 class="page-title"><i class="fas fa-frown-open"></i> 无法找到该页面（404）</h1>
-</div>
-<div class="page-content panel panel-default text-center">
-	<h2>很遗憾，你所要寻找的页面已经丢失或者已经被删除。</h2>
-	<p><a href="<?php bloginfo('url'); ?>" class="btn btn-danger">回到首页</a></p>
-</div>
-<?php get_footer(); ?>
+<?php
+
+/**
+ * The template for displaying 404 pages (not found)
+ *
+ * @package WordPress
+ * @subpackage ZanBlog_Plus
+ * @since ZanBlog Plus 1.0
+ */
+
+get_header(); ?>
+<main id="main" class="site-main" role="main">
+	<section class="error-404 not-found alert alert-danger clearfix">
+		<header class="page-header">
+			<h1 class="page-title"><i class="fas fa-frown-open"></i> <?php _e('Oops! That page cannot be found.', 'zanblog-plus'); ?></h1>
+		</header><!-- .page-header -->
+
+		<div class="page-content">
+			<p><?php _e('It looks like nothing was found at this location. Maybe try a search?', 'zanblog-plus'); ?></p>
+
+			<?php get_search_form(); ?>
+		</div><!-- .page-content -->
+	</section><!-- .error-404 -->
+</main><!-- .site-main -->
+<?php get_footer();

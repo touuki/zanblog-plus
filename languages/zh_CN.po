@@ -1,0 +1,214 @@
+# Copyright (C) 2020 Touuki
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Zanblog Plus 1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/zanblog-plus\n"
+"POT-Creation-Date: 2020-05-09T20:57:14+08:00\n"
+"PO-Revision-Date: 2020-05-09 20:59+0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"X-Domain: zanblog-plus\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. Theme Name of the theme
+msgid "Zanblog Plus"
+msgstr ""
+
+#. Theme URI of the theme
+msgid "https://github.com/touuki/zanblog-plus"
+msgstr ""
+
+#. Description of the theme
+msgid ""
+"Zanblog Plus is a beautiful and powerful WordPress Theme constructed by "
+"Bootstrap3. It's a refactoring and improvement of the unmaintained ZanBlog "
+"2.1.0. ZanBlog Plus will make your WordPress look beautiful everywhere."
+msgstr ""
+
+#. Author of the theme
+msgid "Touuki"
+msgstr ""
+
+#. Author URI of the theme
+msgid "https://github.com/touuki"
+msgstr ""
+
+#: 404.php:15
+msgid "Oops! That page cannot be found."
+msgstr "呃…页面不见了。"
+
+#: 404.php:19
+msgid "It looks like nothing was found at this location. Maybe try a search?"
+msgstr "似乎这里没有内容。或许可以试试搜索？"
+
+#: functions.php:43 template-parts/navigation-top.php:38
+msgid "Top Menu"
+msgstr "顶部菜单"
+
+#: header.php:24
+msgid "Skip to content"
+msgstr "跳到内容"
+
+#: inc/customizer.php:23
+msgid "Content setting"
+msgstr "内容设置"
+
+#: inc/customizer.php:36
+msgid "Post copyright"
+msgstr "文章版权信息"
+
+#: inc/customizer.php:37
+msgid "Accept any HTML content."
+msgstr "可输入任意HTML内容。"
+
+#: inc/customizer.php:46
+msgid "Disable texturize"
+msgstr "禁用文本转义"
+
+#: inc/customizer.php:47
+msgctxt "disable_wptexturize"
+msgid ""
+"If true, it will short-circuit wptexturize() and display the original text. "
+"See <a href=\"https://developer.wordpress.org/reference/functions/"
+"wptexturize/\" target=\"_blank\" rel=\"noreferrer noopener\">wptexturize()</"
+"a>"
+msgstr ""
+"如果禁用文本转义，则会短路wptexturize()函数，原样输出后台输入的文本内容。参"
+"见：<a href=\"https://developer.wordpress.org/reference/functions/"
+"wptexturize/\" target=\"_blank\" rel=\"noreferrer noopener\">wptexturize()</"
+"a>"
+
+#: inc/customizer.php:124
+msgid "Copyright"
+msgstr "版权信息"
+
+#: inc/template-tags.php:27
+msgctxt "Used before post author name."
+msgid "Author"
+msgstr "作者"
+
+#: inc/template-tags.php:44
+msgid "Leave a comment"
+msgstr "留下评论"
+
+#: inc/template-tags.php:45
+msgid "1<span class=\"screen-reader-text\"> Comment</span>"
+msgstr "1<span class=\"screen-reader-text\">条评论</span>"
+
+#. translators: %s: Comments number.
+#: inc/template-tags.php:48
+msgid "%s<span class=\"screen-reader-text\"> Comments</span>"
+msgstr "%s<span class=\"screen-reader-text\">条评论</span>"
+
+#: inc/template-tags.php:91
+msgctxt "Used before publish date."
+msgid "Posted on"
+msgstr "发布于"
+
+#: inc/widget-functions.php:27 sidebar.php:16
+msgid "Blog Sidebar"
+msgstr "侧边栏"
+
+#: inc/widget-functions.php:28
+msgid "Add widgets here to appear in your blog sidebar."
+msgstr "在头部横栏位置（文章主体之前）添加小工具。"
+
+#: inc/widget-functions.php:37 sidebar-head.php:17
+msgid "Head Banner"
+msgstr "头部横栏"
+
+#: inc/widget-functions.php:38
+msgid "Add widgets here to appear in your head banner (before the posts)."
+msgstr "在头部横栏位置（文章主体之前）添加小工具。"
+
+#: inc/widget-functions.php:113
+msgctxt "hidden_widget"
+msgid "Hide on:"
+msgstr "此页面上隐藏："
+
+#: inc/widget-functions.php:114
+msgctxt "hidden_widget"
+msgid "Home"
+msgstr "首页"
+
+#: inc/widget-functions.php:116
+msgctxt "hidden_widget"
+msgid "Post"
+msgstr "文章"
+
+#: inc/widget-functions.php:118
+msgctxt "hidden_widget"
+msgid "Page"
+msgstr "页面"
+
+#: inc/widget-functions.php:120
+msgctxt "hidden_widget"
+msgid "Other"
+msgstr "其他"
+
+#. Template Name of the theme
+msgid "Full Width Template"
+msgstr "全宽模板"
+
+#: template-parts/content-none.php:13
+msgid "Nothing Found"
+msgstr "没有找到内容"
+
+#. translators: %s: Post editor URL.
+#: template-parts/content-none.php:22
+msgid ""
+"Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr "准备好发布您的第一篇文章了吗？ <a href=\"%1$s\">点击这里开始</a>。"
+
+#: template-parts/content-none.php:28
+msgid ""
+"Sorry, but nothing matched your search terms. Please try again with some "
+"different keywords."
+msgstr "抱歉，没有任何内容符合您的搜索字词。 请尝试使用其他一些不同的关键字。"
+
+#: template-parts/content-none.php:33
+msgid ""
+"It seems we cannot find what you are looking for. Perhaps searching can help."
+msgstr "我们似乎无法找到你想要的东西。或许搜索会有帮助。"
+
+#: template-parts/content-page.php:23 template-parts/content-single.php:29
+msgctxt "link_pages"
+msgid "Pages:"
+msgstr "页码："
+
+#: template-parts/content-page.php:27 template-parts/content-single.php:33
+msgctxt "link_pages"
+msgid "<span class=\"screen-reader-text\">Page </span>%"
+msgstr ""
+"<span class=\"screen-reader-text\">第</span>%<span class=\"screen-reader-text"
+"\">页</span>"
+
+#: template-parts/content-single.php:44
+msgid "Back to Parent Post"
+msgstr "返回文章"
+
+#: template-parts/content-single.php:51
+msgid "Next post"
+msgstr "下一篇"
+
+#: template-parts/content-single.php:53
+msgid "Previous post"
+msgstr "上一篇"
+
+#: template-parts/content.php:17
+msgid "Sticky"
+msgstr "置顶"
+
+#: template-parts/related-posts.php:30
+msgid "Maybe you also like these"
+msgstr "你可能也喜欢"
+
+#: widgets/class-zan-widget-recent-comments.php:86
+msgid "This comment cannot be shown because it is belong to a protected post."
+msgstr "该评论属于被密码保护的文章，无法显示。"

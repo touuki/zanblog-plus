@@ -16,41 +16,44 @@
  */
 
 get_header(); ?>
-<div class="row">
-	<main class="col-md-8" role="main">
-		<?php
-		get_sidebar('head');
+<div id="primary" class="content-area row">
+	<div class="col-md-8">
+		<?php get_sidebar('head'); ?>
 
-		if (!is_home() || !is_front_page())
-			zan_breadcrumb();
-
-		if (have_posts()) :
-
-			// Start the Loop.
-			while (have_posts()) :
-				the_post();
-
-				/*
-					 * Include the Post-Format-specific template for the content.
-					 * If you want to override this in a child theme, then include a file
-					 * called content-___.php (where ___ is the Post Format name) and that
-					 * will be used instead.
-					 */
-				get_template_part('template-parts/content', get_post_format());
-
-			endwhile;
-
-			the_posts_pagination(array(
-				'prev_text'          => '«',
-				'next_text'          => '»',
-			));
-		else :
-
-			get_template_part('template-parts/content', 'none');
-
-		endif;
-		?>
-	</main>
+		<main id="main" class="site-main" role="main">
+			<?php
+			
+			if (!is_home() || !is_front_page())
+				zan_breadcrumb();
+	
+			if (have_posts()) :
+	
+				// Start the Loop.
+				while (have_posts()) :
+					the_post();
+	
+					/*
+						 * Include the Post-Format-specific template for the content.
+						 * If you want to override this in a child theme, then include a file
+						 * called content-___.php (where ___ is the Post Format name) and that
+						 * will be used instead.
+						 */
+					get_template_part('template-parts/content', get_post_format());
+	
+				endwhile;
+	
+				the_posts_pagination(array(
+					'prev_text'          => '«',
+					'next_text'          => '»',
+				));
+			else :
+	
+				get_template_part('template-parts/content', 'none');
+	
+			endif;
+			?>
+		</main>
+	</div>
 
 	<?php get_sidebar(); ?>
 </div>

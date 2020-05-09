@@ -40,7 +40,7 @@ function zan_setup()
 	// This theme uses wp_nav_menu() in two locations.
 	register_nav_menus(
 		array(
-			'top'    => __('Top Menu', 'default'),
+			'top'    => __('Top Menu', 'zanblog-plus'),
 		)
 	);
 
@@ -113,6 +113,8 @@ function zan_setup()
 		<span>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.</span></p>';
 		add_option('copyright_post', $default_copyright_post);
 	}
+
+	load_theme_textdomain( 'zanblog-plus', get_template_directory() . '/languages' );
 }
 add_action('after_setup_theme', 'zan_setup');
 
@@ -163,7 +165,7 @@ function zan_scripts()
 	wp_enqueue_style('fontawesome', get_template_directory_uri() . '/assets/css/fontawesome.min.css', array(), '5.13.0');
 
 	// Theme stylesheet.
-	wp_enqueue_style('zan-style', get_stylesheet_uri(), array(), '1.0');
+	wp_enqueue_style('zan-style', get_stylesheet_uri(), array(), '1.0-20200509');
 
 	//wp_deregister_script('jquery');
 	//wp_enqueue_script('jquery', 'https://code.jquery.com/jquery-3.5.0.min.js', array(), null);
@@ -174,7 +176,7 @@ function zan_scripts()
 
 	wp_enqueue_script('bootstrap', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array('jquery'), '3.4.1');
 
-	wp_enqueue_script('zan-script', get_template_directory_uri() . '/assets/js/zanblog.js', array('jquery'), '1.0');
+	wp_enqueue_script('zan-script', get_template_directory_uri() . '/assets/js/zanblog.js', array('jquery'), '1.0-20200509');
 
 	if (is_singular() && comments_open() && get_option('thread_comments')) {
 		wp_enqueue_script('comment-reply');
@@ -300,7 +302,7 @@ function zan_comment_form()
 
 	comment_form(
 		array(
-			'title_reply'          => '<i class="fas fa-pen"></i> ' . __('Leave a Reply', 'default'),
+			'title_reply'          => '<i class="fas fa-pen"></i> ' . __('Leave a Reply'),
 			'fields'               => $fields,
 			'class_submit' => 'submit btn btn-danger btn-block',
 			'comment_field' => sprintf(

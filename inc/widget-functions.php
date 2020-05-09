@@ -1,4 +1,11 @@
 <?php
+/**
+ * Widget functions and definitions
+ *
+ * @package WordPress
+ * @subpackage ZanBlog_Plus
+ * @since ZanBlog Plus 1.0
+ */
 
 require get_template_directory() . '/widgets/class-zan-widget-recent-comments.php';
 function zan_register_widgets()
@@ -17,8 +24,8 @@ function zan_widgets_init()
 {
 	register_sidebar(array(
 		'id'            => 'sidebar-1',
-		'name'          => __('Blog Sidebar', 'default'),
-		'description'   => __('Add widgets here to appear in your sidebar on blog posts and archive pages.', 'default'),
+		'name'          => __('Blog Sidebar', 'zanblog-plus'),
+		'description'   => __('Add widgets here to appear in your blog sidebar.', 'zanblog-plus'),
 		'before_widget' => '<section id="%1$s" class="panel panel-widget widget %2$s">',
 		'after_widget'  => '</section>',
 		'before_title'  => '<div class="panel-heading"><h2 class="widgettitle">',
@@ -27,8 +34,8 @@ function zan_widgets_init()
 
 	register_sidebar(array(
 		'id'            => 'sidebar-2',
-		'name'          => __('Head Banner', 'default'),
-		'description'   => __('Add widgets here to appear in your head banner.', 'default'),
+		'name'          => __('Head Banner', 'zanblog-plus'),
+		'description'   => __('Add widgets here to appear in your head banner (before the posts).', 'zanblog-plus'),
 		'before_widget' => '<section id="%1$s" class="panel panel-widget widget %2$s">',
 		'after_widget'  => '</section>',
 		'before_title'  => '<div class="panel-heading"><h2 class="widgettitle">',
@@ -103,14 +110,14 @@ function zan_widget_form_callback($instance, $widget)
 	$hide_on_other = isset($instance['hide_on_other']) ? (bool) $instance['hide_on_other'] : false;
 ?>
 	<p>
-		<?php _e('Hide on:', 'default') ?>
-		<label for="<?php echo $widget->get_field_id('hide_on_home'); ?>"><?php _e('Home', 'default'); ?></label>
+		<?php _ex('Hide on:', 'hidden_widget', 'zanblog-plus') ?>
+		<label for="<?php echo $widget->get_field_id('hide_on_home'); ?>"><?php _ex('Home', 'hidden_widget', 'zanblog-plus'); ?></label>
 		<input class="checkbox" type="checkbox" <?php checked($hide_on_home); ?> id="<?php echo $widget->get_field_id('hide_on_home'); ?>" name="<?php echo $widget->get_field_name('hide_on_home'); ?>" />
-		<label for="<?php echo $widget->get_field_id('hide_on_post'); ?>"><?php _e('post', 'default'); ?></label>
+		<label for="<?php echo $widget->get_field_id('hide_on_post'); ?>"><?php _ex('Post', 'hidden_widget', 'zanblog-plus'); ?></label>
 		<input class="checkbox" type="checkbox" <?php checked($hide_on_post); ?> id="<?php echo $widget->get_field_id('hide_on_post'); ?>" name="<?php echo $widget->get_field_name('hide_on_post'); ?>" />
-		<label for="<?php echo $widget->get_field_id('hide_on_page'); ?>"><?php _e('Page', 'default'); ?></label>
+		<label for="<?php echo $widget->get_field_id('hide_on_page'); ?>"><?php _ex('Page', 'hidden_widget', 'zanblog-plus'); ?></label>
 		<input class="checkbox" type="checkbox" <?php checked($hide_on_page); ?> id="<?php echo $widget->get_field_id('hide_on_page'); ?>" name="<?php echo $widget->get_field_name('hide_on_page'); ?>" />
-		<label for="<?php echo $widget->get_field_id('hide_on_other'); ?>"><?php _e('other', 'default'); ?></label>
+		<label for="<?php echo $widget->get_field_id('hide_on_other'); ?>"><?php _ex('Other', 'hidden_widget', 'zanblog-plus'); ?></label>
 		<input class="checkbox" type="checkbox" <?php checked($hide_on_other); ?> id="<?php echo $widget->get_field_id('hide_on_other'); ?>" name="<?php echo $widget->get_field_name('hide_on_other'); ?>" />
 	</p>
 <?php

@@ -1,4 +1,14 @@
 <?php
+/**
+ * The template part for displaying related posts
+ *
+ * @package WordPress
+ * @subpackage ZanBlog_Plus
+ * @since ZanBlog Plus 1.0
+ */
+?>
+
+<?php
 $terms = get_the_category();
 if ($terms) :
 	$term_ids = array();
@@ -17,7 +27,7 @@ if ($terms) :
 	if ($related_posts->have_posts()) :
 ?>
 		<aside class="related-posts hidden-xs panel panel-default">
-			<div class="alert alert-danger text-center"><i class="fas fa-heart"></i> 您可能也喜欢:</div>
+			<div class="alert alert-danger text-center"><i class="fas fa-heart"></i> <?php _e('Maybe you also like these','zanblog-plus'); ?></div>
 			<div class="row">
 				<?php
 				while ($related_posts->have_posts()) :
@@ -29,7 +39,7 @@ if ($terms) :
 							<div class="related-post-content">
 								<?php the_excerpt(); ?>
 							</div>
-							<a class="btn btn-danger pull-right more-link" href="<?php the_permalink(); ?>" title="详细阅读 <?php the_title_attribute(); ?>">阅读全文</a>
+							<a class="btn btn-danger pull-right more-link" href="<?php the_permalink(); ?>"><?php _e('Read more');?></a>
 						</div>
 					</div>
 				<?php endwhile; ?>
