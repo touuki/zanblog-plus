@@ -155,7 +155,7 @@ function zan_scripts()
 	wp_enqueue_style('fontawesome', get_template_directory_uri() . '/assets/css/fontawesome.min.css', array(), '5.13.0');
 
 	// Theme stylesheet.
-	wp_enqueue_style('zan-style', get_stylesheet_uri(), array(), '1.0-20200511');
+	wp_enqueue_style('zan-style', get_stylesheet_uri(), array(), '1.0-20200512');
 
 	//wp_deregister_script('jquery');
 	//wp_enqueue_script('jquery', 'https://code.jquery.com/jquery-3.5.0.min.js', array(), null);
@@ -168,7 +168,7 @@ function zan_scripts()
 
 	wp_enqueue_script('lazyload', get_template_directory_uri() . '/assets/js/lazyload.min.js', '2.0.0');
 
-	wp_enqueue_script('zan-script', get_template_directory_uri() . '/assets/js/zanblog.js', array('jquery'), '1.0-20200511');
+	wp_enqueue_script('zan-script', get_template_directory_uri() . '/assets/js/zanblog.js', array('jquery'), '1.0-20200512');
 
 	if (is_singular() && comments_open() && get_option('thread_comments')) {
 		wp_enqueue_script('comment-reply');
@@ -243,8 +243,12 @@ function zan_post_thumbnail_sizes_attr($attr, $attachment, $size)
 }
 add_filter('wp_get_attachment_image_attributes', 'zan_post_thumbnail_sizes_attr', 10, 3);
 
-function zan_lazyload_image_attr($attr)
+function zan_lazyload_image_attr($attr, $attachment, $size)
 {
+	if ('medium' === $size) {
+		return $attr;
+	}
+
 	if (isset($attr['class'])) {
 		if (in_array('lazyload', explode(' ', $attr['class']))) {
 			return $attr;
@@ -255,8 +259,12 @@ function zan_lazyload_image_attr($attr)
 	}
 	if (isset($attr['src'])) {
 		$attr['data-src'] = $attr['src'];
-		// 1x1 transparent GIF pixel
-		$attr['src'] = 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==';
+		if ('thumbnail' === $size || 'thumb' === $size) {
+			// 1x1 transparent git
+			$attr['src'] = 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==';
+		} else {
+			$attr['src'] = wp_get_attachment_image_url($attachment->ID, 'medium');
+		}
 	}
 	if (isset($attr['srcset'])) {
 		$attr['data-srcset'] = $attr['srcset'];
@@ -264,32 +272,138 @@ function zan_lazyload_image_attr($attr)
 	}
 	return $attr;
 }
-add_filter('wp_get_attachment_image_attributes', 'zan_lazyload_image_attr', 99);
+add_filter('wp_get_attachment_image_attributes', 'zan_lazyload_image_attr', 99, 3);
 
+// Modify from wp_image_add_srcset_and_sizes()
+function zan_image_add_lazyload($image, $image_meta, $attachment_id)
+{
+	if (preg_match('/ class="([^"]+)"/', $image, $class) && in_array('lazyload', explode(' ', $class[1]))) {
+		return $image;
+	}
+
+	// Ensure the image meta exists.
+	if (empty($image_meta['sizes']) || !isset($image_meta['sizes']['medium'])) {
+		return $image;
+	}
+
+	$image_src = preg_match('/ src="([^"]+)"/', $image, $match_src) ? $match_src[1] : '';
+	list($image_src) = explode('?', $image_src);
+
+	// Return early if we couldn't get the image source.
+	if (!$image_src) {
+		return $image;
+	}
+
+	$width  = ($has_width = preg_match('/ width="([0-9]*)"/', $image, $match_width)) ? (int) $match_width[1] : 0;
+	$height = ($has_height = preg_match('/ height="([0-9]*)"/', $image, $match_height)) ? (int) $match_height[1] : 0;
+
+	$thumbnail = false;
+	$image_filename = wp_basename($image_src);
+	if (wp_basename($image_meta['file']) === $image_filename) {
+		$width  = (int) $image_meta['width'];
+		$height = (int) $image_meta['height'];
+	} else {
+		foreach ($image_meta['sizes'] as $size => $image_size_data) {
+			if ($image_filename === $image_size_data['file']) {
+				if (($size === 'thumbnail' || $size === 'thumb')) {
+					$thumbnail = true;
+				}
+				$width  = (int) $image_size_data['width'];
+				$height = (int) $image_size_data['height'];
+				break;
+			}
+		}
+	}
+
+	if (!$width || !$height) {
+		return $image;
+	}
+
+	if (
+		!$thumbnail
+		&& $width < 1.5 * intval(get_option('medium_size_w'))
+		&& $height < 1.5 * intval(get_option('medium_size_h'))
+		&& strpos($image, ' srcset=') === false
+	) {
+		return $image;
+	}
+
+	// Retrieve the uploads sub-directory from the full size image.
+	$dirname = _wp_get_attachment_relative_path($image_meta['file']);
+
+	if ($dirname) {
+		$dirname = trailingslashit($dirname);
+	}
+
+	$upload_dir    = wp_get_upload_dir();
+	$image_baseurl = trailingslashit($upload_dir['baseurl']) . $dirname;
+
+	/*
+	 * If currently on HTTPS, prefer HTTPS URLs when we know they're supported by the domain
+	 * (which is to say, when they share the domain name of the current request).
+	 */
+	if (is_ssl() && 'https' !== substr($image_baseurl, 0, 5) && parse_url($image_baseurl, PHP_URL_HOST) === $_SERVER['HTTP_HOST']) {
+		$image_baseurl = set_url_scheme($image_baseurl, 'https');
+	}
+
+	$image = str_replace($class[0], ' class="' . $class[1] . ' lazyload"', $image);
+	$image = str_replace(' srcset=', ' data-srcset=', $image);
+	$image = str_replace(' src=', ' data-src=', $image);
+	$image = str_replace(
+		'<img ',
+		'<img src="' . $thumbnail ? 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=='
+			: esc_url($image_baseurl . $image_meta['sizes']['medium']['file']) . '" ',
+		$image
+	);
+	if ($has_width) {
+		$image = str_replace($match_width, ' width="' . $width . '"', $image);
+	} else {
+		$image = str_replace('<img ', '<img width="' . $width . '" ', $image);
+	}
+	if ($has_height) {
+		$image = str_replace($match_height, ' height="' . $height . '"', $image);
+	} else {
+		$image = str_replace('<img ', '<img height="' . $height . '" ', $image);
+	}
+	return $image;
+}
+
+// Modify from wp_make_content_images_responsive()
 function zan_lazyload_content_images($content)
 {
 	if (!preg_match_all('/<img [^>]+>/', $content, $matches)) {
 		return $content;
 	}
 
+	$selected_images = array();
+	$attachment_ids  = array();
+
 	foreach ($matches[0] as $image) {
-		$new_image = $image;
-		if (preg_match('/class="(.*?)"/', $new_image, $class)) {
-			if (in_array('lazyload', explode(' ', $class[1]))) {
-				continue;
+		if (preg_match('/wp-image-([0-9]+)/i', $image, $class_id)) {
+			$attachment_id = absint($class_id[1]);
+
+			if ($attachment_id) {
+				/*
+				 * If exactly the same image tag is used more than once, overwrite it.
+				 * All identical tags will be replaced later with 'str_replace()'.
+				 */
+				$selected_images[$image] = $attachment_id;
+				// Overwrite the ID when the same image is included more than once.
+				$attachment_ids[$attachment_id] = true;
 			}
-			$new_image = str_replace($class[0], 'class="' . $class[1] . ' lazyload"', $new_image);
-		} else {
-			$new_image = str_replace('<img ', '<img class="lazyload" ',	$new_image);
 		}
-		$new_image = str_replace(' srcset=', ' data-srcset=', $new_image);
-		$new_image = str_replace(' src=', ' data-src=', $new_image);
-		$new_image = str_replace(
-			'<img ',
-			'<img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" ',
-			$new_image
-		);
-		$content = str_replace($image, $new_image, $content);
+	}
+	if (count($attachment_ids) > 1) {
+		/*
+		* Warm the object cache with post and meta information for all found
+		* images to avoid making individual database calls.
+		*/
+		_prime_post_caches(array_keys($attachment_ids), false, true);
+	}
+
+	foreach ($selected_images as $image => $attachment_id) {
+		$image_meta = wp_get_attachment_metadata($attachment_id);
+		$content = str_replace($image, zan_image_add_lazyload($image, $image_meta, $attachment_id), $content);
 	}
 	return $content;
 }
