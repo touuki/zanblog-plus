@@ -85,7 +85,7 @@ class Zan_Widget_Recent_Comments extends WP_Widget_Recent_Comments
                 if(post_password_required($comment->comment_post_ID)){
                     $output .= '<i class="fas fa-lock"></i> ' . __('This comment cannot be shown because it is belong to a protected post.', 'zanblog-plus');
                 } else {
-                    $output .= mb_strimwidth(strip_tags(apply_filters('comment_text', $comment->comment_content, $comment, array())), 0, 70, '[…]');
+                    $output .= get_comment_excerpt($comment->comment_ID);
                 }
                 $output .= '</a></li>';
             }

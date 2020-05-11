@@ -104,17 +104,7 @@ function zan_setup()
 		)
 	);
 
-	if (get_option('copyright_post') === false) {
-		$default_copyright_post = '<p><strong>Author</strong>: <a href="%AUTHOR_URL%">%POST_AUTHOR%</a></p>
-		<p><strong>Title</strong>: %POST_TITLE%</p>
-		<p><strong>URL</strong>: <a href="%POST_URL%" rel="bookmark">%POST_URL%</a></p>
-		<p>If you find this article helpful, you are welcome to reprint it following the license below, with source credited.</p>
-		<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" /></a>
-		<span>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.</span></p>';
-		add_option('copyright_post', $default_copyright_post);
-	}
-
-	load_theme_textdomain( 'zanblog-plus', get_template_directory() . '/languages' );
+	load_theme_textdomain('zanblog-plus', get_template_directory() . '/languages');
 }
 add_action('after_setup_theme', 'zan_setup');
 
@@ -165,7 +155,7 @@ function zan_scripts()
 	wp_enqueue_style('fontawesome', get_template_directory_uri() . '/assets/css/fontawesome.min.css', array(), '5.13.0');
 
 	// Theme stylesheet.
-	wp_enqueue_style('zan-style', get_stylesheet_uri(), array(), '1.0-20200509');
+	wp_enqueue_style('zan-style', get_stylesheet_uri(), array(), '1.0-20200511');
 
 	//wp_deregister_script('jquery');
 	//wp_enqueue_script('jquery', 'https://code.jquery.com/jquery-3.5.0.min.js', array(), null);
@@ -176,7 +166,9 @@ function zan_scripts()
 
 	wp_enqueue_script('bootstrap', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array('jquery'), '3.4.1');
 
-	wp_enqueue_script('zan-script', get_template_directory_uri() . '/assets/js/zanblog.js', array('jquery'), '1.0-20200509');
+	wp_enqueue_script('lazyload', get_template_directory_uri() . '/assets/js/lazyload.min.js', '2.0.0');
+
+	wp_enqueue_script('zan-script', get_template_directory_uri() . '/assets/js/zanblog.js', array('jquery'), '1.0-20200511');
 
 	if (is_singular() && comments_open() && get_option('thread_comments')) {
 		wp_enqueue_script('comment-reply');
@@ -251,6 +243,58 @@ function zan_post_thumbnail_sizes_attr($attr, $attachment, $size)
 }
 add_filter('wp_get_attachment_image_attributes', 'zan_post_thumbnail_sizes_attr', 10, 3);
 
+function zan_lazyload_image_attr($attr)
+{
+	if (isset($attr['class'])) {
+		if (in_array('lazyload', explode(' ', $attr['class']))) {
+			return $attr;
+		}
+		$attr['class'] .= ' lazyload';
+	} else {
+		$attr['class'] = 'lazyload';
+	}
+	if (isset($attr['src'])) {
+		$attr['data-src'] = $attr['src'];
+		// 1x1 transparent GIF pixel
+		$attr['src'] = 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==';
+	}
+	if (isset($attr['srcset'])) {
+		$attr['data-srcset'] = $attr['srcset'];
+		unset($attr['srcset']);
+	}
+	return $attr;
+}
+add_filter('wp_get_attachment_image_attributes', 'zan_lazyload_image_attr', 99);
+
+function zan_lazyload_content_images($content)
+{
+	if (!preg_match_all('/<img [^>]+>/', $content, $matches)) {
+		return $content;
+	}
+
+	foreach ($matches[0] as $image) {
+		$new_image = $image;
+		if (preg_match('/class="(.*?)"/', $new_image, $class)) {
+			if (in_array('lazyload', explode(' ', $class[1]))) {
+				continue;
+			}
+			$new_image = str_replace($class[0], 'class="' . $class[1] . ' lazyload"', $new_image);
+		} else {
+			$new_image = str_replace('<img ', '<img class="lazyload" ',	$new_image);
+		}
+		$new_image = str_replace(' srcset=', ' data-srcset=', $new_image);
+		$new_image = str_replace(' src=', ' data-src=', $new_image);
+		$new_image = str_replace(
+			'<img ',
+			'<img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" ',
+			$new_image
+		);
+		$content = str_replace($image, $new_image, $content);
+	}
+	return $content;
+}
+add_filter('the_content', 'zan_lazyload_content_images', 99);
+
 function zan_comment_form()
 {
 	$req = get_option('require_name_email');
@@ -322,7 +366,7 @@ function zan_comment_form()
 function zan_breadcrumb($is_block = true)
 {
 	if (function_exists('bcn_display')) :
-	?>
+?>
 		<div class="breadcrumb<?php if ($is_block) echo ' panel panel-default'; ?>" itemscope itemtype="https://schema.org/BreadcrumbList">
 			<i class="fas fa-home"></i> <?php bcn_display(); ?>
 		</div>

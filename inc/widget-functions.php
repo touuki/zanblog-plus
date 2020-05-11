@@ -175,3 +175,8 @@ add_filter('get_calendar', 'zan_get_calendar');
 
 
 add_filter('show_recent_comments_widget_style', '__return_false');
+
+function zan_comment_excerpt_length($comment_excerpt_length){
+	return 70;
+}
+add_filter('comment_excerpt_length', 'zan_comment_excerpt_length');

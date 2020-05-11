@@ -12,6 +12,10 @@ jQuery(function () {
 var zan = {
 
   init: function () {
+    lazyload(null, {
+      rootMargin: '200px'
+    });
+
     // set default value
     var defaultState = jQuery('.if-navbar-fixed').attr('data-state');
     if (defaultState) {
