@@ -52,20 +52,18 @@ var zan = {
     // for lazyload, e.g. Smush
     // code from https://stackoverflow.com/questions/23416880/lazy-loading-with-responsive-images-unknown-height#answer-60396260
     jQuery('.lazyload').each(this.setLazyloadImgSize);
-    var onlyNoWidth = jQuery('.no-width:not(.no-height)');
-    var onlyNoHeight = jQuery('.no-height:not(.no-width)');
+    var onlyNoWidth = jQuery('.no-width:not(.no-height.lazyload)');
+    jQuery('.no-height').removeAttr('height').removeClass('no-height');
     onlyNoWidth.removeAttr('width').removeClass('no-width');
-    onlyNoHeight.removeAttr('height').removeClass('no-height');
-    this.removeWidthAndHeight();
-    window.addEventListener('lazyloaded', this.removeWidthAndHeight);
+    this.removeLazyloadedWidth();
+    window.addEventListener('lazyloaded', this.removeLazyloadedWidth);
   },
 
   prevScrollpos: window.pageYOffset,
 
-  removeWidthAndHeight: function () {
-    jQuery('.lazyloaded.no-width.no-height')
-      .removeAttr('width').removeClass('no-width')
-      .removeAttr('height').removeClass('no-height');
+  removeLazyloadedWidth: function () {
+    jQuery('.lazyloaded.no-width')
+      .removeAttr('width').removeClass('no-width');
   },
 
   setLazyloadImgSize: function (i, e) {
