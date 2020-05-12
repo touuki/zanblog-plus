@@ -12,12 +12,6 @@ jQuery(function () {
 var zan = {
 
   init: function () {
-    // for lazyload, e.g. Smush
-    // code from https://stackoverflow.com/questions/23416880/lazy-loading-with-responsive-images-unknown-height#answer-60396260
-    jQuery('.lazyload').each(this.setLazyloadImgSize);
-    jQuery('.no-width').removeAttr('width').removeClass('no-width');
-    jQuery('.no-height').removeAttr('height').removeClass('no-height');
-
     // set default value
     var defaultState = jQuery('.if-navbar-fixed').attr('data-state');
     if (defaultState) {
@@ -54,9 +48,25 @@ var zan = {
       zan.showGotoTopAccordingly();
       zan.prevScrollpos = window.pageYOffset;
     });
+    
+    // for lazyload, e.g. Smush
+    // code from https://stackoverflow.com/questions/23416880/lazy-loading-with-responsive-images-unknown-height#answer-60396260
+    jQuery('.lazyload').each(this.setLazyloadImgSize);
+    var onlyNoWidth = jQuery('.no-width:not(.no-height)');
+    var onlyNoHeight = jQuery('.no-height:not(.no-width)');
+    onlyNoWidth.removeAttr('width').removeClass('no-width');
+    onlyNoHeight.removeAttr('height').removeClass('no-height');
+    this.removeWidthAndHeight();
+    window.addEventListener('lazyloaded', this.removeWidthAndHeight);
   },
 
   prevScrollpos: window.pageYOffset,
+
+  removeWidthAndHeight: function () {
+    jQuery('.lazyloaded.no-width.no-height')
+      .removeAttr('width').removeClass('no-width')
+      .removeAttr('height').removeClass('no-height');
+  },
 
   setLazyloadImgSize: function (i, e) {
     var img = jQuery(e);
