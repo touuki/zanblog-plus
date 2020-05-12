@@ -12,10 +12,7 @@ jQuery(function () {
 var zan = {
 
   init: function () {
-    lazyload(null, {
-      rootMargin: '200px'
-    });
-
+    
     // set default value
     var defaultState = jQuery('.if-navbar-fixed').attr('data-state');
     if (defaultState) {
@@ -67,10 +64,10 @@ var zan = {
   },
 
   showNavbarAccordingly: function (currentScrollPos, prevScrollpos) {
+    var width = jQuery(window).width();
     if (jQuery('#top-menu').hasClass('in') && width < 768) {
       return;
     }
-    var width = jQuery(window).width();
     var height = jQuery('.navbar-fixed-top').height();
     var additionalHeight = jQuery('#wpadminbar').height() || 0;
     if (width <= 600 && additionalHeight > 0) {

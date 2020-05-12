@@ -155,7 +155,7 @@ function zan_scripts()
 	wp_enqueue_style('fontawesome', get_template_directory_uri() . '/assets/css/fontawesome.min.css', array(), '5.13.0');
 
 	// Theme stylesheet.
-	wp_enqueue_style('zan-style', get_stylesheet_uri(), array(), '1.0-20200512');
+	wp_enqueue_style('zan-style', get_stylesheet_uri(), array(), '20200512');
 
 	//wp_deregister_script('jquery');
 	//wp_enqueue_script('jquery', 'https://code.jquery.com/jquery-3.5.0.min.js', array(), null);
@@ -166,9 +166,7 @@ function zan_scripts()
 
 	wp_enqueue_script('bootstrap', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array('jquery'), '3.4.1');
 
-	wp_enqueue_script('lazyload', get_template_directory_uri() . '/assets/js/lazyload.min.js', '2.0.0');
-
-	wp_enqueue_script('zan-script', get_template_directory_uri() . '/assets/js/zanblog.js', array('jquery'), '1.0-20200512');
+	wp_enqueue_script('zan-script', get_template_directory_uri() . '/assets/js/zanblog.js', array('jquery'), '20200512');
 
 	if (is_singular() && comments_open() && get_option('thread_comments')) {
 		wp_enqueue_script('comment-reply');
@@ -220,7 +218,7 @@ add_filter('wp_calculate_image_sizes', 'zan_content_image_sizes_attr', 10, 2);
 
 /**
  * Add custom image sizes attribute to enhance responsive image functionality
- * for post thumbnails. Add lazyload to post thumbnails.
+ * for post thumbnails.
  *
  * @since ZanBlog Plus 1.0
  *
@@ -229,7 +227,7 @@ add_filter('wp_calculate_image_sizes', 'zan_content_image_sizes_attr', 10, 2);
  * @param array $size       Registered image size or flat array of height and width dimensions.
  * @return array The filtered attributes for the image markup.
  */
-function zan_post_thumbnail_attr($attr, $attachment, $size)
+function zan_post_thumbnail_sizes_attr($attr, $attachment, $size)
 {
 	if ('post-thumbnail' === $size) {
 		if (is_page_template('page-templates/full-width.php')) {
@@ -237,26 +235,10 @@ function zan_post_thumbnail_attr($attr, $attachment, $size)
 		} else {
 			$attr['sizes'] = '(max-width: 768px) 89vw, (max-width: 992px) 680px, (max-width: 1200px) 576px, 710px';
 		}
-
-		if (isset($attr['class'])) {
-			$attr['class'] .= ' lazyload';
-		} else {
-			$attr['class'] = 'lazyload';
-		}
-		if (isset($attr['src'])) {
-			$attr['data-src'] = $attr['src'];
-			$attr['src'] = wp_get_attachment_image_url($attachment->ID, 'medium');
-		}
-		if (isset($attr['srcset'])) {
-			$attr['data-srcset'] = $attr['srcset'];
-			unset($attr['srcset']);
-		}
 	}
 	return $attr;
 }
-add_filter('wp_get_attachment_image_attributes', 'zan_post_thumbnail_attr', 99, 3);
-
-remove_filter('the_content', 'wp_make_content_images_responsive');
+add_filter('wp_get_attachment_image_attributes', 'zan_post_thumbnail_sizes_attr', 10, 3);
 
 function zan_comment_form()
 {
@@ -390,3 +372,8 @@ require get_template_directory() . '/inc/widget-functions.php';
  * Customizer additions.
  */
 require get_template_directory() . '/inc/customizer.php';
+
+
+add_filter('xmlrpc_enabled','__return_false');
+
+remove_filter('the_content', 'wp_make_content_images_responsive');

@@ -26,10 +26,6 @@ a {
     text-decoration: none;
 }
 
-img {
-    height: auto;
-}
-
 a:hover,
 a:focus {
     color: #c9302c;
