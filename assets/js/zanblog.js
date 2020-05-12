@@ -12,7 +12,12 @@ jQuery(function () {
 var zan = {
 
   init: function () {
-    
+    // for lazyload, e.g. Smush
+    // code from https://stackoverflow.com/questions/23416880/lazy-loading-with-responsive-images-unknown-height#answer-60396260
+    jQuery('.lazyload').each(this.setLazyloadImgSize);
+    jQuery('.no-width').removeAttr('width').removeClass('no-width');
+    jQuery('.no-height').removeAttr('height').removeClass('no-height');
+
     // set default value
     var defaultState = jQuery('.if-navbar-fixed').attr('data-state');
     if (defaultState) {
@@ -52,6 +57,16 @@ var zan = {
   },
 
   prevScrollpos: window.pageYOffset,
+
+  setLazyloadImgSize: function (i, e) {
+    var img = jQuery(e);
+    var h = img.attr('height');
+    var w = img.attr('width');
+    if (h && w) {
+      img.attr('src', "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 "
+        + w + " " + h + "'%3E%3C/svg%3E");
+    }
+  },
 
   openMenu: function () {
     var menu = jQuery(this);
