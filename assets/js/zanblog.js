@@ -5,10 +5,6 @@
  *
  */
 
-jQuery(function () {
-  zan.init();
-});
-
 var zan = {
 
   init: function () {
@@ -141,4 +137,6 @@ var zan = {
   bodyPaddingTop: function () {
     jQuery('body').css('padding-top', jQuery('.navbar-fixed-top').height() + 'px');
   },
-}
+};
+
+setTimeout(function () { zan.init(); });

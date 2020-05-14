@@ -160,19 +160,19 @@ function zan_scripts()
 	//wp_deregister_script('jquery');
 	//wp_enqueue_script('jquery', 'https://code.jquery.com/jquery-3.5.0.min.js', array(), null);
 
+	wp_enqueue_script('zan-script', get_template_directory_uri() . '/assets/js/zanblog.js', array('jquery'), '20200514-1', true);
+
 	//wp_enqueue_script('popper.js', 'https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js', array('jquery'), null);
 
 	//wp_enqueue_script('bootstrap', 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js', array('jquery', 'popper.js'), null);
 
-	wp_enqueue_script('bootstrap', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array('jquery'), '3.4.1');
-
-	wp_enqueue_script('zan-script', get_template_directory_uri() . '/assets/js/zanblog.js', array('jquery'), '20200514');
+	wp_enqueue_script('bootstrap', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array('jquery'), '3.4.1', true);
 
 	if (is_singular() && comments_open() && get_option('thread_comments')) {
 		wp_enqueue_script('comment-reply');
 	}
 }
-add_action('wp_enqueue_scripts', 'zan_scripts');
+add_action('wp_enqueue_scripts', 'zan_scripts', 1);
 
 
 /**
@@ -245,13 +245,6 @@ if (class_exists('\\Smush\\Core\\Settings') && \Smush\Core\Settings::get_instanc
 	// Modify from wp_image_add_srcset_and_sizes()
 	function zan_image_add_width_and_height($image, $image_meta, $attachment_id)
 	{
-		$has_width = strpos($image, ' width=') !== false;
-		$has_height = strpos($image, ' height=') !== false;
-
-		if ($has_width && $has_height) {
-			return $image;
-		}
-
 		$image_src = preg_match('/ src="([^"]+)"/', $image, $match_src) ? $match_src[1] : '';
 		list($image_src) = explode('?', $image_src);
 
@@ -277,14 +270,15 @@ if (class_exists('\\Smush\\Core\\Settings') && \Smush\Core\Settings::get_instanc
 			}
 		}
 
-		if (!$has_width && $width) {
+		if (!$width || !$height) {
+			return $image;
+		}
+
+		if (strpos($image, ' width=') === false && strpos($image, ' height=') === false) {
 			$image = str_replace(' class="', ' class="no-width ', $image);
 			$image = str_replace('<img ', '<img width="' . $width . '" ', $image);
 		}
-		if (!$has_height && $height) {
-			$image = str_replace(' class="', ' class="no-height ', $image);
-			$image = str_replace('<img ', '<img height="' . $height . '" ', $image);
-		}
+		$image = str_replace('<img ', '<img data-width="' . $width . '" data-height="' . $height . '" ', $image);
 		return $image;
 	}
 
@@ -337,14 +331,16 @@ if (class_exists('\\Smush\\Core\\Settings') && \Smush\Core\Settings::get_instanc
 				var img = jQuery(e);
 				var h = img.attr('height');
 				var w = img.attr('width');
-				if (h && w) {
+				var dh = img.attr('data-height');
+				var dw = img.attr('data-width');
+				if (dh && dw) {
+					img.attr('src', "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 " +
+						dw + " " + dh + "'%3E%3C/svg%3E");
+				} else if(w && h){
 					img.attr('src', "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 " +
 						w + " " + h + "'%3E%3C/svg%3E");
 				}
 			});
-			var onlyNoWidth = jQuery('.no-width:not(.no-height.lazyload)');
-			jQuery('.no-height').removeAttr('height').removeClass('no-height');
-			onlyNoWidth.removeAttr('width').removeClass('no-width');
 			window.addEventListener('lazyloaded', function(event) {
 				var img = jQuery(event.target);
 				img.hasClass('no-width') && img.removeAttr('width').removeClass('no-width');

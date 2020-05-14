@@ -44,7 +44,7 @@ function zan_customize_register($wp_customize)
 
 	$wp_customize->add_control('disable_wptexturize', array(
 		'label'      => __('Disable texturize', 'zanblog-plus'),
-		'description'=> _x('If true, it will short-circuit wptexturize() and display the original text. See <a href="https://developer.wordpress.org/reference/functions/wptexturize/" target="_blank" rel="noreferrer noopener">wptexturize()</a>', 'disable_wptexturize', 'zanblog-plus'),
+		'description' => _x('If true, it will short-circuit wptexturize() and display the original text. See <a href="https://developer.wordpress.org/reference/functions/wptexturize/" target="_blank" rel="noreferrer noopener">wptexturize()</a>', 'disable_wptexturize', 'zanblog-plus'),
 		'priority'   => 10,
 		'type'       => 'checkbox',
 		'section'    => 'content'
@@ -120,7 +120,8 @@ function zan_copyright_post()
 	echo $output;
 }
 
-function zan_default_option_copyright_post($default) {
+function zan_default_option_copyright_post($default)
+{
 	return '<p><strong>Author</strong>: <a href="%AUTHOR_URL%">%POST_AUTHOR%</a></p>
 	<p><strong>Title</strong>: %POST_TITLE%</p>
 	<p><strong>URL</strong>: <a href="%POST_URL%" rel="bookmark">%POST_URL%</a></p>
@@ -129,24 +130,29 @@ function zan_default_option_copyright_post($default) {
 	<span>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.</span></p>';
 }
 
-add_filter( 'default_option_copyright_post', 'zan_default_option_copyright_post' );
+add_filter('default_option_copyright_post', 'zan_default_option_copyright_post');
 
-function add_theme_copyright_page() {
-    add_theme_page( __('Copyright', 'zanblog-plus'), __('Copyright', 'zanblog-plus'), 'edit_theme_options', add_query_arg( 
-		array( 
-			'return' => urlencode( remove_query_arg( wp_removable_query_args(), wp_unslash( $_SERVER['REQUEST_URI'] ) ) ), 
-			'autofocus' => array( 'control' => 'copyright_post' ),
-		), 'customize.php' ) );
+function add_theme_copyright_page()
+{
+	add_theme_page(__('Copyright', 'zanblog-plus'), __('Copyright', 'zanblog-plus'), 'edit_theme_options', add_query_arg(
+		array(
+			'return' => urlencode(remove_query_arg(wp_removable_query_args(), wp_unslash($_SERVER['REQUEST_URI']))),
+			'autofocus' => array('control' => 'copyright_post'),
+		),
+		'customize.php'
+	));
 }
-add_action( 'admin_menu', 'add_theme_copyright_page' );
+add_action('admin_menu', 'add_theme_copyright_page');
 
-function zan_document_title_separator($sep) {
+function zan_document_title_separator($sep)
+{
 	return '–';
 }
 
-function zan_run_wptexturize($run_texturize) {
-	if(get_theme_mod('disable_wptexturize')){
-		add_filter( 'document_title_separator', 'zan_document_title_separator' );
+function zan_run_wptexturize($run_texturize)
+{
+	if (get_theme_mod('disable_wptexturize')) {
+		add_filter('document_title_separator', 'zan_document_title_separator');
 		return false;
 	} else {
 		return $run_texturize;
@@ -163,6 +169,12 @@ wptexturize('Any non-empty text', true);
  */
 function zan_custom_background_cb()
 {
+	global $is_IE;
+	if ($is_IE) {
+		// if IE, back to default callback function
+		return _custom_background_cb();
+	}
+
 	$attachment = get_theme_mod('background_attachment', get_theme_support('custom-background', 'default-attachment'));
 
 	if ('fixed' !== $attachment) {
@@ -231,12 +243,6 @@ function zan_custom_background_cb()
 	}
 ?>
 	<style <?php echo $type_attr; ?> id="custom-background-css">
-		body.custom-background {
-			/* To be compatible with IE */
-			background-attachment: fixed;
-			<?php echo trim($style); ?>
-		}
-
 		body.custom-background:before {
 			content: '';
 			position: fixed;
@@ -248,5 +254,5 @@ function zan_custom_background_cb()
 			<?php echo trim($style); ?>
 		}
 	</style>
-	<?php
+<?php
 }
