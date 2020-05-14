@@ -166,7 +166,7 @@ function zan_scripts()
 
 	wp_enqueue_script('bootstrap', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array('jquery'), '3.4.1');
 
-	wp_enqueue_script('zan-script', get_template_directory_uri() . '/assets/js/zanblog.js', array('jquery'), '20200513');
+	wp_enqueue_script('zan-script', get_template_directory_uri() . '/assets/js/zanblog.js', array('jquery'), '20200514');
 
 	if (is_singular() && comments_open() && get_option('thread_comments')) {
 		wp_enqueue_script('comment-reply');
@@ -240,92 +240,121 @@ function zan_post_thumbnail_sizes_attr($attr, $attachment, $size)
 }
 add_filter('wp_get_attachment_image_attributes', 'zan_post_thumbnail_sizes_attr', 10, 3);
 
-// Modify from wp_image_add_srcset_and_sizes()
-function zan_image_add_width_and_height($image, $image_meta, $attachment_id)
-{
-	$has_width = strpos($image, ' width=') !== false;
-	$has_height = strpos($image, ' height=') !== false;
+if (class_exists('\\Smush\\Core\\Settings') && \Smush\Core\Settings::get_instance()->get('lazy_load')) :
 
-	if ($has_width && $has_height) {
-		return $image;
-	}
+	// Modify from wp_image_add_srcset_and_sizes()
+	function zan_image_add_width_and_height($image, $image_meta, $attachment_id)
+	{
+		$has_width = strpos($image, ' width=') !== false;
+		$has_height = strpos($image, ' height=') !== false;
 
-	$image_src = preg_match('/ src="([^"]+)"/', $image, $match_src) ? $match_src[1] : '';
-	list($image_src) = explode('?', $image_src);
+		if ($has_width && $has_height) {
+			return $image;
+		}
 
-	// Return early if we couldn't get the image source.
-	if (!$image_src) {
-		return $image;
-	}
+		$image_src = preg_match('/ src="([^"]+)"/', $image, $match_src) ? $match_src[1] : '';
+		list($image_src) = explode('?', $image_src);
 
-	$width = 0;
-	$height = 0;
+		// Return early if we couldn't get the image source.
+		if (!$image_src) {
+			return $image;
+		}
 
-	$image_filename = wp_basename($image_src);
-	if (wp_basename($image_meta['file']) === $image_filename) {
-		$width  = (int) $image_meta['width'];
-		$height = (int) $image_meta['height'];
-	} else if (!empty($image_meta['sizes'])) {
-		foreach ($image_meta['sizes'] as $image_size_data) {
-			if ($image_filename === $image_size_data['file']) {
-				$width  = (int) $image_size_data['width'];
-				$height = (int) $image_size_data['height'];
-				break;
+		$width = 0;
+		$height = 0;
+
+		$image_filename = wp_basename($image_src);
+		if (wp_basename($image_meta['file']) === $image_filename) {
+			$width  = (int) $image_meta['width'];
+			$height = (int) $image_meta['height'];
+		} else if (!empty($image_meta['sizes'])) {
+			foreach ($image_meta['sizes'] as $image_size_data) {
+				if ($image_filename === $image_size_data['file']) {
+					$width  = (int) $image_size_data['width'];
+					$height = (int) $image_size_data['height'];
+					break;
+				}
 			}
 		}
+
+		if (!$has_width && $width) {
+			$image = str_replace(' class="', ' class="no-width ', $image);
+			$image = str_replace('<img ', '<img width="' . $width . '" ', $image);
+		}
+		if (!$has_height && $height) {
+			$image = str_replace(' class="', ' class="no-height ', $image);
+			$image = str_replace('<img ', '<img height="' . $height . '" ', $image);
+		}
+		return $image;
 	}
 
-	if (!$has_width && $width) {
-		$image = str_replace(' class="', ' class="no-width ', $image);
-		$image = str_replace('<img ', '<img width="' . $width . '" ', $image);
-	}
-	if (!$has_height && $height) {
-		$image = str_replace(' class="', ' class="no-height ', $image);
-		$image = str_replace('<img ', '<img height="' . $height . '" ', $image);
-	}
-	return $image;
-}
+	// Modify from wp_make_content_images_responsive()
+	function zan_content_images_add_width_and_height($content)
+	{
+		if (!preg_match_all('/<img [^>]+>/', $content, $matches)) {
+			return $content;
+		}
 
-// Modify from wp_make_content_images_responsive()
-function zan_content_images_add_width_and_height($content)
-{
-	if (!preg_match_all('/<img [^>]+>/', $content, $matches)) {
-		return $content;
-	}
+		$selected_images = array();
+		$attachment_ids  = array();
 
-	$selected_images = array();
-	$attachment_ids  = array();
+		foreach ($matches[0] as $image) {
+			if (preg_match('/wp-image-([0-9]+)/i', $image, $class_id)) {
+				$attachment_id = absint($class_id[1]);
 
-	foreach ($matches[0] as $image) {
-		if (preg_match('/wp-image-([0-9]+)/i', $image, $class_id)) {
-			$attachment_id = absint($class_id[1]);
-
-			if ($attachment_id) {
-				/*
+				if ($attachment_id) {
+					/*
 				 * If exactly the same image tag is used more than once, overwrite it.
 				 * All identical tags will be replaced later with 'str_replace()'.
 				 */
-				$selected_images[$image] = $attachment_id;
-				// Overwrite the ID when the same image is included more than once.
-				$attachment_ids[$attachment_id] = true;
+					$selected_images[$image] = $attachment_id;
+					// Overwrite the ID when the same image is included more than once.
+					$attachment_ids[$attachment_id] = true;
+				}
 			}
 		}
-	}
-	if (count($attachment_ids) > 1) {
-		/*
+		if (count($attachment_ids) > 1) {
+			/*
 		* Warm the object cache with post and meta information for all found
 		* images to avoid making individual database calls.
 		*/
-		_prime_post_caches(array_keys($attachment_ids), false, true);
-	}
+			_prime_post_caches(array_keys($attachment_ids), false, true);
+		}
 
-	foreach ($selected_images as $image => $attachment_id) {
-		$image_meta = wp_get_attachment_metadata($attachment_id);
-		$content = str_replace($image, zan_image_add_width_and_height($image, $image_meta, $attachment_id), $content);
+		foreach ($selected_images as $image => $attachment_id) {
+			$image_meta = wp_get_attachment_metadata($attachment_id);
+			$content = str_replace($image, zan_image_add_width_and_height($image, $image_meta, $attachment_id), $content);
+		}
+		return $content;
 	}
-	return $content;
-}
-add_filter('the_content', 'zan_content_images_add_width_and_height', 20);
+	add_filter('the_content', 'zan_content_images_add_width_and_height', 20);
+
+	// code part from https://stackoverflow.com/questions/23416880/lazy-loading-with-responsive-images-unknown-height#answer-60396260
+	function zan_footer_lazyload_javascript()
+	{ ?>
+		<script>
+			jQuery('.lazyload').each(function(i, e) {
+				var img = jQuery(e);
+				var h = img.attr('height');
+				var w = img.attr('width');
+				if (h && w) {
+					img.attr('src', "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 " +
+						w + " " + h + "'%3E%3C/svg%3E");
+				}
+			});
+			var onlyNoWidth = jQuery('.no-width:not(.no-height.lazyload)');
+			jQuery('.no-height').removeAttr('height').removeClass('no-height');
+			onlyNoWidth.removeAttr('width').removeClass('no-width');
+			window.addEventListener('lazyloaded', function(event) {
+				var img = jQuery(event.target);
+				img.hasClass('no-width') && img.removeAttr('width').removeClass('no-width');
+			});
+		</script>
+	<?php
+	}
+	add_action('wp_footer', 'zan_footer_lazyload_javascript');
+
+endif;
 
 function zan_comment_form()
 {
@@ -398,7 +427,7 @@ function zan_comment_form()
 function zan_breadcrumb($is_block = true)
 {
 	if (function_exists('bcn_display')) :
-?>
+	?>
 		<div class="breadcrumb<?php if ($is_block) echo ' panel panel-default'; ?>" itemscope itemtype="https://schema.org/BreadcrumbList">
 			<i class="fas fa-home"></i> <?php bcn_display(); ?>
 		</div>

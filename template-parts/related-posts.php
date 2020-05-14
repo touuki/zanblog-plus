@@ -21,6 +21,7 @@ if ($terms) :
 			'category__in' => $term_ids,
 			'post__not_in' => (array) $post->ID,
 			'showposts' => 3,
+			'ignore_sticky_posts' => true,
 		)
 	);
 

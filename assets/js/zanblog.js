@@ -48,33 +48,9 @@ var zan = {
       zan.showGotoTopAccordingly();
       zan.prevScrollpos = window.pageYOffset;
     });
-    
-    // for lazyload, e.g. Smush
-    // code from https://stackoverflow.com/questions/23416880/lazy-loading-with-responsive-images-unknown-height#answer-60396260
-    jQuery('.lazyload').each(this.setLazyloadImgSize);
-    var onlyNoWidth = jQuery('.no-width:not(.no-height.lazyload)');
-    jQuery('.no-height').removeAttr('height').removeClass('no-height');
-    onlyNoWidth.removeAttr('width').removeClass('no-width');
-    this.removeLazyloadedWidth();
-    window.addEventListener('lazyloaded', this.removeLazyloadedWidth);
   },
 
   prevScrollpos: window.pageYOffset,
-
-  removeLazyloadedWidth: function () {
-    jQuery('.lazyloaded.no-width')
-      .removeAttr('width').removeClass('no-width');
-  },
-
-  setLazyloadImgSize: function (i, e) {
-    var img = jQuery(e);
-    var h = img.attr('height');
-    var w = img.attr('width');
-    if (h && w) {
-      img.attr('src', "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 "
-        + w + " " + h + "'%3E%3C/svg%3E");
-    }
-  },
 
   openMenu: function () {
     var menu = jQuery(this);
