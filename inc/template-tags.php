@@ -53,7 +53,7 @@ if (!function_exists('zan_entry_meta')) :
             echo '</span>';
         }
 
-        if (function_exists('the_views') && is_singular()) {
+        if (function_exists('the_views')) {
             the_views(true, '<span class="post-views"><span class="label label-meta"><i class="fas fa-eye"></i> ', '</span></span>');
         }
 

@@ -30,11 +30,7 @@
 	<footer>
 		<?php zan_entry_tag_list(); ?>
 		<a class="btn btn-danger pull-right more-link" href="<?php the_permalink(); ?>">
-			<?php
-			_e('Read more');
-			if (function_exists('the_views'))
-				the_views(true, '<span class="badge">', '</span>');
-			?>
+			<?php _e('Read more'); ?>
 		</a>
 	</footer>
 

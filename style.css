@@ -381,18 +381,6 @@ textarea:focus {
     background-color: #d9534f;
 }
 
-.entry-content {
-    font-size: 15px;
-    line-height: 1.6;
-}
-
-@media (max-width: 767px) {
-    .entry-content ul,
-    .entry-content ol {
-        padding-left: 15px;
-    }
-}
-
 .post-navigation {
     /* Clone pager */
     padding-left: 0;
@@ -515,6 +503,25 @@ textarea:focus {
 
 /* --------------------------- Article End --------------------------- */
 
+/* --------------------------- Content Start ------------------------- */
+.entry-content {
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+@media (max-width: 767px) {
+    .entry-content ul,
+    .entry-content ol {
+        padding-left: 15px;
+    }
+}
+
+/* Adapt IE */
+.wp-block-image .aligncenter {
+    table-layout: fixed;
+    width: 100%;
+    text-align: center;
+}
 
 /* --------------------------- Related Posts Start --------------------------- */
 
