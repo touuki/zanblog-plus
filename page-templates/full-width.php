@@ -3,8 +3,7 @@
  * Template Name: Full Width Template
  * Template Post Type: page
  *
- * @package WordPress
- * @subpackage ZanBlog_plus
+ * @package ZanBlog_Plus
  * @since ZanBlog-Plus 1.0
  */
 get_header(); ?>

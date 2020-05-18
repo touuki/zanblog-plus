@@ -2,8 +2,7 @@
 /**
  * The template part for displaying related posts
  *
- * @package WordPress
- * @subpackage ZanBlog_Plus
+ * @package ZanBlog_Plus
  * @since ZanBlog Plus 1.0
  */
 ?>

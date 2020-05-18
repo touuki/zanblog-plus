@@ -4,8 +4,7 @@
  *
  * Displays all of the head element and everything up until the "content" div.
  *
- * @package WordPress
- * @subpackage ZanBlog_Plus
+ * @package ZanBlog_Plus
  * @since ZanBlog Plus 1.0
  */
 

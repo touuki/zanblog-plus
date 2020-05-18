@@ -5,8 +5,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#single-post
  *
- * @package WordPress
- * @subpackage ZanBlog_Plus
+ * @package ZanBlog_Plus
  * @since ZanBlog Plus 1.0
  */
 

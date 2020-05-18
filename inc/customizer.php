@@ -3,8 +3,7 @@
 /**
  * ZanBlog Plus: Customizer
  *
- * @package WordPress
- * @subpackage ZanBlog_Plus
+ * @package ZanBlog_Plus
  * @since ZanBlog Plus 1.0
  */
 
@@ -45,7 +44,17 @@ function zan_customize_register($wp_customize)
 	$wp_customize->add_control('disable_wptexturize', array(
 		'label'      => __('Disable texturize', 'zanblog-plus'),
 		'description' => _x('If true, it will short-circuit wptexturize() and display the original text. See <a href="https://developer.wordpress.org/reference/functions/wptexturize/" target="_blank" rel="noreferrer noopener">wptexturize()</a>', 'disable_wptexturize', 'zanblog-plus'),
-		'priority'   => 10,
+		'priority'   => 20,
+		'type'       => 'checkbox',
+		'section'    => 'content'
+	));
+
+	$wp_customize->add_setting('disable_content_images_responsive');
+
+	$wp_customize->add_control('disable_content_images_responsive', array(
+		'label'      => __('Disable content images responsive', 'zanblog-plus'),
+		'description' => _x('If true, it will disable images responsive in the post content. Sometime the responsive images are larger than the original images, and there is no benefit in these cases.', 'disable_content_images_responsive', 'zanblog-plus'),
+		'priority'   => 30,
 		'type'       => 'checkbox',
 		'section'    => 'content'
 	));
@@ -161,6 +170,10 @@ function zan_run_wptexturize($run_texturize)
 add_filter('run_wptexturize', 'zan_run_wptexturize');
 //Reset wptexturize in case the wptexturize is first called before the filter is added.
 wptexturize('Any non-empty text', true);
+
+if (get_theme_mod('disable_content_images_responsive')) {
+	remove_filter('the_content', 'wp_make_content_images_responsive');
+}
 
 /**
  * Modified from wp-includes/theme.php/_custom_background_cb(). The default callback function cannot show fixed background on iOS browser.

@@ -5,8 +5,7 @@
  *
  * Eventually, some of the functionality here could be replaced by core features.
  *
- * @package WordPress
- * @subpackage ZanBlog_Plus
+ * @package ZanBlog_Plus
  * @since ZanBlog Plus 1.0
  */
 

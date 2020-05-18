@@ -2,13 +2,12 @@
 /**
  * The template part for displaying single posts
  *
- * @package WordPress
- * @subpackage ZanBlog_Plus
+ * @package ZanBlog_Plus
  * @since ZanBlog Plus 1.0
  */
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class('article panel panel-default clearfix'); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class('entry panel panel-default clearfix'); ?>>
 	<header class="entry-header">
 
 		<?php zan_breadcrumb(false); ?>
@@ -57,7 +56,7 @@
 		);
 	}
 	?>
-	<footer>
+	<footer class="entry-footer">
 		<?php if (get_option('copyright_post') || is_customize_preview()) : ?>
 			<div class="copyright-post alert alert-success"><?php zan_copyright_post(); ?></div>
 		<?php endif; ?>

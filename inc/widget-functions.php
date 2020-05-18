@@ -2,8 +2,7 @@
 /**
  * Widget functions and definitions
  *
- * @package WordPress
- * @subpackage ZanBlog_Plus
+ * @package ZanBlog_Plus
  * @since ZanBlog Plus 1.0
  */
 

@@ -3,8 +3,7 @@
 /**
  * The template for displaying 404 pages (not found)
  *
- * @package WordPress
- * @subpackage ZanBlog_Plus
+ * @package ZanBlog_Plus
  * @since ZanBlog Plus 1.0
  */
 

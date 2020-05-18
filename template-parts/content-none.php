@@ -2,8 +2,7 @@
 /**
  * The template part for displaying a message that posts cannot be found
  *
- * @package WordPress
- * @subpackage ZanBlog_Plus
+ * @package ZanBlog_Plus
  * @since ZanBlog Plus 1.0
  */
 ?>

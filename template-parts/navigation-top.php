@@ -2,8 +2,7 @@
 /**
  * The template part for displaying top navigation
  *
- * @package WordPress
- * @subpackage ZanBlog_Plus
+ * @package ZanBlog_Plus
  * @since ZanBlog Plus 1.0
  */
 ?>

@@ -4,8 +4,7 @@
  *
  * Contains the closing of the #content div and all content after
  *
- * @package WordPress
- * @subpackage ZanBlog_Plus
+ * @package ZanBlog_Plus
  * @since ZanBlog Plus 1.0
  */
 ?>

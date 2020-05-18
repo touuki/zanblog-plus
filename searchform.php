@@ -3,8 +3,7 @@
 /**
  * Template for displaying search forms in ZanBlog Plus
  *
- * @package WordPress
- * @subpackage ZanBlog_Plus
+ * @package ZanBlog_Plus
  * @since ZanBlog Plus 1.0
  */
 

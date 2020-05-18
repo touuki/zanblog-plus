@@ -312,13 +312,13 @@ textarea:focus {
     margin-top: 0;
 }
 
-.article {
+.entry {
     position: relative;
 }
 
-.article .breadcrumb,
-.article .thumbnail,
-.article .alert .post-thumbnail,
+.entry .breadcrumb,
+.entry .thumbnail,
+.entry .alert .post-thumbnail,
 .entry-title,
 .entry-meta,
 .entry-summary,
@@ -326,7 +326,7 @@ textarea:focus {
     margin-bottom: 16px;
 }
 
-.article-stick {
+.entry-stick {
     position: absolute;
     top: -10px;
     right: 5%;
@@ -500,12 +500,15 @@ textarea:focus {
     }
 }
 
+.copyright-post:last-child {
+    margin-bottom: 0;
+}
 
 /* --------------------------- Article End --------------------------- */
 
 /* --------------------------- Content Start ------------------------- */
 .entry-content {
-    font-size: 15px;
+    font-size: 16px;
     line-height: 1.6;
 }
 
@@ -539,6 +542,10 @@ textarea:focus {
 .related-posts .col-md-4 {
     width: 33%;
     float: left;
+}
+
+.related-post {
+    margin-bottom: 0;
 }
 
 
@@ -901,12 +908,17 @@ textarea:focus {
 }
 
 .commentlist li {
-    margin: 10px 0px 10px 0px;
+    margin: 10px 0;
     list-style: none;
     border: 2px solid #f1f5f8;
     padding: 2px;
     background-color: white;
     border-radius: 4px;
+}
+
+.commentlist,
+.commentlist>li:last-child {
+    margin-bottom: 0;
 }
 
 .commentlist .comment-body {
@@ -1036,6 +1048,19 @@ textarea:focus {
 
 .comment-form textarea:focus {
     border-color: #c9302c;
+}
+
+.comment-respond {
+    margin-top: 10px;
+}
+
+.comment-respond:first-child {
+    margin-top: 0;
+}
+
+.form-submit,
+.no-comments {
+    margin-bottom: 0;
 }
 
 

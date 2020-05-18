@@ -5,8 +5,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/theme-functions/
  *
- * @package WordPress
- * @subpackage ZanBlog_Plus
+ * @package ZanBlog_Plus
  * @since ZanBlog Plus 1.0
  */
 
@@ -155,7 +154,7 @@ function zan_scripts()
 	wp_enqueue_style('fontawesome', get_template_directory_uri() . '/assets/css/fontawesome.min.css', array(), '5.13.0');
 
 	// Theme stylesheet.
-	wp_enqueue_style('zan-style', get_stylesheet_uri(), array(), '20200516');
+	wp_enqueue_style('zan-style', get_stylesheet_uri(), array(), '20200518');
 
 	//wp_deregister_script('jquery');
 	//wp_enqueue_script('jquery', 'https://code.jquery.com/jquery-3.5.0.min.js', array(), null);
@@ -488,4 +487,3 @@ require get_template_directory() . '/inc/customizer.php';
 
 add_filter('xmlrpc_enabled', '__return_false');
 
-remove_filter('the_content', 'wp_make_content_images_responsive');
