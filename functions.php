@@ -483,7 +483,3 @@ require get_template_directory() . '/inc/widget-functions.php';
  * Customizer additions.
  */
 require get_template_directory() . '/inc/customizer.php';
-
-
-add_filter('xmlrpc_enabled', '__return_false');
-
