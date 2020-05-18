@@ -14,7 +14,7 @@ ZanBlog Plus是基于ZanBlog 2.1.0的WordPress主题。由于原[ZanBlog](https:
 + 可在近期文章小工具标题中添加`i$random-posts$`使之变成随机文章
 + 可在小工具设置面板中选择在哪些页面上隐藏小工具
 + 可在自定义中设置背景图像以及网站Logo，没有Logo的情况下Logo位置显示站名及副标题，有Logo的情况下站名及副标题仅阅读器可见
-+ 可在自定义`内容设置`中设置文章末尾的版权声明信息，可用替换标记有文章标题`%POST_TITLE%`、文章链接`%POST_URL%`、文章发布日期`%POST_DATE%`、文章发布时间`%POST_TIME%`、文章作者`%POST_AUTHOR%`、文章作者链接`%AUTHOR_URL%`、网站名称`%BLOG_NAME%`、网站链接`%BLOG_URL%`
++ 可在自定义`内容设置`中设置文章末尾的版权声明信息，可用变量有文章标题`%POST_TITLE%`、文章链接`%POST_URL%`、文章发布日期`%POST_DATE%`、文章发布时间`%POST_TIME%`、文章作者`%POST_AUTHOR%`、文章作者链接`%AUTHOR_URL%`、网站名称`%BLOG_NAME%`、网站链接`%BLOG_URL%`
 + 可在自定义`内容设置`中设置是否禁用文本转义，在中文环境下建议禁用转义，这样可以让后台输入的内容和前台显示一致
 ### 推荐插件
 主题的正常工作不需要添加任何插件，但是下面这些插件会让主题更好哦
@@ -26,9 +26,10 @@ ZanBlog Plus是基于ZanBlog 2.1.0的WordPress主题。由于原[ZanBlog](https:
 + 异步评论加载（使用WordPress REST API重构）
 + 登录页面、登录小工具
 + 文章存档页面
-+ 页脚自定义
-+ 支持不同文章格式显示
++ 更多自定义选项：导航栏搜索框隐藏、主题颜色、页脚内容
++ 支持多种文章格式显示
 + 经典编辑器样式适配
++ 小型设备下拉菜单添加展开按钮，目前移动端存在无法点击次级菜单的问题
 
 ## LICENSE
 Copyright (c) 2020 Touuki, [GPLv2 or later](https://www.gnu.org/licenses/gpl-2.0.html)

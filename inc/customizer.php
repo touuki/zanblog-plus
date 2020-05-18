@@ -33,9 +33,9 @@ function zan_customize_register($wp_customize)
 
 	$wp_customize->add_control('copyright_post', array(
 		'label'			=> __('Post copyright', 'zanblog-plus'),
-		'description'   => __('Accept any HTML content.', 'zanblog-plus'),
+		'description'   => __('Accept any HTML content. Allowed Variables: %POST_TITLE%, %POST_URL%, %POST_DATE%, %POST_TIME%, %POST_AUTHOR%, %AUTHOR_URL%, %BLOG_NAME%, %BLOG_URL%', 'zanblog-plus'),
 		'section'		=> 'content',
-		'priority'		=> 10,
+		'priority'		=> 100,
 		'type'          => 'textarea',
 	));
 
@@ -43,7 +43,7 @@ function zan_customize_register($wp_customize)
 
 	$wp_customize->add_control('disable_wptexturize', array(
 		'label'      => __('Disable texturize', 'zanblog-plus'),
-		'description' => _x('If true, it will short-circuit wptexturize() and display the original text. See <a href="https://developer.wordpress.org/reference/functions/wptexturize/" target="_blank" rel="noreferrer noopener">wptexturize()</a>', 'disable_wptexturize', 'zanblog-plus'),
+		'description' => _x('If checked, it will short-circuit wptexturize() and display the original text. See <a href="https://developer.wordpress.org/reference/functions/wptexturize/" target="_blank" rel="noreferrer noopener">wptexturize()</a>', 'disable_wptexturize', 'zanblog-plus'),
 		'priority'   => 20,
 		'type'       => 'checkbox',
 		'section'    => 'content'
@@ -53,7 +53,7 @@ function zan_customize_register($wp_customize)
 
 	$wp_customize->add_control('disable_content_images_responsive', array(
 		'label'      => __('Disable content images responsive', 'zanblog-plus'),
-		'description' => _x('If true, it will disable images responsive in the post content. Sometime the responsive images are larger than the original images, and there is no benefit in these cases.', 'disable_content_images_responsive', 'zanblog-plus'),
+		'description' => _x('If checked, it will disable images responsive in the post content. Sometime the responsive images are larger than the original images, and there is no benefit in these cases.', 'disable_content_images_responsive', 'zanblog-plus'),
 		'priority'   => 30,
 		'type'       => 'checkbox',
 		'section'    => 'content'
@@ -131,12 +131,12 @@ function zan_copyright_post()
 
 function zan_default_option_copyright_post($default)
 {
-	return '<p><strong>Author</strong>: <a href="%AUTHOR_URL%">%POST_AUTHOR%</a></p>
+	return __('<p><strong>Author</strong>: <a href="%AUTHOR_URL%">%POST_AUTHOR%</a></p>
 	<p><strong>Title</strong>: %POST_TITLE%</p>
 	<p><strong>URL</strong>: <a href="%POST_URL%" rel="bookmark">%POST_URL%</a></p>
 	<p>If you find this article helpful, you are welcome to reprint it following the license below, with source credited.</p>
 	<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" /></a>
-	<span>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.</span></p>';
+	<span>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.</span></p>', 'zanblog-plus');
 }
 
 add_filter('default_option_copyright_post', 'zan_default_option_copyright_post');

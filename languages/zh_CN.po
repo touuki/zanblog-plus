@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zanblog Plus 1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/zanblog-plus\n"
-"POT-Creation-Date: 2020-05-09T20:57:14+08:00\n"
-"PO-Revision-Date: 2020-05-09 20:59+0800\n"
+"POT-Creation-Date: 2020-05-19T01:22:38+08:00\n"
+"PO-Revision-Date: 2020-05-19 01:36+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh\n"
@@ -30,6 +30,9 @@ msgid ""
 "Bootstrap3. It's a refactoring and improvement of the unmaintained ZanBlog "
 "2.1.0. ZanBlog Plus will make your WordPress look beautiful everywhere."
 msgstr ""
+"Zanblog Plus是一个非常漂亮强大、基于Bootstrap3的WordPress主题。它是对已经无人"
+"维护的ZanBlog 2.1.0主题的完全重构及改进。ZanBlog Plus会使你的WordPress无论什"
+"么场景都焕发出光彩。"
 
 #. Author of the theme
 msgid "Touuki"
@@ -39,115 +42,161 @@ msgstr ""
 msgid "https://github.com/touuki"
 msgstr ""
 
-#: 404.php:15
+#: 404.php:14
 msgid "Oops! That page cannot be found."
 msgstr "呃…页面不见了。"
 
-#: 404.php:19
+#: 404.php:18
 msgid "It looks like nothing was found at this location. Maybe try a search?"
 msgstr "似乎这里没有内容。或许可以试试搜索？"
 
-#: functions.php:43 template-parts/navigation-top.php:38
+#: functions.php:42 template-parts/navigation-top.php:37
 msgid "Top Menu"
 msgstr "顶部菜单"
 
-#: header.php:24
+#: header.php:23
 msgid "Skip to content"
 msgstr "跳到内容"
 
-#: inc/customizer.php:23
+#: inc/customizer.php:22
 msgid "Content setting"
 msgstr "内容设置"
 
-#: inc/customizer.php:36
+#: inc/customizer.php:35
 msgid "Post copyright"
 msgstr "文章版权信息"
 
-#: inc/customizer.php:37
-msgid "Accept any HTML content."
-msgstr "可输入任意HTML内容。"
+#: inc/customizer.php:36
+msgid ""
+"Accept any HTML content. Allowed Variables: %POST_TITLE%, %POST_URL%, "
+"%POST_DATE%, %POST_TIME%, %POST_AUTHOR%, %AUTHOR_URL%, %BLOG_NAME%, %BLOG_URL"
+"%"
+msgstr ""
+"接受任意HTML内容。可以使用的变量有 %POST_TITLE%、%POST_URL%、%POST_DATE"
+"%、%POST_TIME%、%POST_AUTHOR%、%AUTHOR_URL%、%BLOG_NAME%、%BLOG_URL%"
 
-#: inc/customizer.php:46
+#: inc/customizer.php:45
 msgid "Disable texturize"
 msgstr "禁用文本转义"
 
-#: inc/customizer.php:47
+#: inc/customizer.php:46
 msgctxt "disable_wptexturize"
 msgid ""
-"If true, it will short-circuit wptexturize() and display the original text. "
-"See <a href=\"https://developer.wordpress.org/reference/functions/"
+"If checked, it will short-circuit wptexturize() and display the original "
+"text. See <a href=\"https://developer.wordpress.org/reference/functions/"
 "wptexturize/\" target=\"_blank\" rel=\"noreferrer noopener\">wptexturize()</"
 "a>"
 msgstr ""
-"如果禁用文本转义，则会短路wptexturize()函数，原样输出后台输入的文本内容。参"
-"见：<a href=\"https://developer.wordpress.org/reference/functions/"
-"wptexturize/\" target=\"_blank\" rel=\"noreferrer noopener\">wptexturize()</"
-"a>"
+"如果选中，则会短路wptexturize()函数，原样输出后台输入的文本内容。参见：<a "
+"href=\"https://developer.wordpress.org/reference/functions/wptexturize/\" "
+"target=\"_blank\" rel=\"noreferrer noopener\">wptexturize()</a>"
 
-#: inc/customizer.php:124
+#: inc/customizer.php:55
+msgid "Disable content images responsive"
+msgstr "禁用内容响应式图像"
+
+#: inc/customizer.php:56
+msgctxt "disable_content_images_responsive"
+msgid ""
+"If checked, it will disable images responsive in the post content. Sometime "
+"the responsive images are larger than the original images, and there is no "
+"benefit in these cases."
+msgstr ""
+"如果选中，则会禁止文章中图像使用响应式。有时响应式图像反而比源图像大，在这种"
+"情况下使用响应式图像并没有好处。"
+
+#: inc/customizer.php:134
+msgid ""
+"<p><strong>Author</strong>: <a href=\"%AUTHOR_URL%\">%POST_AUTHOR%</a></p>\n"
+"\t<p><strong>Title</strong>: %POST_TITLE%</p>\n"
+"\t<p><strong>URL</strong>: <a href=\"%POST_URL%\" rel=\"bookmark\">%POST_URL"
+"%</a></p>\n"
+"\t<p>If you find this article helpful, you are welcome to reprint it "
+"following the license below, with source credited.</p>\n"
+"\t<p><a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc-"
+"sa/4.0/\"><img alt=\"Creative Commons License\" style=\"border-width:0\" src="
+"\"https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png\" /></a>\n"
+"\t<span>This work is licensed under a <a rel=\"license\" href=\"http://"
+"creativecommons.org/licenses/by-nc-sa/4.0/\">Creative Commons Attribution-"
+"NonCommercial-ShareAlike 4.0 International License</a>.</span></p>"
+msgstr ""
+"<p><strong>作者</strong>：<a href=\"%AUTHOR_URL%\">%POST_AUTHOR%</a></p>\n"
+"\t<p><strong>标题</strong>：%POST_TITLE%</p>\n"
+"\t<p><strong>网址</strong>：<a href=\"%POST_URL%\" rel=\"bookmark\">%POST_URL"
+"%</a></p>\n"
+"\t<p>如果您觉得这篇文章对您有帮助，欢迎按照下面的许可进行转载。转载请注明来"
+"源。</p>\n"
+"\t<p><a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc-"
+"sa/4.0/\"><img alt=\"Creative Commons License\" style=\"border-width:0\" src="
+"\"https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png\" /></a>\n"
+"\t<span>本作品采用<a rel=\"license\" href=\"http://creativecommons.org/"
+"licenses/by-nc-sa/4.0/\">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可"
+"协议</a>进行许可。</span></p>"
+
+#: inc/customizer.php:146
 msgid "Copyright"
 msgstr "版权信息"
 
-#: inc/template-tags.php:27
+#: inc/template-tags.php:26
 msgctxt "Used before post author name."
 msgid "Author"
 msgstr "作者"
 
-#: inc/template-tags.php:44
+#: inc/template-tags.php:43
 msgid "Leave a comment"
 msgstr "留下评论"
 
-#: inc/template-tags.php:45
+#: inc/template-tags.php:44
 msgid "1<span class=\"screen-reader-text\"> Comment</span>"
 msgstr "1<span class=\"screen-reader-text\">条评论</span>"
 
 #. translators: %s: Comments number.
-#: inc/template-tags.php:48
+#: inc/template-tags.php:47
 msgid "%s<span class=\"screen-reader-text\"> Comments</span>"
 msgstr "%s<span class=\"screen-reader-text\">条评论</span>"
 
-#: inc/template-tags.php:91
+#: inc/template-tags.php:90
 msgctxt "Used before publish date."
 msgid "Posted on"
 msgstr "发布于"
 
-#: inc/widget-functions.php:27 sidebar.php:16
+#: inc/widget-functions.php:26 sidebar.php:15
 msgid "Blog Sidebar"
 msgstr "侧边栏"
 
-#: inc/widget-functions.php:28
+#: inc/widget-functions.php:27
 msgid "Add widgets here to appear in your blog sidebar."
 msgstr "在头部横栏位置（文章主体之前）添加小工具。"
 
-#: inc/widget-functions.php:37 sidebar-head.php:17
+#: inc/widget-functions.php:36 sidebar-head.php:16
 msgid "Head Banner"
 msgstr "头部横栏"
 
-#: inc/widget-functions.php:38
+#: inc/widget-functions.php:37
 msgid "Add widgets here to appear in your head banner (before the posts)."
 msgstr "在头部横栏位置（文章主体之前）添加小工具。"
 
-#: inc/widget-functions.php:113
+#: inc/widget-functions.php:112
 msgctxt "hidden_widget"
 msgid "Hide on:"
 msgstr "此页面上隐藏："
 
-#: inc/widget-functions.php:114
+#: inc/widget-functions.php:113
 msgctxt "hidden_widget"
 msgid "Home"
 msgstr "首页"
 
-#: inc/widget-functions.php:116
+#: inc/widget-functions.php:115
 msgctxt "hidden_widget"
 msgid "Post"
 msgstr "文章"
 
-#: inc/widget-functions.php:118
+#: inc/widget-functions.php:117
 msgctxt "hidden_widget"
 msgid "Page"
 msgstr "页面"
 
-#: inc/widget-functions.php:120
+#: inc/widget-functions.php:119
 msgctxt "hidden_widget"
 msgid "Other"
 msgstr "其他"
@@ -156,52 +205,52 @@ msgstr "其他"
 msgid "Full Width Template"
 msgstr "全宽模板"
 
-#: template-parts/content-none.php:13
+#: template-parts/content-none.php:12
 msgid "Nothing Found"
 msgstr "没有找到内容"
 
 #. translators: %s: Post editor URL.
-#: template-parts/content-none.php:22
+#: template-parts/content-none.php:21
 msgid ""
 "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
 msgstr "准备好发布您的第一篇文章了吗？ <a href=\"%1$s\">点击这里开始</a>。"
 
-#: template-parts/content-none.php:28
+#: template-parts/content-none.php:27
 msgid ""
 "Sorry, but nothing matched your search terms. Please try again with some "
 "different keywords."
 msgstr "抱歉，没有任何内容符合您的搜索字词。 请尝试使用其他一些不同的关键字。"
 
-#: template-parts/content-none.php:33
+#: template-parts/content-none.php:32
 msgid ""
 "It seems we cannot find what you are looking for. Perhaps searching can help."
 msgstr "我们似乎无法找到你想要的东西。或许搜索会有帮助。"
 
-#: template-parts/content-page.php:23 template-parts/content-single.php:29
+#: template-parts/content-page.php:22 template-parts/content-single.php:28
 msgctxt "link_pages"
 msgid "Pages:"
 msgstr "页码："
 
-#: template-parts/content-page.php:27 template-parts/content-single.php:33
+#: template-parts/content-page.php:26 template-parts/content-single.php:32
 msgctxt "link_pages"
 msgid "<span class=\"screen-reader-text\">Page </span>%"
 msgstr ""
 "<span class=\"screen-reader-text\">第</span>%<span class=\"screen-reader-text"
 "\">页</span>"
 
-#: template-parts/content-single.php:44
+#: template-parts/content-single.php:43
 msgid "Back to Parent Post"
 msgstr "返回文章"
 
-#: template-parts/content-single.php:51
+#: template-parts/content-single.php:50
 msgid "Next post"
 msgstr "下一篇"
 
-#: template-parts/content-single.php:53
+#: template-parts/content-single.php:52
 msgid "Previous post"
 msgstr "上一篇"
 
-#: template-parts/content.php:17
+#: template-parts/content.php:16
 msgid "Sticky"
 msgstr "置顶"
 
@@ -209,6 +258,6 @@ msgstr "置顶"
 msgid "Maybe you also like these"
 msgstr "你可能也喜欢"
 
-#: widgets/class-zan-widget-recent-comments.php:86
+#: widgets/class-zan-widget-recent-comments.php:85
 msgid "This comment cannot be shown because it is belong to a protected post."
 msgstr "该评论属于被密码保护的文章，无法显示。"

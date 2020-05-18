@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-05-09T20:57:14+08:00\n"
+"POT-Creation-Date: 2020-05-19T01:22:38+08:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: zanblog-plus\n"
@@ -34,110 +34,129 @@ msgstr ""
 msgid "https://github.com/touuki"
 msgstr ""
 
-#: 404.php:15
+#: 404.php:14
 msgid "Oops! That page cannot be found."
 msgstr ""
 
-#: 404.php:19
+#: 404.php:18
 msgid "It looks like nothing was found at this location. Maybe try a search?"
 msgstr ""
 
-#: functions.php:43
-#: template-parts/navigation-top.php:38
+#: functions.php:42
+#: template-parts/navigation-top.php:37
 msgid "Top Menu"
 msgstr ""
 
-#: header.php:24
+#: header.php:23
 msgid "Skip to content"
 msgstr ""
 
-#: inc/customizer.php:23
+#: inc/customizer.php:22
 msgid "Content setting"
 msgstr ""
 
-#: inc/customizer.php:36
+#: inc/customizer.php:35
 msgid "Post copyright"
 msgstr ""
 
-#: inc/customizer.php:37
-msgid "Accept any HTML content."
+#: inc/customizer.php:36
+msgid "Accept any HTML content. Allowed Variables: %POST_TITLE%, %POST_URL%, %POST_DATE%, %POST_TIME%, %POST_AUTHOR%, %AUTHOR_URL%, %BLOG_NAME%, %BLOG_URL%"
 msgstr ""
 
-#: inc/customizer.php:46
+#: inc/customizer.php:45
 msgid "Disable texturize"
 msgstr ""
 
-#: inc/customizer.php:47
+#: inc/customizer.php:46
 msgctxt "disable_wptexturize"
-msgid "If true, it will short-circuit wptexturize() and display the original text. See <a href=\"https://developer.wordpress.org/reference/functions/wptexturize/\" target=\"_blank\" rel=\"noreferrer noopener\">wptexturize()</a>"
+msgid "If checked, it will short-circuit wptexturize() and display the original text. See <a href=\"https://developer.wordpress.org/reference/functions/wptexturize/\" target=\"_blank\" rel=\"noreferrer noopener\">wptexturize()</a>"
 msgstr ""
 
-#: inc/customizer.php:124
+#: inc/customizer.php:55
+msgid "Disable content images responsive"
+msgstr ""
+
+#: inc/customizer.php:56
+msgctxt "disable_content_images_responsive"
+msgid "If checked, it will disable images responsive in the post content. Sometime the responsive images are larger than the original images, and there is no benefit in these cases."
+msgstr ""
+
+#: inc/customizer.php:134
+msgid ""
+"<p><strong>Author</strong>: <a href=\"%AUTHOR_URL%\">%POST_AUTHOR%</a></p>\n"
+"\t<p><strong>Title</strong>: %POST_TITLE%</p>\n"
+"\t<p><strong>URL</strong>: <a href=\"%POST_URL%\" rel=\"bookmark\">%POST_URL%</a></p>\n"
+"\t<p>If you find this article helpful, you are welcome to reprint it following the license below, with source credited.</p>\n"
+"\t<p><a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc-sa/4.0/\"><img alt=\"Creative Commons License\" style=\"border-width:0\" src=\"https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png\" /></a>\n"
+"\t<span>This work is licensed under a <a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc-sa/4.0/\">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.</span></p>"
+msgstr ""
+
+#: inc/customizer.php:146
 msgid "Copyright"
 msgstr ""
 
-#: inc/template-tags.php:27
+#: inc/template-tags.php:26
 msgctxt "Used before post author name."
 msgid "Author"
 msgstr ""
 
-#: inc/template-tags.php:44
+#: inc/template-tags.php:43
 msgid "Leave a comment"
 msgstr ""
 
-#: inc/template-tags.php:45
+#: inc/template-tags.php:44
 msgid "1<span class=\"screen-reader-text\"> Comment</span>"
 msgstr ""
 
 #. translators: %s: Comments number.
-#: inc/template-tags.php:48
+#: inc/template-tags.php:47
 msgid "%s<span class=\"screen-reader-text\"> Comments</span>"
 msgstr ""
 
-#: inc/template-tags.php:91
+#: inc/template-tags.php:90
 msgctxt "Used before publish date."
 msgid "Posted on"
 msgstr ""
 
-#: inc/widget-functions.php:27
-#: sidebar.php:16
+#: inc/widget-functions.php:26
+#: sidebar.php:15
 msgid "Blog Sidebar"
 msgstr ""
 
-#: inc/widget-functions.php:28
+#: inc/widget-functions.php:27
 msgid "Add widgets here to appear in your blog sidebar."
 msgstr ""
 
-#: inc/widget-functions.php:37
-#: sidebar-head.php:17
+#: inc/widget-functions.php:36
+#: sidebar-head.php:16
 msgid "Head Banner"
 msgstr ""
 
-#: inc/widget-functions.php:38
+#: inc/widget-functions.php:37
 msgid "Add widgets here to appear in your head banner (before the posts)."
 msgstr ""
 
-#: inc/widget-functions.php:113
+#: inc/widget-functions.php:112
 msgctxt "hidden_widget"
 msgid "Hide on:"
 msgstr ""
 
-#: inc/widget-functions.php:114
+#: inc/widget-functions.php:113
 msgctxt "hidden_widget"
 msgid "Home"
 msgstr ""
 
-#: inc/widget-functions.php:116
+#: inc/widget-functions.php:115
 msgctxt "hidden_widget"
 msgid "Post"
 msgstr ""
 
-#: inc/widget-functions.php:118
+#: inc/widget-functions.php:117
 msgctxt "hidden_widget"
 msgid "Page"
 msgstr ""
 
-#: inc/widget-functions.php:120
+#: inc/widget-functions.php:119
 msgctxt "hidden_widget"
 msgid "Other"
 msgstr ""
@@ -146,48 +165,48 @@ msgstr ""
 msgid "Full Width Template"
 msgstr ""
 
-#: template-parts/content-none.php:13
+#: template-parts/content-none.php:12
 msgid "Nothing Found"
 msgstr ""
 
 #. translators: %s: Post editor URL.
-#: template-parts/content-none.php:22
+#: template-parts/content-none.php:21
 msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
 msgstr ""
 
-#: template-parts/content-none.php:28
+#: template-parts/content-none.php:27
 msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
 msgstr ""
 
-#: template-parts/content-none.php:33
+#: template-parts/content-none.php:32
 msgid "It seems we cannot find what you are looking for. Perhaps searching can help."
 msgstr ""
 
-#: template-parts/content-page.php:23
-#: template-parts/content-single.php:29
+#: template-parts/content-page.php:22
+#: template-parts/content-single.php:28
 msgctxt "link_pages"
 msgid "Pages:"
 msgstr ""
 
-#: template-parts/content-page.php:27
-#: template-parts/content-single.php:33
+#: template-parts/content-page.php:26
+#: template-parts/content-single.php:32
 msgctxt "link_pages"
 msgid "<span class=\"screen-reader-text\">Page </span>%"
 msgstr ""
 
-#: template-parts/content-single.php:44
+#: template-parts/content-single.php:43
 msgid "Back to Parent Post"
 msgstr ""
 
-#: template-parts/content-single.php:51
+#: template-parts/content-single.php:50
 msgid "Next post"
 msgstr ""
 
-#: template-parts/content-single.php:53
+#: template-parts/content-single.php:52
 msgid "Previous post"
 msgstr ""
 
-#: template-parts/content.php:17
+#: template-parts/content.php:16
 msgid "Sticky"
 msgstr ""
 
@@ -195,6 +214,6 @@ msgstr ""
 msgid "Maybe you also like these"
 msgstr ""
 
-#: widgets/class-zan-widget-recent-comments.php:86
+#: widgets/class-zan-widget-recent-comments.php:85
 msgid "This comment cannot be shown because it is belong to a protected post."
 msgstr ""

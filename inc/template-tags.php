@@ -103,7 +103,7 @@ if (!function_exists('zan_entry_category_list')) :
      */
     function zan_entry_category_list()
     {
-        $categories_list = get_the_category_list(', ');
+        $categories_list = get_the_category_list('</span><span class="label label-meta"><i class="fas fa-folder"></i> ');
         if ($categories_list) {
             printf(
                 '<span class="cat-links"><span class="screen-reader-text">%1$s </span><span class="label label-meta"><i class="fas fa-folder"></i> %2$s</span></span>',
