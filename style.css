@@ -1105,7 +1105,6 @@ textarea:focus {
 
 
 /* --------------------------- Goto Top Botton Start --------------------------- */
-
 .goto-top {
     position: fixed;
     bottom: 20px;
@@ -1153,5 +1152,27 @@ textarea:focus {
 @media (max-width: 767px) {
     .site-footer {
         padding: 20px;
+    }
+}
+/* --------------------------- Goto Top Botton End --------------------------- */
+
+/* --------------------------- Print -------------------------------------*/
+
+ @media print {
+    .body-padding-top,
+    .related-posts,
+    .widget-area,
+    .comment-respond,
+    .goto-top,
+    .post-navigation {
+		display: none;
+    }
+    
+    .site-content-contain {
+        padding: 0;
+    }
+
+    a[href]:after {
+        content: '';
     }
 }

@@ -135,7 +135,7 @@ var zan = {
   },
 
   bodyPaddingTop: function () {
-    jQuery('body').css('padding-top', jQuery('.navbar-fixed-top').height() + 'px');
+    jQuery('.body-padding-top').css('height', jQuery('.navbar-fixed-top').height() + 'px');
   },
 };
 

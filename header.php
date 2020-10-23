@@ -22,5 +22,5 @@
   <?php wp_body_open(); ?>
   <a class="skip-link screen-reader-text" href="#content"><?php _e('Skip to content', 'zanblog-plus'); ?></a>
   <?php get_template_part('template-parts/navigation', 'top'); ?>
-
+  <div class="body-padding-top"></div>
   <div id="content" class="site-content-contain container">

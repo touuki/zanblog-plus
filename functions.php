@@ -256,7 +256,7 @@ if (class_exists('\\Smush\\Core\\Settings') && \Smush\Core\Settings::get_instanc
 		$height = 0;
 
 		$image_filename = wp_basename($image_src);
-		if (wp_basename($image_meta['file']) === $image_filename) {
+		if ($image_meta && wp_basename($image_meta['file']) === $image_filename) {
 			$width  = (int) $image_meta['width'];
 			$height = (int) $image_meta['height'];
 		} else if (!empty($image_meta['sizes'])) {
