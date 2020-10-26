@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-05-19T01:22:38+08:00\n"
+"POT-Creation-Date: 2020-10-26T20:15:58+08:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: zanblog-plus\n"
@@ -45,6 +45,34 @@ msgstr ""
 #: functions.php:42
 #: template-parts/navigation-top.php:37
 msgid "Top Menu"
+msgstr ""
+
+#: functions.php:418
+msgid "Notify me of follow-up comments via email."
+msgstr ""
+
+#. translators: %s: Post title.
+#: functions.php:481
+msgid "Your comment on post \"%s\" has a new reply."
+msgstr ""
+
+#: functions.php:482
+msgid "(This email is sent automatically. Please don't reply.)"
+msgstr ""
+
+#. translators: %s: Comment author's name
+#: functions.php:487
+msgid "Author: %s"
+msgstr ""
+
+#. translators: %s: Comment text.
+#: functions.php:489
+msgid "Reply: %s"
+msgstr ""
+
+#. translators: Comment notification email subject. %s: Site title
+#: functions.php:494
+msgid "[%s] Your comment has a new reply"
 msgstr ""
 
 #: header.php:23

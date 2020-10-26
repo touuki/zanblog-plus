@@ -335,7 +335,7 @@ if (class_exists('\\Smush\\Core\\Settings') && \Smush\Core\Settings::get_instanc
 				if (dh && dw) {
 					img.attr('src', "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 " +
 						dw + " " + dh + "'%3E%3C/svg%3E");
-				} else if(w && h){
+				} else if (w && h) {
 					img.attr('src', "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 " +
 						w + " " + h + "'%3E%3C/svg%3E");
 				}
@@ -406,18 +406,114 @@ function zan_comment_form()
 			'fields'               => $fields,
 			'class_submit' => 'submit btn btn-danger btn-block',
 			'comment_field' => sprintf(
-				'<p class="comment-form-comment">%s %s</p>',
+				'<p class="comment-form-comment">%s %s</p><p class="comment-mail-notify">%s %s</p>',
 				sprintf(
 					'<label class="screen-reader-text" for="comment">%s</label>',
 					_x('Comment', 'noun')
 				),
-				'<textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea>'
+				'<textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea>',
+				'<input id="wp-comment-mail-notify" name="wp-comment-mail-notify" type="checkbox" value="yes">',
+				sprintf(
+					'<label for="wp-comment-mail-notify">%s</label>',
+					__('Notify me of follow-up comments via email.', 'zanblog-plus')
+				)
 			),
 			'title_reply_before'   => '<h3 id="reply-title" class="comment-reply-title alert alert-info">',
 			'title_reply_after'    => '</h3>',
 		)
 	);
 }
+
+function zan_preprocess_comment_mail_notify($commentdata)
+{
+	if (isset($_POST['wp-comment-mail-notify'])) {
+		if (!isset($commentdata['comment_meta']) || !is_array($commentdata['comment_meta'])) {
+			$commentdata['comment_meta'] = array();
+		}
+		$commentdata['comment_meta']['mail_notify'] = 1;
+	}
+	return $commentdata;
+}
+add_filter('preprocess_comment', 'zan_preprocess_comment_mail_notify');
+
+function zan_comment_mail_notify($comment_ID)
+{
+	$comment = get_comment($comment_ID);
+
+	if ($comment->comment_parent == 0) {
+		return false;
+	}
+
+	// Only send notifications for approved comments.
+	if (!isset($comment->comment_approved) || '1' != $comment->comment_approved) {
+		return false;
+	}
+
+	$parent = get_comment($comment->comment_parent);
+
+	if (empty($parent) || 1 != get_comment_meta($comment->comment_parent, 'mail_notify', true)) {
+		return false;
+	}
+
+	if (!isset($parent->comment_approved) || '1' != $parent->comment_approved) {
+		return false;
+	}
+
+	if ($comment->comment_author_email == $parent->comment_author_email) {
+		return false;
+	}
+
+	$post   = get_post($comment->comment_post_ID);
+
+	if (empty($post)) {
+		return false;
+	}
+
+	$switched_locale = switch_to_locale(get_locale());
+
+	// The blogname option is escaped with esc_html() on the way into the database in sanitize_option().
+	// We want to reverse this for the plain text arena of emails.
+	$blogname        = wp_specialchars_decode(get_option('blogname'), ENT_QUOTES);
+	$reply_content = wp_specialchars_decode($comment->comment_content);
+	$comment_content = wp_specialchars_decode($parent->comment_content);
+
+	/* translators: %s: Post title. */
+	$notify_message = sprintf(__('Your comment on post "%s" has a new reply.', 'zanblog-plus'), $post->post_title);
+	$notify_message .= __('(This email is sent automatically. Please don\'t reply.)', 'zanblog-plus');
+	/* translators: %s: Comment text. */
+	$notify_message .= str_replace("\n", "\n> ","\r\n" . $comment_content) . "\r\n\r\n";
+
+	/* translators: %s: Comment author's name*/
+	$notify_message .= sprintf(__('Author: %s', 'zanblog-plus'), $comment->comment_author) . "\r\n";
+	/* translators: %s: Comment text. */
+	$notify_message .= sprintf(__('Reply: %s', 'zanblog-plus'), "\r\n" . $reply_content) . "\r\n\r\n";
+	/* translators: %s: Comment URL. */
+	$notify_message .= sprintf(__('Permalink: %s'), get_comment_link($comment)) . "\r\n";
+
+	/* translators: Comment notification email subject. %s: Site title */
+	$subject = sprintf(__('[%s] Your comment has a new reply', 'zanblog-plus'), $blogname);
+
+	$wp_email = 'wordpress@' . preg_replace('#^www\.#', '', wp_parse_url(network_home_url(), PHP_URL_HOST));
+
+	if ('' === $comment->comment_author) {
+		$from = "From: \"$blogname\" <$wp_email>";
+	} else {
+		$from = "From: \"$comment->comment_author\" <$wp_email>";
+	}
+
+	$message_headers = "$from\n"
+		. 'Content-Type: text/plain; charset="' . get_option('blog_charset') . "\"\n";
+
+	wp_mail($parent->comment_author_email, wp_specialchars_decode($subject), $notify_message, $message_headers);
+
+	if ($switched_locale) {
+		restore_previous_locale();
+	}
+
+	return true;
+}
+add_action('wp_set_comment_status', 'zan_comment_mail_notify');
+add_action('comment_post', 'zan_comment_mail_notify');
 
 function zan_breadcrumb($is_block = true)
 {
