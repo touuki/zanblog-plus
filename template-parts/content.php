@@ -29,7 +29,7 @@
 	<footer class="entry-footer">
 		<?php zan_entry_tag_list(); ?>
 		<a class="btn btn-danger pull-right more-link" href="<?php the_permalink(); ?>">
-			<?php _e('Read more'); ?>
+			<?php _e('Read more', 'zanblog-plus'); ?>
 		</a>
 	</footer>
 

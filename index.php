@@ -44,6 +44,7 @@ get_header(); ?>
 				the_posts_pagination(array(
 					'prev_text'          => '«',
 					'next_text'          => '»',
+					'class'              => 'posts-pagination'
 				));
 			else :
 	

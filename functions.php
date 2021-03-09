@@ -154,12 +154,12 @@ function zan_scripts()
 	wp_enqueue_style('fontawesome', get_template_directory_uri() . '/assets/css/fontawesome.min.css', array(), '5.13.0');
 
 	// Theme stylesheet.
-	wp_enqueue_style('zan-style', get_stylesheet_uri(), array(), '20200518');
+	wp_enqueue_style('zan-style', get_stylesheet_uri(), array(), '20210308');
 
 	//wp_deregister_script('jquery');
 	//wp_enqueue_script('jquery', 'https://code.jquery.com/jquery-3.5.0.min.js', array(), null);
 
-	wp_enqueue_script('zan-script', get_template_directory_uri() . '/assets/js/zanblog.js', array('jquery'), '20200516', true);
+	wp_enqueue_script('zan-script', get_template_directory_uri() . '/assets/js/zanblog.js', array('jquery'), '20210308', true);
 
 	//wp_enqueue_script('popper.js', 'https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js', array('jquery'), null);
 
@@ -424,6 +424,15 @@ function zan_comment_form()
 	);
 }
 
+/**
+ * Add an option "whether notify the comment's author of follow-up comments via email"
+ * to the comment's metadata.
+ *
+ * @since ZanBlog Plus 1.1
+ *
+ * @param array   $commentdata     Comment Data.
+ * @return array Processed Comment Data.
+ */
 function zan_preprocess_comment_mail_notify($commentdata)
 {
 	if (isset($_POST['wp-comment-mail-notify'])) {
@@ -436,16 +445,17 @@ function zan_preprocess_comment_mail_notify($commentdata)
 }
 add_filter('preprocess_comment', 'zan_preprocess_comment_mail_notify');
 
-function zan_comment_mail_notify($comment_ID)
+/**
+ * Notify the parental comment's author via wp_mail if a new comment replied.
+ *
+ * @since ZanBlog Plus 1.1
+ *
+ * @param WP_Comment $comment    Comment object.
+ * @return bool Whether the mail is sent or not.
+ */
+function zan_comment_mail_notify($comment)
 {
-	$comment = get_comment($comment_ID);
-
 	if ($comment->comment_parent == 0) {
-		return false;
-	}
-
-	// Only send notifications for approved comments.
-	if (!isset($comment->comment_approved) || '1' != $comment->comment_approved) {
 		return false;
 	}
 
@@ -455,7 +465,7 @@ function zan_comment_mail_notify($comment_ID)
 		return false;
 	}
 
-	if (!isset($parent->comment_approved) || '1' != $parent->comment_approved) {
+	if ('1' != $parent->comment_approved) {
 		return false;
 	}
 
@@ -474,7 +484,7 @@ function zan_comment_mail_notify($comment_ID)
 	// The blogname option is escaped with esc_html() on the way into the database in sanitize_option().
 	// We want to reverse this for the plain text arena of emails.
 	$blogname        = wp_specialchars_decode(get_option('blogname'), ENT_QUOTES);
-	$reply_content = wp_specialchars_decode($comment->comment_content);
+	$reply_content   = wp_specialchars_decode($comment->comment_content);
 	$comment_content = wp_specialchars_decode($parent->comment_content);
 
 	/* translators: %s: Post title. */
@@ -512,8 +522,15 @@ function zan_comment_mail_notify($comment_ID)
 
 	return true;
 }
-add_action('wp_set_comment_status', 'zan_comment_mail_notify');
-add_action('comment_post', 'zan_comment_mail_notify');
+add_action('comment_unapproved_to_approved', 'zan_comment_mail_notify');
+
+function zan_comment_post_mail_notify($comment_ID, $comment_approved){
+	if('1' == $comment_approved){
+		$comment = get_comment($comment_ID);
+		zan_comment_mail_notify($comment);
+	}
+}
+add_action('comment_post', 'zan_comment_post_mail_notify', 10, 2);
 
 function zan_breadcrumb($is_block = true)
 {

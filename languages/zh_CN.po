@@ -4,15 +4,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zanblog Plus 1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/zanblog-plus\n"
-"POT-Creation-Date: 2020-10-26T20:15:58+08:00\n"
-"PO-Revision-Date: 2020-10-26 20:27+0800\n"
+"POT-Creation-Date: 2021-03-09T23:13:13+08:00\n"
+"PO-Revision-Date: 2021-03-09 23:15+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.1\n"
+"X-Generator: Poedit 2.4.2\n"
 "X-Domain: zanblog-plus\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
@@ -59,26 +59,26 @@ msgid "Notify me of follow-up comments via email."
 msgstr "有人回复时通过电子邮件通知我。"
 
 #. translators: %s: Post title.
-#: functions.php:481
+#: functions.php:491
 msgid "Your comment on post \"%s\" has a new reply."
 msgstr "你在文章“%s”中的评论有了新的回复。"
 
-#: functions.php:482
+#: functions.php:492
 msgid "(This email is sent automatically. Please don't reply.)"
 msgstr "（此邮件由系统自动发送，请勿回复此邮件）"
 
 #. translators: %s: Comment author's name
-#: functions.php:487
+#: functions.php:497
 msgid "Author: %s"
 msgstr "作者：%s"
 
 #. translators: %s: Comment text.
-#: functions.php:489
+#: functions.php:499
 msgid "Reply: %s"
 msgstr "回复内容：%s"
 
 #. translators: Comment notification email subject. %s: Site title
-#: functions.php:494
+#: functions.php:504
 msgid "[%s] Your comment has a new reply"
 msgstr "【%s】你的评论有了新的回复"
 
@@ -281,6 +281,10 @@ msgstr "上一篇"
 #: template-parts/content.php:16
 msgid "Sticky"
 msgstr "置顶"
+
+#: template-parts/content.php:32 template-parts/related-posts.php:42
+msgid "Read more"
+msgstr "阅读更多"
 
 #: template-parts/related-posts.php:30
 msgid "Maybe you also like these"

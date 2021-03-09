@@ -4,10 +4,10 @@ Theme URI: https://github.com/touuki/zanblog-plus
 Author: Touuki
 Author URI: https://github.com/touuki
 Description: Zanblog Plus is a beautiful and powerful WordPress Theme constructed by Bootstrap3. It's a refactoring and improvement of the unmaintained ZanBlog 2.1.0. ZanBlog Plus will make your WordPress look beautiful everywhere.
-Version: 1.0
+Version: 1.1
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Tags: bootstrap3, one-column, two-columns, right-sidebar, accessibility-ready, custom-background, custom-menu, featured-images, sticky-post, threaded-comments, blog
+Tags: bootstrap3, one-column, two-columns, right-sidebar, accessibility-ready, custom-background, custom-menu, featured-images, sticky-post, threaded-comments, blog, comment-mail-notify
 Text Domain: zanblog-plus
 
 */
@@ -33,6 +33,7 @@ a:focus {
 }
 
 img,
+figure,
 video {
     max-width: 100%;
 	height: auto;
@@ -882,6 +883,7 @@ textarea:focus {
 
 .commentlist {
     padding: 0;
+    margin-bottom: 0;
 }
 
 .commentlist .comment-awaiting-moderation {
@@ -914,17 +916,12 @@ textarea:focus {
 }
 
 .commentlist li {
-    margin: 10px 0;
+    margin-bottom: 10px;
     list-style: none;
     border: 2px solid #f1f5f8;
     padding: 2px;
     background-color: white;
     border-radius: 4px;
-}
-
-.commentlist,
-.commentlist>li:last-child {
-    margin-bottom: 0;
 }
 
 .commentlist .comment-body {
@@ -1056,17 +1053,17 @@ textarea:focus {
     border-color: #c9302c;
 }
 
-.comment-respond {
-    margin-top: 10px;
-}
-
-.comment-respond:first-child {
-    margin-top: 0;
-}
-
 .form-submit,
 .no-comments {
     margin-bottom: 0;
+}
+
+.comment-respond {
+    margin-top: 16px;
+}
+
+.comments-pagination {
+    margin-top: 16px;
 }
 
 
@@ -1075,6 +1072,14 @@ textarea:focus {
 
 /* --------------------------- Pagination Start --------------------------- */
 
+.posts-pagination {
+    margin-bottom: 30px;
+}
+
+.page-links {
+    margin-bottom: 10px;
+}
+
 .page-numbers,
 .post-page-numbers {
     border-radius: 4px;
@@ -1082,7 +1087,7 @@ textarea:focus {
     background-color: transparent;
     border: 2px solid #d9534f;
     display: inline-block;
-    margin: 0 0 10px 10px;
+    margin-left: 10px;
     padding: 5px 10px;
 }
 

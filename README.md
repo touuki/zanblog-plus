@@ -21,6 +21,7 @@ ZanBlog Plus是基于ZanBlog 2.1.0的WordPress主题。由于原[ZanBlog](https:
 + **WP-PostViews** 安装后可在文章元数据中显示文章浏览数，可使用经过样式适配的WP-PostViews小工具
 + **Breadcrumb NavXT** 安装后可自动在首页之外的页面上方显示面包屑导航
 + **Smush** 启用`lazyload`图片懒加载后更有利于页面的渲染，并且主题对图片尺寸进行了适配，不会产生懒加载的垂直跳跃问题
++ **WP Mail SMTP** 安装设置好SMTP后可使用评论回复通知功能
 
 ## TODO
 + 异步评论加载（使用WordPress REST API重构）

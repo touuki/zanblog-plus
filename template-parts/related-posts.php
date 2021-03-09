@@ -39,7 +39,7 @@ if ($terms) :
 							<div class="related-post-content">
 								<?php the_excerpt(); ?>
 							</div>
-							<a class="btn btn-danger pull-right more-link" href="<?php the_permalink(); ?>"><?php _e('Read more');?></a>
+							<a class="btn btn-danger pull-right more-link" href="<?php the_permalink(); ?>"><?php _e('Read more', 'zanblog-plus');?></a>
 						</div>
 					</div>
 				<?php endwhile; ?>
