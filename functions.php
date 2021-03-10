@@ -40,6 +40,7 @@ function zan_setup()
 	register_nav_menus(
 		array(
 			'top'    => __('Top Menu', 'zanblog-plus'),
+			'social' => __('Social Links Menu', 'zanblog-plus'),
 		)
 	);
 
@@ -154,24 +155,26 @@ function zan_scripts()
 	wp_enqueue_style('fontawesome', get_template_directory_uri() . '/assets/css/fontawesome.min.css', array(), '5.13.0');
 
 	// Theme stylesheet.
-	wp_enqueue_style('zan-style', get_stylesheet_uri(), array(), '20210308');
+	wp_enqueue_style('zan-style', get_stylesheet_uri(), array(), '20210310');
 
 	//wp_deregister_script('jquery');
 	//wp_enqueue_script('jquery', 'https://code.jquery.com/jquery-3.5.0.min.js', array(), null);
-
-	wp_enqueue_script('zan-script', get_template_directory_uri() . '/assets/js/zanblog.js', array('jquery'), '20210308', true);
 
 	//wp_enqueue_script('popper.js', 'https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js', array('jquery'), null);
 
 	//wp_enqueue_script('bootstrap', 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js', array('jquery', 'popper.js'), null);
 
+	wp_enqueue_script('twemoji', get_template_directory_uri() . '/assets/js/twemoji.min.js', array(), '13.0.1', true);
+
 	wp_enqueue_script('bootstrap', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array('jquery'), '3.4.1', true);
+
+	wp_enqueue_script('zan-script', get_template_directory_uri() . '/assets/js/zanblog.js', array('jquery'), '20210310', true);
 
 	if (is_singular() && comments_open() && get_option('thread_comments')) {
 		wp_enqueue_script('comment-reply');
 	}
 }
-add_action('wp_enqueue_scripts', 'zan_scripts', 1);
+add_action('wp_enqueue_scripts', 'zan_scripts', 10);
 
 
 /**
@@ -491,7 +494,7 @@ function zan_comment_mail_notify($comment)
 	$notify_message = sprintf(__('Your comment on post "%s" has a new reply.', 'zanblog-plus'), $post->post_title);
 	$notify_message .= __('(This email is sent automatically. Please don\'t reply.)', 'zanblog-plus');
 	/* translators: %s: Comment text. */
-	$notify_message .= str_replace("\n", "\n> ","\r\n" . $comment_content) . "\r\n\r\n";
+	$notify_message .= str_replace("\n", "\n> ", "\r\n" . $comment_content) . "\r\n\r\n";
 
 	/* translators: %s: Comment author's name*/
 	$notify_message .= sprintf(__('Author: %s', 'zanblog-plus'), $comment->comment_author) . "\r\n";
@@ -524,8 +527,9 @@ function zan_comment_mail_notify($comment)
 }
 add_action('comment_unapproved_to_approved', 'zan_comment_mail_notify');
 
-function zan_comment_post_mail_notify($comment_ID, $comment_approved){
-	if('1' == $comment_approved){
+function zan_comment_post_mail_notify($comment_ID, $comment_approved)
+{
+	if ('1' == $comment_approved) {
 		$comment = get_comment($comment_ID);
 		zan_comment_mail_notify($comment);
 	}

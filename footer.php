@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The template for displaying the footer
  *
@@ -11,12 +12,23 @@
 
 </div>
 <footer class="site-footer" role="contentinfo">
-	<div class="site-info">
-		<span>Copyright © 2019-<?php echo current_time('Y')?>.</span>
+	<?php
+	wp_nav_menu(
+		array(
+			'theme_location' => 'social',
+			'container' => '',
+			'menu_class' => 'social-links in-footer',
+			'depth' => 1,
+			'fallback_cb' => false
+		)
+	);
+	?>
+	<p class="site-info in-footer">
+		Copyright © 2019-<?php echo current_time('Y') ?>.
 		<span class="site-title"><a href="<?php echo esc_url(home_url('/')); ?>" rel="home"><?php bloginfo('name'); ?></a>.</span>
-		<span>Powered by <a href="<?php echo esc_url(__('https://wordpress.org/')); ?>" target="_blank">WordPress</a>.</span>
-		<span>Theme by <a href="http://github.com/touuki/zanblog-plus/" target="_blank">ZanBlog Plus</a>.</span>
-	</div><!-- .site-info -->
+		Powered by <a href="<?php echo esc_url(__('https://wordpress.org/')); ?>" target="_blank">WordPress</a>.
+		Theme by <a href="http://github.com/touuki/zanblog-plus/" target="_blank">ZanBlog Plus</a>.
+	</p><!-- .site-info -->
 </footer>
 
 <div class="goto-top">

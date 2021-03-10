@@ -44,6 +44,10 @@ var zan = {
       zan.showGotoTopAccordingly();
       zan.prevScrollpos = window.pageYOffset;
     });
+
+    if(twemoji){
+      twemoji.parse(document.body);
+    }
   },
 
   prevScrollpos: window.pageYOffset,
