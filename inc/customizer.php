@@ -182,7 +182,11 @@ add_filter('run_wptexturize', 'zan_run_wptexturize');
 wptexturize('Any non-empty text', true);
 
 if (get_theme_mod('disable_content_images_responsive')) {
-	remove_filter('the_content', 'wp_make_content_images_responsive');
+	if (version_compare($GLOBALS['wp_version'], '5.5.0', '<')) {
+		remove_filter('the_content', 'wp_make_content_images_responsive');
+	} else {
+		add_filter('wp_img_tag_add_srcset_and_sizes_attr', '__return_false');
+	}
 }
 
 /**

@@ -258,86 +258,85 @@ add_filter('wp_get_attachment_image_attributes', 'zan_post_thumbnail_sizes_attr'
 
 if (class_exists('\\Smush\\Core\\Settings') && \Smush\Core\Settings::get_instance()->get('lazy_load')) :
 
-	// Modify from wp_image_add_srcset_and_sizes()
-	function zan_image_add_width_and_height($image, $image_meta, $attachment_id)
-	{
-		$image_src = preg_match('/ src="([^"]+)"/', $image, $match_src) ? $match_src[1] : '';
-		list($image_src) = explode('?', $image_src);
+	if (version_compare($GLOBALS['wp_version'], '5.5.0', '<')) :
+		// Modify from wp_image_add_srcset_and_sizes()
+		function zan_image_add_width_and_height($image, $image_meta, $attachment_id)
+		{
+			$image_src = preg_match('/ src="([^"]+)"/', $image, $match_src) ? $match_src[1] : '';
+			list($image_src) = explode('?', $image_src);
 
-		// Return early if we couldn't get the image source.
-		if (!$image_src) {
-			return $image;
-		}
+			// Return early if we couldn't get the image source.
+			if (!$image_src) {
+				return $image;
+			}
 
-		$width = 0;
-		$height = 0;
+			$width = 0;
+			$height = 0;
 
-		$image_filename = wp_basename($image_src);
-		if ($image_meta && wp_basename($image_meta['file']) === $image_filename) {
-			$width  = (int) $image_meta['width'];
-			$height = (int) $image_meta['height'];
-		} else if (!empty($image_meta['sizes'])) {
-			foreach ($image_meta['sizes'] as $image_size_data) {
-				if ($image_filename === $image_size_data['file']) {
-					$width  = (int) $image_size_data['width'];
-					$height = (int) $image_size_data['height'];
-					break;
+			$image_filename = wp_basename($image_src);
+			if ($image_meta && wp_basename($image_meta['file']) === $image_filename) {
+				$width  = (int) $image_meta['width'];
+				$height = (int) $image_meta['height'];
+			} else if (!empty($image_meta['sizes'])) {
+				foreach ($image_meta['sizes'] as $image_size_data) {
+					if ($image_filename === $image_size_data['file']) {
+						$width  = (int) $image_size_data['width'];
+						$height = (int) $image_size_data['height'];
+						break;
+					}
 				}
+			}
+
+			if (!$width || !$height) {
+				return $image;
+			}
+
+			if (strpos($image, ' width=') === false && strpos($image, ' height=') === false) {
+				return str_replace('<img ', '<img width="' . $width . '" height="' . $height . '" ', $image);
 			}
 		}
 
-		if (!$width || !$height) {
-			return $image;
-		}
+		// Modify from wp_make_content_images_responsive()
+		function zan_content_images_add_width_and_height($content)
+		{
+			if (!preg_match_all('/<img [^>]+>/', $content, $matches)) {
+				return $content;
+			}
 
-		if (strpos($image, ' width=') === false && strpos($image, ' height=') === false) {
-			$image = str_replace(' class="', ' class="no-width ', $image);
-			$image = str_replace('<img ', '<img width="' . $width . '" ', $image);
-		}
-		$image = str_replace('<img ', '<img data-width="' . $width . '" data-height="' . $height . '" ', $image);
-		return $image;
-	}
+			$selected_images = array();
+			$attachment_ids  = array();
 
-	// Modify from wp_make_content_images_responsive()
-	function zan_content_images_add_width_and_height($content)
-	{
-		if (!preg_match_all('/<img [^>]+>/', $content, $matches)) {
-			return $content;
-		}
+			foreach ($matches[0] as $image) {
+				if (preg_match('/wp-image-([0-9]+)/i', $image, $class_id)) {
+					$attachment_id = absint($class_id[1]);
 
-		$selected_images = array();
-		$attachment_ids  = array();
-
-		foreach ($matches[0] as $image) {
-			if (preg_match('/wp-image-([0-9]+)/i', $image, $class_id)) {
-				$attachment_id = absint($class_id[1]);
-
-				if ($attachment_id) {
-					/*
+					if ($attachment_id) {
+						/*
 				 * If exactly the same image tag is used more than once, overwrite it.
 				 * All identical tags will be replaced later with 'str_replace()'.
 				 */
-					$selected_images[$image] = $attachment_id;
-					// Overwrite the ID when the same image is included more than once.
-					$attachment_ids[$attachment_id] = true;
+						$selected_images[$image] = $attachment_id;
+						// Overwrite the ID when the same image is included more than once.
+						$attachment_ids[$attachment_id] = true;
+					}
 				}
 			}
-		}
-		if (count($attachment_ids) > 1) {
-			/*
+			if (count($attachment_ids) > 1) {
+				/*
 		* Warm the object cache with post and meta information for all found
 		* images to avoid making individual database calls.
 		*/
-			_prime_post_caches(array_keys($attachment_ids), false, true);
-		}
+				_prime_post_caches(array_keys($attachment_ids), false, true);
+			}
 
-		foreach ($selected_images as $image => $attachment_id) {
-			$image_meta = wp_get_attachment_metadata($attachment_id);
-			$content = str_replace($image, zan_image_add_width_and_height($image, $image_meta, $attachment_id), $content);
+			foreach ($selected_images as $image => $attachment_id) {
+				$image_meta = wp_get_attachment_metadata($attachment_id);
+				$content = str_replace($image, zan_image_add_width_and_height($image, $image_meta, $attachment_id), $content);
+			}
+			return $content;
 		}
-		return $content;
-	}
-	add_filter('the_content', 'zan_content_images_add_width_and_height', 20);
+		add_filter('the_content', 'zan_content_images_add_width_and_height', 20);
+	endif;
 
 	// code part from https://stackoverflow.com/questions/23416880/lazy-loading-with-responsive-images-unknown-height#answer-60396260
 	function zan_footer_lazyload_javascript()
@@ -347,24 +346,15 @@ if (class_exists('\\Smush\\Core\\Settings') && \Smush\Core\Settings::get_instanc
 				var img = jQuery(e);
 				var h = img.attr('height');
 				var w = img.attr('width');
-				var dh = img.attr('data-height');
-				var dw = img.attr('data-width');
-				if (dh && dw) {
-					img.attr('src', "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 " +
-						dw + " " + dh + "'%3E%3C/svg%3E");
-				} else if (w && h) {
+				if (w && h) {
 					img.attr('src', "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 " +
 						w + " " + h + "'%3E%3C/svg%3E");
 				}
 			});
-			window.addEventListener('lazyloaded', function(event) {
-				var img = jQuery(event.target);
-				img.hasClass('no-width') && img.removeAttr('width').removeClass('no-width');
-			});
 		</script>
 	<?php
 	}
-	add_action('wp_footer', 'zan_footer_lazyload_javascript');
+	add_action('wp_print_footer_scripts', 'zan_footer_lazyload_javascript');
 
 endif;
 
