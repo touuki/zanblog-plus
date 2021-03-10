@@ -164,7 +164,8 @@ function zan_scripts()
 
 	//wp_enqueue_script('bootstrap', 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js', array('jquery', 'popper.js'), null);
 
-	wp_enqueue_script('twemoji', get_template_directory_uri() . '/assets/js/twemoji.min.js', array(), '13.0.1', true);
+	if (get_theme_mod('use_twemoji'))
+		wp_enqueue_script('twemoji', get_template_directory_uri() . '/assets/js/twemoji.min.js', array(), '13.0.1', true);
 
 	wp_enqueue_script('bootstrap', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array('jquery'), '3.4.1', true);
 
@@ -176,6 +177,19 @@ function zan_scripts()
 }
 add_action('wp_enqueue_scripts', 'zan_scripts', 10);
 
+if (get_theme_mod('use_twemoji')) :
+	remove_action('wp_print_styles', 'print_emoji_styles');
+	remove_action('wp_head', 'print_emoji_detection_script', 7);
+
+	function zan_twemoji_parse()
+	{ ?>
+		<script>
+			twemoji.parse(document.body);
+		</script>
+	<?php
+	}
+	add_action('wp_print_footer_scripts', 'zan_twemoji_parse');
+endif;
 
 /**
  * Add custom image sizes attribute to enhance responsive image functionality

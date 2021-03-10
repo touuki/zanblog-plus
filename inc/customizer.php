@@ -59,6 +59,16 @@ function zan_customize_register($wp_customize)
 		'section'    => 'content'
 	));
 
+	$wp_customize->add_setting('use_twemoji');
+
+	$wp_customize->add_control('use_twemoji', array(
+		'label'      => __('Use Twemoji', 'zanblog-plus'),
+		'description' => _x('Convert Emoji characters to Twemoji img elements.', 'use_twemoji', 'zanblog-plus'),
+		'priority'   => 40,
+		'type'       => 'checkbox',
+		'section'    => 'content'
+	));
+
 	if (isset($wp_customize->selective_refresh)) {
 		$wp_customize->selective_refresh->add_partial(
 			'blogname',
@@ -155,7 +165,7 @@ add_action('admin_menu', 'add_theme_copyright_page');
 
 function zan_document_title_separator($sep)
 {
-	return '–';
+	return '–'; // U+2013
 }
 
 function zan_run_wptexturize($run_texturize)
