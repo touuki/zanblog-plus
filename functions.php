@@ -136,17 +136,22 @@ add_action('wp_head', 'zan_pingback_header');
  * Prevent search engine web crawlers from indexing a password protected post or a none content page.
  */
 if (version_compare($GLOBALS['wp_version'], '5.7', '<')) :
-	function zan_noindex()
+	function zan_no_robots()
 	{
 		if ((!have_posts() || post_password_required()) && get_option('blog_public')) {
 			wp_no_robots();
 		}
 	}
-	add_action('wp_head', 'zan_noindex', 1);
+	add_action('wp_head', 'zan_no_robots', 1);
 else :
-	if ((!have_posts() || post_password_required()) && get_option('blog_public')) {
-		add_filter( 'wp_robots', 'wp_robots_no_robots' );
+	function zan_no_robots($robots)
+	{
+		if ((!have_posts() || post_password_required()) && get_option('blog_public')) {
+			return wp_robots_no_robots($robots);
+		}
+		return $robots;
 	}
+	add_filter( 'wp_robots', 'zan_no_robots' );
 endif;
 
 /**
