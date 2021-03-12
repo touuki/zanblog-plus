@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Widget functions and definitions
  *
@@ -60,7 +61,7 @@ function zan_widget_title_callback($matches)
 add_filter('widget_title', 'zan_widget_title');
 
 
-if (version_compare($GLOBALS['wp_version'], '4.9.0', '>=')) {
+if (version_compare($GLOBALS['wp_version'], '4.9', '>=')) :
 	/**
 	 * Add a method to use WP_Widget_Recent_Posts to show random posts.
 	 * Just add 'i$random-posts$' in the widget title and it will not display on the front.
@@ -74,7 +75,7 @@ if (version_compare($GLOBALS['wp_version'], '4.9.0', '>=')) {
 		return $args;
 	}
 	add_filter('widget_posts_args', 'zan_widget_posts_args', 10, 2);
-}
+endif;
 
 function zan_widget_display_callback($instance, $widget, $args)
 {
@@ -175,7 +176,8 @@ add_filter('get_calendar', 'zan_get_calendar');
 
 add_filter('show_recent_comments_widget_style', '__return_false');
 
-function zan_comment_excerpt_length($comment_excerpt_length){
+function zan_comment_excerpt_length($comment_excerpt_length)
+{
 	return 70;
 }
 add_filter('comment_excerpt_length', 'zan_comment_excerpt_length');

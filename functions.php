@@ -135,13 +135,19 @@ add_action('wp_head', 'zan_pingback_header');
 /**
  * Prevent search engine web crawlers from indexing a password protected post or a none content page.
  */
-function zan_noindex()
-{
-	if ((!have_posts() || post_password_required()) && get_option('blog_public')) {
-		wp_no_robots();
+if (version_compare($GLOBALS['wp_version'], '5.7', '<')) :
+	function zan_noindex()
+	{
+		if ((!have_posts() || post_password_required()) && get_option('blog_public')) {
+			wp_no_robots();
+		}
 	}
-}
-add_action('wp_head', 'zan_noindex', 1);
+	add_action('wp_head', 'zan_noindex', 1);
+else :
+	if ((!have_posts() || post_password_required()) && get_option('blog_public')) {
+		add_filter( 'wp_robots', 'wp_robots_no_robots' );
+	}
+endif;
 
 /**
  * Enqueues scripts and styles.
@@ -164,9 +170,6 @@ function zan_scripts()
 
 	//wp_enqueue_script('bootstrap', 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js', array('jquery', 'popper.js'), null);
 
-	if (get_theme_mod('use_twemoji'))
-		wp_enqueue_script('twemoji', get_template_directory_uri() . '/assets/js/twemoji.min.js', array(), '13.0.1', true);
-
 	wp_enqueue_script('bootstrap', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array('jquery'), '3.4.1', true);
 
 	wp_enqueue_script('zan-script', get_template_directory_uri() . '/assets/js/zanblog.js', array('jquery'), '20210310', true);
@@ -177,18 +180,20 @@ function zan_scripts()
 }
 add_action('wp_enqueue_scripts', 'zan_scripts', 10);
 
-if (get_theme_mod('use_twemoji')) :
-	remove_action('wp_print_styles', 'print_emoji_styles');
-	remove_action('wp_head', 'print_emoji_detection_script', 7);
-
-	function zan_twemoji_parse()
+if (get_theme_mod('always_use_twemoji')) :
+	function zan_always_use_twemoji()
 	{ ?>
 		<script>
-			twemoji.parse(document.body);
+			_wpemojiSettings.supports = {
+				everything: false,
+				everythingExceptFlag: false,
+				flag: false,
+				emoji: false
+			}
 		</script>
 	<?php
 	}
-	add_action('wp_print_footer_scripts', 'zan_twemoji_parse');
+	add_action('wp_print_footer_scripts', 'zan_always_use_twemoji');
 endif;
 
 /**
@@ -258,7 +263,7 @@ add_filter('wp_get_attachment_image_attributes', 'zan_post_thumbnail_sizes_attr'
 
 if (class_exists('\\Smush\\Core\\Settings') && \Smush\Core\Settings::get_instance()->get('lazy_load')) :
 
-	if (version_compare($GLOBALS['wp_version'], '5.5.0', '<')) :
+	if (version_compare($GLOBALS['wp_version'], '5.5', '<')) :
 		// Modify from wp_image_add_srcset_and_sizes()
 		function zan_image_add_width_and_height($image, $image_meta, $attachment_id)
 		{
@@ -312,9 +317,9 @@ if (class_exists('\\Smush\\Core\\Settings') && \Smush\Core\Settings::get_instanc
 
 					if ($attachment_id) {
 						/*
-				 * If exactly the same image tag is used more than once, overwrite it.
-				 * All identical tags will be replaced later with 'str_replace()'.
-				 */
+						* If exactly the same image tag is used more than once, overwrite it.
+						* All identical tags will be replaced later with 'str_replace()'.
+						*/
 						$selected_images[$image] = $attachment_id;
 						// Overwrite the ID when the same image is included more than once.
 						$attachment_ids[$attachment_id] = true;
@@ -323,9 +328,9 @@ if (class_exists('\\Smush\\Core\\Settings') && \Smush\Core\Settings::get_instanc
 			}
 			if (count($attachment_ids) > 1) {
 				/*
-		* Warm the object cache with post and meta information for all found
-		* images to avoid making individual database calls.
-		*/
+				* Warm the object cache with post and meta information for all found
+				* images to avoid making individual database calls.
+				*/
 				_prime_post_caches(array_keys($attachment_ids), false, true);
 			}
 

@@ -59,11 +59,11 @@ function zan_customize_register($wp_customize)
 		'section'    => 'content'
 	));
 
-	$wp_customize->add_setting('use_twemoji');
+	$wp_customize->add_setting('always_use_twemoji');
 
-	$wp_customize->add_control('use_twemoji', array(
-		'label'      => __('Use Twemoji', 'zanblog-plus'),
-		'description' => _x('Convert Emoji characters to Twemoji img elements.', 'use_twemoji', 'zanblog-plus'),
+	$wp_customize->add_control('always_use_twemoji', array(
+		'label'      => __('Always use Twemoji', 'zanblog-plus'),
+		'description' => _x('Always use Twemoji to show Emoji characters.', 'always_use_twemoji', 'zanblog-plus'),
 		'priority'   => 40,
 		'type'       => 'checkbox',
 		'section'    => 'content'
@@ -182,7 +182,7 @@ add_filter('run_wptexturize', 'zan_run_wptexturize');
 wptexturize('Any non-empty text', true);
 
 if (get_theme_mod('disable_content_images_responsive')) {
-	if (version_compare($GLOBALS['wp_version'], '5.5.0', '<')) {
+	if (version_compare($GLOBALS['wp_version'], '5.5', '<')) {
 		remove_filter('the_content', 'wp_make_content_images_responsive');
 	} else {
 		add_filter('wp_img_tag_add_srcset_and_sizes_attr', '__return_false');
