@@ -48,8 +48,8 @@ if (post_password_required()) {
     );
   endif;
 
-  if (!comments_open() && get_comments_number() && post_type_supports(get_post_type(), 'comments')) : ?>
-    <p class="no-comments"><?php _e('Comments are closed.'); ?></p>
+  if (!comments_open()) : ?>
+    <p class="no-comments alert alert-danger text-center"><i class="fas fa-ban"></i> <?php _e('Comments are closed.'); ?></p>
   <?php endif;
   zan_comment_form();
   ?>

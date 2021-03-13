@@ -138,7 +138,7 @@ add_action('wp_head', 'zan_pingback_header');
 if (version_compare($GLOBALS['wp_version'], '5.7', '<')) :
 	function zan_no_robots()
 	{
-		if ((!have_posts() || post_password_required()) && get_option('blog_public')) {
+		if ((!have_posts() || is_single() && post_password_required()) && get_option('blog_public')) {
 			wp_no_robots();
 		}
 	}
@@ -146,12 +146,12 @@ if (version_compare($GLOBALS['wp_version'], '5.7', '<')) :
 else :
 	function zan_no_robots($robots)
 	{
-		if ((!have_posts() || post_password_required()) && get_option('blog_public')) {
+		if ((!have_posts() || is_single() && post_password_required()) && get_option('blog_public')) {
 			return wp_robots_no_robots($robots);
 		}
 		return $robots;
 	}
-	add_filter( 'wp_robots', 'zan_no_robots' );
+	add_filter('wp_robots', 'zan_no_robots');
 endif;
 
 /**
@@ -168,12 +168,11 @@ function zan_scripts()
 	// Theme stylesheet.
 	wp_enqueue_style('zan-style', get_stylesheet_uri(), array(), '20210310');
 
-	//wp_deregister_script('jquery');
-	//wp_enqueue_script('jquery', 'https://code.jquery.com/jquery-3.5.0.min.js', array(), null);
-
 	//wp_enqueue_script('popper.js', 'https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js', array('jquery'), null);
 
 	//wp_enqueue_script('bootstrap', 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js', array('jquery', 'popper.js'), null);
+
+	//wp_enqueue_script('tinymce', get_option('siteurl') . '/wp-includes/js/tinymce/tinymce.min.js', array(), '4.9.11', true);
 
 	wp_enqueue_script('bootstrap', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array('jquery'), '3.4.1', true);
 
@@ -591,6 +590,31 @@ function zan_private_title_format()
 	return '<i class="fas fa-eye-slash"></i> %s';
 }
 add_filter('private_title_format', 'zan_private_title_format');
+
+/**
+ * Retrieve protected post password form content.
+ *
+ * @since ZanBlog Plus 1.2
+ *
+ * @param string $output The password form HTML output.
+ * @return string HTML content for password form for password protected post.
+ */
+function zan_password_form($output)
+{
+	if(preg_match('/<label for="(.*?)">/', $output, $matches)){
+		$label = $matches[1];
+	} else {
+		$label  = 'pwbox-' . wp_rand();
+	}
+	$output = '<p>' . __( 'This content is password protected. To view it please enter your password below:' ) . '</p>
+	<form action="' . esc_url( site_url( 'wp-login.php?action=postpass', 'login_post' ) ) . '" class="post-password-form" method="post">
+	<div><label for="' . $label . '" class="screen-reader-text">' . __( 'Password:' ) . '</label></div><div class="input-group">
+	<input name="post_password" id="' . $label . '" class="post-password-field form-control" type="password" size="20" placeholder="'. __( 'Password' ) .'" />
+	<span class="input-group-btn"><button type="submit" class="post-password-submit btn btn-danger" name="Submit">' . esc_attr_x( 'Enter', 'post password form' ) . '</button></span>
+	</div></form>';
+	return $output;
+}
+add_filter('the_password_form', 'zan_password_form');
 
 function exclude_password_proceted($query)
 {

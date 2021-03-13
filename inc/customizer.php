@@ -28,6 +28,7 @@ function zan_customize_register($wp_customize)
 		array(
 			'type'			=> 'option',
 			'transport'     => 'postMessage',
+			'sanitize_callback' => 'wp_kses_normalize_entities',
 		)
 	);
 
@@ -39,7 +40,13 @@ function zan_customize_register($wp_customize)
 		'type'          => 'textarea',
 	));
 
-	$wp_customize->add_setting('disable_wptexturize');
+	$wp_customize->add_setting(
+		'disable_wptexturize',
+		array(
+			'default'           => 0,
+			'sanitize_callback' => 'absint',
+		)
+	);
 
 	$wp_customize->add_control('disable_wptexturize', array(
 		'label'      => __('Disable texturize', 'zanblog-plus'),
@@ -49,7 +56,13 @@ function zan_customize_register($wp_customize)
 		'section'    => 'content'
 	));
 
-	$wp_customize->add_setting('disable_content_images_responsive');
+	$wp_customize->add_setting(
+		'disable_content_images_responsive',
+		array(
+			'default'           => 0,
+			'sanitize_callback' => 'absint',
+		)
+	);
 
 	$wp_customize->add_control('disable_content_images_responsive', array(
 		'label'      => __('Disable content images responsive', 'zanblog-plus'),
@@ -59,11 +72,17 @@ function zan_customize_register($wp_customize)
 		'section'    => 'content'
 	));
 
-	$wp_customize->add_setting('always_use_twemoji');
+	$wp_customize->add_setting(
+		'always_use_twemoji',
+		array(
+			'default'           => 0,
+			'sanitize_callback' => 'absint',
+		)
+	);
 
 	$wp_customize->add_control('always_use_twemoji', array(
 		'label'      => __('Always use Twemoji', 'zanblog-plus'),
-		'description' => _x('Always use Twemoji to show Emoji characters.', 'always_use_twemoji', 'zanblog-plus'),
+		'description' => _x('Always use <a href="https://twemoji.twitter.com/" target="_blank" rel="noreferrer noopener">Twemoji</a> to show Emoji characters.', 'always_use_twemoji', 'zanblog-plus'),
 		'priority'   => 40,
 		'type'       => 'checkbox',
 		'section'    => 'content'
