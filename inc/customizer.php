@@ -170,17 +170,17 @@ function zan_default_option_copyright_post($default)
 
 add_filter('default_option_copyright_post', 'zan_default_option_copyright_post');
 
-function add_theme_copyright_page()
+function add_theme_content_page()
 {
-	add_theme_page(__('Copyright', 'zanblog-plus'), __('Copyright', 'zanblog-plus'), 'edit_theme_options', add_query_arg(
+	add_theme_page(__('Content setting', 'zanblog-plus'), __('Content setting', 'zanblog-plus'), 'edit_theme_options', add_query_arg(
 		array(
 			'return' => urlencode(remove_query_arg(wp_removable_query_args(), wp_unslash($_SERVER['REQUEST_URI']))),
-			'autofocus' => array('control' => 'copyright_post'),
+			'autofocus' => array('section' => 'content'),
 		),
 		'customize.php'
 	));
 }
-add_action('admin_menu', 'add_theme_copyright_page');
+add_action('admin_menu', 'add_theme_content_page');
 
 function zan_document_title_separator($sep)
 {

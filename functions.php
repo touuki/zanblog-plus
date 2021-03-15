@@ -159,27 +159,23 @@ endif;
  */
 function zan_scripts()
 {
-	//wp_enqueue_style('bootstrap', 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css', array(), null);
-
 	wp_enqueue_style('bootstrap', get_template_directory_uri() . '/assets/css/bootstrap.min.css', array(), '3.4.1');
 
 	wp_enqueue_style('fontawesome', get_template_directory_uri() . '/assets/css/fontawesome.min.css', array(), '5.13.0');
 
 	// Theme stylesheet.
-	wp_enqueue_style('zan-style', get_stylesheet_uri(), array(), '20210310');
-
-	//wp_enqueue_script('popper.js', 'https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js', array('jquery'), null);
-
-	//wp_enqueue_script('bootstrap', 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js', array('jquery', 'popper.js'), null);
-
-	//wp_enqueue_script('tinymce', get_option('siteurl') . '/wp-includes/js/tinymce/tinymce.min.js', array(), '4.9.11', true);
+	wp_enqueue_style('zan-style', get_stylesheet_uri(), array(), '20210313');
 
 	wp_enqueue_script('bootstrap', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array('jquery'), '3.4.1', true);
 
 	wp_enqueue_script('zan-script', get_template_directory_uri() . '/assets/js/zanblog.js', array('jquery'), '20210310', true);
 
-	if (is_singular() && comments_open() && get_option('thread_comments')) {
-		wp_enqueue_script('comment-reply');
+	if (is_singular() && comments_open()) {
+		wp_enqueue_editor();
+
+		if (get_option('thread_comments')) {
+			wp_enqueue_script('comment-reply');
+		}
 	}
 }
 add_action('wp_enqueue_scripts', 'zan_scripts', 10);
@@ -200,6 +196,23 @@ if (get_theme_mod('always_use_twemoji')) :
 	add_action('wp_print_footer_scripts', 'zan_always_use_twemoji');
 endif;
 
+
+function zan_init_comment_tinymce()
+{ ?>
+	<script>
+		wp.editor.initialize('comment-tinymce', {
+			tinymce: {
+				plugins: "charmap,link,paste,tabfocus,wordpress",
+				toolbar1: "bold,italic,strikethrough,link,wp_code,blockquote,pastetext,removeformat,charmap,undo,redo,wp_help",
+				inline: true,
+				content_css: false,
+				forced_root_block: false
+			}
+		})
+	</script>
+	<?php
+}
+add_action('wp_print_footer_scripts', 'zan_init_comment_tinymce', 99);
 /**
  * Add custom image sizes attribute to enhance responsive image functionality
  * for content images.
@@ -416,24 +429,35 @@ function zan_comment_form()
 		),
 	);
 
+	//wp_editor('editor test', 'editor-test');
+
+	ob_start(); ?>
+	<div class="comment-form-comment">
+		<label class="screen-reader-text" for="comment"><?php _ex('Comment', 'noun') ?></label>
+		<div class="wp-editor-wrap tmce-active">
+			<div class="wp-editor-tabs">
+				<button type="button" id="wp-comment-editor-tmce" class="btn switch-tmce">可视化</button><button type="button" id="wp-comment-editor-html" class="btn switch-html">文本</button>
+			</div>
+			<div class="clearfix"></div>
+			<div class="comment-editor-container">
+				<textarea style="display: none;" class="comment-textarea" id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea>
+				<div id="comment-tinymce" class="comment-tinymce"></div>
+			</div>
+		</div>
+	</div>
+	<p class="comment-mail-notify">
+		<input id="wp-comment-mail-notify" name="wp-comment-mail-notify" type="checkbox" value="yes">
+		<label for="wp-comment-mail-notify"><?php _e('Notify me of follow-up comments via email.', 'zanblog-plus') ?></label>
+	</p>
+	<?php
+	$comment_form = ob_get_clean();
+
 	comment_form(
 		array(
 			'title_reply'          => '<i class="fas fa-pen"></i> ' . __('Leave a Reply'),
 			'fields'               => $fields,
-			'class_submit' => 'submit btn btn-danger btn-block',
-			'comment_field' => sprintf(
-				'<p class="comment-form-comment">%s %s</p><p class="comment-mail-notify">%s %s</p>',
-				sprintf(
-					'<label class="screen-reader-text" for="comment">%s</label>',
-					_x('Comment', 'noun')
-				),
-				'<textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea>',
-				'<input id="wp-comment-mail-notify" name="wp-comment-mail-notify" type="checkbox" value="yes">',
-				sprintf(
-					'<label for="wp-comment-mail-notify">%s</label>',
-					__('Notify me of follow-up comments via email.', 'zanblog-plus')
-				)
-			),
+			'class_submit'         => 'submit btn btn-danger btn-block',
+			'comment_field'        => $comment_form,
 			'title_reply_before'   => '<h3 id="reply-title" class="comment-reply-title alert alert-info">',
 			'title_reply_after'    => '</h3>',
 		)
@@ -601,17 +625,17 @@ add_filter('private_title_format', 'zan_private_title_format');
  */
 function zan_password_form($output)
 {
-	if(preg_match('/<label for="(.*?)">/', $output, $matches)){
+	if (preg_match('/<label for="(.*?)">/', $output, $matches)) {
 		$label = $matches[1];
 	} else {
 		$label  = 'pwbox-' . wp_rand();
 	}
-	$output = '<p>' . __( 'This content is password protected. To view it please enter your password below:' ) . '</p>
-	<form action="' . esc_url( site_url( 'wp-login.php?action=postpass', 'login_post' ) ) . '" class="post-password-form" method="post">
-	<div><label for="' . $label . '" class="screen-reader-text">' . __( 'Password:' ) . '</label></div><div class="input-group">
-	<input name="post_password" id="' . $label . '" class="post-password-field form-control" type="password" size="20" placeholder="'. __( 'Password' ) .'" />
-	<span class="input-group-btn"><button type="submit" class="post-password-submit btn btn-danger" name="Submit">' . esc_attr_x( 'Enter', 'post password form' ) . '</button></span>
-	</div></form>';
+	$output = '<p>' . __('This content is password protected. To view it please enter your password below:') . '</p>'
+		. '<form action="' . esc_url(site_url('wp-login.php?action=postpass', 'login_post')) . '" class="post-password-form" method="post">'
+		. '<div><label for="' . $label . '" class="screen-reader-text">' . __('Password:') . '</label></div><div class="input-group">'
+		. '<input name="post_password" id="' . $label . '" class="post-password-field form-control" type="password" size="20" placeholder="' . __('Password') . '" />'
+		. '<span class="input-group-btn"><button type="submit" class="post-password-submit btn btn-danger" name="Submit">' . esc_attr_x('Enter', 'post password form') . '</button></span>'
+		. '</div></form>';
 	return $output;
 }
 add_filter('the_password_form', 'zan_password_form');

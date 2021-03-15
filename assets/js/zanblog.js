@@ -31,6 +31,9 @@ var zan = {
     jQuery('.panel-btn-toggle').data('toggle', true).click(this.panelToggle);
     jQuery('.panel-btn-remove').click(this.panelClose);
 
+    jQuery('#wp-comment-editor-html').click(this.changeCommentEditorToHtml);
+    jQuery('#wp-comment-editor-tmce').click(this.changeCommentEditorToTmce);
+
     this.bodyPaddingTop();
     this.showNavbarAccordingly(window.pageYOffset, zan.prevScrollpos);
     this.showGotoTopAccordingly();
@@ -47,6 +50,33 @@ var zan = {
   },
 
   prevScrollpos: window.pageYOffset,
+
+  changeCommentEditorToHtml: function(){
+    var wrap = jQuery('.comment-form-comment>.wp-editor-wrap');
+    if (wrap.hasClass('html-active')) {
+      return;
+    }
+    var tmce = jQuery('.comment-tinymce');
+    var textarea = jQuery('.comment-textarea');
+    wrap.removeClass('tmce-active').addClass('html-active');
+    textarea.val(tmce.html())
+    jQuery('.mce-floatpanel').css('display', 'none');
+    tmce.css('display', 'none');
+    textarea.css('display', '');
+  },
+
+  changeCommentEditorToTmce: function(){
+    var wrap = jQuery('.comment-form-comment>.wp-editor-wrap');
+    if (wrap.hasClass('tmce-active')) {
+      return;
+    }
+    var tmce = jQuery('.comment-tinymce');
+    var textarea = jQuery('.comment-textarea');
+    wrap.removeClass('html-active').addClass('tmce-active');
+    tmce.html(textarea.val());
+    textarea.css('display', 'none');
+    tmce.css('display', '');
+  },
 
   openMenu: function () {
     var menu = jQuery(this);
