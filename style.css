@@ -5,7 +5,7 @@ Author: Touuki
 Author URI: https://github.com/touuki
 Description: Zanblog Plus is a beautiful and powerful WordPress Theme constructed by Bootstrap3. It's a refactoring and improvement of the unmaintained ZanBlog 2.1.0. ZanBlog Plus will make your WordPress look beautiful everywhere.
 Tested up to: 5.7
-Version: 1.1
+Version: 1.2
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: one-column, two-columns, right-sidebar, accessibility-ready, custom-background, custom-menu, featured-images, sticky-post, threaded-comments, blog
@@ -1105,7 +1105,7 @@ blockquote {
 .comment-html-active .comment-switch-html {
     color: #fff;
     background-color: #d9534f;
-    border-color: #d43f3a;
+    border-color: #d9534f;
 }
 
 .comment-editor-container {

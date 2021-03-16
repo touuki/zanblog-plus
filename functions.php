@@ -423,8 +423,7 @@ function zan_comment_form()
 		<?php if (get_theme_mod('rich_comment_editor', 1)) : ?>
 			<div class="comment-editor-wrap comment-tmce-active">
 				<div class="comment-editor-tabs">
-					<button type="button" class="btn comment-switch-tmce"><?php _ex( 'Visual', 'Name for the Visual editor tab' ); ?></button>
-					<button type="button" class="btn comment-switch-html"><?php _ex( 'Text', 'Name for the Text editor tab (formerly HTML)' ); ?></button>
+					<button type="button" class="btn comment-switch-html"><i class="fas fa-code"></i> <?php _ex('Text', 'Name for the Text editor tab (formerly HTML)'); ?></button><button type="button" class="btn comment-switch-tmce"><i class="fas fa-eye"></i> <?php _ex('Visual', 'Name for the Visual editor tab'); ?></button>
 				</div>
 				<div class="clearfix"></div>
 				<div class="comment-editor-container">
@@ -440,7 +439,7 @@ function zan_comment_form()
 		<input id="wp-comment-mail-notify" name="wp-comment-mail-notify" type="checkbox" value="yes">
 		<label for="wp-comment-mail-notify"><?php _e('Notify me of follow-up comments via email.', 'zanblog-plus'); ?></label>
 	</p>
-	<?php
+<?php
 	$comment_field = ob_get_clean();
 
 	comment_form(
@@ -459,7 +458,7 @@ function zan_init_comment_tinymce()
 {
 	$mce_locale = get_user_locale();
 	$mce_locale = empty($mce_locale) ? 'en' : strtolower(substr($mce_locale, 0, 2)); // ISO 639-1.
-	?>
+?>
 	<script>
 		tinymce.addI18n('<?php echo $mce_locale; ?>',
 			<?php
@@ -480,6 +479,10 @@ function zan_init_comment_tinymce()
 				'New window'                           => __('New window'),
 				'Text to display'                      => __('Text to display'),
 				'Url'                                  => __('URL'),
+				'Title'                                => __('Title'),
+				'None'                                 => __('None'),
+				'Ok'                                   => __( 'OK' ),
+				'Cancel'                               => __( 'Cancel' ),
 				'The URL you entered seems to be an email address. Do you want to add the required mailto: prefix?' =>
 				__('The URL you entered seems to be an email address. Do you want to add the required mailto: prefix?'),
 				'The URL you entered seems to be an external link. Do you want to add the required http:// prefix?' =>

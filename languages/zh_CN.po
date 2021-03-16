@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zanblog Plus 1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/zanblog-plus\n"
-"POT-Creation-Date: 2021-03-09T23:13:13+08:00\n"
-"PO-Revision-Date: 2021-03-09 23:15+0800\n"
+"POT-Creation-Date: 2021-03-16T18:55:32+08:00\n"
+"PO-Revision-Date: 2021-03-16 19:05+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh\n"
@@ -54,31 +54,35 @@ msgstr "似乎这里没有内容。或许可以试试搜索？"
 msgid "Top Menu"
 msgstr "顶部菜单"
 
-#: functions.php:418
+#: functions.php:43
+msgid "Social Links Menu"
+msgstr "社交链接菜单"
+
+#: functions.php:440
 msgid "Notify me of follow-up comments via email."
 msgstr "有人回复时通过电子邮件通知我。"
 
 #. translators: %s: Post title.
-#: functions.php:491
+#: functions.php:580
 msgid "Your comment on post \"%s\" has a new reply."
 msgstr "你在文章“%s”中的评论有了新的回复。"
 
-#: functions.php:492
+#: functions.php:581
 msgid "(This email is sent automatically. Please don't reply.)"
 msgstr "（此邮件由系统自动发送，请勿回复此邮件）"
 
 #. translators: %s: Comment author's name
-#: functions.php:497
+#: functions.php:586
 msgid "Author: %s"
 msgstr "作者：%s"
 
 #. translators: %s: Comment text.
-#: functions.php:499
+#: functions.php:588
 msgid "Reply: %s"
 msgstr "回复内容：%s"
 
 #. translators: Comment notification email subject. %s: Site title
-#: functions.php:504
+#: functions.php:593
 msgid "[%s] Your comment has a new reply"
 msgstr "【%s】你的评论有了新的回复"
 
@@ -86,15 +90,15 @@ msgstr "【%s】你的评论有了新的回复"
 msgid "Skip to content"
 msgstr "跳到内容"
 
-#: inc/customizer.php:22
+#: inc/customizer.php:22 inc/customizer.php:191
 msgid "Content setting"
 msgstr "内容设置"
 
-#: inc/customizer.php:35
+#: inc/customizer.php:36
 msgid "Post copyright"
 msgstr "文章版权信息"
 
-#: inc/customizer.php:36
+#: inc/customizer.php:37
 msgid ""
 "Accept any HTML content. Allowed Variables: %POST_TITLE%, %POST_URL%, "
 "%POST_DATE%, %POST_TIME%, %POST_AUTHOR%, %AUTHOR_URL%, %BLOG_NAME%, %BLOG_URL"
@@ -103,12 +107,11 @@ msgstr ""
 "接受任意HTML内容。可以使用的变量有 %POST_TITLE%、%POST_URL%、%POST_DATE"
 "%、%POST_TIME%、%POST_AUTHOR%、%AUTHOR_URL%、%BLOG_NAME%、%BLOG_URL%"
 
-#: inc/customizer.php:45
+#: inc/customizer.php:52
 msgid "Disable texturize"
 msgstr "禁用文本转义"
 
-#: inc/customizer.php:46
-msgctxt "disable_wptexturize"
+#: inc/customizer.php:53
 msgid ""
 "If checked, it will short-circuit wptexturize() and display the original "
 "text. See <a href=\"https://developer.wordpress.org/reference/functions/"
@@ -119,12 +122,11 @@ msgstr ""
 "href=\"https://developer.wordpress.org/reference/functions/wptexturize/\" "
 "target=\"_blank\" rel=\"noreferrer noopener\">wptexturize()</a>"
 
-#: inc/customizer.php:55
+#: inc/customizer.php:68
 msgid "Disable content images responsive"
 msgstr "禁用内容响应式图像"
 
-#: inc/customizer.php:56
-msgctxt "disable_content_images_responsive"
+#: inc/customizer.php:69
 msgid ""
 "If checked, it will disable images responsive in the post content. Sometime "
 "the responsive images are larger than the original images, and there is no "
@@ -133,7 +135,27 @@ msgstr ""
 "如果选中，则会禁止文章中图像使用响应式。有时响应式图像反而比源图像大，在这种"
 "情况下使用响应式图像并没有好处。"
 
-#: inc/customizer.php:134
+#: inc/customizer.php:84
+msgid "Enable rich comment editor"
+msgstr "评论启用富文本编辑"
+
+#: inc/customizer.php:85
+msgid "Use TinyMCE in comment form"
+msgstr "在评论框中使用TinyMCE编辑器"
+
+#: inc/customizer.php:100
+msgid "Always use Twemoji"
+msgstr "始终使用Twemoji"
+
+#: inc/customizer.php:101
+msgid ""
+"Always use <a href=\"https://twemoji.twitter.com/\" target=\"_blank\" rel="
+"\"noreferrer noopener\">Twemoji</a> to show Emoji characters."
+msgstr ""
+"始终使用<a href=\"https://twemoji.twitter.com/\" target=\"_blank\" rel="
+"\"noreferrer noopener\">Twemoji</a>来显示Emoji符号。"
+
+#: inc/customizer.php:179
 msgid ""
 "<p><strong>Author</strong>: <a href=\"%AUTHOR_URL%\">%POST_AUTHOR%</a></p>\n"
 "\t<p><strong>Title</strong>: %POST_TITLE%</p>\n"
@@ -161,10 +183,6 @@ msgstr ""
 "licenses/by-nc-sa/4.0/\">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可"
 "协议</a>进行许可。</span></p>"
 
-#: inc/customizer.php:146
-msgid "Copyright"
-msgstr "版权信息"
-
 #: inc/template-tags.php:26
 msgctxt "Used before post author name."
 msgid "Author"
@@ -188,43 +206,43 @@ msgctxt "Used before publish date."
 msgid "Posted on"
 msgstr "发布于"
 
-#: inc/widget-functions.php:26 sidebar.php:15
+#: inc/widget-functions.php:27 sidebar.php:15
 msgid "Blog Sidebar"
 msgstr "侧边栏"
 
-#: inc/widget-functions.php:27
+#: inc/widget-functions.php:28
 msgid "Add widgets here to appear in your blog sidebar."
 msgstr "在头部横栏位置（文章主体之前）添加小工具。"
 
-#: inc/widget-functions.php:36 sidebar-head.php:16
+#: inc/widget-functions.php:37 sidebar-head.php:16
 msgid "Head Banner"
 msgstr "头部横栏"
 
-#: inc/widget-functions.php:37
+#: inc/widget-functions.php:38
 msgid "Add widgets here to appear in your head banner (before the posts)."
 msgstr "在头部横栏位置（文章主体之前）添加小工具。"
 
-#: inc/widget-functions.php:112
+#: inc/widget-functions.php:113
 msgctxt "hidden_widget"
 msgid "Hide on:"
 msgstr "此页面上隐藏："
 
-#: inc/widget-functions.php:113
+#: inc/widget-functions.php:114
 msgctxt "hidden_widget"
 msgid "Home"
 msgstr "首页"
 
-#: inc/widget-functions.php:115
+#: inc/widget-functions.php:116
 msgctxt "hidden_widget"
 msgid "Post"
 msgstr "文章"
 
-#: inc/widget-functions.php:117
+#: inc/widget-functions.php:118
 msgctxt "hidden_widget"
 msgid "Page"
 msgstr "页面"
 
-#: inc/widget-functions.php:119
+#: inc/widget-functions.php:120
 msgctxt "hidden_widget"
 msgid "Other"
 msgstr "其他"
@@ -282,14 +300,17 @@ msgstr "上一篇"
 msgid "Sticky"
 msgstr "置顶"
 
-#: template-parts/content.php:32 template-parts/related-posts.php:42
+#: template-parts/content.php:32 template-parts/related-posts.php:38
 msgid "Read more"
 msgstr "阅读更多"
 
-#: template-parts/related-posts.php:30
+#: template-parts/related-posts.php:26
 msgid "Maybe you also like these"
 msgstr "你可能也喜欢"
 
 #: widgets/class-zan-widget-recent-comments.php:85
 msgid "This comment cannot be shown because it is belong to a protected post."
 msgstr "该评论属于被密码保护的文章，无法显示。"
+
+#~ msgid "Copyright"
+#~ msgstr "版权信息"
