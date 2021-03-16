@@ -164,14 +164,19 @@ function zan_scripts()
 	wp_enqueue_style('fontawesome', get_template_directory_uri() . '/assets/css/fontawesome.min.css', array(), '5.13.0');
 
 	// Theme stylesheet.
-	wp_enqueue_style('zan-style', get_stylesheet_uri(), array(), '20210313');
+	wp_enqueue_style('zan-style', get_stylesheet_uri(), array(), '20210316');
 
 	wp_enqueue_script('bootstrap', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array('jquery'), '3.4.1', true);
 
-	wp_enqueue_script('zan-script', get_template_directory_uri() . '/assets/js/zanblog.js', array('jquery'), '20210310', true);
+	wp_enqueue_script('zan-script', get_template_directory_uri() . '/assets/js/zanblog.js', array('jquery'), '20210316', true);
 
 	if (is_singular() && comments_open()) {
-		wp_enqueue_editor();
+		if (get_theme_mod('rich_comment_editor', 1)) {
+			wp_enqueue_style('editor-buttons');
+			wp_enqueue_script('editor');
+			wp_enqueue_script('wp-tinymce');
+			add_action('wp_print_footer_scripts', 'zan_init_comment_tinymce', 50);
+		}
 
 		if (get_option('thread_comments')) {
 			wp_enqueue_script('comment-reply');
@@ -196,23 +201,6 @@ if (get_theme_mod('always_use_twemoji')) :
 	add_action('wp_print_footer_scripts', 'zan_always_use_twemoji');
 endif;
 
-
-function zan_init_comment_tinymce()
-{ ?>
-	<script>
-		wp.editor.initialize('comment-tinymce', {
-			tinymce: {
-				plugins: "charmap,link,paste,tabfocus,wordpress",
-				toolbar1: "bold,italic,strikethrough,link,wp_code,blockquote,pastetext,removeformat,charmap,undo,redo,wp_help",
-				inline: true,
-				content_css: false,
-				forced_root_block: false
-			}
-		})
-	</script>
-	<?php
-}
-add_action('wp_print_footer_scripts', 'zan_init_comment_tinymce', 99);
 /**
  * Add custom image sizes attribute to enhance responsive image functionality
  * for content images.
@@ -429,39 +417,97 @@ function zan_comment_form()
 		),
 	);
 
-	//wp_editor('editor test', 'editor-test');
-
 	ob_start(); ?>
 	<div class="comment-form-comment">
-		<label class="screen-reader-text" for="comment"><?php _ex('Comment', 'noun') ?></label>
-		<div class="wp-editor-wrap tmce-active">
-			<div class="wp-editor-tabs">
-				<button type="button" id="wp-comment-editor-tmce" class="btn switch-tmce">可视化</button><button type="button" id="wp-comment-editor-html" class="btn switch-html">文本</button>
+		<label class="screen-reader-text" for="comment"><?php _ex('Comment', 'noun'); ?></label>
+		<?php if (get_theme_mod('rich_comment_editor', 1)) : ?>
+			<div class="comment-editor-wrap comment-tmce-active">
+				<div class="comment-editor-tabs">
+					<button type="button" class="btn comment-switch-tmce"><?php _ex( 'Visual', 'Name for the Visual editor tab' ); ?></button>
+					<button type="button" class="btn comment-switch-html"><?php _ex( 'Text', 'Name for the Text editor tab (formerly HTML)' ); ?></button>
+				</div>
+				<div class="clearfix"></div>
+				<div class="comment-editor-container">
+					<textarea style="display: none;" class="comment-textarea" id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea>
+					<div id="comment-tinymce" class="comment-tinymce"></div>
+				</div>
 			</div>
-			<div class="clearfix"></div>
-			<div class="comment-editor-container">
-				<textarea style="display: none;" class="comment-textarea" id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea>
-				<div id="comment-tinymce" class="comment-tinymce"></div>
-			</div>
-		</div>
+		<?php else : ?>
+			<textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea>
+		<?php endif; ?>
 	</div>
 	<p class="comment-mail-notify">
 		<input id="wp-comment-mail-notify" name="wp-comment-mail-notify" type="checkbox" value="yes">
-		<label for="wp-comment-mail-notify"><?php _e('Notify me of follow-up comments via email.', 'zanblog-plus') ?></label>
+		<label for="wp-comment-mail-notify"><?php _e('Notify me of follow-up comments via email.', 'zanblog-plus'); ?></label>
 	</p>
 	<?php
-	$comment_form = ob_get_clean();
+	$comment_field = ob_get_clean();
 
 	comment_form(
 		array(
 			'title_reply'          => '<i class="fas fa-pen"></i> ' . __('Leave a Reply'),
 			'fields'               => $fields,
 			'class_submit'         => 'submit btn btn-danger btn-block',
-			'comment_field'        => $comment_form,
+			'comment_field'        => $comment_field,
 			'title_reply_before'   => '<h3 id="reply-title" class="comment-reply-title alert alert-info">',
 			'title_reply_after'    => '</h3>',
 		)
 	);
+}
+
+function zan_init_comment_tinymce()
+{
+	$mce_locale = get_user_locale();
+	$mce_locale = empty($mce_locale) ? 'en' : strtolower(substr($mce_locale, 0, 2)); // ISO 639-1.
+	?>
+	<script>
+		tinymce.addI18n('<?php echo $mce_locale; ?>',
+			<?php
+			echo wp_json_encode(array(
+				'Bold'                                 => __('Bold'),
+				'Italic'                               => __('Italic'),
+				'Strikethrough'                        => __('Strikethrough'),
+				'Insert/edit link'                     => __('Insert/edit link'),
+				'Remove link'                          => __('Remove link'),
+				'Code'                                 => __('Code'),
+				'Blockquote'                           => __('Blockquote'),
+				'Clear formatting'                     => __('Clear formatting'),
+
+				// Link plugin.
+				'Link'                                 => __('Link'),
+				'Insert link'                          => __('Insert link'),
+				'Target'                               => __('Target'),
+				'New window'                           => __('New window'),
+				'Text to display'                      => __('Text to display'),
+				'Url'                                  => __('URL'),
+				'The URL you entered seems to be an email address. Do you want to add the required mailto: prefix?' =>
+				__('The URL you entered seems to be an email address. Do you want to add the required mailto: prefix?'),
+				'The URL you entered seems to be an external link. Do you want to add the required http:// prefix?' =>
+				__('The URL you entered seems to be an external link. Do you want to add the required http:// prefix?'),
+
+			));
+			?>
+		);
+		window.tinymce.init({
+			selector: '#comment-tinymce',
+			plugins: "link,paste,wordpress,wpemoji",
+			toolbar1: "bold,italic,strikethrough,link,unlink,wp_code,blockquote,removeformat",
+			inline: true,
+			convert_urls: false,
+			relative_urls: false,
+			remove_script_host: false,
+			menubar: false,
+			language: "<?php echo $mce_locale; ?>",
+			formats: {
+				strikethrough: {
+					inline: "del",
+					deep: true,
+					split: true
+				}
+			},
+		})
+	</script>
+	<?php
 }
 
 /**

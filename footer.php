@@ -24,7 +24,7 @@
 	);
 	?>
 	<p class="site-info in-footer">
-		Copyright © 2019-<?php echo current_time('Y') ?>.
+		Copyright © 2019-<?php echo current_time('Y'); ?>.
 		<span class="site-title"><a href="<?php echo esc_url(home_url('/')); ?>" rel="home"><?php bloginfo('name'); ?></a>.</span>
 		Powered by <a href="<?php echo esc_url(__('https://wordpress.org/')); ?>" target="_blank">WordPress</a>.
 		Theme by <a href="http://github.com/touuki/zanblog-plus/" target="_blank">ZanBlog Plus</a>.

@@ -50,7 +50,7 @@ function zan_customize_register($wp_customize)
 
 	$wp_customize->add_control('disable_wptexturize', array(
 		'label'      => __('Disable texturize', 'zanblog-plus'),
-		'description' => _x('If checked, it will short-circuit wptexturize() and display the original text. See <a href="https://developer.wordpress.org/reference/functions/wptexturize/" target="_blank" rel="noreferrer noopener">wptexturize()</a>', 'disable_wptexturize', 'zanblog-plus'),
+		'description' => __('If checked, it will short-circuit wptexturize() and display the original text. See <a href="https://developer.wordpress.org/reference/functions/wptexturize/" target="_blank" rel="noreferrer noopener">wptexturize()</a>', 'zanblog-plus'),
 		'priority'   => 20,
 		'type'       => 'checkbox',
 		'section'    => 'content'
@@ -66,8 +66,24 @@ function zan_customize_register($wp_customize)
 
 	$wp_customize->add_control('disable_content_images_responsive', array(
 		'label'      => __('Disable content images responsive', 'zanblog-plus'),
-		'description' => _x('If checked, it will disable images responsive in the post content. Sometime the responsive images are larger than the original images, and there is no benefit in these cases.', 'disable_content_images_responsive', 'zanblog-plus'),
+		'description' => __('If checked, it will disable images responsive in the post content. Sometime the responsive images are larger than the original images, and there is no benefit in these cases.', 'zanblog-plus'),
 		'priority'   => 30,
+		'type'       => 'checkbox',
+		'section'    => 'content'
+	));
+
+	$wp_customize->add_setting(
+		'rich_comment_editor',
+		array(
+			'default'           => 1,
+			'sanitize_callback' => 'absint',
+		)
+	);
+
+	$wp_customize->add_control('rich_comment_editor', array(
+		'label'      => __('Enable rich comment editor', 'zanblog-plus'),
+		'description' => __('Use TinyMCE in comment form', 'zanblog-plus'),
+		'priority'   => 35,
 		'type'       => 'checkbox',
 		'section'    => 'content'
 	));
@@ -82,7 +98,7 @@ function zan_customize_register($wp_customize)
 
 	$wp_customize->add_control('always_use_twemoji', array(
 		'label'      => __('Always use Twemoji', 'zanblog-plus'),
-		'description' => _x('Always use <a href="https://twemoji.twitter.com/" target="_blank" rel="noreferrer noopener">Twemoji</a> to show Emoji characters.', 'always_use_twemoji', 'zanblog-plus'),
+		'description' => __('Always use <a href="https://twemoji.twitter.com/" target="_blank" rel="noreferrer noopener">Twemoji</a> to show Emoji characters.', 'zanblog-plus'),
 		'priority'   => 40,
 		'type'       => 'checkbox',
 		'section'    => 'content'

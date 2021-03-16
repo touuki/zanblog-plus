@@ -31,8 +31,15 @@ var zan = {
     jQuery('.panel-btn-toggle').data('toggle', true).click(this.panelToggle);
     jQuery('.panel-btn-remove').click(this.panelClose);
 
-    jQuery('#wp-comment-editor-html').click(this.changeCommentEditorToHtml);
-    jQuery('#wp-comment-editor-tmce').click(this.changeCommentEditorToTmce);
+    jQuery('.comment-switch-html').click(this.changeCommentEditorToHtml);
+    jQuery('.comment-switch-tmce').click(this.changeCommentEditorToTmce);
+    if (jQuery('textarea#comment').hasClass('comment-textarea')) {
+      jQuery('.comment-form .submit').click(function () {
+        if (jQuery('.comment-editor-wrap').hasClass('comment-tmce-active')) {
+          zan.syncTmceToTextarea();
+        }
+      });
+    }
 
     this.bodyPaddingTop();
     this.showNavbarAccordingly(window.pageYOffset, zan.prevScrollpos);
@@ -51,31 +58,35 @@ var zan = {
 
   prevScrollpos: window.pageYOffset,
 
-  changeCommentEditorToHtml: function(){
-    var wrap = jQuery('.comment-form-comment>.wp-editor-wrap');
-    if (wrap.hasClass('html-active')) {
-      return;
-    }
-    var tmce = jQuery('.comment-tinymce');
-    var textarea = jQuery('.comment-textarea');
-    wrap.removeClass('tmce-active').addClass('html-active');
-    textarea.val(tmce.html())
-    jQuery('.mce-floatpanel').css('display', 'none');
-    tmce.css('display', 'none');
-    textarea.css('display', '');
+  syncTmceToTextarea: function () {
+    jQuery('.comment-textarea').val(wp.editor.removep(tinymce.get('comment-tinymce').getContent()));
   },
 
-  changeCommentEditorToTmce: function(){
-    var wrap = jQuery('.comment-form-comment>.wp-editor-wrap');
-    if (wrap.hasClass('tmce-active')) {
+  syncTextareaToTmce: function () {
+    tinymce.get('comment-tinymce').setContent(wp.editor.autop(jQuery('.comment-textarea').val()));
+  },
+
+  changeCommentEditorToHtml: function () {
+    var wrap = jQuery('.comment-editor-wrap');
+    if (wrap.hasClass('comment-html-active')) {
       return;
     }
-    var tmce = jQuery('.comment-tinymce');
-    var textarea = jQuery('.comment-textarea');
-    wrap.removeClass('html-active').addClass('tmce-active');
-    tmce.html(textarea.val());
-    textarea.css('display', 'none');
-    tmce.css('display', '');
+    zan.syncTmceToTextarea();
+    wrap.removeClass('comment-tmce-active').addClass('comment-html-active');
+    jQuery('.mce-floatpanel').css('display', 'none');
+    jQuery('.comment-tinymce').css('display', 'none');
+    jQuery('.comment-textarea').css('display', '');
+  },
+
+  changeCommentEditorToTmce: function () {
+    var wrap = jQuery('.comment-editor-wrap');
+    if (wrap.hasClass('comment-tmce-active')) {
+      return;
+    }
+    zan.syncTextareaToTmce();
+    wrap.removeClass('comment-html-active').addClass('comment-tmce-active');
+    jQuery('.comment-textarea').css('display', 'none');
+    jQuery('.comment-tinymce').css('display', '');
   },
 
   openMenu: function () {
