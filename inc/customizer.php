@@ -219,12 +219,13 @@ if (get_theme_mod('always_use_twemoji')) :
 	function zan_always_use_twemoji()
 	{ ?>
 		<script>
-			_wpemojiSettings.supports = {
-				everything: false,
-				everythingExceptFlag: false,
-				flag: false,
-				emoji: false
-			}
+			if (typeof _wpemojiSettings !== 'undefined')
+				_wpemojiSettings.supports = {
+					everything: false,
+					everythingExceptFlag: false,
+					flag: false,
+					emoji: false
+				}
 		</script>
 	<?php
 	}
@@ -310,7 +311,7 @@ function zan_custom_background_cb()
 
 		$style .= $image . $position . $size . $repeat;
 	}
-?>
+	?>
 	<style <?php echo $type_attr; ?> id="custom-background-css">
 		body.custom-background:before {
 			content: '';

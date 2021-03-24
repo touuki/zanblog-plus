@@ -459,6 +459,7 @@ function zan_init_comment_tinymce()
 				'Code'                                 => __('Code'),
 				'Blockquote'                           => __('Blockquote'),
 				'Clear formatting'                     => __('Clear formatting'),
+				'Emoticons'                            => __('Emoticons'),
 
 				// Link plugin.
 				'Link'                                 => __('Link'),
