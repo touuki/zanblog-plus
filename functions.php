@@ -164,17 +164,21 @@ function zan_scripts()
 	wp_enqueue_style('fontawesome', get_template_directory_uri() . '/assets/css/fontawesome.min.css', array(), '5.13.0');
 
 	// Theme stylesheet.
-	wp_enqueue_style('zan-style', get_stylesheet_uri(), array(), '20210316');
+	wp_enqueue_style('zan-style', get_stylesheet_uri(), array(), '20210324');
 
 	wp_enqueue_script('bootstrap', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array('jquery'), '3.4.1', true);
 
-	wp_enqueue_script('zan-script', get_template_directory_uri() . '/assets/js/zanblog.js', array('jquery'), '20210316', true);
+	wp_enqueue_script('zan-script', get_template_directory_uri() . '/assets/js/zanblog.js', array('jquery'), '20210324', true);
 
 	if (is_singular() && comments_open()) {
 		if (get_theme_mod('rich_comment_editor', 1)) {
+
 			wp_enqueue_style('editor-buttons');
+
 			wp_enqueue_script('editor');
+
 			wp_enqueue_script('wp-tinymce');
+
 			add_action('wp_print_footer_scripts', 'zan_init_comment_tinymce', 50);
 		}
 
@@ -184,22 +188,6 @@ function zan_scripts()
 	}
 }
 add_action('wp_enqueue_scripts', 'zan_scripts', 10);
-
-if (get_theme_mod('always_use_twemoji')) :
-	function zan_always_use_twemoji()
-	{ ?>
-		<script>
-			_wpemojiSettings.supports = {
-				everything: false,
-				everythingExceptFlag: false,
-				flag: false,
-				emoji: false
-			}
-		</script>
-	<?php
-	}
-	add_action('wp_print_footer_scripts', 'zan_always_use_twemoji');
-endif;
 
 /**
  * Add custom image sizes attribute to enhance responsive image functionality
@@ -481,8 +469,8 @@ function zan_init_comment_tinymce()
 				'Url'                                  => __('URL'),
 				'Title'                                => __('Title'),
 				'None'                                 => __('None'),
-				'Ok'                                   => __( 'OK' ),
-				'Cancel'                               => __( 'Cancel' ),
+				'Ok'                                   => __('OK'),
+				'Cancel'                               => __('Cancel'),
 				'The URL you entered seems to be an email address. Do you want to add the required mailto: prefix?' =>
 				__('The URL you entered seems to be an email address. Do you want to add the required mailto: prefix?'),
 				'The URL you entered seems to be an external link. Do you want to add the required http:// prefix?' =>
@@ -493,8 +481,12 @@ function zan_init_comment_tinymce()
 		);
 		window.tinymce.init({
 			selector: '#comment-tinymce',
-			plugins: "link,paste,wordpress,wpemoji",
-			toolbar1: "bold,italic,strikethrough,link,unlink,wp_code,blockquote,removeformat",
+			plugins: "link,paste,wordpress,wpemoji,emojipanel",
+			toolbar1: "bold,italic,strikethrough,link,unlink,wp_code,blockquote,removeformat,emoticons",
+			external_plugins: {
+				'emojipanel': "<?php echo get_template_directory_uri() . '/assets/js/tinymce4-emojipanel.min.js' ?>"
+			},
+			content_css: "<?php echo get_template_directory_uri() . '/assets/css/emojipanel.min.css' ?>",
 			inline: true,
 			convert_urls: false,
 			relative_urls: false,
@@ -508,6 +500,7 @@ function zan_init_comment_tinymce()
 					split: true
 				}
 			},
+			emojipanel_sprites_url: "<?php echo get_template_directory_uri() . '/assets/img/twemoji.c83f003a.png' ?>"
 		})
 	</script>
 	<?php

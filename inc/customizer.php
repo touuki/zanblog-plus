@@ -198,31 +198,38 @@ function add_theme_content_page()
 }
 add_action('admin_menu', 'add_theme_content_page');
 
-function zan_document_title_separator($sep)
-{
-	return '–'; // U+2013
-}
-
-function zan_run_wptexturize($run_texturize)
-{
-	if (get_theme_mod('disable_wptexturize')) {
-		add_filter('document_title_separator', 'zan_document_title_separator');
-		return false;
-	} else {
-		return $run_texturize;
+if (get_theme_mod('disable_wptexturize')) :
+	function zan_document_title_separator($sep)
+	{
+		return '–'; // U+2013
 	}
-}
-add_filter('run_wptexturize', 'zan_run_wptexturize');
-//Reset wptexturize in case the wptexturize is first called before the filter is added.
-wptexturize('Any non-empty text', true);
+	add_filter('document_title_separator', 'zan_document_title_separator');
+	add_filter('run_wptexturize', '__return_false');
+endif;
 
-if (get_theme_mod('disable_content_images_responsive')) {
+if (get_theme_mod('disable_content_images_responsive')) :
 	if (version_compare($GLOBALS['wp_version'], '5.5', '<')) {
 		remove_filter('the_content', 'wp_make_content_images_responsive');
 	} else {
 		add_filter('wp_img_tag_add_srcset_and_sizes_attr', '__return_false');
 	}
-}
+endif;
+
+if (get_theme_mod('always_use_twemoji')) :
+	function zan_always_use_twemoji()
+	{ ?>
+		<script>
+			_wpemojiSettings.supports = {
+				everything: false,
+				everythingExceptFlag: false,
+				flag: false,
+				emoji: false
+			}
+		</script>
+	<?php
+	}
+	add_action('wp_print_footer_scripts', 'zan_always_use_twemoji');
+endif;
 
 /**
  * Modified from wp-includes/theme.php/_custom_background_cb(). The default callback function cannot show fixed background on iOS browser.
