@@ -1303,8 +1303,3 @@ blockquote {
         content: '';
     }
 }
-
-/* --------------------------- Other -------------------------------------*/
-.mce-i-emoticons:before {
-    vertical-align: middle;
-}

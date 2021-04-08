@@ -164,7 +164,7 @@ function zan_scripts()
 	wp_enqueue_style('fontawesome', get_template_directory_uri() . '/assets/css/fontawesome.min.css', array(), '5.13.0');
 
 	// Theme stylesheet.
-	wp_enqueue_style('zan-style', get_stylesheet_uri(), array(), '20210324');
+	wp_enqueue_style('zan-style', get_stylesheet_uri(), array(), '20210408');
 
 	wp_enqueue_script('bootstrap', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array('jquery'), '3.4.1', true);
 
@@ -352,7 +352,7 @@ if (class_exists('\\Smush\\Core\\Settings') && \Smush\Core\Settings::get_instanc
 		</script>
 	<?php
 	}
-	add_action('wp_print_footer_scripts', 'zan_footer_lazyload_javascript');
+	add_action('wp_print_footer_scripts', 'zan_footer_lazyload_javascript', 5);
 
 endif;
 
@@ -446,7 +446,63 @@ function zan_init_comment_tinymce()
 {
 	$mce_locale = get_user_locale();
 	$mce_locale = empty($mce_locale) ? 'en' : strtolower(substr($mce_locale, 0, 2)); // ISO 639-1.
+
+	$tag_descriptions = array(
+		'a'          => _x('Link to another page using the <code>href</code> attribute', 'tag-description', 'zanblog-plus'),
+		'abbr'       => _x('Define an abbreviation or an acronym using the <code>title</code> attribute', 'tag-description', 'zanblog-plus'),
+		'blockquote' => _x('Define a section that is quoted from another source', 'tag-description', 'zanblog-plus'),
+		'code'       => _x('Used to show inline <code>computer code</code>', 'tag-description', 'zanblog-plus'),
+		'del'        => _x('<del>Strike</del> a line through text', 'tag-description', 'zanblog-plus'),
+		'em'         => _x('Display the text in <em>italic</em>', 'tag-description', 'zanblog-plus'),
+		'q'          => _x('Insert quotation marks around the text.', 'tag-description', 'zanblog-plus'),
+		'strong'     => _x('Display the text in <strong>bold</strong>', 'tag-description', 'zanblog-plus'),
+	);
+
+	ob_start();
 ?>
+	<div class="wp-editor-help">
+		<h2><?php _e('You can use following HTML Tags in your comment:', 'zanblog-plus') ?></h2>
+		<table class="wp-help-single">
+			<tbody>
+				<?php
+				echo '<tr><th>' . __('Tag', 'zanblog-plus') . '</th><th>' . __('Description', 'zanblog-plus') . '</th></tr>';
+				echo '<tr><td><kbd>&lt;br&gt;</kbd></td><td>' . _x('Insert a single line break. Use single line feed (<code>\n</code>) to add &lt;br&gt; in plain text mode.', 'tag-description', 'zanblog-plus') . '</td></tr>';
+				echo '<tr><td><kbd>&lt;p&gt;</kbd></td><td>' . _x('Define a paragraph. Use two successive line feeds (<code>\n\n</code>) to add new &lt;p&gt; in plain text mode.', 'tag-description', 'zanblog-plus') . '</td></tr>';
+				global $allowedtags;
+				if (is_array($allowedtags)) {
+					foreach ($allowedtags as $tag => $attrs) {
+						if (array_key_exists($tag, $tag_descriptions)) {
+							echo '<tr><td><kbd>&lt;' . $tag . '&gt;</kbd></td><td>' . $tag_descriptions[$tag] . '</td></tr>';
+						}
+					}
+				}
+				?>
+			</tbody>
+		</table>
+		<?php
+		global $SyntaxHighlighter;
+		if (isset($SyntaxHighlighter) && count($SyntaxHighlighter->brush_names) > 0) : ?>
+			<h2><?php _e('You can use following shortcodes to format your source code, e.g. <code>[php]your code here[/php]</code>', 'zanblog-plus') ?></h2>
+			<table class="wp-help-single">
+				<tbody>
+					<?php
+					echo '<tr><th>' . __('Shortcode', 'zanblog-plus') . '</th><th>' . __('Language', 'zanblog-plus') . '</th></tr>';
+					foreach ($SyntaxHighlighter->brush_names as $brush => $name) {
+						echo '<tr><td><kbd>[' . $brush . ']</kbd></td><td>' . $name . '</td></tr>';
+					}
+					?>
+				</tbody>
+			</table>
+		<?php 
+		endif; 
+		if (class_exists('\\SimpleMathJax')){
+			echo '<h2>' . __('You can use common LaTeX commands to enter math formulas, e.g. $\LaTeX$', 'zanblog-plus') . '</h2>';
+		}
+		?>
+	</div>
+	<?php
+	$help_html = ob_get_clean();
+	?>
 	<script>
 		tinymce.addI18n('<?php echo $mce_locale; ?>',
 			<?php
@@ -460,6 +516,8 @@ function zan_init_comment_tinymce()
 				'Blockquote'                           => __('Blockquote'),
 				'Clear formatting'                     => __('Clear formatting'),
 				'Emoticons'                            => __('Emoticons'),
+				'Help'                                 => __('Help'),
+				'Close'                                => __('Close'),
 
 				// Link plugin.
 				'Link'                                 => __('Link'),
@@ -483,7 +541,7 @@ function zan_init_comment_tinymce()
 		window.tinymce.init({
 			selector: '#comment-tinymce',
 			plugins: "link,paste,wordpress,wpemoji,emojipanel",
-			toolbar1: "bold,italic,strikethrough,link,unlink,wp_code,blockquote,removeformat,emoticons",
+			toolbar1: "bold,italic,strikethrough,link,unlink,wp_code,blockquote,removeformat,emoticons,input_help",
 			external_plugins: {
 				'emojipanel': "<?php echo get_template_directory_uri() . '/assets/js/tinymce4-emojipanel.min.js' ?>"
 			},
@@ -500,6 +558,52 @@ function zan_init_comment_tinymce()
 					deep: true,
 					split: true
 				}
+			},
+			setup: function(editor) {
+				editor.on('postrender', function(e) {
+					var emoticons = editor.buttons.emoticons;
+					if (typeof emoticons !== 'undefined') {
+						var originalOnpostrender = emoticons.onpostrender;
+						emoticons.onpostrender = function(e) {
+							typeof originalOnpostrender !== 'undefined' && originalOnpostrender(e);
+							e.target.$el.find('i').css('padding-top', '2.5px');
+						}
+					}
+				})
+				editor.addButton('input_help', {
+					icon: 'help',
+					tooltip: 'Help',
+					onclick: function(e) {
+						var dialog = editor.windowManager.open({
+							title: 'Help',
+							items: {
+								type: 'container',
+								classes: 'wp-help',
+								html: <?php echo wp_json_encode($help_html); ?>
+							},
+							buttons: {
+								text: 'Close',
+								onclick: 'close'
+							}
+						});
+						if (dialog.$el) {
+							dialog.$el.find('div[role="application"]').attr('role', 'document');
+							var $wrap = dialog.$el.find('.mce-wp-help');
+
+							if ($wrap[0]) {
+								$wrap.attr('tabindex', '0');
+								$wrap[0].focus();
+								$wrap.on('keydown', function(event) {
+									// Prevent use of: page up, page down, end, home, left arrow, up arrow, right arrow, down arrow
+									// in the dialog keydown handler.
+									if (event.keyCode >= 33 && event.keyCode <= 40) {
+										event.stopPropagation();
+									}
+								});
+							}
+						}
+					}
+				});
 			},
 			emojipanel_sprites_url: "<?php echo get_template_directory_uri() . '/assets/img/twemoji.c83f003a.png' ?>"
 		})
