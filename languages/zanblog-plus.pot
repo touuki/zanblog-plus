@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Zanblog Plus 1.1\n"
+"Project-Id-Version: Zanblog Plus 1.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/zanblog-plus\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-03-16T18:55:32+08:00\n"
+"POT-Creation-Date: 2021-04-09T18:01:13+08:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: zanblog-plus\n"
@@ -51,31 +51,113 @@ msgstr ""
 msgid "Social Links Menu"
 msgstr ""
 
-#: functions.php:440
+#: functions.php:428
 msgid "Notify me of follow-up comments via email."
 msgstr ""
 
-#. translators: %s: Post title.
-#: functions.php:580
-msgid "Your comment on post \"%s\" has a new reply."
+#: functions.php:451
+msgctxt "tag-description"
+msgid "Link to <a href=\"#comment-help-modal\">another page</a> using the <code>href</code> attribute"
+msgstr ""
+
+#: functions.php:452
+msgctxt "tag-description"
+msgid "Define <abbr title=\"Here is the value of the title attribute\">an abbreviation or an acronym</abbr> using the <code>title</code> attribute"
+msgstr ""
+
+#: functions.php:453
+msgctxt "tag-description"
+msgid "Define a section that is quoted from another source"
+msgstr ""
+
+#: functions.php:454
+msgctxt "tag-description"
+msgid "Used to show <code>inline computer code</code>"
+msgstr ""
+
+#: functions.php:455
+msgctxt "tag-description"
+msgid "<del>Strike a line</del> through text"
+msgstr ""
+
+#: functions.php:456
+msgctxt "tag-description"
+msgid "Display the text in <em>italic</em>"
+msgstr ""
+
+#: functions.php:457
+msgctxt "tag-description"
+msgid "Insert <q>quotation marks</q> around the text"
+msgstr ""
+
+#: functions.php:458
+msgctxt "tag-description"
+msgid "Display the text in <strong>bold</strong>"
+msgstr ""
+
+#: functions.php:543
+msgid "Comment Help"
+msgstr ""
+
+#: functions.php:546
+msgid "You can use following HTML Tags in your comment:"
+msgstr ""
+
+#: functions.php:550
+msgid "Tag"
+msgstr ""
+
+#: functions.php:550
+msgid "Description"
+msgstr ""
+
+#: functions.php:559
+msgctxt "tag-description"
+msgid "Insert a line break (Only available in Visual mode. Wrap directly in Text mode to obtain the same effect.)"
+msgstr ""
+
+#: functions.php:560
+msgctxt "tag-description"
+msgid "Define a paragraph (Only available in Visual mode. Wrap twice in Text mode to begin a new paragraph.)"
+msgstr ""
+
+#: functions.php:567
+msgid "You can use following shortcodes to format your source code, e.g. <code>[php]your code here[/php]</code>"
+msgstr ""
+
+#: functions.php:571
+msgid "Shortcode"
+msgstr ""
+
+#: functions.php:571
+msgid "Language"
 msgstr ""
 
 #: functions.php:581
+msgid "You can use common LaTeX commands to enter math formulas, e.g. <code>$\\LaTeX$</code> and <code>\\begin{equation}E=mc^2\\end{equation}</code>"
+msgstr ""
+
+#. translators: %s: Post title.
+#: functions.php:658
+msgid "Your comment on post \"%s\" has a new reply."
+msgstr ""
+
+#: functions.php:659
 msgid "(This email is sent automatically. Please don't reply.)"
 msgstr ""
 
 #. translators: %s: Comment author's name
-#: functions.php:586
+#: functions.php:664
 msgid "Author: %s"
 msgstr ""
 
 #. translators: %s: Comment text.
-#: functions.php:588
+#: functions.php:666
 msgid "Reply: %s"
 msgstr ""
 
 #. translators: Comment notification email subject. %s: Site title
-#: functions.php:593
+#: functions.php:671
 msgid "[%s] Your comment has a new reply"
 msgstr ""
 

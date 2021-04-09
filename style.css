@@ -17,7 +17,7 @@ Text Domain: zanblog-plus
 
 body {
     background-color: #f0f0f0;
-    word-break: break-word;
+    word-break: normal;
     word-wrap: break-word;
     overflow-x: hidden;
 }
@@ -58,8 +58,13 @@ button,
     transition: all .3s ease;
 }
 
+td, th {
+    padding: .5em;
+    word-break: normal;
+}
+
 blockquote {
-    padding: 0.5em 1em;
+    padding: .5em 1em;
     margin: 0 0 10px;
     font-size: 1em;
     border-left: 0.2em solid #d9534f;
@@ -1154,6 +1159,14 @@ blockquote {
     margin-top: 16px;
 }
 
+.comment-help-modal .modal-body h4 {
+    line-height: inherit;
+}
+
+.comment-help-modal .modal-header,
+.comment-help-modal .modal-footer {
+    padding: 10px;
+}
 
 /* --------------------------- Comment End --------------------------- */
 

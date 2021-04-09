@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zanblog Plus 1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/zanblog-plus\n"
-"POT-Creation-Date: 2021-03-16T18:55:32+08:00\n"
-"PO-Revision-Date: 2021-03-16 19:05+0800\n"
+"POT-Creation-Date: 2021-04-09T18:01:13+08:00\n"
+"PO-Revision-Date: 2021-04-09 18:04+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh\n"
@@ -58,31 +58,134 @@ msgstr "顶部菜单"
 msgid "Social Links Menu"
 msgstr "社交链接菜单"
 
-#: functions.php:440
+#: functions.php:428
 msgid "Notify me of follow-up comments via email."
 msgstr "有人回复时通过电子邮件通知我。"
 
+#: functions.php:451
+msgctxt "tag-description"
+msgid ""
+"Link to <a href=\"#comment-help-modal\">another page</a> using the "
+"<code>href</code> attribute"
+msgstr ""
+"使用<code>href</code>属性链接到<a href=\"#comment-help-modal\">另一个页面</a>"
+
+#: functions.php:452
+msgctxt "tag-description"
+msgid ""
+"Define <abbr title=\"Here is the value of the title attribute\">an "
+"abbreviation or an acronym</abbr> using the <code>title</code> attribute"
+msgstr ""
+"使用<code>title</code>属性来定义一个<abbr title=\"这里是title属性的值\">首字"
+"母缩写</abbr>"
+
+#: functions.php:453
+msgctxt "tag-description"
+msgid "Define a section that is quoted from another source"
+msgstr "标识一个块引用"
+
+#: functions.php:454
+msgctxt "tag-description"
+msgid "Used to show <code>inline computer code</code>"
+msgstr "用以显示<code>行内代码</code>"
+
+#: functions.php:455
+msgctxt "tag-description"
+msgid "<del>Strike a line</del> through text"
+msgstr "在文本上添加一个<del>删除线</del>"
+
+#: functions.php:456
+msgctxt "tag-description"
+msgid "Display the text in <em>italic</em>"
+msgstr "以<em>斜体</em>显示文本"
+
+#: functions.php:457
+msgctxt "tag-description"
+msgid "Insert <q>quotation marks</q> around the text"
+msgstr "在文本周围加上<q>双引号</q>"
+
+#: functions.php:458
+msgctxt "tag-description"
+msgid "Display the text in <strong>bold</strong>"
+msgstr "以<strong>粗体</strong>显示文本"
+
+#: functions.php:543
+msgid "Comment Help"
+msgstr "评论帮助"
+
+#: functions.php:546
+msgid "You can use following HTML Tags in your comment:"
+msgstr "你可以在评论中使用以下HTML标签："
+
+#: functions.php:550
+msgid "Tag"
+msgstr "标签"
+
+#: functions.php:550
+msgid "Description"
+msgstr "说明"
+
+#: functions.php:559
+msgctxt "tag-description"
+msgid ""
+"Insert a line break (Only available in Visual mode. Wrap directly in Text "
+"mode to obtain the same effect.)"
+msgstr "插入一个换行符（仅在可视化模式可用，文本模式请直接换行来达到相同效果）"
+
+#: functions.php:560
+msgctxt "tag-description"
+msgid ""
+"Define a paragraph (Only available in Visual mode. Wrap twice in Text mode "
+"to begin a new paragraph.)"
+msgstr ""
+"定义一个段落（仅在可视化模式可用，文本模式请通过连续两次换行来开启一个新的段"
+"落）"
+
+#: functions.php:567
+msgid ""
+"You can use following shortcodes to format your source code, e.g. "
+"<code>[php]your code here[/php]</code>"
+msgstr ""
+"你可以使用以下短码来格式化你的代码，例如：<code>[php]your code here[/php]</"
+"code>"
+
+#: functions.php:571
+msgid "Shortcode"
+msgstr "短码"
+
+#: functions.php:571
+msgid "Language"
+msgstr "语言"
+
+#: functions.php:581
+msgid ""
+"You can use common LaTeX commands to enter math formulas, e.g. <code>$\\LaTeX"
+"$</code> and <code>\\begin{equation}E=mc^2\\end{equation}</code>"
+msgstr ""
+"你可以使用通用的LaTeX命令来输入数学公式，例如<code>$\\LaTeX$</code>以及<code>"
+"\\begin{equation}E=mc^2\\end{equation}</code>"
+
 #. translators: %s: Post title.
-#: functions.php:580
+#: functions.php:658
 msgid "Your comment on post \"%s\" has a new reply."
 msgstr "你在文章“%s”中的评论有了新的回复。"
 
-#: functions.php:581
+#: functions.php:659
 msgid "(This email is sent automatically. Please don't reply.)"
 msgstr "（此邮件由系统自动发送，请勿回复此邮件）"
 
 #. translators: %s: Comment author's name
-#: functions.php:586
+#: functions.php:664
 msgid "Author: %s"
 msgstr "作者：%s"
 
 #. translators: %s: Comment text.
-#: functions.php:588
+#: functions.php:666
 msgid "Reply: %s"
 msgstr "回复内容：%s"
 
 #. translators: Comment notification email subject. %s: Site title
-#: functions.php:593
+#: functions.php:671
 msgid "[%s] Your comment has a new reply"
 msgstr "【%s】你的评论有了新的回复"
 
@@ -311,6 +414,3 @@ msgstr "你可能也喜欢"
 #: widgets/class-zan-widget-recent-comments.php:85
 msgid "This comment cannot be shown because it is belong to a protected post."
 msgstr "该评论属于被密码保护的文章，无法显示。"
-
-#~ msgid "Copyright"
-#~ msgstr "版权信息"
