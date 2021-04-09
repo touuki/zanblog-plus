@@ -54,6 +54,10 @@ var zan = {
       zan.showGotoTopAccordingly();
       zan.prevScrollpos = window.pageYOffset;
     });
+
+    if (typeof window._comment_help_html !== 'undefined') {
+      jQuery('.comment-help-btn').click(this.showCommentHelp)
+    }
   },
 
   prevScrollpos: window.pageYOffset,
@@ -87,6 +91,13 @@ var zan = {
     wrap.removeClass('comment-html-active').addClass('comment-tmce-active');
     jQuery('.comment-textarea').css('display', 'none');
     jQuery('.comment-tinymce').css('display', '');
+  },
+
+  showCommentHelp: function(){
+    if (!jQuery('.comment-help-modal').length) {
+      jQuery('body').append(window._comment_help_html);
+    }
+    jQuery('.comment-help-modal').modal();
   },
 
   openMenu: function () {

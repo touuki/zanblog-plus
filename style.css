@@ -1159,6 +1159,20 @@ blockquote {
     margin-top: 16px;
 }
 
+.comment-help-btn {
+    padding: 1px 5px;
+    font-size: 12px;
+    position: absolute;
+    right: 50px;
+}
+
+.comment-help-btn.focus,
+.comment-help-btn:focus,
+.comment-help-btn:hover {
+    color: #004172;
+    text-decoration: none;
+}
+
 .comment-help-modal .modal-body h4 {
     line-height: inherit;
 }

@@ -1,6 +1,8 @@
 # 版本变更记录
 ## ZanBlog Plus 1.2
 + 添加富文本评论功能
++ 富文本评论工具栏添加[EmojiPanel](https://github.com/touuki/EmojiPanel)
++ 评论添加帮助页面
 + 添加始终启用Twemoji的功能
 + 添加底部社交链接菜单功能
 + 修改相关文章策略，不再从同一类别中查找，改为完全随机
