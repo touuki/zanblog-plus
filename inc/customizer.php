@@ -24,23 +24,6 @@ function zan_customize_register($wp_customize)
 	));
 
 	$wp_customize->add_setting(
-		'copyright_post',
-		array(
-			'type'			=> 'option',
-			'transport'     => 'postMessage',
-			'sanitize_callback' => 'wp_kses_normalize_entities',
-		)
-	);
-
-	$wp_customize->add_control('copyright_post', array(
-		'label'			=> __('Post copyright', 'zanblog-plus'),
-		'description'   => __('Accept any HTML content. Allowed Variables: %POST_TITLE%, %POST_URL%, %POST_DATE%, %POST_TIME%, %POST_AUTHOR%, %AUTHOR_URL%, %BLOG_NAME%, %BLOG_URL%', 'zanblog-plus'),
-		'section'		=> 'content',
-		'priority'		=> 100,
-		'type'          => 'textarea',
-	));
-
-	$wp_customize->add_setting(
 		'disable_wptexturize',
 		array(
 			'default'           => 0,
@@ -104,6 +87,39 @@ function zan_customize_register($wp_customize)
 		'section'    => 'content'
 	));
 
+	$wp_customize->add_setting(
+		'copyright_post',
+		array(
+			'type'			=> 'option',
+			'transport'     => 'postMessage',
+			'sanitize_callback' => 'wp_kses_normalize_entities',
+		)
+	);
+
+	$wp_customize->add_control('copyright_post', array(
+		'label'			=> __('Post copyright', 'zanblog-plus'),
+		'description'   => __('Accept any HTML content. Allowed Variables: %POST_TITLE%, %POST_URL%, %POST_DATE%, %POST_TIME%, %POST_AUTHOR%, %AUTHOR_URL%, %BLOG_NAME%, %BLOG_URL%', 'zanblog-plus'),
+		'section'		=> 'content',
+		'priority'		=> 90,
+		'type'          => 'textarea',
+	));
+
+	$wp_customize->add_setting(
+		'analytics_script',
+		array(
+			'type'			=> 'option',
+			'sanitize_callback' => 'wp_kses_normalize_entities',
+		)
+	);
+
+	$wp_customize->add_control('analytics_script', array(
+		'label'			=> __('Analytics script', 'zanblog-plus'),
+		'description'   => __('Accept any HTML content and insert it in <code>&lt;head&gt;</code> tag.', 'zanblog-plus'),
+		'section'		=> 'content',
+		'priority'		=> 100,
+		'type'          => 'textarea',
+	));
+
 	if (isset($wp_customize->selective_refresh)) {
 		$wp_customize->selective_refresh->add_partial(
 			'blogname',
@@ -159,6 +175,11 @@ function zan_customize_partial_blogdescription()
 {
 	bloginfo('description');
 }
+
+function zan_analytics_script(){
+	echo get_option('analytics_script');
+}
+add_action('wp_head', 'zan_analytics_script', 1000);
 
 function zan_copyright_post()
 {
