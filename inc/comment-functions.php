@@ -16,7 +16,7 @@ function zan_comment_scripts()
 
 		add_action('wp_print_footer_scripts', 'zan_output_comment_help_html_in_script');
 
-		if (get_theme_mod('rich_comment_editor', 1)) {
+		if (get_theme_mod('rich_comment_editor', 1) && strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') === false) {
 
 			wp_enqueue_style('editor-buttons');
 
@@ -86,7 +86,7 @@ function zan_comment_form()
 	ob_start(); ?>
 	<div class="comment-form-comment">
 		<label class="screen-reader-text" for="comment"><?php _ex('Comment', 'noun'); ?></label>
-		<?php if (get_theme_mod('rich_comment_editor', 1)) : ?>
+		<?php if (get_theme_mod('rich_comment_editor', 1) && strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') === false) : ?>
 			<div class="comment-editor-wrap comment-tmce-active">
 				<div class="comment-editor-tabs">
 					<button type="button" class="btn comment-switch-html"><i class="fas fa-code"></i> <?php _ex('Text', 'Name for the Text editor tab (formerly HTML)'); ?></button><button type="button" class="btn comment-switch-tmce"><i class="fas fa-eye"></i> <?php _ex('Visual', 'Name for the Visual editor tab'); ?></button>
@@ -267,7 +267,7 @@ function zan_init_comment_tinymce()
 			emojipanel_sprites_url: "<?php echo get_template_directory_uri() . '/assets/img/twemoji.c83f003a.png' ?>"
 		})
 	</script>
-	<?php
+<?php
 }
 
 /**
