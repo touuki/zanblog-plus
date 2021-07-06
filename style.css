@@ -1330,3 +1330,11 @@ blockquote {
         content: '';
     }
 }
+
+/* --------------------------- Print End ----------------------------------*/
+
+/* --------------------------- Syntaxhighlighter Compatible-------------------------------------*/
+.syntaxhighlighter .container:after,
+.syntaxhighlighter .container:before {
+    content: none;
+}
